@@ -18,4 +18,36 @@
 <figure class="photo p9"><img loading="lazy" src="09-breathe.jpg" alt="Mia 闭眼感受微风"><figcaption>Breathe</figcaption></figure>
 </div></section>
 <section class="end" id="enter"><img src="07-journey.jpg" alt="森林夜色中的提灯背影"><div class="end-content fade"><div class="eyebrow">UNTIL WE MEET AGAIN</div><h2 class="serif">What does it mean<br>to feel alive?</h2><p>感受生命，<br>究竟意味着什么？</p><a class="cta" href="#home">进入 Mia 的世界　→</a></div></section></main><footer><span>M I A</span><span>Small moments. A bigger world.</span><a href="#home">BACK TO THE LIGHT ↑</a></footer>
-<script>const items=document.querySelectorAll('.fade,.photo');if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});items.forEach((el,i)=>{if(el.classList.contains('photo'))el.style.transitionDelay=(i%5)*90+'ms';io.observe(el)})}else items.forEach(el=>el.classList.add('visible'));</script></body></html>
+<script>const items=document.querySelectorAll('.fade,.photo');if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});items.forEach((el,i)=>{if(el.classList.contains('photo'))el.style.transitionDelay=(i%5)*90+'ms';io.observe(el)})}else items.forEach(el=>el.classList.add('visible'));</script>
+const music = document.getElementById('mia-music');
+const toggle = document.getElementById('music-toggle');
+
+music.volume = 0.22;
+
+async function tryAutoplay() {
+  try {
+    await music.play();
+    toggle.textContent = 'Ⅱ';
+    toggle.setAttribute('aria-label', '暂停背景音乐');
+  } catch (error) {
+    // 浏览器禁止自动播放时，等待访客点击音乐按钮
+    toggle.textContent = '♫';
+  }
+}
+
+tryAutoplay();
+
+toggle.addEventListener('click', async () => {
+  if (music.paused) {
+    try {
+      await music.play();
+      toggle.textContent = 'Ⅱ';
+    } catch (error) {
+      toggle.textContent = '♫';
+    }
+  } else {
+    music.pause();
+    toggle.textContent = '♫';
+  }
+});
+</body></html>
