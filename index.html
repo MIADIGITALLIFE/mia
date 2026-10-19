@@ -50,4 +50,47 @@ toggle.addEventListener('click', async () => {
     toggle.textContent = '♫';
   }
 });
+
+<audio id="mia-music" loop preload="none" aria-label="Mia 背景音乐">
+  <source src="mia-background.mp3" type="audio/mpeg">
+</audio>
+<button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐"
+  style="position:fixed;right:24px;bottom:24px;z-index:99;width:48px;height:48px;border-radius:50%;border:1px solid #e8dfc988;background:rgba(41,56,50,.92);backdrop-filter:blur(8px);color:#f4f1ea;cursor:pointer;font-size:19px;box-shadow:0 5px 22px #101a162b;display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s;">
+  ♫
+</button>
+<script>
+(() => {
+  const music = document.getElementById('mia-music');
+  const toggle = document.getElementById('music-toggle');
+  if (!music || !toggle) return;
+
+  music.volume = 0.22;
+
+  function updateButton(isPlaying) {
+    toggle.textContent = isPlaying ? 'Ⅱ' : '♫';
+    toggle.setAttribute('aria-label', isPlaying ? '暂停背景音乐' : '播放背景音乐');
+    toggle.title = isPlaying ? '暂停背景音乐' : '播放背景音乐';
+  }
+
+  // 尝试进入页面后自动播放；浏览器可能要求用户先进行交互。
+  music.play().then(() => updateButton(true)).catch(() => updateButton(false));
+
+  toggle.addEventListener('click', async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        updateButton(true);
+      } catch (error) {
+        updateButton(false);
+      }
+    } else {
+      music.pause();
+      updateButton(false);
+    }
+  });
+
+  music.addEventListener('ended', () => updateButton(false));
+})();
+</script>
+
 </body></html>
