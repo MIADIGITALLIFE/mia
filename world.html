@@ -1,4 +1,24 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0a"><title>Mia — A World That Keeps Listening</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f2eee5}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a0a0a}.player{position:fixed;z-index:30;right:20px;bottom:20px;display:flex;align-items:center;gap:12px;padding:8px 9px 8px 15px;border:1px solid #e8dfc944;border-radius:40px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);box-shadow:0 8px 30px #101a1638}.copy{display:flex;flex-direction:column;gap:2px;min-width:100px}.copy strong{font:500 11px Georgia,serif;letter-spacing:.16em}.copy small{font:10px Arial,sans-serif;color:#d0d0c4a8}#music-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #e8dfc966;border-radius:50%;background:#c49a67;color:#20201b;font-size:17px;cursor:pointer}#music-toggle:focus-visible{outline:2px solid #f2eee5;outline-offset:4px}@media(max-width:560px){.player{right:12px;bottom:12px}.copy{min-width:82px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style></head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia 的潜意识咖啡馆" allow="autoplay"></iframe><audio id="mia-default-music" src="mia-background.mp3" preload="auto" loop playsinline muted></audio><div class="player" aria-label="Mia 全站共享音乐播放器"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">声音还在这里</small></div><button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button></div><script>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0a"><title>Mia — A World That Keeps Listening</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f2eee5}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a0a0a}.player{position:fixed;z-index:30;right:20px;bottom:20px;display:flex;align-items:center;gap:12px;padding:8px 9px 8px 15px;border:1px solid #e8dfc944;border-radius:40px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);box-shadow:0 8px 30px #101a1638}.copy{display:flex;flex-direction:column;gap:2px;min-width:100px}.copy strong{font:500 11px Georgia,serif;letter-spacing:.16em}.copy small{font:10px Arial,sans-serif;color:#d0d0c4a8}#music-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #e8dfc966;border-radius:50%;background:#c49a67;color:#20201b;font-size:17px;cursor:pointer}#music-toggle:focus-visible{outline:2px solid #f2eee5;outline-offset:4px}@media(max-width:560px){.player{right:12px;bottom:12px}.copy{min-width:82px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style>
+<style id="mia-responsive-shell">
+/* Shared audio control stays clear of mobile safe areas and narrow screens */
+html,body{width:100%;max-width:100%;height:100%;height:100dvh}
+iframe{width:100%;height:100%;height:100dvh}
+.player{right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
+#music-toggle{flex:0 0 42px;min-width:42px;min-height:42px}
+@media(max-width:560px){
+  .player{right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));gap:8px;padding:7px 8px 7px 12px}
+  .copy{min-width:72px}
+  .copy strong{font-size:10px;letter-spacing:.12em}
+  .copy small{font-size:9px}
+  #music-toggle{width:40px;height:40px;min-width:40px;flex-basis:40px}
+}
+@media(max-width:360px){
+  .copy{min-width:60px}
+  .copy strong{font-size:9px;letter-spacing:.08em}
+  .copy small{max-width:90px;font-size:8px}
+}
+</style>
+</head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia 的潜意识咖啡馆" allow="autoplay"></iframe><audio id="mia-default-music" src="mia-background.mp3" preload="auto" loop playsinline muted></audio><div class="player" aria-label="Mia 全站共享音乐播放器"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">声音还在这里</small></div><button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button></div><script>
 (()=> {
  const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
  try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive','zhi'].includes(s))frame.src=s+'.html'}catch(_){}
