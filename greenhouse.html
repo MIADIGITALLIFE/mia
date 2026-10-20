@@ -46,6 +46,39 @@ body{background:radial-gradient(ellipse at 10% 0%,#40523a45 0,transparent 42%),l
 .greenhouse-hero h2,.today-card h2,.memory-title{letter-spacing:.025em}
 .mist-line{letter-spacing:.06em}
 @media(max-width:680px){.page-head h1{line-height:1.42;letter-spacing:.025em}}
-</style></head><body><nav class="site-nav" aria-label="Mia 五个空间"><a class="brand" href="index.html">M I A</a><div class="nav-links"><a href="index.html" >THE MIST</a><a href="bar.html" >THE BAR</a><a href="music.html" >MUSIC ROOM</a><a href="greenhouse.html" aria-current="page">GREENHOUSE</a><a href="archive.html" >THE ARCHIVE</a></div></nav><main><header class="page-head"><div class="eyebrow">03 / THE GREENHOUSE · SENSORY PAUSE</div><h1>让心，<br><em>回到有风的地方。</em></h1><p>这里没有任务，也没有需要完成的练习。你可以观察一点光，听一场想象中的雨，或者只是待一会儿。</p></header><section class="panel greenhouse-hero"><div class="leaf-orbit" aria-hidden="true"></div><div class="inner"><div class="eyebrow">A SMALL GREEN WORLD</div><h2>不必盛开。<br>先好好呼吸。</h2><p class="small-note">微光 · 苔藓 · 水汽 · 留白</p></div></section><div class="divider"></div><div class="eyebrow">CHOOSE A QUIET MOMENT</div><h2 class="section-title">此刻，你想靠近什么？</h2><section class="grid-3"><button class="panel practice" data-practice="rain" aria-pressed="false"><div><div class="glyph">⌁</div><h3>听雨</h3><p>想象雨落在玻璃上。<br>每一滴都可以不急着抵达。</p></div><span class="small-note">STAY WITH THE SOUND ↗</span></button><button class="panel practice" data-practice="light" aria-pressed="false"><div><div class="glyph">☼</div><h3>看光</h3><p>找到视线里最柔和的一处光。<br>让它停留几秒。</p></div><span class="small-note">NOTICE THE LIGHT ↗</span></button><button class="panel practice" data-practice="breath" aria-pressed="false"><div><div class="glyph">◌</div><h3>深呼吸</h3><p>如果你愿意，慢慢吸气，<br>再让呼气自然离开。</p></div><span class="small-note">NO NEED TO GET IT RIGHT ↗</span></button></section><section class="prompt" aria-live="polite"><div class="eyebrow">A NOTE FROM THE GREENHOUSE</div><p id="practice-text">植物不会因为今天没有长高，就觉得自己做错了什么。</p><div id="breath-circle" class="breath-circle" aria-hidden="true"><span id="breath-label">PAUSE</span></div><p id="practice-status" class="small-note">选择一个角落，看看它会带来什么。</p></section></main><footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer><script>
-(()=>{const prompts={rain:{text:'雨不必洗净一切。它只是落下来，然后慢慢经过。',status:'雨声想象已开启：听听周围真实存在的声音。',label:'RAIN'},light:{text:'光落在哪里，哪里就暂时成为一个可以停留的地方。',status:'光线观察已开启：找一处柔和的明暗变化。',label:'LIGHT'},breath:{text:'不需要改变任何感受。只需给这一口气一点空间。',status:'呼吸提示已开启：节奏由你决定，随时可以停止。',label:'BREATHE'}};const circle=document.getElementById('breath-circle'),label=document.getElementById('breath-label');document.querySelectorAll('.practice').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.practice').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const p=prompts[btn.dataset.practice];document.getElementById('practice-text').textContent=p.text;document.getElementById('practice-status').textContent=p.status;label.textContent=p.label;circle.classList.toggle('active',btn.dataset.practice==='breath')}));})();
-</script><script src="content.js"></script></body></html>
+</style><style id="greenhouse-loop">
+.experience-panel{margin:34px 0 10px;background:linear-gradient(145deg,#a0b18a0b,#ffffff02)}
+.experience-panel h2{font:400 clamp(25px,3vw,33px)/1.5 var(--art,var(--cn));margin:13px 0 8px;color:#dce0d0}
+.experience-description{max-width:560px;font-size:12px;line-height:2;color:#bdb9ad}
+.experience-progress{height:2px;background:#ffffff16;margin:22px 0 10px;overflow:hidden}
+.experience-progress span{display:block;height:100%;width:0;background:#a6b993;transition:width .35s linear}
+.experience-timer{font:400 25px var(--serif);letter-spacing:.12em;color:#cbd6bf;margin:10px 0}
+.reflection-wrap{margin-top:22px}
+.reflection-wrap label{display:block;font-size:12px;color:#d7d5c9;margin-bottom:10px}
+.reflection-wrap textarea{width:100%;resize:vertical;min-height:78px;padding:13px 14px;border:1px solid #ffffff24;border-radius:3px;background:#080d09a8;color:#e9e3d7;line-height:1.9;font-size:12px}
+.experience-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.experience-actions [hidden],.experience-progress[hidden],.experience-timer[hidden],.reflection-wrap[hidden]{display:none!important}
+.archive-return{display:inline-block;margin-top:18px;font:11px var(--serif);letter-spacing:.08em;color:#b9c7aa}
+.archive-return:hover{color:#e0e8d7}
+@media(max-width:680px){.experience-actions .button{width:100%}.experience-panel{padding:22px}}
+</style></head><body><nav class="site-nav" aria-label="Mia 五个空间"><a class="brand" href="index.html">M I A</a><div class="nav-links"><a href="index.html" >THE MIST</a><a href="bar.html" >THE BAR</a><a href="music.html" >MUSIC ROOM</a><a href="greenhouse.html" aria-current="page">GREENHOUSE</a><a href="archive.html" >THE ARCHIVE</a></div></nav><main><header class="page-head"><div class="eyebrow">03 / THE GREENHOUSE · SENSORY PAUSE</div><h1>让心，<br><em>回到有风的地方。</em></h1><p>这里没有任务，也没有需要完成的练习。你可以观察一点光，听一场想象中的雨，或者只是待一会儿。</p></header><section class="panel greenhouse-hero"><div class="leaf-orbit" aria-hidden="true"></div><div class="inner"><div class="eyebrow">A SMALL GREEN WORLD</div><h2>不必盛开。<br>先好好呼吸。</h2><p class="small-note">微光 · 苔藓 · 水汽 · 留白</p></div></section><div class="divider"></div><div class="eyebrow">CHOOSE A QUIET MOMENT</div><h2 class="section-title">此刻，你想靠近什么？</h2><section class="grid-3"><button class="panel practice" data-practice="rain" aria-pressed="false"><div><div class="glyph">⌁</div><h3>听雨</h3><p>想象雨落在玻璃上。<br>每一滴都可以不急着抵达。</p></div><span class="small-note">STAY WITH THE SOUND ↗</span></button><button class="panel practice" data-practice="light" aria-pressed="false"><div><div class="glyph">☼</div><h3>看光</h3><p>找到视线里最柔和的一处光。<br>让它停留几秒。</p></div><span class="small-note">NOTICE THE LIGHT ↗</span></button><button class="panel practice" data-practice="breath" aria-pressed="false"><div><div class="glyph">◌</div><h3>深呼吸</h3><p>如果你愿意，慢慢吸气，<br>再让呼气自然离开。</p></div><span class="small-note">NO NEED TO GET IT RIGHT ↗</span></button></section><section class="prompt" aria-live="polite"><div class="eyebrow">A NOTE FROM THE GREENHOUSE</div><p id="practice-text">植物不会因为今天没有长高，就觉得自己做错了什么。</p><div id="breath-circle" class="breath-circle" aria-hidden="true"><span id="breath-label">PAUSE</span></div><p id="practice-status" class="small-note">选择一个角落，看看它会带来什么。</p></section>
+<section id="experience-panel" class="panel experience-panel" aria-live="polite">
+  <div class="eyebrow">A MOMENT, JUST FOR YOU</div>
+  <h2 id="experience-title">不必急着开始。</h2>
+  <p id="experience-description" class="experience-description">选好一个角落后，按下开始。你可以随时结束，也可以什么都不保存。</p>
+  <div id="experience-progress" class="experience-progress" hidden><span id="experience-progress-fill"></span></div>
+  <p id="experience-timer" class="experience-timer" hidden>00:20</p>
+  <div id="reflection-wrap" class="reflection-wrap" hidden>
+    <label for="experience-note">如果愿意，留下一句话</label>
+    <textarea id="experience-note" rows="3" maxlength="240" placeholder="此刻，我注意到……（选填）"></textarea>
+    <p class="small-note">只保存你主动写下的内容。最多 240 个字。</p>
+  </div>
+  <div class="experience-actions">
+    <button id="experience-start" class="button" type="button">开始这一刻 ↗</button>
+    <button id="experience-end" class="button" type="button" hidden>结束这一刻</button>
+    <button id="experience-save" class="button" type="button" hidden>保存到记忆档案</button>
+    <button id="experience-skip" class="button" type="button" hidden>不保存，轻轻离开</button>
+  </div>
+  <p id="experience-feedback" class="small-note" role="status"></p>
+  <a class="archive-return" href="archive.html">去 The Archive 看看记忆 ↗</a>
+</section></main><footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer><script src="content.js"></script></body></html>
