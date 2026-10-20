@@ -91,19 +91,126 @@
       if (path === 'greenhouse.html') {
         const circle = document.getElementById('breath-circle');
         const label = document.getElementById('breath-label');
+        const title = document.getElementById('experience-title');
+        const description = document.getElementById('experience-description');
+        const startBtn = document.getElementById('experience-start');
+        const endBtn = document.getElementById('experience-end');
+        const saveBtn = document.getElementById('experience-save');
+        const skipBtn = document.getElementById('experience-skip');
+        const timerEl = document.getElementById('experience-timer');
+        const progress = document.getElementById('experience-progress');
+        const progressFill = document.getElementById('experience-progress-fill');
+        const reflection = document.getElementById('reflection-wrap');
+        const noteInput = document.getElementById('experience-note');
+        const feedback = document.getElementById('experience-feedback');
+        const duration = 20;
+        const key = 'mia-greenhouse-memories-v1';
+        const names = {rain:'听雨',light:'看光',breath:'深呼吸'};
+        const endings = {
+          rain:'雨不必真的落下。愿你刚才听见的声音，给心留出一点空白。',
+          light:'光不一定要照亮所有地方。刚才看见的那一点，已经足够。',
+          breath:'不需要做得更好。愿你把这一口自然的呼吸，带回接下来的时间。'
+        };
+        let selected = null, remaining = duration, interval = null, finished = false;
+        const getMemories = () => { try { const v = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        const clearTimer = () => { if (interval) clearInterval(interval); interval = null; };
+        const resetSession = () => {
+          clearTimer(); remaining = duration; finished = false;
+          if (timerEl) { timerEl.hidden = true; timerEl.textContent = '00:20'; }
+          if (progress) progress.hidden = true;
+          if (progressFill) progressFill.style.width = '0%';
+          if (reflection) reflection.hidden = true;
+          if (startBtn) { startBtn.hidden = !selected; startBtn.textContent = '再体验一次 ↗'; }
+          if (endBtn) endBtn.hidden = true;
+          if (saveBtn) saveBtn.hidden = true;
+          if (skipBtn) skipBtn.hidden = true;
+          if (circle) circle.classList.remove('active');
+        };
+        const finishSession = (wasNatural) => {
+          clearTimer(); finished = true;
+          if (circle) circle.classList.remove('active');
+          if (label) label.textContent = 'PAUSE';
+          if (timerEl) timerEl.hidden = true;
+          if (progress) progress.hidden = true;
+          if (endBtn) endBtn.hidden = true;
+          if (startBtn) startBtn.hidden = true;
+          if (reflection) reflection.hidden = false;
+          if (saveBtn) saveBtn.hidden = false;
+          if (skipBtn) skipBtn.hidden = false;
+          if (title) title.textContent = '这一刻，已经足够。';
+          if (description) description.textContent = endings[selected] || '感谢你在这里停留。';
+          if (feedback) feedback.textContent = wasNatural ? '体验已完成。你可以留下一句话，也可以什么都不留下。' : '体验已结束。没有完成时长也完全没关系。';
+          if (selected === 'breath' && label) label.textContent = 'REST';
+        };
         document.querySelectorAll('.practice').forEach(btn => btn.addEventListener('click', e => {
-          const p = data.greenhouse_notes && data.greenhouse_notes[btn.dataset.practice];
-          if (!p) return;
-          e.preventDefault();
-          e.stopImmediatePropagation();
+          e.preventDefault(); e.stopImmediatePropagation();
+          clearTimer();
+          selected = btn.dataset.practice;
           document.querySelectorAll('.practice').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-          const text = document.getElementById('practice-text');
-          const status = document.getElementById('practice-status');
-          if (text) text.textContent = p.text;
-          if (status) status.textContent = p.status;
-          if (label) label.textContent = p.label;
-          if (circle) circle.classList.toggle('active', btn.dataset.practice === 'breath');
+          const p = data.greenhouse_notes && data.greenhouse_notes[selected];
+          if (p) {
+            const text = document.getElementById('practice-text');
+            const status = document.getElementById('practice-status');
+            if (text) text.textContent = p.text;
+            if (status) status.textContent = p.status;
+            if (label) label.textContent = p.label;
+          }
+          if (circle) circle.classList.remove('active');
+          if (title) title.textContent = names[selected] + ' · 慢一点就好';
+          if (description) description.textContent = selected === 'rain' ? '用 20 秒听听此刻真实存在的声音。不需要播放雨声，也不必刻意寻找。' : selected === 'light' ? '用 20 秒观察一处柔和的光、颜色或明暗变化。没有正确答案。' : '如果舒服，可以跟随圆环慢慢呼吸；不舒服就按自己的自然节奏呼吸，随时可以结束。';
+          if (feedback) feedback.textContent = '';
+          if (noteInput) noteInput.value = '';
+          resetSession();
+          if (startBtn) { startBtn.hidden = false; startBtn.textContent = '开始这一刻 ↗'; }
         }, true));
+        if (startBtn) startBtn.addEventListener('click', () => {
+          if (!selected || interval) return;
+          remaining = duration; finished = false;
+          startBtn.hidden = true; endBtn.hidden = false; timerEl.hidden = false; progress.hidden = false;
+          timerEl.textContent = '00:20';
+          if (selected === 'breath') { circle.classList.add('active'); label.textContent = 'BREATHE'; }
+          if (title) title.textContent = '把这一小段时间，留给自己。';
+          if (description) description.textContent = '不需要努力完成。你可以随时按下结束。';
+          if (feedback) feedback.textContent = selected === 'breath' ? '圆环只是温柔的提示，不必跟随固定节奏。' : '你可以保持安静，也可以随时结束。';
+          const started = Date.now();
+          interval = setInterval(() => {
+            remaining = Math.max(0, duration - Math.floor((Date.now() - started) / 1000));
+            timerEl.textContent = '00:' + String(remaining).padStart(2,'0');
+            progressFill.style.width = ((duration - remaining) / duration * 100) + '%';
+            if (remaining <= 0) finishSession(true);
+          }, 200);
+        });
+        if (endBtn) endBtn.addEventListener('click', () => { if (selected) finishSession(false); });
+        if (skipBtn) skipBtn.addEventListener('click', () => {
+          resetSession();
+          if (title) title.textContent = '不必留下任何东西。';
+          if (description) description.textContent = '谢谢你在这里停留。你可以再选一个角落，或直接离开。';
+          if (feedback) feedback.textContent = '这次体验没有保存。';
+          if (startBtn) startBtn.hidden = !selected;
+        });
+        if (saveBtn) saveBtn.addEventListener('click', () => {
+          if (!selected || !finished) return;
+          const memories = getMemories();
+          const item = {id:'gh-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),type:selected,title:names[selected],note:(noteInput.value || '').trim(),date:new Date().toISOString(),quote:endings[selected]};
+          memories.unshift(item);
+          try {
+            localStorage.setItem(key, JSON.stringify(memories.slice(0,50)));
+            saveBtn.hidden = true; skipBtn.hidden = true; reflection.hidden = true;
+            if (feedback) feedback.textContent = '已保存到这台设备的浏览器。你可以在 The Archive 中再次找到它。';
+            if (description) description.textContent = '这段记忆只保存在当前浏览器，不会发送到服务器。';
+            if (title) title.textContent = '一段记忆，轻轻收好了。';
+          } catch (_) {
+            if (feedback) feedback.textContent = '浏览器暂时无法保存。你可以复制这句话，或不保存地离开。';
+          }
+        });
+        if (title) title.textContent = '先选一个安静的角落。';
+        if (startBtn) startBtn.disabled = true;
+        if (startBtn) startBtn.hidden = true;
+        if (endBtn) endBtn.hidden = true;
+        if (saveBtn) saveBtn.hidden = true;
+        if (skipBtn) skipBtn.hidden = true;
+        if (timerEl) timerEl.hidden = true;
+        if (progress) progress.hidden = true;
       }
       if (path === 'archive.html') {
         const note = document.getElementById('daily-note');
