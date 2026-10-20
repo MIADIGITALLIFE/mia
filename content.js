@@ -13,30 +13,18 @@
   }
   const choose = list => list[Math.floor(Math.random() * list.length)];
   function setup() {
+    const currentPath = location.pathname.split('/').pop() || 'index.html';
+    if (currentPath === 'index.html' || currentPath === '') {
+      const module = document.createElement('script');
+      module.src = 'mia-daily.js';
+      module.defer = true;
+      document.head.appendChild(module);
+    }
     load().then(data => {
       const path = location.pathname.split('/').pop() || 'index.html';
       if (path === 'index.html' || path === '') {
         const line = document.getElementById('time-line');
-        const art = document.getElementById('mia-art');
         if (line && Array.isArray(data.mia_response)) line.textContent = choose(data.mia_response);
-        // The generated snapshot is the source of truth for Mia's daily voice and artwork.
-        fetch('state/mia_memory.json?t=' + Date.now(), { cache: 'no-store' })
-          .then(response => { if (!response.ok) throw new Error('Daily memory unavailable'); return response.json(); })
-          .then(memory => {
-            if (memory.last_thought && line) line.textContent = memory.last_thought;
-            if (art && memory.artwork_id) {
-              art.src = 'assets/art/' + encodeURIComponent(memory.artwork_id) + '.svg?v=' + encodeURIComponent(memory.date || '');
-              art.hidden = false;
-              art.alt = 'Mia 的每日画作 · ' + (memory.date || '');
-            }
-            if (Array.isArray(memory.palette) && memory.palette[1]) {
-              document.documentElement.style.setProperty('--mia-mood-color', memory.palette[1]);
-            }
-            document.documentElement.dataset.miaMood = memory.mood || 'calm';
-          })
-          .catch(() => {
-            // Keep the existing welcome line if the daily snapshot is not available.
-          });
       }
       if (path === 'bar.html') {
         const text = document.getElementById('fortune-text');
