@@ -106,7 +106,36 @@
         const duration = 20;
         const key = 'mia-greenhouse-memories-v1';
         const names = {rain:'听雨',light:'看光',breath:'深呼吸'};
-        const tellWorld = type => { try { if (window.parent !== window) window.parent.postMessage({type}, '*'); } catch (_) {} };
+        const localRain = document.createElement('audio');
+        localRain.src = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Rain_(1).ogg';
+        localRain.preload = 'none'; localRain.loop = true; localRain.volume = 0;
+        localRain.setAttribute('aria-hidden', 'true'); document.body.appendChild(localRain);
+        let localRainFade = null;
+        const fadeLocalRain = (target, duration, done) => {
+          if (localRainFade) clearInterval(localRainFade);
+          const from = localRain.volume, started = Date.now();
+          localRainFade = setInterval(() => {
+            const p = Math.min(1, (Date.now() - started) / duration);
+            localRain.volume = from + (target - from) * p;
+            if (p >= 1) { clearInterval(localRainFade); localRainFade = null; if (done) done(); }
+          }, 35);
+        };
+        const tellWorld = type => {
+          try {
+            if (window.parent !== window) window.parent.postMessage({type}, '*');
+            else if (type === 'mia:rain-start') {
+              localRain.volume = 0;
+              const result = localRain.play();
+              if (result && result.catch) result.catch(() => { if (feedback) feedback.textContent = '雨声暂时无法加载，请检查网络后再试。'; });
+              fadeLocalRain(.24, 900);
+            } else if (type === 'mia:rain-stop') {
+              fadeLocalRain(0, 500, () => { localRain.pause(); localRain.currentTime = 0; });
+            }
+          } catch (_) {}
+        };
+        localRain.addEventListener('error', () => {
+          if (feedback && selected === 'rain' && interval) feedback.textContent = '雨声音频加载失败，请检查网络后再试。';
+        });
         window.addEventListener('pagehide', () => tellWorld('mia:rain-stop'));
         const endings = {
           rain:'雨不必真的落下。愿你刚才听见的声音，给心留出一点空白。',
