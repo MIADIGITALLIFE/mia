@@ -372,7 +372,22 @@
       const hint = document.getElementById('music-hint');
       const toast = document.getElementById('toast');
       let toastTimer;
+      const enabledKey = 'mia-music-enabled';
+      const timeKey = 'mia-music-time';
       music.volume = 0.22;
+      function read(key) { try { return localStorage.getItem(key); } catch (_) { return null; } }
+      function write(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+      function savePosition() {
+        if (Number.isFinite(music.currentTime) && music.currentTime > 0) write(timeKey, String(music.currentTime));
+      }
+      music.addEventListener('timeupdate', savePosition);
+      window.addEventListener('pagehide', savePosition);
+      music.addEventListener('loadedmetadata', () => {
+        const saved = Number(read(timeKey));
+        if (Number.isFinite(saved) && saved >= 0 && Number.isFinite(music.duration) && music.duration > 0) {
+          music.currentTime = saved % music.duration;
+        }
+      }, { once: true });
 
       function updateButton(playing) {
         toggle.textContent = playing ? 'Ⅱ' : '♫';
@@ -390,7 +405,7 @@
         try {
           await music.play();
           updateButton(true);
-          try { localStorage.setItem('mia-music-enabled', 'yes'); } catch (_) {}
+          write(enabledKey, 'yes');
           showToast('让声音轻轻留在这里。');
         } catch (_) {
           updateButton(false);
@@ -400,7 +415,8 @@
       function pauseMusic() {
         music.pause();
         updateButton(false);
-        try { localStorage.setItem('mia-music-enabled', 'no'); } catch (_) {}
+        write(enabledKey, 'no');
+        savePosition();
       }
       toggle.addEventListener('click', () => music.paused ? playMusic() : pauseMusic());
       hint.addEventListener('click', () => music.paused ? playMusic() : pauseMusic());
@@ -416,11 +432,12 @@
       music.addEventListener('play', () => updateButton(true));
       music.addEventListener('pause', () => updateButton(false));
       // 只在访客曾主动开启时尝试恢复；若浏览器拦截，不强迫播放。
-      try {
-        if (localStorage.getItem('mia-music-enabled') === 'yes') {
+      // 仅在访客此前主动开启音乐时尝试恢复；浏览器仍可能要求再次点击。
+      if (read(enabledKey) === 'yes') {
+        music.addEventListener('loadedmetadata', () => {
           music.play().then(() => updateButton(true)).catch(() => updateButton(false));
-        }
-      } catch (_) {}
+        }, { once: true });
+      }
     })();
 
     // 森林温室入口目前只是原型，不验证或保存邀请码。
