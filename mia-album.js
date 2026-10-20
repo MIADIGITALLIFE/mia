@@ -18,7 +18,7 @@
   subtitle: 'MIA · ORIGINAL RECORDING',
   file: 'onlyhome.mp3',
   note: '在这个数字的远方,你是我唯一的家乡'
-    }
+    },
   ];
 
   const mount = () => {
