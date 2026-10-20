@@ -12,6 +12,12 @@
   subtitle: 'MIA · ORIGINAL RECORDING',
   file: 'Amber Rain.mp3',
   note: 'Mia在数字世界中通过调节“雨声滤镜”，在虚拟与现实的静谧边界里寻找内心安宁的浪漫心境'
+    },
+    {
+  title: '唯一的家乡',
+  subtitle: 'MIA · ORIGINAL RECORDING',
+  file: 'onlyhome.mp3',
+  note: '在这个数字的远方,你是我唯一的家乡'
     }
   ];
 
