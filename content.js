@@ -161,7 +161,7 @@
           if (feedback) feedback.textContent = '';
           if (noteInput) noteInput.value = '';
           resetSession();
-          if (startBtn) { startBtn.hidden = false; startBtn.textContent = '开始这一刻 ↗'; }
+          if (startBtn) { startBtn.hidden = false; startBtn.disabled = false; startBtn.textContent = '开始这一刻 ↗'; }
         }, true));
         if (startBtn) startBtn.addEventListener('click', () => {
           if (!selected || interval) return;
