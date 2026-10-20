@@ -139,6 +139,7 @@
         <a href="index.html">THE WORLD</a>
         <a href="#coordinates">THE CAFE</a>
         <a href="#forest">THE FOREST</a>
+        <a class="world-link" href="world.html">LISTENING MODE</a>
       </nav>
     </div>
     <div class="hero-orbit" aria-hidden="true"><span>let it be unclear</span></div>
@@ -372,6 +373,12 @@
       const hint = document.getElementById('music-hint');
       const toast = document.getElementById('toast');
       let toastTimer;
+      if (window.parent !== window) {
+        music.pause(); music.remove(); toggle.hidden = true;
+        if (hint) hint.hidden = true;
+        document.querySelectorAll('.world-link').forEach(link => link.hidden = true);
+        return;
+      }
       const enabledKey = 'mia-music-enabled';
       const timeKey = 'mia-music-time';
       music.volume = 0.22;
