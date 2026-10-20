@@ -46,6 +46,12 @@
             const small = document.createElement('small');
             small.textContent = '— ' + (item.user || 'Mia 馆藏短句');
             article.appendChild(small);
+            if (item.mia_reply) {
+              const reply = document.createElement('p');
+              reply.className = 'echo-reply';
+              reply.textContent = 'Mia：' + item.mia_reply;
+              article.appendChild(reply);
+            }
             wall.appendChild(article);
           });
         }
@@ -55,27 +61,35 @@
         const detail = document.getElementById('track-detail');
         const wave = document.getElementById('wave');
         const cards = [...document.querySelectorAll('.mood-card')];
-        cards.forEach(card => card.addEventListener('click', () => {
+        cards.forEach(card => card.addEventListener('click', e => {
           const item = (data.music_playlist || []).find(x => x.id === card.dataset.mood);
           if (!item) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          cards.forEach(c => c.setAttribute('aria-pressed', String(c === card)));
           if (quote) quote.textContent = item.philosophy;
           if (detail) detail.textContent = '情绪已选择 · 全站共享曲目';
           if (wave) wave.classList.add('playing');
-        }));
+          if (item.color) document.body.style.background = 'radial-gradient(ellipse at 50% 0%,' + item.color + '88 0,transparent 48%),linear-gradient(155deg,#080c18,#0b0c13 70%)';
+          try { if (window.parent !== window) window.parent.postMessage({type:'mia:play'}, '*'); } catch (_) {}
+        }, true));
       }
       if (path === 'greenhouse.html') {
         const circle = document.getElementById('breath-circle');
         const label = document.getElementById('breath-label');
-        document.querySelectorAll('.practice').forEach(btn => btn.addEventListener('click', () => {
+        document.querySelectorAll('.practice').forEach(btn => btn.addEventListener('click', e => {
           const p = data.greenhouse_notes && data.greenhouse_notes[btn.dataset.practice];
           if (!p) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          document.querySelectorAll('.practice').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
           const text = document.getElementById('practice-text');
           const status = document.getElementById('practice-status');
           if (text) text.textContent = p.text;
           if (status) status.textContent = p.status;
           if (label) label.textContent = p.label;
           if (circle) circle.classList.toggle('active', btn.dataset.practice === 'breath');
-        }));
+        }, true));
       }
       if (path === 'archive.html') {
         const note = document.getElementById('daily-note');
