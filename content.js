@@ -127,7 +127,7 @@
               localRain.volume = 0;
               const result = localRain.play();
               if (result && result.catch) result.catch(() => { if (feedback) feedback.textContent = '雨声暂时无法加载，请检查网络后再试。'; });
-              fadeLocalRain(.24, 900);
+              fadeLocalRain(.4, 900);
             } else if (type === 'mia:rain-stop') {
               fadeLocalRain(0, 500, () => { localRain.pause(); localRain.currentTime = 0; });
             }
