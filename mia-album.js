@@ -62,6 +62,23 @@
       audio.preload = 'metadata';
       audio.setAttribute('aria-label', '播放 ' + track.title);
       audio.src = encodeURI(track.file);
+      // Keep only one audible player: pause any other audio in this document,
+      // then ask the shared world player to fade out and stop.
+      audio.addEventListener('play', () => {
+        document.querySelectorAll('audio').forEach(other => {
+          if (other !== audio && !other.paused) other.pause();
+        });
+        try {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({type:'mia:album-play', title:track.title}, '*');
+          }
+        } catch (_) {}
+      });
+      window.addEventListener('message', event => {
+        if (event.data && event.data.type === 'mia:stop-album' && !audio.paused) {
+          audio.pause();
+        }
+      });
       audio.addEventListener('error', () => {
         const warning = document.createElement('p');
         warning.className = 'small-note';
