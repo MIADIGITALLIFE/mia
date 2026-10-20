@@ -80,7 +80,7 @@
     hint.className = 'album-empty-note';
     hint.textContent = '每一首新作品，都可以成为这里的一束微光。';
     section.appendChild(hint);
-    main.insertBefore(section, footer);
+    main.appendChild(section);
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once:true});
