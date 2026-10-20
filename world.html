@@ -9,6 +9,27 @@
  };
  const audio=document.getElementById('mia-default-music');audio.muted=true;const rainAudio=document.createElement('audio');rainAudio.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/Rain_(1).ogg';rainAudio.loop=true;rainAudio.preload='none';rainAudio.volume=0;document.body.appendChild(rainAudio);let ctx=null,master=null,playing=false,track='default',stepIndex=0,scene=null,fadeTimer=null,audioFade=null,rainFade=null,rainActive=false,rainRestore=null;
  const read=k=>{try{return localStorage.getItem(k)}catch(_){return null}},write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
+ const AUDIO_OWNER_KEY='mia-audio-owner-v1';
+ const tabId='tab-'+Math.random().toString(36).slice(2);
+ function claimAudio(source){
+  const packet={owner:tabId,source,at:Date.now()};
+  try{localStorage.setItem(AUDIO_OWNER_KEY,JSON.stringify(packet))}catch(_){}
+  try{if(audioChannel)audioChannel.postMessage(packet)}catch(_){}
+ }
+ function silenceForOtherTab(){
+  if(rainFade){clearInterval(rainFade);rainFade=null}
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  if(rainActive){rainActive=false;rainRestore=null;rainAudio.pause();rainAudio.currentTime=0;rainAudio.volume=0}
+  playing=false;audio.pause();audio.muted=true;audio.volume=1;
+  const previous=scene;scene=null;if(previous)retire(previous,.35);
+  paint();status.textContent='声音已在另一个 Mia 页面播放';
+ }
+ let audioChannel=null;
+ try{if('BroadcastChannel' in window){audioChannel=new BroadcastChannel('mia-audio-v1');audioChannel.onmessage=e=>{if(e.data&&e.data.owner!==tabId)silenceForOtherTab()}}}catch(_){}
+ window.addEventListener('storage',e=>{
+  if(e.key!==AUDIO_OWNER_KEY||!e.newValue)return;
+  try{const packet=JSON.parse(e.newValue);if(packet.owner!==tabId)silenceForOtherTab()}catch(_){}
+ });
  function init(){if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='此浏览器暂不支持实时合成';return false}ctx=new AC();master=ctx.createGain();master.gain.value=.88;master.connect(ctx.destination);return true}
  function makeScene(id){
   const m=modes[id],bus=ctx.createGain(),filter=ctx.createBiquadFilter();
@@ -107,6 +128,7 @@
   rainFade=setInterval(()=>{const p=Math.min(1,(Date.now()-started)/duration);rainAudio.volume=from+(target-from)*p;if(p>=1){clearInterval(rainFade);rainFade=null;if(done)done()}},35);
  }
  function beginRain(){
+  claimAudio('rain');
   if(rainActive)return;
   rainRestore={wasPlaying:playing,track:track};
   rainActive=true;
@@ -138,6 +160,7 @@
  }
  rainAudio.addEventListener('error',()=>{if(rainActive){rainActive=false;status.textContent='雨声文件暂时无法读取';button.textContent='♫'}});
  function startDefaultFromGesture(){
+  claimAudio('background');
   if(track==='default'&&playing&&!audio.paused){paint();return}
   if(audioFade){clearInterval(audioFade);audioFade=null}
   const previous=scene;scene=null;
@@ -154,6 +177,7 @@
  window.__miaStartDefaultMusic=startDefaultFromGesture;
  audio.addEventListener('error',()=>{status.textContent='背景音乐文件暂时无法读取';button.textContent='♫';});
  async function start(){
+  claimAudio(track==='default'?'background':'soundscape');
   if(playing){paint();return}
   if(track==='default'){
    if(!audio.paused){playing=true;paint();return}
@@ -182,6 +206,7 @@
   if(rainActive){rainActive=false;if(rainFade){clearInterval(rainFade);rainFade=null}rainAudio.pause();rainAudio.currentTime=0;rainAudio.volume=0;rainRestore=null}
   const changed=track!==id;track=id;stepIndex=0;write('mia-synth-track',id);
   if(shouldPlay){
+   claimAudio('soundscape');
    if(!init())return;
    try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}
    if(changed||!playing){
