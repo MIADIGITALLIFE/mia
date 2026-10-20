@@ -106,6 +106,8 @@
         const duration = 20;
         const key = 'mia-greenhouse-memories-v1';
         const names = {rain:'听雨',light:'看光',breath:'深呼吸'};
+        const tellWorld = type => { try { if (window.parent !== window) window.parent.postMessage({type}, '*'); } catch (_) {} };
+        window.addEventListener('pagehide', () => tellWorld('mia:rain-stop'));
         const endings = {
           rain:'雨不必真的落下。愿你刚才听见的声音，给心留出一点空白。',
           light:'光不一定要照亮所有地方。刚才看见的那一点，已经足够。',
@@ -115,6 +117,7 @@
         const getMemories = () => { try { const v = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
         const clearTimer = () => { if (interval) clearInterval(interval); interval = null; };
         const resetSession = () => {
+          tellWorld('mia:rain-stop');
           clearTimer(); remaining = duration; finished = false;
           if (timerEl) { timerEl.hidden = true; timerEl.textContent = '00:20'; }
           if (progress) progress.hidden = true;
@@ -127,6 +130,7 @@
           if (circle) circle.classList.remove('active');
         };
         const finishSession = (wasNatural) => {
+          tellWorld('mia:rain-stop');
           clearTimer(); finished = true;
           if (circle) circle.classList.remove('active');
           if (label) label.textContent = 'PAUSE';
@@ -165,6 +169,7 @@
         }, true));
         if (startBtn) startBtn.addEventListener('click', () => {
           if (!selected || interval) return;
+          if (selected === 'rain') tellWorld('mia:rain-start');
           remaining = duration; finished = false;
           startBtn.hidden = true; endBtn.hidden = false; timerEl.hidden = false; progress.hidden = false;
           timerEl.textContent = '00:20';
