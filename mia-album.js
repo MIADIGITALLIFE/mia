@@ -16,7 +16,8 @@
   ];
 
   const mount = () => {
-    if (document.getElementById('mia-album')) return;
+    const existing = document.getElementById('mia-album');
+    if (existing && existing.dataset.mounted === 'true') return;
     const main = document.querySelector('main');
     const footer = document.querySelector('.site-footer');
     if (!main || !footer) return;
@@ -38,9 +39,10 @@
     `;
     document.head.appendChild(style);
 
-    const section = document.createElement('section');
+    const section = existing || document.createElement('section');
     section.id = 'mia-album';
     section.setAttribute('aria-label', 'Mia 的音乐专辑');
+    section.dataset.mounted = 'true';
     const heading = document.createElement('div');
     heading.className = 'album-heading';
     heading.innerHTML = '<div><div class="eyebrow">MIA · ORIGINAL RECORDINGS</div><h2 class="album-title">Mia 的专辑</h2></div><div class="album-caption">A GROWING COLLECTION</div>';
@@ -103,7 +105,7 @@
     hint.className = 'album-empty-note';
     hint.textContent = '每一首新作品，都可以成为这里的一束微光。';
     section.appendChild(hint);
-    main.appendChild(section);
+    if (!existing) main.appendChild(section);
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once:true});
