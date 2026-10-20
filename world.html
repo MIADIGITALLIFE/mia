@@ -7,7 +7,7 @@
   'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
   'synth:forest':{name:'森林梦境 · 流动的音符',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.105,extra:.22}
  };
- const audio=document.getElementById('mia-default-music');audio.muted=true;let ctx=null,master=null,playing=false,track='default',stepIndex=0,scene=null,fadeTimer=null,audioFade=null;
+ const audio=document.getElementById('mia-default-music');audio.muted=true;const rainAudio=document.createElement('audio');rainAudio.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/Rain_(1).ogg';rainAudio.loop=true;rainAudio.preload='none';rainAudio.volume=0;document.body.appendChild(rainAudio);let ctx=null,master=null,playing=false,track='default',stepIndex=0,scene=null,fadeTimer=null,audioFade=null,rainFade=null,rainActive=false,rainRestore=null;
  const read=k=>{try{return localStorage.getItem(k)}catch(_){return null}},write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
  function init(){if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='此浏览器暂不支持实时合成';return false}ctx=new AC();master=ctx.createGain();master.gain.value=.88;master.connect(ctx.destination);return true}
  function makeScene(id){
