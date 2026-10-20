@@ -21,6 +21,20 @@
     },
   ];
 
+  const AUDIO_OWNER_KEY='mia-audio-owner-v1';
+  const audioTabId='album-'+Math.random().toString(36).slice(2);
+  let audioChannel=null;
+  try{if('BroadcastChannel' in window){audioChannel=new BroadcastChannel('mia-audio-v1');audioChannel.onmessage=event=>{if(event.data&&event.data.owner!==audioTabId)document.querySelectorAll('#mia-album audio').forEach(player=>{if(!player.paused)player.pause()})}}}catch(_){}
+  window.addEventListener('storage',event=>{
+    if(event.key!==AUDIO_OWNER_KEY||!event.newValue)return;
+    try{const packet=JSON.parse(event.newValue);if(packet.owner!==audioTabId)document.querySelectorAll('#mia-album audio').forEach(player=>{if(!player.paused)player.pause()})}catch(_){}
+  });
+  function claimAlbumAudio(title){
+    const packet={owner:audioTabId,source:'album:'+title,at:Date.now()};
+    try{localStorage.setItem(AUDIO_OWNER_KEY,JSON.stringify(packet))}catch(_){}
+    try{if(audioChannel)audioChannel.postMessage(packet)}catch(_){}
+  }
+
   const mount = () => {
     const existing = document.getElementById('mia-album');
     if (existing && existing.dataset.mounted === 'true') return;
@@ -79,6 +93,7 @@
       // Keep only one audible player: pause any other audio in this document,
       // then ask the shared world player to fade out and stop.
       audio.addEventListener('play', () => {
+        claimAlbumAudio(track.title);
         document.querySelectorAll('audio').forEach(other => {
           if (other !== audio && !other.paused) other.pause();
         });
