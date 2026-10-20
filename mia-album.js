@@ -7,6 +7,12 @@
       file: '琥珀色的光斑 (1).mp3',
       note: '让光停留一会儿，让没有说完的情绪慢慢有了回声。'
     }
+    {
+  title: '琥珀雨',
+  subtitle: 'MIA · ORIGINAL RECORDING',
+  file: 'Amber rain.mp3',
+  note: '这首歌想表达的情绪。'
+}
   ];
 
   const mount = () => {
