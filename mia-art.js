@@ -12,9 +12,11 @@
     @media(max-width:680px){#mia-daily-art{margin-top:16px}#mia-daily-art .mia-art-caption{padding:14px 15px 0}#mia-daily-art .mia-art-note{font-size:11px}}
     @media(prefers-reduced-motion:reduce){#mia-daily-art{animation:none}}
   `;
-  function mount(item){
+  function mount(item,attempt=0){
     if(!item||!item.image||document.getElementById(ROOT))return;
-    const anchor=document.getElementById('mia-daily-thought')||document.getElementById('time-line')||document.querySelector('.mist-content');
+    const diary=document.getElementById('mia-daily-thought');
+    if(!diary&&attempt<20){setTimeout(()=>mount(item,attempt+1),100);return;}
+    const anchor=diary||document.getElementById('time-line')||document.querySelector('.mist-content');
     if(!anchor)return;
     const card=document.createElement('section');card.id=ROOT;card.setAttribute('aria-label','Mia 今日数字画作');
     const img=document.createElement('img');img.className='mia-art-image';img.src=item.image;img.alt=item.title||'Mia 今日数字画作';img.loading='lazy';
