@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">雨声与静谧的回响</title><desc id="desc">雨后的雾林小径与远处朦胧的光，浅青瓷、奶油黄和灰蓝色调。</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#303e43"/><stop offset=".52" stop-color="#89999a"/><stop offset="1" stop-color="#d9d7c6"/></linearGradient>
+ <linearGradient id="path" x2=".1" y2="1"><stop stop-color="#a9b7ad"/><stop offset="1" stop-color="#343f3c"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff6c9" stop-opacity=".92"/><stop offset=".42" stop-color="#fff0b7" stop-opacity=".24"/><stop offset="1" stop-color="#fff0b7" stop-opacity="0"/></radialGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#c3d4cc" stop-opacity=".8"/><stop offset="1" stop-color="#687c7b" stop-opacity=".1"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+ <pattern id="grain" width="140" height="140" patternUnits="userSpaceOnUse"><circle cx="12" cy="20" r="1" fill="#fff" opacity=".2"/><circle cx="88" cy="46" r=".8" fill="#fff" opacity=".16"/><circle cx="51" cy="119" r=".7" fill="#14201f" opacity=".18"/><circle cx="122" cy="102" r="1" fill="#fff" opacity=".13"/></pattern>
+</defs>
+<rect width="1200" height="900" fill="url(#sky)"/>
+<ellipse cx="612" cy="380" rx="330" ry="280" fill="url(#glow)" filter="url(#blur)"/>
+<path d="M0 280 Q150 190 300 300 T600 275 T900 285 T1200 230 L1200 560 L0 560Z" fill="#354747" opacity=".65"/>
+<path d="M0 390 Q180 285 360 390 T700 350 T1200 365 L1200 630 L0 630Z" fill="#536762" opacity=".78"/>
+<path d="M0 465 Q200 360 420 465 T820 425 T1200 450 L1200 680 L0 680Z" fill="#a4b6aa" opacity=".45"/>
+<g fill="#1c2a29" opacity=".84">
+ <path d="M0 0H150L208 250 150 220 180 380 105 300 78 420 32 315 0 350Z"/>
+ <path d="M1200 0H1025L985 245 1044 210 1010 370 1080 300 1114 420 1160 320 1200 360Z"/>
+ <path d="M95 100L0 170V0H125Z M1110 110L1200 170V0H1080Z"/>
+</g>
+<g fill="#2a3c38" opacity=".72">
+ <path d="M80 210L10 310 70 292 25 400 120 330 165 400 152 288 210 300Z"/>
+ <path d="M1120 215L1195 305 1130 288 1180 410 1085 333 1040 405 1052 292 995 310Z"/>
+ <path d="M260 170L198 270 250 255 220 350 292 300 330 362 320 250 365 270Z"/>
+ <path d="M940 175L1000 275 950 255 980 350 910 300 870 360 880 250 835 270Z"/>
+</g>
+<path d="M420 900 Q500 680 545 540 Q590 475 630 540 Q700 700 830 900Z" fill="url(#path)"/>
+<path d="M500 900 Q560 710 585 590 Q610 560 628 590 Q670 740 750 900Z" fill="url(#water)" opacity=".75"/>
+<g fill="none" stroke="#e6e8d7" stroke-linecap="round" opacity=".5">
+ <path d="M510 780 Q620 760 710 784" stroke-width="3"/><path d="M488 825 Q620 804 740 831" stroke-width="2"/>
+ <path d="M554 684 Q614 670 674 688" stroke-width="2"/><path d="M536 725 Q617 710 694 730" stroke-width="1.5"/>
+ <path d="M470 865 Q620 840 765 870" stroke-width="2"/>
+</g>
+<g fill="#20312e" opacity=".9">
+ <path d="M0 900V520L60 465 110 535 160 455 218 548 270 495 325 610 355 900Z"/>
+ <path d="M1200 900V510L1140 455 1090 530 1038 448 980 545 925 485 875 590 840 900Z"/>
+</g>
+<g fill="#5f7a70" opacity=".75">
+ <path d="M0 650L75 570 120 640 165 550 230 680 280 620 330 730 350 900H0Z"/>
+ <path d="M1200 645L1120 565 1070 635 1025 552 960 680 910 620 860 735 840 900H1200Z"/>
+</g>
+<g stroke="#d8e7dc" stroke-linecap="round" opacity=".35">
+ <path d="M160 120l-22 60M260 80l-18 44M380 135l-24 70M790 80l-20 54M910 125l-23 65M1030 65l-19 55M610 95l-20 56M720 175l-17 46" stroke-width="2"/>
+</g>
+<rect width="1200" height="900" fill="url(#grain)" opacity=".65"/>
+<rect width="1200" height="900" fill="#d5d9c7" opacity=".05"/>
+</svg>
