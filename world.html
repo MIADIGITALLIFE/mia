@@ -102,6 +102,7 @@
   },40);
  }
  function startDefaultFromGesture(){
+  if(track==='default'&&playing&&!audio.paused){paint();return}
   if(audioFade){clearInterval(audioFade);audioFade=null}
   const previous=scene;scene=null;
   if(previous)retire(previous,1.2);
@@ -180,7 +181,7 @@
  frame.addEventListener('load',bindMoodClicks);
  setTimeout(bindMoodClicks,250);
  button.addEventListener('click',()=>playing?stop():start());
- window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter'){if(track!=='default'){const previous=scene;scene=null;if(previous)retire(previous,1.2);playing=false;track='default';if(audioFade){clearInterval(audioFade);audioFade=null}audio.volume=1}start()}else if(e.data.type==='mia:play')start()});
+ window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter')startDefaultFromGesture();else if(e.data.type==='mia:play')start()});
  // Every fresh visit begins with the original background track; mood cards can switch to other soundscapes.
  track='default';audio.pause();audio.currentTime=0;audio.muted=true;playing=false;paint();
 })();
