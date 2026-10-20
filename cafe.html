@@ -437,6 +437,7 @@
         music.addEventListener('loadedmetadata', () => {
           music.play().then(() => updateButton(true)).catch(() => updateButton(false));
         }, { once: true });
+        music.load();
       }
     })();
 
