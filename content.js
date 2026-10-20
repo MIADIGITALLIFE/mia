@@ -112,6 +112,30 @@
         localRain.preload = 'none'; localRain.loop = true; localRain.volume = 0;
         localRain.setAttribute('aria-hidden', 'true'); document.body.appendChild(localRain);
         let localRainFade = null;
+        const audioOwnerKey = 'mia-audio-owner-v1';
+        const rainAudioTabId = 'greenhouse-' + Math.random().toString(36).slice(2);
+        let rainAudioChannel = null;
+        const stopLocalRainForOtherAudio = () => {
+          if (localRainFade) { clearInterval(localRainFade); localRainFade = null; }
+          localRain.volume = 0; localRain.pause(); localRain.currentTime = 0;
+        };
+        try {
+          if ('BroadcastChannel' in window) {
+            rainAudioChannel = new BroadcastChannel('mia-audio-v1');
+            rainAudioChannel.onmessage = event => {
+              if (event.data && event.data.owner !== rainAudioTabId) stopLocalRainForOtherAudio();
+            };
+          }
+        } catch (_) {}
+        window.addEventListener('storage', event => {
+          if (event.key !== audioOwnerKey || !event.newValue) return;
+          try { const packet = JSON.parse(event.newValue); if (packet.owner !== rainAudioTabId) stopLocalRainForOtherAudio(); } catch (_) {}
+        });
+        const claimStandaloneRain = () => {
+          const packet = {owner:rainAudioTabId,source:'greenhouse-rain',at:Date.now()};
+          try { localStorage.setItem(audioOwnerKey, JSON.stringify(packet)); } catch (_) {}
+          try { if (rainAudioChannel) rainAudioChannel.postMessage(packet); } catch (_) {}
+        };
         const fadeLocalRain = (target, duration, done) => {
           if (localRainFade) clearInterval(localRainFade);
           const from = localRain.volume, started = Date.now();
@@ -125,6 +149,7 @@
           try {
             if (window.parent !== window) window.parent.postMessage({type}, '*');
             else if (type === 'mia:rain-start') {
+              claimStandaloneRain();
               localRain.volume = 0;
               const result = localRain.play();
               if (result && result.catch) result.catch(() => { if (feedback) feedback.textContent = '雨声暂时无法加载，请检查网络后再试。'; });
