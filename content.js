@@ -68,10 +68,10 @@
           e.stopImmediatePropagation();
           cards.forEach(c => c.setAttribute('aria-pressed', String(c === card)));
           if (quote) quote.textContent = item.philosophy;
-          if (detail) detail.textContent = '情绪已选择 · 全站共享曲目';
+          if (detail) detail.textContent = item.track_title || '已切换背景音乐';
           if (wave) wave.classList.add('playing');
           if (item.color) document.body.style.background = 'radial-gradient(ellipse at 50% 0%,' + item.color + '88 0,transparent 48%),linear-gradient(155deg,#080c18,#0b0c13 70%)';
-          try { if (window.parent !== window) window.parent.postMessage({type:'mia:play'}, '*'); } catch (_) {}
+          try { if (window.parent !== window) window.parent.postMessage({type:'mia:track', track:item.track, title:item.track_title || item.mood}, '*'); } catch (_) {}
         }, true));
       }
       if (path === 'greenhouse.html') {
