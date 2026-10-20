@@ -13,7 +13,7 @@
  function makeScene(id){
   const m=modes[id],bus=ctx.createGain(),filter=ctx.createBiquadFilter();
   bus.gain.value=.0001;filter.type='lowpass';filter.frequency.value=m.filter;filter.Q.value=.45;filter.connect(bus);bus.connect(master);
-  const s={id,bus,filter,nodes:[],timer:null,index:0,nextAt:ctx.currentTime+.25,disposed:false};
+  const s={id,bus,filter,nodes:[],timer:null,index:0,nextAt:ctx.currentTime+.25,disposed:false,lfo:null};
   function tone(freq,when,duration,wave,volume,detune=0){
    if(s.disposed)return;
    const osc=ctx.createOscillator(),gain=ctx.createGain();
@@ -31,6 +31,26 @@
   }
   function addTexture(){
    const now=ctx.currentTime;
+   // Deep-blue mode: one gentle 10-second breath cycle (4s in, 6s out).
+   // A dedicated low-frequency gain node modulates only the sustained low layer.
+   if(id==='synth:tearful'){
+    const breathGain=ctx.createGain(),lfo=ctx.createOscillator(),depth=ctx.createGain();
+    breathGain.gain.value=.76;
+    lfo.type='sine';lfo.frequency.value=.1;
+    depth.gain.value=.24;
+    lfo.connect(depth);depth.connect(breathGain.gain);
+    breathGain.connect(filter);
+    lfo.start(now);
+    s.lfo={osc:lfo,gain:breathGain};
+    const low=ctx.createOscillator(),lowGain=ctx.createGain();
+    low.type='sine';low.frequency.value=m.base;low.detune.value=-2;
+    lowGain.gain.value=m.volume*.72;
+    low.connect(lowGain);lowGain.connect(breathGain);
+    low.start(now);s.nodes.push(low);
+    low.onended=()=>{try{low.disconnect();lowGain.disconnect()}catch(_){}};
+   } else {
+    tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
+   }
    tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
    tone(m.base*1.5,now+.12,Math.max(6,m.step*1.8),'sine',m.volume*.24,3);
   }
@@ -59,6 +79,7 @@
   s.bus.gain.setValueAtTime(Math.max(.0001,s.bus.gain.value),now);
   s.bus.gain.linearRampToValueAtTime(.0001,now+fadeSeconds);
   s.disposed=true;if(s.timer)clearInterval(s.timer);
+  if(s.lfo){try{s.lfo.osc.stop(now+fadeSeconds);s.lfo.osc.disconnect()}catch(_){}s.lfo=null;}
   setTimeout(()=>{s.nodes.forEach(n=>{try{n.stop()}catch(_){}});try{s.filter.disconnect();s.bus.disconnect()}catch(_){}},(fadeSeconds+.2)*1000);
  }
  function fadeIn(s,seconds=2){
