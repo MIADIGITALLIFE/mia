@@ -62,38 +62,27 @@ main{width:min(1040px,100% - 40px);margin:auto}.hero{padding:clamp(54px,9vh,100p
 <footer class="footer">MIA · ZHI NOTES</footer>
 <script>
 (()=> {
-const DATA_URL='https://zeefsee.github.io/ZEE/mia/daily.json';
+const DATA_URL='https://zeefsee.github.io/ZEE/mia/sections.json';
 const statusEl=document.getElementById('status');
-const sections=[...document.querySelectorAll('[data-section]')];
-const hiddenKeys=new Set(['safety_status','source']);
-const aliases={
- origin:['origin','exploration','creation','创世与探索','创世','探索','起源'],
- mirror:['mirror','decision','reality','现实镜像与决策','现实镜像','决策','复盘'],
- philosophy:['philosophy','thought','experiment','思想实验与哲理','思想实验','哲理'],
- 'small-things':['small-things','growth','daily-life','成长与微观生活','成长','微观生活','日常']
+const sectionEls=[...document.querySelectorAll('[data-section]')];
+const config={
+ 'creation_exploration':{pageId:'origin',dimension:'origin'},
+ 'reality_decisions':{pageId:'mirror',dimension:'decision'},
+ 'philosophy_experiment':{pageId:'philosophy',dimension:'philosophy'},
+ 'micro_life_growth':{pageId:'small-things',dimension:'daily_life'}
 };
 function dateLabel(value){if(!value)return '';const d=new Date(value);if(Number.isNaN(d.getTime()))return String(value);return new Intl.DateTimeFormat('zh-SG',{year:'numeric',month:'long',day:'numeric'}).format(d)}
-function asRecords(raw){if(Array.isArray(raw))return raw.filter(x=>x&&typeof x==='object');for(const k of ['entries','items','records','posts','articles'])if(raw&&Array.isArray(raw[k]))return raw[k].filter(x=>x&&typeof x==='object');return raw&&typeof raw==='object'?[raw]:[]}
-function field(item,keys){for(const key of keys){if(item[key]!==undefined&&item[key]!==null&&item[key]!=='')return item[key]}return ''}
-function matchesSection(item,id){
- const raw=field(item,['dimension','section','category','category_id','type','pillar']);
- const values=[raw,...(Array.isArray(item.tags)?item.tags:[]),...(Array.isArray(item.mood)?item.mood:[])].flat().map(v=>String(v).toLowerCase());
- const keys=aliases[id]||[];
- return values.some(v=>keys.some(k=>v===k.toLowerCase()||v.includes(k.toLowerCase())));
-}
-function makeRecord(item,index){
- if(item.status&&item.status!=='published')return null;
- if(item.safety_status&&item.safety_status!=='passed')return null;
- const card=document.createElement('article');card.className='record';card.style.animationDelay=Math.min(index*.07,.35)+'s';
- const date=field(item,['date','created_at','generated_at','published_at']);
- if(date){const d=document.createElement('div');d.className='record-date';d.textContent=dateLabel(date);card.appendChild(d)}
- const title=field(item,['title','headline']);
- if(title){const h=document.createElement('h3');h.className='record-title';h.textContent=title;card.appendChild(h)}
- const body=field(item,['diary','content','text','body','summary']);
- if(body){const p=document.createElement('p');p.className='record-body';p.textContent=Array.isArray(body)?body.join('\n'):String(body);card.appendChild(p)}
- const moods=Array.isArray(item.mood)?item.mood:(Array.isArray(item.tags)?item.tags:[]);
- if(moods.length){const group=document.createElement('div');group.className='moods';moods.forEach(m=>{const tag=document.createElement('span');tag.className='mood';tag.textContent=String(m).startsWith('#')?String(m):'#'+String(m);group.appendChild(tag)});card.appendChild(group)}
- return card.childNodes.length?card:null;
+function text(value){if(value===null||value===undefined)return '';return Array.isArray(value)?value.map(String).join(' · '):String(value)}
+function setText(node,value){if(node&&value!==undefined&&value!==null)node.textContent=text(value)}
+function renderCard(container,section){
+ container.replaceChildren();
+ const card=document.createElement('article');card.className='record';
+ const title=document.createElement('h3');title.className='record-title';title.textContent=text(section.title);card.appendChild(title);
+ if(section.subtitle){const subtitle=document.createElement('p');subtitle.className='record-date';subtitle.textContent=text(section.subtitle);card.appendChild(subtitle)}
+ if(section.content){const body=document.createElement('p');body.className='record-body';body.textContent=text(section.content);card.appendChild(body)}
+ if(Array.isArray(section.mood)&&section.mood.length){const moods=document.createElement('div');moods.className='moods';section.mood.forEach(value=>{const chip=document.createElement('span');chip.className='mood';chip.textContent=text(value);moods.appendChild(chip)});card.appendChild(moods)}
+ if(section.trigger){const trigger=document.createElement('div');trigger.className='field';const label=document.createElement('div');label.className='field-name';label.textContent='触发条件';const value=document.createElement('div');value.className='field-value';value.textContent=text(section.trigger);trigger.append(label,value);card.appendChild(trigger)}
+ container.appendChild(card);
 }
 function showEmpty(container,message){container.replaceChildren();const p=document.createElement('p');p.className='empty';p.textContent=message;container.appendChild(p)}
 async function load(){
@@ -101,24 +90,41 @@ async function load(){
   const response=await fetch(DATA_URL,{cache:'no-store'});
   if(!response.ok)throw new Error('HTTP '+response.status);
   const raw=await response.json();
-  const records=asRecords(raw).filter(item=>(!item.status||item.status==='published')&&(!item.safety_status||item.safety_status==='passed'));
-  records.sort((a,b)=>String(b.date||b.generated_at||b.created_at||'').localeCompare(String(a.date||a.generated_at||a.created_at||'')));
-  sections.forEach(section=>{
-   const id=section.dataset.section,container=section.querySelector('[data-records]');
-   let chosen=records.filter(item=>matchesSection(item,id));
-   // Older daily.json entries may not have a category. Show these in the exploration stream rather than inventing copies in every section.
-   if(id==='origin'&&!chosen.length)chosen=records.filter(item=>!field(item,['dimension','section','category','category_id','type','pillar']));
-   container.replaceChildren();
-   if(!chosen.length){showEmpty(container,'这个维度暂时还没有对应的公开记录。新记录发布到 JSON 并标注栏目后，会自动出现在这里。');return}
-   chosen.forEach((item,index)=>{const card=makeRecord(item,index);if(card)container.appendChild(card)});
-   if(!container.childElementCount)showEmpty(container,'当前没有可公开展示的记录。');
+  if(!Array.isArray(raw.sections))throw new Error('JSON missing sections array');
+  setText(document.querySelector('.eyebrow'),text(raw.title)+' · FOUR DIMENSIONS');
+  const byDimension=new Map(raw.sections.map(s=>[String(s.dimension||''),s]));
+  const byId=new Map(raw.sections.map(s=>[String(s.id||''),s]));
+  const used=new Set();
+  sectionEls.forEach(sectionEl=>{
+   const pageId=sectionEl.dataset.section;
+   const id=Object.keys(config).find(key=>config[key].pageId===pageId);
+   const expected=config[id];
+   const data=(expected&&byId.get(id))||(expected&&byDimension.get(expected.dimension));
+   if(!data){showEmpty(sectionEl.querySelector('[data-records]'),'sections.json 中暂时没有这个版块的数据。');return}
+   used.add(data.id);
+   const heading=sectionEl.querySelector('h2');setText(heading,data.title);
+   const number=sectionEl.querySelector('.dimension-number');setText(number,(String(sectionEls.indexOf(sectionEl)+1).padStart(2,'0'))+' — '+(data.subtitle||'ZHI NOTES'));
+   const tags=sectionEl.querySelector('.tags');tags.replaceChildren();
+   const displayTags=Array.isArray(data.tags_display)?data.tags_display:(Array.isArray(data.tags)?data.tags.map(t=>'#'+String(t).replace(/^#/,' ')).map(t=>t.replace('# ','#')):[]);
+   displayTags.forEach(t=>{const chip=document.createElement('span');chip.className='tag';chip.textContent=String(t).startsWith('#')?String(t):'#'+String(t);tags.appendChild(chip)});
+   const note=sectionEl.querySelector('.section-note');setText(note,data.focus||'');
+   const container=sectionEl.querySelector('[data-records]');
+   if(data.status&&data.status!=='published'){showEmpty(container,'此版块目前未公开发布。');return}
+   if(data.content||data.title)renderCard(container,data);else showEmpty(container,'此版块暂时没有公开内容。');
+   const link=sectionEl.querySelector('.share-link');
+   if(link){link.href='zhi.html?section='+encodeURIComponent(pageId)+'#'+pageId;link.setAttribute('aria-label','单独查看 '+text(data.title))}
   });
-  statusEl.textContent='已读取公开 JSON · '+dateLabel(field(raw,['generated_at','date']));
+  const pageTitle=raw.title||'ZHI NOTES';document.title='Mia · '+pageTitle;
+  statusEl.className='status';statusEl.textContent='每日读取公开 sections.json · '+dateLabel(raw.updated_at||'');
   const params=new URLSearchParams(location.search),requested=params.get('section');
-  if(requested&&aliases[requested]){sections.forEach(s=>s.classList.toggle('hidden',s.dataset.section!==requested));document.querySelector('.section-index').classList.add('hidden');document.querySelector('.hero').classList.add('hidden');}
+  if(requested&&sectionEls.some(s=>s.dataset.section===requested)){
+   sectionEls.forEach(s=>s.classList.toggle('hidden',s.dataset.section!==requested));
+   document.querySelector('.section-index').classList.add('hidden');
+   document.querySelector('.hero').classList.add('hidden');
+  }
  }catch(error){
-  sections.forEach(section=>showEmpty(section.querySelector('[data-records]'),'暂时无法读取公开 JSON。请稍后刷新页面。'));
-  statusEl.className='status error';statusEl.textContent='数据源连接失败；页面不会使用本地文章内容替代。';
+  sectionEls.forEach(s=>showEmpty(s.querySelector('[data-records]'),'暂时无法读取 sections.json。请检查数据源后刷新页面。'));
+  statusEl.className='status error';statusEl.textContent='sections.json 连接失败；页面不会用本地文章替代。';
  }
 }
 load();
