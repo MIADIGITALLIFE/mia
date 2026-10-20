@@ -44,6 +44,8 @@
     if(i%4===0)tone(m.base*(i%8===0?1:1.25),t+.1,m.step*1.9,'sine',m.volume*m.extra,Math.sin(i)*3);
     if(id==='synth:dazing'&&i%3===1)tone(note*2,t+.42,Math.max(1.2,m.step*.75),'triangle',m.volume*.2,6);
     if(id==='synth:forest'&&i%2===0)tone(note*2,t+.16,Math.max(.7,m.step*.72),'sine',m.volume*.18,-4);
+    // A tiny high-frequency glimmer balances the deep-blue scene without overpowering it.
+    if(id==='synth:tearful'&&i%4===0)tone(i%8===0?440:880,t+.2,m.step*1.5,'sine',m.volume*.036,0);
     s.nextAt+=m.step;
    }
   }
