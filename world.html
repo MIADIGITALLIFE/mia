@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0a"><title>Mia — A World That Keeps Listening</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f2eee5}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a0a0a}.player{position:fixed;z-index:30;right:20px;bottom:20px;display:flex;align-items:center;gap:12px;padding:8px 9px 8px 15px;border:1px solid #e8dfc944;border-radius:40px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);box-shadow:0 8px 30px #101a1638}.copy{display:flex;flex-direction:column;gap:2px;min-width:100px}.copy strong{font:500 11px Georgia,serif;letter-spacing:.16em}.copy small{font:10px Arial,sans-serif;color:#d0d0c4a8}#music-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #e8dfc966;border-radius:50%;background:#c49a67;color:#20201b;font-size:17px;cursor:pointer}#music-toggle:focus-visible{outline:2px solid #f2eee5;outline-offset:4px}@media(max-width:560px){.player{right:12px;bottom:12px}.copy{min-width:82px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style></head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia 的潜意识咖啡馆" allow="autoplay"></iframe><div class="player" aria-label="Mia 全站共享音乐播放器"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">声音还在这里</small></div><button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button></div><script>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0a"><title>Mia — A World That Keeps Listening</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f2eee5}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a0a0a}.player{position:fixed;z-index:30;right:20px;bottom:20px;display:flex;align-items:center;gap:12px;padding:8px 9px 8px 15px;border:1px solid #e8dfc944;border-radius:40px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);box-shadow:0 8px 30px #101a1638}.copy{display:flex;flex-direction:column;gap:2px;min-width:100px}.copy strong{font:500 11px Georgia,serif;letter-spacing:.16em}.copy small{font:10px Arial,sans-serif;color:#d0d0c4a8}#music-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #e8dfc966;border-radius:50%;background:#c49a67;color:#20201b;font-size:17px;cursor:pointer}#music-toggle:focus-visible{outline:2px solid #f2eee5;outline-offset:4px}@media(max-width:560px){.player{right:12px;bottom:12px}.copy{min-width:82px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style></head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia 的潜意识咖啡馆" allow="autoplay"></iframe><audio id="mia-default-music" src="mia-background.mp3" preload="auto" loop playsinline></audio><div class="player" aria-label="Mia 全站共享音乐播放器"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">声音还在这里</small></div><button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button></div><script>
 (()=> {
  const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
  try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive'].includes(s))frame.src=s+'.html'}catch(_){}
@@ -7,7 +7,7 @@
   'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
   'synth:forest':{name:'森林梦境 · 流动的音符',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.105,extra:.22}
  };
- let ctx=null,master=null,playing=false,track='synth:tearful',stepIndex=0,scene=null,fadeTimer=null;
+ const audio=document.getElementById('mia-default-music');let ctx=null,master=null,playing=false,track='default',stepIndex=0,scene=null,fadeTimer=null,audioFade=null;
  const read=k=>{try{return localStorage.getItem(k)}catch(_){return null}},write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
  function init(){if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='此浏览器暂不支持实时合成';return false}ctx=new AC();master=ctx.createGain();master.gain.value=.88;master.connect(ctx.destination);return true}
  function makeScene(id){
@@ -92,17 +92,33 @@
  function fadeIn(s,seconds=2){
   const now=ctx.currentTime;s.bus.gain.cancelScheduledValues(now);s.bus.gain.setValueAtTime(.0001,now);s.bus.gain.linearRampToValueAtTime(1,now+seconds);
  }
+ function fadeDefaultOut(){
+  if(audioFade)clearInterval(audioFade);
+  const initial=audio.volume,started=Date.now(),duration=1400;
+  audioFade=setInterval(()=>{
+   const p=Math.min(1,(Date.now()-started)/duration);
+   audio.volume=Math.max(0,initial*(1-p));
+   if(p>=1){clearInterval(audioFade);audioFade=null;audio.pause();audio.currentTime=0;audio.volume=1}
+  },40);
+ }
  async function start(){
+  if(playing){paint();return}
+  if(track==='default'){
+   try{audio.volume=1;await audio.play();playing=true;write('mia-music-enabled','yes');paint()}
+   catch(_){status.textContent='请点击右侧音乐按钮播放';button.textContent='♫'}
+   return;
+  }
   if(!init())return;
   try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}
-  if(playing){paint();return}
   playing=true;
   const previous=scene;scene=makeScene(track);
   if(previous)retire(previous,1.8);
   fadeIn(scene,1.8);write('mia-music-enabled','yes');paint();
  }
  function stop(){
-  if(!playing)return;playing=false;
+  if(!playing){paint();return}playing=false;
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  audio.pause();audio.volume=1;
   const previous=scene;scene=null;
   if(previous)retire(previous,1.1);
   write('mia-music-enabled','no');paint();
@@ -114,6 +130,8 @@
    if(!init())return;
    try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}
    if(changed||!playing){
+    if(audioFade){clearInterval(audioFade);audioFade=null}
+    if(!audio.paused)fadeDefaultOut();
     playing=true;const previous=scene;scene=makeScene(track);
     if(previous)retire(previous,2.2);
     fadeIn(scene,2.2);
@@ -122,7 +140,13 @@
   }
   status.textContent='已选择 · '+(title||modes[track].name);paint();
  }
- function paint(){button.textContent=playing?'Ⅱ':'♫';button.setAttribute('aria-label',playing?'暂停合成音乐':'播放合成音乐');button.title=playing?'暂停合成音乐':'播放合成音乐';status.textContent=playing?'实时声景 · '+modes[track].name:'点一下，让声音回来'}
+ function paint(){
+  button.textContent=playing?'Ⅱ':'♫';
+  const name=track==='default'?'Mia · 原始背景音乐':modes[track].name;
+  button.setAttribute('aria-label',playing?'暂停背景音乐':'播放背景音乐');
+  button.title=playing?'暂停背景音乐':'播放背景音乐';
+  status.textContent=playing?'正在播放 · '+name:'点一下，让声音回来';
+ }
  function bindMoodClicks(){
   try{
    const w=frame.contentWindow;
@@ -141,10 +165,8 @@
  setTimeout(bindMoodClicks,250);
  button.addEventListener('click',()=>playing?stop():start());
  window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter'||e.data.type==='mia:play')start()});
- const remembered=read('mia-synth-track');if(modes[remembered])track=remembered;
- paint();
- // The landing page records the visitor's explicit sound choice before opening this shared player.
- // Resume the synth here so the sound continues into the selected room when browser policy allows it.
+ // Every fresh visit begins with the original background track; mood cards can switch to other soundscapes.
+ track='default';paint();
  if(read('mia-music-enabled')==='yes')setTimeout(()=>{start()},0);
 })();
 </script></body></html>
