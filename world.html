@@ -141,6 +141,7 @@
   write('mia-music-enabled','no');paint();
  }
  async function selectTrack(id,title,shouldPlay=true){
+  try{frame.contentWindow.postMessage({type:'mia:stop-album'},'*')}catch(_){}
   if(!modes[id])return;
   const changed=track!==id;track=id;stepIndex=0;write('mia-synth-track',id);
   if(shouldPlay){
