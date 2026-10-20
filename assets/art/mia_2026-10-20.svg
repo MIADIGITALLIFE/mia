@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-labelledby="title desc">
-<title id="title">Mia — 2026-10-20</title>
-<desc id="desc">A quiet abstract artwork in misty celadon tones.</desc>
-<defs><linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dce8e4"/><stop offset="1" stop-color="#355b58"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="22"/></filter></defs>
-<rect width="800" height="480" fill="url(#wash)"/>
-<g filter="url(#blur)"><circle cx="130" cy="110" r="60" fill="#8ca9a0" opacity=".15"/><circle cx="290" cy="220" r="75" fill="#f3eee4" opacity=".18"/><circle cx="510" cy="150" r="95" fill="#8ca9a0" opacity=".12"/><circle cx="660" cy="310" r="80" fill="#f3eee4" opacity=".15"/><circle cx="370" cy="360" r="55" fill="#355b58" opacity=".13"/></g>
-<g fill="none" stroke="#f3eee4" stroke-opacity=".24"><path d="M0 105 C180 65 390 165 800 87" stroke-width="1"/><path d="M0 153 C180 113 390 213 800 135" stroke-width="2"/><path d="M0 201 C180 161 390 261 800 183" stroke-width="3"/><path d="M0 249 C180 209 390 309 800 231" stroke-width="1"/><path d="M0 297 C180 257 390 357 800 279" stroke-width="2"/><path d="M0 345 C180 305 390 405 800 327" stroke-width="3"/></g>
-<circle cx="400" cy="240" r="74" fill="#f3eee4" opacity=".13"/><circle cx="400" cy="240" r="53" fill="none" stroke="#f3eee4" stroke-opacity=".45"/>
-<text x="40" y="430" fill="#f3eee4" font-family="Georgia,serif" font-size="14" letter-spacing="5" opacity=".8">MIA · 2026-10-20</text></svg>
