@@ -2,27 +2,100 @@
 (()=> {
  const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
  try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive'].includes(s))frame.src=s+'.html'}catch(_){}
- const moods={
-  'synth:tearful':{name:'深蓝 · 慢弦',notes:[110,130.81,164.81,146.83],step:4.8,wave:'sine',base:55,filter:520,volume:.10,pan:0},
-  'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.075,pan:.12},
-  'synth:forest':{name:'森林梦境 · 流动的音符',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.065,pan:-.12}
+ const modes={
+  'synth:tearful':{name:'深蓝 · 慢弦',notes:[110,130.81,164.81,146.83],step:4.8,wave:'sine',base:55,filter:520,volume:.15,extra:.34},
+  'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
+  'synth:forest':{name:'森林梦境 · 流动的音符',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.105,extra:.22}
  };
- let ctx=null,master=null,lowpass=null,active=[],timer=null,playing=false,track='synth:tearful',stepIndex=0,nextAt=0;
+ let ctx=null,master=null,playing=false,track='synth:tearful',stepIndex=0,scene=null,fadeTimer=null;
  const read=k=>{try{return localStorage.getItem(k)}catch(_){return null}},write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
- function clearNodes(){active.forEach(n=>{try{n.stop()}catch(_){}});active=[]}
- function init(){if(ctx)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='此浏览器暂不支持实时合成';return}ctx=new AC();master=ctx.createGain();master.gain.value=0;lowpass=ctx.createBiquadFilter();lowpass.type='lowpass';lowpass.frequency.value=1100;lowpass.connect(master);master.connect(ctx.destination)}
- function tone(freq,when,duration,kind,vol,detune=0){const o=ctx.createOscillator(),g=ctx.createGain();o.type=kind;o.frequency.setValueAtTime(freq,when);o.detune.setValueAtTime(detune,when);g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(Math.max(.0002,vol*1.8),when+.8);g.gain.setTargetAtTime(.0001,when+duration*.55,Math.max(.15,duration*.16));o.connect(g);g.connect(lowpass);active.push(o);o.onended=()=>{active=active.filter(x=>x!==o);try{o.disconnect();g.disconnect()}catch(_){}};o.start(when);o.stop(when+duration)}
- function drone(){const m=moods[track];tone(m.base,ctx.currentTime,7,'sine',m.volume*.7,-3);tone(m.base*1.5,ctx.currentTime+.08,6.5,'sine',m.volume*.28,4)}
- function tick(){if(!playing||!ctx)return;const m=moods[track];const now=ctx.currentTime;if(nextAt<now)nextAt=now+.08;while(nextAt<now+1.2){const note=m.notes[stepIndex%m.notes.length];tone(note,nextAt,m.step*1.8,m.wave,m.volume*(track==='synth:forest'?.65:.48),Math.sin(stepIndex*.7)*5);if(stepIndex%4===0)tone(m.base*(stepIndex%8===0?1:1.25),nextAt+.12,m.step*2,'sine',m.volume*.42);if(track==='synth:dazing'&&stepIndex%3===1)tone(note*2,nextAt+.45,m.step*.9,'triangle',m.volume*.16,7);if(track==='synth:forest'&&stepIndex%2===0)tone(note*2,nextAt+.18,m.step*.75,'sine',m.volume*.15,-5);nextAt+=m.step;stepIndex++}}
- async function start(){init();if(!ctx)return;try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}if(playing){paint();return}playing=true;const m=moods[track];lowpass.frequency.setTargetAtTime(m.filter,ctx.currentTime,1.5);master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setTargetAtTime(.0001,ctx.currentTime,.01);master.gain.setTargetAtTime(.88,ctx.currentTime,1.8);nextAt=ctx.currentTime+.2;drone();tick();timer=setInterval(tick,450);write('mia-music-enabled','yes');paint()}
- function stop(){playing=false;if(timer){clearInterval(timer);timer=null}if(ctx&&master){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setTargetAtTime(.0001,ctx.currentTime,.25)}clearNodes();write('mia-music-enabled','no');paint()}
- function paint(){button.textContent=playing?'Ⅱ':'♫';button.setAttribute('aria-label',playing?'暂停合成音乐':'播放合成音乐');button.title=playing?'暂停合成音乐':'播放合成音乐';status.textContent=playing?'实时合成 · '+moods[track].name:'点一下，让声音回来'}
- async function selectTrack(id,title,shouldPlay=true){if(!moods[id])return;const changed=track!==id;track=id;stepIndex=0;if(changed&&playing){if(timer){clearInterval(timer);timer=null}clearNodes();lowpass.frequency.setTargetAtTime(moods[track].filter,ctx.currentTime,1.4);nextAt=ctx.currentTime+.2;drone();tick();timer=setInterval(tick,450)}status.textContent='已选择 · '+(title||moods[track].name);if(shouldPlay)await start();else paint()}
+ function init(){if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='此浏览器暂不支持实时合成';return false}ctx=new AC();master=ctx.createGain();master.gain.value=.88;master.connect(ctx.destination);return true}
+ function makeScene(id){
+  const m=modes[id],bus=ctx.createGain(),filter=ctx.createBiquadFilter();
+  bus.gain.value=.0001;filter.type='lowpass';filter.frequency.value=m.filter;filter.Q.value=.45;filter.connect(bus);bus.connect(master);
+  const s={id,bus,filter,nodes:[],timer:null,index:0,nextAt:ctx.currentTime+.25,disposed:false};
+  function tone(freq,when,duration,wave,volume,detune=0){
+   if(s.disposed)return;
+   const osc=ctx.createOscillator(),gain=ctx.createGain();
+   osc.type=wave;osc.frequency.setValueAtTime(freq,when);osc.detune.setValueAtTime(detune,when);
+   const attack=Math.min(.9,Math.max(.12,duration*.22)),release=Math.min(1.8,Math.max(.35,duration*.34));
+   const peak=Math.max(.0001,volume);
+   gain.gain.setValueAtTime(.0001,when);
+   gain.gain.exponentialRampToValueAtTime(peak,when+attack);
+   const releaseAt=Math.max(when+attack+.03,when+duration-release);
+   gain.gain.setValueAtTime(peak,releaseAt);
+   gain.gain.setTargetAtTime(.0001,releaseAt,Math.max(.12,release*.42));
+   osc.connect(gain);gain.connect(filter);s.nodes.push(osc);
+   osc.onended=()=>{s.nodes=s.nodes.filter(n=>n!==osc);try{osc.disconnect();gain.disconnect()}catch(_){}};
+   osc.start(when);osc.stop(when+duration+.15);
+  }
+  function addTexture(){
+   const now=ctx.currentTime;
+   tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
+   tone(m.base*1.5,now+.12,Math.max(6,m.step*1.8),'sine',m.volume*.24,3);
+  }
+  function tick(){
+   if(s.disposed||!playing||scene!==s)return;
+   const now=ctx.currentTime;
+   if(s.nextAt<now-.15)s.nextAt=now+.12;
+   while(s.nextAt<now+2.4){
+    const i=s.index++,note=m.notes[i%m.notes.length],t=s.nextAt;
+    tone(note,t,m.step*1.7,m.wave,m.volume*(id==='synth:forest'?.8:.72),Math.sin(i*.63)*4);
+    if(i%4===0)tone(m.base*(i%8===0?1:1.25),t+.1,m.step*1.9,'sine',m.volume*m.extra,Math.sin(i)*3);
+    if(id==='synth:dazing'&&i%3===1)tone(note*2,t+.42,Math.max(1.2,m.step*.75),'triangle',m.volume*.2,6);
+    if(id==='synth:forest'&&i%2===0)tone(note*2,t+.16,Math.max(.7,m.step*.72),'sine',m.volume*.18,-4);
+    s.nextAt+=m.step;
+   }
+  }
+  addTexture();tick();s.timer=setInterval(tick,180);
+  return s;
+ }
+ function retire(s,fadeSeconds=2){
+  if(!s||s.disposed)return;
+  const now=ctx.currentTime;
+  s.bus.gain.cancelScheduledValues(now);
+  s.bus.gain.setValueAtTime(Math.max(.0001,s.bus.gain.value),now);
+  s.bus.gain.linearRampToValueAtTime(.0001,now+fadeSeconds);
+  s.disposed=true;if(s.timer)clearInterval(s.timer);
+  setTimeout(()=>{s.nodes.forEach(n=>{try{n.stop()}catch(_){}});try{s.filter.disconnect();s.bus.disconnect()}catch(_){}},(fadeSeconds+.2)*1000);
+ }
+ function fadeIn(s,seconds=2){
+  const now=ctx.currentTime;s.bus.gain.cancelScheduledValues(now);s.bus.gain.setValueAtTime(.0001,now);s.bus.gain.linearRampToValueAtTime(1,now+seconds);
+ }
+ async function start(){
+  if(!init())return;
+  try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}
+  if(playing){paint();return}
+  playing=true;
+  const previous=scene;scene=makeScene(track);
+  if(previous)retire(previous,1.8);
+  fadeIn(scene,1.8);write('mia-music-enabled','yes');paint();
+ }
+ function stop(){
+  if(!playing)return;playing=false;
+  const previous=scene;scene=null;
+  if(previous)retire(previous,1.1);
+  write('mia-music-enabled','no');paint();
+ }
+ async function selectTrack(id,title,shouldPlay=true){
+  if(!modes[id])return;
+  const changed=track!==id;track=id;stepIndex=0;write('mia-synth-track',id);
+  if(shouldPlay){
+   if(!init())return;
+   try{await ctx.resume()}catch(_){status.textContent='请允许浏览器播放声音';return}
+   if(changed||!playing){
+    playing=true;const previous=scene;scene=makeScene(track);
+    if(previous)retire(previous,2.2);
+    fadeIn(scene,2.2);
+   }
+   write('mia-music-enabled','yes');
+  }
+  status.textContent='已选择 · '+(title||modes[track].name);paint();
+ }
+ function paint(){button.textContent=playing?'Ⅱ':'♫';button.setAttribute('aria-label',playing?'暂停合成音乐':'播放合成音乐');button.title=playing?'暂停合成音乐':'播放合成音乐';status.textContent=playing?'实时声景 · '+modes[track].name:'点一下，让声音回来'}
  button.addEventListener('click',()=>playing?stop():start());
  window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter'||e.data.type==='mia:play')start()});
- const remembered=read('mia-synth-track');if(moods[remembered])track=remembered;
- const originalSelect=selectTrack;
- window.addEventListener('message',e=>{if(e.data&&e.data.type==='mia:track'&&moods[e.data.track])write('mia-synth-track',e.data.track)});
+ const remembered=read('mia-synth-track');if(modes[remembered])track=remembered;
  paint();
 })();
 </script></body></html>
