@@ -226,7 +226,7 @@
   status.textContent='Mia 专辑播放中';
  }
  button.addEventListener('click',()=>{try{frame.contentWindow.postMessage({type:'mia:stop-album'},'*')}catch(_){};playing?stop():start()});
- window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:album-play'){stopForAlbum()}else if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter')startDefaultFromGesture();else if(e.data.type==='mia:play')start()});
+ window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:album-play'){stopForAlbum()}else if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter')startDefaultFromGesture();else if(e.data.type==='mia:play')start();else if(e.data.type==='mia:rain-start')beginRain();else if(e.data.type==='mia:rain-stop')endRain()});
  // Every fresh visit begins with the original background track; mood cards can switch to other soundscapes.
  track='default';audio.pause();audio.currentTime=0;audio.muted=true;playing=false;paint();
 })();
