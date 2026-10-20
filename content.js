@@ -103,6 +103,7 @@
         const reflection = document.getElementById('reflection-wrap');
         const noteInput = document.getElementById('experience-note');
         const feedback = document.getElementById('experience-feedback');
+        const experiencePanel = document.getElementById('experience-panel');
         const duration = 20;
         const key = 'mia-greenhouse-memories-v1';
         const names = {rain:'听雨',light:'看光',breath:'深呼吸'};
@@ -147,6 +148,7 @@
         const clearTimer = () => { if (interval) clearInterval(interval); interval = null; };
         const resetSession = () => {
           tellWorld('mia:rain-stop');
+          if (experiencePanel) experiencePanel.classList.remove('light-active');
           clearTimer(); remaining = duration; finished = false;
           if (timerEl) { timerEl.hidden = true; timerEl.textContent = '00:20'; }
           if (progress) progress.hidden = true;
@@ -160,6 +162,7 @@
         };
         const finishSession = (wasNatural) => {
           tellWorld('mia:rain-stop');
+          if (experiencePanel) experiencePanel.classList.remove('light-active');
           clearTimer(); finished = true;
           if (circle) circle.classList.remove('active');
           if (label) label.textContent = 'PAUSE';
@@ -199,13 +202,14 @@
         if (startBtn) startBtn.addEventListener('click', () => {
           if (!selected || interval) return;
           if (selected === 'rain') tellWorld('mia:rain-start');
+          if (experiencePanel) experiencePanel.classList.toggle('light-active', selected === 'light');
           remaining = duration; finished = false;
           startBtn.hidden = true; endBtn.hidden = false; timerEl.hidden = false; progress.hidden = false;
           timerEl.textContent = '00:20';
           if (selected === 'breath') { circle.classList.add('active'); label.textContent = 'BREATHE'; }
           if (title) title.textContent = '把这一小段时间，留给自己。';
           if (description) description.textContent = '不需要努力完成。你可以随时按下结束。';
-          if (feedback) feedback.textContent = selected === 'breath' ? '圆环只是温柔的提示，不必跟随固定节奏。' : '你可以保持安静，也可以随时结束。';
+          if (feedback) feedback.textContent = selected === 'breath' ? '圆环只是温柔的提示，不必跟随固定节奏。' : selected === 'light' ? '留意光线缓慢移动的方向，以及明暗交界的地方。' : '你可以保持安静，也可以随时结束。';
           const started = Date.now();
           interval = setInterval(() => {
             remaining = Math.max(0, duration - Math.floor((Date.now() - started) / 1000));
