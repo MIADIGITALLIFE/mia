@@ -6,9 +6,11 @@ const pool = JSON.parse(fs.readFileSync(path.join(root, 'templates/content_pool.
 
 // GitHub Actions runs at 00:00 UTC, which is 08:00 in Singapore.
 const now = new Date();
-const date = new Intl.DateTimeFormat('en-CA', {
+const dateParts = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Singapore', year: 'numeric', month: '2-digit', day: '2-digit'
-}).format(now);
+}).formatToParts(now);
+const dateValues = Object.fromEntries(dateParts.map(part => [part.type, part.value]));
+const date = dateValues.year + '-' + dateValues.month + '-' + dateValues.day;
 const updatedAt = new Intl.DateTimeFormat('sv-SE', {
   timeZone: 'Asia/Singapore', year: 'numeric', month: '2-digit', day: '2-digit',
   hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
