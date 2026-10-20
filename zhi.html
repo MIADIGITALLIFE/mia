@@ -99,6 +99,49 @@ main{width:min(980px,calc(100% - 48px))}
 @media(max-width:480px){.hero h1{font-size:34px}.hero-slogan span{display:block;margin:5px 0 0}.hero-intro{font-size:12px!important}}
 
 </style>
+
+<style id="mia-responsive-finish">
+/* Responsive finish: preserve Mia's atmosphere while preventing clipped content */
+html{max-width:100%;overflow-x:clip}
+body{max-width:100%;overflow-x:clip}
+img,video,canvas,svg{max-width:100%;height:auto}
+main{min-width:0}
+.site-nav{flex-wrap:wrap;min-width:0}
+.nav-links{min-width:0;max-width:100%;flex-wrap:wrap}
+.panel,.record,.memory,.mood-card,.dimension,.greenhouse-memory,.today-card,.saved-card{min-width:0;overflow-wrap:anywhere}
+button,a,input,textarea,select{touch-action:manipulation}
+input,textarea,select{max-width:100%}
+@media(max-width:760px){
+  .site-nav{gap:15px}
+  .nav-links{row-gap:12px}
+  .panel{padding:clamp(18px,4vw,28px)}
+  .grid-2,.grid-3{grid-template-columns:minmax(0,1fr)}
+  .bar-layout{grid-template-columns:minmax(0,1fr)!important}
+  .memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-index{min-width:0}
+  .experience-panel{padding:24px 18px}
+  .experience-actions{flex-wrap:wrap}
+  .experience-actions>*{max-width:100%}
+}
+@media(max-width:480px){
+  .site-nav{padding:17px 16px;gap:14px}
+  .brand{font-size:17px;letter-spacing:.24em}
+  .nav-links{gap:11px 14px}
+  .nav-links a{font-size:9px;letter-spacing:.08em}
+  main{width:calc(100% - 30px)}
+  .page-head{padding-top:42px}
+  .page-head h1{font-size:clamp(30px,9vw,39px);overflow-wrap:anywhere}
+  .page-head p{font-size:12px;line-height:2}
+  .button{min-height:44px;padding:12px 16px}
+  .memory-grid{grid-template-columns:minmax(0,1fr)}
+  .memory-detail{max-width:100%;overflow-wrap:anywhere}
+  .fortune-text{overflow-wrap:anywhere}
+  .site-footer{padding-left:16px;padding-right:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 <nav class="site-nav" aria-label="Mia spaces">
