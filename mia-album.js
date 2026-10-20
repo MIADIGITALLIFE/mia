@@ -10,9 +10,9 @@
     {
   title: '琥珀雨',
   subtitle: 'MIA · ORIGINAL RECORDING',
-  file: 'Amber rain.mp3',
-  note: '这首歌想表达的情绪。'
-}
+  file: 'Amber Rain.mp3',
+  note: 'Mia在数字世界中通过调节“雨声滤镜”，在虚拟与现实的静谧边界里寻找内心安宁的浪漫心境'
+    }
   ];
 
   const mount = () => {
