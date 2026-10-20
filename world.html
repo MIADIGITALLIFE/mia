@@ -93,6 +93,22 @@
   status.textContent='已选择 · '+(title||modes[track].name);paint();
  }
  function paint(){button.textContent=playing?'Ⅱ':'♫';button.setAttribute('aria-label',playing?'暂停合成音乐':'播放合成音乐');button.title=playing?'暂停合成音乐':'播放合成音乐';status.textContent=playing?'实时声景 · '+modes[track].name:'点一下，让声音回来'}
+ function bindMoodClicks(){
+  try{
+   const w=frame.contentWindow;
+   if(!w||w.__miaMoodAudioBound)return;
+   w.__miaMoodAudioBound=true;
+   w.addEventListener('click',ev=>{
+    const card=ev.target&&ev.target.closest?ev.target.closest('.mood-card[data-mood]'):null;
+    if(!card)return;
+    const ids={blue:'synth:tearful',gold:'synth:dazing',green:'synth:forest'};
+    const id=ids[card.dataset.mood];
+    if(id)selectTrack(id,modes[id].name,true);
+   },true);
+  }catch(_){}
+ }
+ frame.addEventListener('load',bindMoodClicks);
+ setTimeout(bindMoodClicks,250);
  button.addEventListener('click',()=>playing?stop():start());
  window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter'||e.data.type==='mia:play')start()});
  const remembered=read('mia-synth-track');if(modes[remembered])track=remembered;
