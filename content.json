@@ -24,15 +24,15 @@
     {
       "id": "blue",
       "mood": "想哭",
-      "track": "mia-background.mp3",
-      "track_title": "深蓝 · Mia 原声",
+      "track": "synth:tearful",
+      "track_title": "深蓝 · 慢弦",
       "philosophy": "低沉的声音像一只安静的容器。它不急着解决你，只是陪你坐一会儿。",
       "color": "#263a68"
     },
     {
       "id": "gold",
       "mood": "想发呆",
-      "track": "琥珀色的光斑 (1).mp3",
+      "track": "synth:dazing",
       "track_title": "琥珀色的光斑",
       "philosophy": "发呆不是空白。也许只是心里的雪，终于有时间慢慢落下。",
       "color": "#71603e"
@@ -40,8 +40,8 @@
     {
       "id": "green",
       "mood": "想奔跑",
-      "track": "The Forest of Dreams.mp3",
-      "track_title": "The Forest of Dreams",
+      "track": "synth:forest",
+      "track_title": "森林梦境 · 流动的音符",
       "philosophy": "想奔跑的时候，就把窗打开一点。风不需要知道你的目的地。",
       "color": "#3c5a49"
     }
