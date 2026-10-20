@@ -193,7 +193,7 @@
           }
           if (circle) circle.classList.remove('active');
           if (title) title.textContent = names[selected] + ' · 慢一点就好';
-          if (description) description.textContent = selected === 'rain' ? '用 20 秒听听此刻真实存在的声音。不需要播放雨声，也不必刻意寻找。' : selected === 'light' ? '用 20 秒观察一处柔和的光、颜色或明暗变化。没有正确答案。' : '如果舒服，可以跟随圆环慢慢呼吸；不舒服就按自己的自然节奏呼吸，随时可以结束。';
+          if (description) description.textContent = selected === 'rain' ? '用 20 秒听听此刻真实存在的声音。不需要播放雨声，也不必刻意寻找。' : selected === 'light' ? '用 20 秒看一束光慢慢穿过空间。留意光斑、窗格般的影子，以及明暗交界如何变化。' : '如果舒服，可以跟随圆环慢慢呼吸；不舒服就按自己的自然节奏呼吸，随时可以结束。';
           if (feedback) feedback.textContent = '';
           if (noteInput) noteInput.value = '';
           resetSession();
@@ -209,7 +209,7 @@
           if (selected === 'breath') { circle.classList.add('active'); label.textContent = 'BREATHE'; }
           if (title) title.textContent = '把这一小段时间，留给自己。';
           if (description) description.textContent = '不需要努力完成。你可以随时按下结束。';
-          if (feedback) feedback.textContent = selected === 'breath' ? '圆环只是温柔的提示，不必跟随固定节奏。' : selected === 'light' ? '留意光线缓慢移动的方向，以及明暗交界的地方。' : '你可以保持安静，也可以随时结束。';
+          if (feedback) feedback.textContent = selected === 'breath' ? '圆环只是温柔的提示，不必跟随固定节奏。' : selected === 'light' ? '光正在慢慢经过。看看它如何改变颜色、影子和空间的温度。' : '你可以保持安静，也可以随时结束。';
           const started = Date.now();
           interval = setInterval(() => {
             remaining = Math.max(0, duration - Math.floor((Date.now() - started) / 1000));
