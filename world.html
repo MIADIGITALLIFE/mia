@@ -116,7 +116,7 @@
   playing=false;rainAudio.volume=0;rainAudio.currentTime=0;
   let attempt;try{attempt=rainAudio.play()}catch(_){rainActive=false;rainRestore=null;status.textContent='雨声暂时无法播放';paint();return}
   if(attempt&&attempt.catch)attempt.catch(()=>{rainActive=false;rainRestore=null;status.textContent='雨声暂时无法播放';paint()});
-  fadeRainTo(.22,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','停止听雨');status.textContent='正在播放 · 温室真实雨声';
+  fadeRainTo(.4,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','停止听雨');status.textContent='正在播放 · 温室真实雨声';
  }
  async function endRain(){
   if(!rainActive)return;
