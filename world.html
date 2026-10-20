@@ -3,7 +3,7 @@
  const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
  try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive'].includes(s))frame.src=s+'.html'}catch(_){}
  const modes={
-  'synth:tearful':{name:'深蓝 · 慢弦',notes:[110,130.81,164.81,146.83],step:4.8,wave:'sine',base:55,filter:520,volume:.15,extra:.34},
+  'synth:tearful':{name:'深蓝 · 慢弦',notes:[110,130.81,164.81,146.83],step:4.8,wave:'triangle',base:55,filter:760,volume:.24,extra:.48},
   'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
   'synth:forest':{name:'森林梦境 · 流动的音符',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.105,extra:.22}
  };
