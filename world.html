@@ -101,6 +101,42 @@
    if(p>=1){clearInterval(audioFade);audioFade=null;audio.pause();audio.currentTime=0;audio.volume=1}
   },40);
  }
+ function fadeRainTo(target,duration,done){
+  if(rainFade)clearInterval(rainFade);
+  const from=rainAudio.volume,started=Date.now();
+  rainFade=setInterval(()=>{const p=Math.min(1,(Date.now()-started)/duration);rainAudio.volume=from+(target-from)*p;if(p>=1){clearInterval(rainFade);rainFade=null;if(done)done()}},35);
+ }
+ function beginRain(){
+  if(rainActive)return;
+  rainRestore={wasPlaying:playing,track:track};
+  rainActive=true;
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  if(!audio.paused)fadeDefaultOut();
+  const previous=scene;scene=null;if(previous)retire(previous,1.2);
+  playing=false;rainAudio.volume=0;rainAudio.currentTime=0;
+  let attempt;try{attempt=rainAudio.play()}catch(_){rainActive=false;rainRestore=null;status.textContent='雨声暂时无法播放';paint();return}
+  if(attempt&&attempt.catch)attempt.catch(()=>{rainActive=false;rainRestore=null;status.textContent='雨声暂时无法播放';paint()});
+  fadeRainTo(.22,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','停止听雨');status.textContent='正在播放 · 温室真实雨声';
+ }
+ async function endRain(){
+  if(!rainActive)return;
+  rainActive=false;const restore=rainRestore;rainRestore=null;
+  fadeRainTo(0,850,()=>{rainAudio.pause();rainAudio.currentTime=0});
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  audio.pause();audio.currentTime=0;audio.volume=1;audio.muted=true;
+  if(!restore||!restore.wasPlaying){playing=false;paint();status.textContent='听雨已结束';return}
+  track=restore.track||'default';
+  if(track==='default'){
+   playing=true;audio.muted=false;audio.volume=0;
+   try{await audio.play();const started=Date.now(),fade=setInterval(()=>{const p=Math.min(1,(Date.now()-started)/1200);audio.volume=p;if(p>=1)clearInterval(fade)},35);paint()}
+   catch(_){playing=false;audio.muted=true;paint();status.textContent='听雨已结束 · 点击音乐按钮恢复背景音乐'}
+   return;
+  }
+  if(!modes[track]||!init()){playing=false;paint();return}
+  try{await ctx.resume()}catch(_){playing=false;paint();return}
+  playing=true;scene=makeScene(track);fadeIn(scene,1.5);paint();
+ }
+ rainAudio.addEventListener('error',()=>{if(rainActive){rainActive=false;status.textContent='雨声文件暂时无法读取';button.textContent='♫'}});
  function startDefaultFromGesture(){
   if(track==='default'&&playing&&!audio.paused){paint();return}
   if(audioFade){clearInterval(audioFade);audioFade=null}
