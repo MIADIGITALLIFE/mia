@@ -34,14 +34,10 @@
    // Deep-blue mode: one gentle 10-second breath cycle (4s in, 6s out).
    // A dedicated low-frequency gain node modulates only the sustained low layer.
    if(id==='synth:tearful'){
-    const breathGain=ctx.createGain(),lfo=ctx.createOscillator(),depth=ctx.createGain();
-    breathGain.gain.value=.76;
-    lfo.type='sine';lfo.frequency.value=.1;
-    depth.gain.value=.24;
-    lfo.connect(depth);depth.connect(breathGain.gain);
+    const breathGain=ctx.createGain();
+    breathGain.gain.setValueAtTime(.52,now);
     breathGain.connect(filter);
-    lfo.start(now);
-    s.lfo={osc:lfo,gain:breathGain};
+    s.breathGain=breathGain;s.breathNext=now;
     const low=ctx.createOscillator(),lowGain=ctx.createGain();
     low.type='sine';low.frequency.value=m.base;low.detune.value=-2;
     lowGain.gain.value=m.volume*.72;
@@ -54,9 +50,20 @@
    tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
    tone(m.base*1.5,now+.12,Math.max(6,m.step*1.8),'sine',m.volume*.24,3);
   }
+  function scheduleBreath(){
+   if(!s.breathGain||s.disposed)return;
+   const param=s.breathGain.gain,now=ctx.currentTime;
+   if(s.breathNext===now)param.setValueAtTime(.52,now);
+   while(s.breathNext<now+30){
+    param.linearRampToValueAtTime(1,s.breathNext+4); // inhale: 4 seconds
+    param.linearRampToValueAtTime(.52,s.breathNext+10); // exhale: 6 seconds
+    s.breathNext+=10;
+   }
+  }
   function tick(){
    if(s.disposed||!playing||scene!==s)return;
    const now=ctx.currentTime;
+   scheduleBreath();
    if(s.nextAt<now-.15)s.nextAt=now+.12;
    while(s.nextAt<now+2.4){
     const i=s.index++,note=m.notes[i%m.notes.length],t=s.nextAt;
@@ -79,7 +86,7 @@
   s.bus.gain.setValueAtTime(Math.max(.0001,s.bus.gain.value),now);
   s.bus.gain.linearRampToValueAtTime(.0001,now+fadeSeconds);
   s.disposed=true;if(s.timer)clearInterval(s.timer);
-  if(s.lfo){try{s.lfo.osc.stop(now+fadeSeconds);s.lfo.osc.disconnect()}catch(_){}s.lfo=null;}
+  if(s.breathGain){try{s.breathGain.gain.cancelScheduledValues(now);s.breathGain.gain.setTargetAtTime(.0001,now,Math.max(.15,fadeSeconds/3));s.breathGain.disconnect()}catch(_){}s.breathGain=null;}
   setTimeout(()=>{s.nodes.forEach(n=>{try{n.stop()}catch(_){}});try{s.filter.disconnect();s.bus.disconnect()}catch(_){}},(fadeSeconds+.2)*1000);
  }
  function fadeIn(s,seconds=2){
