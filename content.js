@@ -17,7 +17,11 @@
     if (currentPath === 'index.html' || currentPath === '') {
       const module = document.createElement('script');
       module.src = 'mia-daily.js';
-      module.defer = true;
+      module.onload = () => {
+        const artModule = document.createElement('script');
+        artModule.src = 'mia-art.js';
+        document.head.appendChild(artModule);
+      };
       document.head.appendChild(module);
     }
     load().then(data => {
