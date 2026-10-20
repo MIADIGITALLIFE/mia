@@ -101,9 +101,25 @@
    if(p>=1){clearInterval(audioFade);audioFade=null;audio.pause();audio.currentTime=0;audio.volume=1}
   },40);
  }
+ function startDefaultFromGesture(){
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  const previous=scene;scene=null;
+  if(previous)retire(previous,1.2);
+  playing=true;track='default';write('mia-music-enabled','yes');write('mia-synth-track','');
+  audio.volume=1;
+  let attempt;
+  try{attempt=audio.play()}catch(_){playing=false;status.textContent='请点击右下角音乐按钮播放';paint();return}
+  paint();
+  if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{
+   playing=false;status.textContent='请点击右下角音乐按钮播放';paint();
+  });
+ }
+ window.__miaStartDefaultMusic=startDefaultFromGesture;
+ audio.addEventListener('error',()=>{status.textContent='背景音乐文件暂时无法读取';button.textContent='♫';});
  async function start(){
   if(playing){paint();return}
   if(track==='default'){
+   if(!audio.paused){playing=true;paint();return}
    try{audio.volume=1;await audio.play();playing=true;write('mia-music-enabled','yes');paint()}
    catch(_){status.textContent='请点击右侧音乐按钮播放';button.textContent='♫'}
    return;
