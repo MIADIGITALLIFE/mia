@@ -1,5 +1,6 @@
 (() => {
   const ROOT = 'mia-daily-thought';
+  const DAILY_URL = 'https://zeefsee.github.io/ZEE/mia/daily.json';
   const styles = `
     #mia-daily-thought{width:min(520px,calc(100% - 36px));margin:24px auto 0;padding:18px 20px 16px;border:1px solid #d8cbb033;border-radius:4px;background:linear-gradient(135deg,#ffffff05,var(--mia-diary-tint,#e0f7fa12));text-align:center;box-sizing:border-box;animation:mia-diary-in .8s ease both}
     #mia-daily-thought .mia-daily-label{font:10px/1.8 Georgia,serif;letter-spacing:.24em;color:#c8c0b0a0}
@@ -29,13 +30,31 @@
     document.head.appendChild(style);
     anchor.insertAdjacentElement('afterend', card);
   }
-  fetch('mia_diary.json?v=' + encodeURIComponent(singaporeDate()), {cache:'no-cache'})
-    .then(response => {if (!response.ok) throw new Error('Diary unavailable'); return response.json();})
-    .then(diary => {
-      const today = singaporeDate();
-      if (diary[today]) return mount(diary[today], today);
-      const previous = Object.keys(diary).filter(date => /^d{4}-d{2}-d{2}$/.test(date) && date <= today).sort().pop();
-      if (previous) mount(diary[previous], previous);
-    })
-    .catch(() => {});
+  function mountLocalDiary(diary) {
+    const today = singaporeDate();
+    if (diary[today]) return mount(diary[today], today);
+    const previous = Object.keys(diary).filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date) && date <= today).sort().pop();
+    if (previous) mount(diary[previous], previous);
+  }
+  async function loadDiary() {
+    try {
+      const response = await fetch(DAILY_URL + '?t=' + Date.now(), {cache:'no-store'});
+      if (!response.ok) throw new Error('Remote diary unavailable');
+      const data = await response.json();
+      if (data.status === 'published' && data.safety_status === 'passed' && typeof data.diary === 'string' && data.diary.trim()) {
+        mount({thought:data.diary}, data.date || singaporeDate());
+        return;
+      }
+    } catch (error) {
+      // If the remote diary is unavailable, retain the existing local diary as a fallback.
+    }
+    try {
+      const response = await fetch('mia_diary.json?v=' + encodeURIComponent(singaporeDate()), {cache:'no-cache'});
+      if (!response.ok) throw new Error('Local diary unavailable');
+      mountLocalDiary(await response.json());
+    } catch (error) {
+      // Keep the existing page intact if neither diary source is available.
+    }
+  }
+  loadDiary();
 })();
