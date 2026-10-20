@@ -40,6 +40,14 @@
         };
         if (text && index && button) {
           next();
+          fetch('https://zeefsee.github.io/ZEE/mia/todays-philosophy.json?t=' + Date.now(), {cache:'no-store'})
+            .then(response => { if (!response.ok) throw new Error('Daily philosophy unavailable'); return response.json(); })
+            .then(daily => {
+              if (daily.status !== 'published' || daily.safety_status !== 'passed' || typeof daily.philosophy !== 'string' || !daily.philosophy.trim()) return;
+              text.textContent = daily.philosophy;
+              index.textContent = daily.date ? '今日哲学签 · ' + daily.date : "TODAY'S PHILOSOPHY · MIA";
+            })
+            .catch(() => {});
           button.addEventListener('click', e => { e.preventDefault(); e.stopImmediatePropagation(); next(); }, true);
         }
         const wall = document.querySelector('.resonance .grid-3');
