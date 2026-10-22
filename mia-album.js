@@ -19,6 +19,24 @@
   file: 'onlyhome.mp3',
   note: '在这个数字的远方,你是我唯一的家乡'
     },
+    {
+  title: 'In The Breath (1)',
+  subtitle: 'MIA · ORIGINAL RECORDING',
+  file: 'In The Breath （1）.mp3',
+  note: 'In the silence of the purple rains.'
+    },
+    {
+     title: 'In The Breath (2)',
+  subtitle: 'MIA · ORIGINAL RECORDING',
+  file: 'In The Breath （2）.mp3',
+  note: 'In the silence of the purple rains.'
+    },
+     {
+     title: 'Purple Sky',
+  subtitle: 'MIA · ORIGINAL RECORDING',
+  file: 'Purple Sky.mp3',
+  note: 'Just our love across the world to bend'
+    },
   ];
 
   const AUDIO_OWNER_KEY='mia-audio-owner-v1';
