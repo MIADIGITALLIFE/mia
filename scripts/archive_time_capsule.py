@@ -5,7 +5,6 @@ This script intentionally fails closed: if a source is unavailable or has an
 unexpected shape, it leaves the existing archive untouched.
 """
 import json
-import os
 import sys
 import urllib.request
 from datetime import datetime
@@ -49,7 +48,11 @@ def main():
     sections_raw = fetch_json(SECTIONS_URL)
     daily_raw = fetch_json(DAILY_URL)
     sections = list_from(sections_raw, ("sections", "items", "records"))
-    daily = list_from(daily_raw, ("daily_entries", "entries", "items", "records", "daily"))
+    daily = list_from(daily_raw, ("daily_entries", "entries", "items", "records", "daily", "daily_philosophy"))
+    if daily is None and isinstance(daily_raw, dict) and any(
+        nonempty_text(daily_raw.get(key)) for key in ("content", "text", "philosophy", "quote")
+    ):
+        daily = [daily_raw]
     if not sections:
         raise RuntimeError("sections.json has no published sections array; archive unchanged.")
     if daily is None:
