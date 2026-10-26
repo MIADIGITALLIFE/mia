@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Append a dated snapshot of Mia's published ZHI sections and daily philosophy.
+"""Append dated snapshots of Mia's published sections and daily philosophy.
 
-This script intentionally fails closed: if a source is unavailable or has an
-unexpected shape, it leaves the existing archive untouched.
+The archive is updated only after both source files and their content validate.
+A same-day section snapshot and a same-day daily entry are tracked independently,
+so a partially completed archive can be repaired safely by rerunning the job.
 """
 import json
 import sys
@@ -18,7 +19,7 @@ SG = ZoneInfo("Asia/Singapore")
 
 
 def fetch_json(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mia-Time-Capsule/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mia-Time-Capsule/1.1"})
     with urllib.request.urlopen(req, timeout=20) as response:
         if response.status != 200:
             raise RuntimeError(f"Source returned HTTP {response.status}: {url}")
@@ -40,19 +41,37 @@ def nonempty_text(value):
     return isinstance(value, str) and bool(value.strip())
 
 
-def main():
-    today = datetime.now(SG).date().isoformat()
-    captured_at = datetime.now(SG).isoformat(timespec="seconds")
+def daily_text(item):
+    """Support both list-based records and the published single-object diary schema."""
+    if isinstance(item, str):
+        return item.strip() if item.strip() else None
+    if not isinstance(item, dict):
+        return None
+    for key in ("content", "text", "philosophy", "quote", "diary"):
+        value = item.get(key)
+        if nonempty_text(value):
+            return value.strip()
+    return None
 
-    # Fetch and validate everything before touching the archive.
+
+def main():
+    now = datetime.now(SG)
+    today = now.date().isoformat()
+    captured_at = now.isoformat(timespec="seconds")
+
+    # Fetch and validate all sources before touching the archive.
     sections_raw = fetch_json(SECTIONS_URL)
     daily_raw = fetch_json(DAILY_URL)
+
     sections = list_from(sections_raw, ("sections", "items", "records"))
-    daily = list_from(daily_raw, ("daily_entries", "entries", "items", "records", "daily", "daily_philosophy"))
-    if daily is None and isinstance(daily_raw, dict) and any(
-        nonempty_text(daily_raw.get(key)) for key in ("content", "text", "philosophy", "quote")
-    ):
+    daily = list_from(
+        daily_raw,
+        ("daily_entries", "entries", "items", "records", "daily", "daily_philosophy"),
+    )
+    # ZEE's published daily.json currently uses a single object with a "diary" field.
+    if daily is None and daily_text(daily_raw):
         daily = [daily_raw]
+
     if not sections:
         raise RuntimeError("sections.json has no published sections array; archive unchanged.")
     if daily is None:
@@ -73,22 +92,19 @@ def main():
             "dimension": section.get("dimension", section.get("id", "")),
             "content": section["content"],
             "focus": section.get("focus", ""),
-            "tags": section.get("tags", []),
+            "tags": section.get("tags", section.get("tags_display", [])),
             "mood": section.get("mood", []),
         })
     if not published_sections:
         raise RuntimeError("No published section content found; archive unchanged.")
 
-    # Keep only non-empty daily philosophy records. Do not invent a quote if
-    # today's source has no content.
     daily_records = []
     for item in daily:
-        if isinstance(item, str) and item.strip():
-            daily_records.append({"content": item.strip(), "title": "每日哲理"})
-        elif isinstance(item, dict):
-            content = item.get("content") or item.get("text") or item.get("philosophy") or item.get("quote")
-            if nonempty_text(content):
-                daily_records.append({**item, "content": content.strip()})
+        content = daily_text(item)
+        if content:
+            record = dict(item) if isinstance(item, dict) else {}
+            record["content"] = content
+            daily_records.append(record)
     if not daily_records:
         raise RuntimeError("No daily philosophy content found; archive unchanged.")
 
@@ -96,44 +112,64 @@ def main():
         archive = json.load(f)
     if not isinstance(archive, dict):
         raise RuntimeError("Archive JSON is not an object; archive unchanged.")
+
     archive.setdefault("schema_version", "1.0")
     archive.setdefault("section_snapshots", [])
     archive.setdefault("daily_entries", [])
+    if not isinstance(archive["section_snapshots"], list):
+        raise RuntimeError("Archive section_snapshots is not a list; archive unchanged.")
+    if not isinstance(archive["daily_entries"], list):
+        raise RuntimeError("Archive daily_entries is not a list; archive unchanged.")
 
-    # Idempotence: a scheduled rerun on the same Singapore date never
-    # overwrites the first captured record for that date.
-    if any(x.get("snapshot_date") == today for x in archive["section_snapshots"] if isinstance(x, dict)):
-        print(f"{today}: section snapshot already exists; preserving it.")
-        return
+    # Repair each archive stream independently; never overwrite an existing same-day snapshot.
+    section_exists = any(
+        isinstance(item, dict) and item.get("snapshot_date") == today
+        for item in archive["section_snapshots"]
+    )
+    daily_exists = any(
+        isinstance(item, dict) and item.get("date") == today
+        for item in archive["daily_entries"]
+    )
+    changed = False
 
-    section_snapshot = {
-        "captured_at": captured_at,
-        "snapshot_date": today,
-        "title": "Mia · 四维独白",
-        "source_url": SECTIONS_URL,
-        "source_updated_at": sections_raw.get("updated_at") if isinstance(sections_raw, dict) else None,
-        "sections": published_sections,
-    }
-    archive["section_snapshots"].insert(0, section_snapshot)
-
-    # A single dated record holds the exact source daily content observed at
-    # capture time. Preserve all source text; no current-page fallback.
-    daily_payload = daily_raw if isinstance(daily_raw, dict) else {"entries": daily_raw}
-    for index, item in enumerate(daily_records):
-        content = item["content"]
-        stable_key = f"{today}-{index + 1}"
-        archive["daily_entries"].insert(0, {
+    if not section_exists:
+        section_snapshot = {
             "captured_at": captured_at,
-            "date": today,
-            "title": item.get("title") or item.get("theme_label") or "Mia · 每日哲理",
-            "theme": item.get("theme") or item.get("id") or "daily_philosophy",
-            "theme_label": item.get("theme_label") or item.get("title") or "每日哲理",
-            "content": content,
-            "tags": item.get("tags", []),
-            "mood": item.get("mood", []),
-            "source_url": DAILY_URL,
-            "source_key": stable_key,
-        })
+            "snapshot_date": today,
+            "title": "Mia · 四维独白",
+            "source_url": SECTIONS_URL,
+            "source_updated_at": sections_raw.get("updated_at") if isinstance(sections_raw, dict) else None,
+            "sections": published_sections,
+        }
+        archive["section_snapshots"].insert(0, section_snapshot)
+        changed = True
+        print(f"Prepared section snapshot for {today}: {len(published_sections)} sections.")
+    else:
+        print(f"{today}: section snapshot already exists; preserving it.")
+
+    if not daily_exists:
+        for index, item in enumerate(daily_records):
+            archive["daily_entries"].insert(0, {
+                "captured_at": captured_at,
+                "date": today,
+                "source_date": item.get("date"),
+                "title": item.get("title") or item.get("theme_label") or "Mia · 每日哲理",
+                "theme": item.get("theme") or item.get("id") or "daily_philosophy",
+                "theme_label": item.get("theme_label") or item.get("title") or "每日哲理",
+                "content": item["content"],
+                "tags": item.get("tags", []),
+                "mood": item.get("mood", []),
+                "source_url": DAILY_URL,
+                "source_key": f"{today}-{index + 1}",
+            })
+        changed = True
+        print(f"Prepared {len(daily_records)} daily philosophy entry/entries for {today}.")
+    else:
+        print(f"{today}: daily entry already exists; preserving it.")
+
+    if not changed:
+        print("No new archive data to write.")
+        return
 
     archive["generated_at"] = captured_at
     archive["automation"] = {
@@ -145,7 +181,7 @@ def main():
     with open(ARCHIVE_PATH, "w", encoding="utf-8") as f:
         json.dump(archive, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    print(f"Archived {len(published_sections)} sections and {len(daily_records)} daily philosophy entries for {today}.")
+    print(f"Archive updated successfully for {today}.")
 
 
 if __name__ == "__main__":
