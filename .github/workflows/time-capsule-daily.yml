@@ -1,6 +1,9 @@
 name: Mia Time Capsule Daily Archive
 
 on:
+  push:
+    paths:
+      - "scripts/archive_time_capsule.py"
   schedule:
     # 10:00 Asia/Singapore = 02:00 UTC
     - cron: "0 2 * * *"
