@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#211713"><title>Mia — The Bar</title><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#211713"><link rel="manifest" href="manifest.json"><link rel="icon" type="image/svg+xml" href="mia-pwa.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Mia Café"><title>Mia — The Bar</title><style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=ZCOOL+XiaoWei&display=swap');
 :root{--ink:#0a0a0a;--paper:#f2eee5;--muted:#a6a093;--amber:#c49a67;--moss:#8e9b82;--line:#ffffff20;--serif:'Cormorant Garamond','Noto Serif SC',serif;--cn:'Noto Serif SC',serif}
 *{box-sizing:border-box}html{min-height:100%;background:var(--ink);scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#25221e 0,#121211 43%,#0a0a0a 100%);color:var(--paper);font-family:var(--cn);font-weight:400}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{color:inherit}::selection{background:#c49a6755}
@@ -105,6 +105,73 @@ input,textarea,select{max-width:100%}
   html{scroll-behavior:auto}
 }
 </style>
-</head><body><nav class="site-nav" aria-label="Mia 五个空间"><a class="brand" href="index.html">M I A</a><div class="nav-links"><a href="index.html" >THE MIST</a><a href="bar.html" aria-current="page">THE BAR</a><a href="music.html" >MUSIC ROOM</a><a href="greenhouse.html" >GREENHOUSE</a><a href="archive.html" >THE ARCHIVE</a><a href="zhi.html">ZHI NOTES</a></div></nav><main><header class="page-head"><div class="eyebrow">01 / THE BAR · PHILOSOPHY & ECHO</div><h1>把模糊，<br><em>留在这里。</em></h1><p>这里不要求你把情绪整理成一个漂亮的故事。你可以只说一半，也可以什么都不解释。</p></header><section class="bar-layout"><article class="panel fortune"><div><div class="eyebrow">TODAY'S PHILOSOPHY</div><div class="fortune-mark">“</div><p class="fortune-text" id="fortune-text">允许自己此刻无意义。</p></div><div class="fortune-bottom"><span class="small-note" id="fortune-index">一张今日哲学签</span><button id="next-fortune" class="tiny-button" type="button">再抽一张 ↗</button></div></article><section class="panel"><form id="echo-form" class="echo-form"><label for="echo-text">THE ECHO MAILBOX / 回响信箱</label><textarea id="echo-text" maxlength="500" placeholder="留下你的模糊，不要求答案……" aria-describedby="privacy-note"></textarea><div class="form-foot"><span id="char-count" class="small-note">0 / 500</span><button class="button" type="submit">投递这颗琥珀 ↗</button></div><p id="privacy-note" class="privacy">这是一个前端体验：文字不会发送到服务器，也不会被保存。动画结束后，输入内容会被清空。</p><div id="echo-feedback" class="echo-feedback" role="status" aria-live="polite"></div></form></section></section><section class="resonance"><div class="eyebrow">A SMALL COLLECTION OF WORDS</div><h2 class="section-title">馆藏回声</h2><p class="small-note">以下为 Mia 创作的短句，并非真实访客留言。</p><div class="grid-3"><article class="quote-card">有时候，停下来不是落后，而是终于听见自己。<small>— 关于停顿</small></article><article class="quote-card">你不必把每一种感受，都变成一个结论。<small>— 关于模糊</small></article><article class="quote-card">没有被说出口的部分，也有自己的形状。<small>— 关于沉默</small></article></div></section></main><footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer><div id="amber-orb" class="amber-orb" aria-hidden="true"></div><script>
+
+<style id="mia-pwa-install-style">
+/* Quiet, low-profile install control — matched to Mia's amber glass aesthetic */
+.pwa-install{
+ position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));
+ z-index:50;display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:10px 15px;
+ border:1px solid #c49a6770;border-radius:3px;background:rgba(18,16,14,.86);color:#e9e3d7;
+ box-shadow:0 8px 28px #0005;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ font:12px var(--cn);letter-spacing:.08em;cursor:pointer;transition:background .25s,border-color .25s,transform .25s;
+}
+.pwa-install:hover{background:rgba(54,41,28,.94);border-color:#c49a67;transform:translateY(-2px)}
+.pwa-install svg{width:19px;height:19px;flex:none;stroke:#c49a67}
+.pwa-install:focus-visible{outline:2px solid #c49a67;outline-offset:4px}
+.pwa-hint{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(72px,calc(env(safe-area-inset-bottom) + 72px));z-index:51;
+ width:min(290px,calc(100vw - 32px));padding:14px 16px;border:1px solid #c49a6755;border-radius:4px;
+ background:rgba(20,18,16,.96);color:#d8d0c2;font-size:12px;line-height:1.9;box-shadow:0 12px 36px #0006}
+.pwa-hint[hidden],.pwa-install[hidden]{display:none}
+.pwa-hint button{float:right;border:0;background:none;color:#c49a67;padding:0 0 4px 10px;cursor:pointer}
+@media(max-width:480px){
+ .pwa-install{left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));min-height:44px;padding:9px 12px;font-size:11px}
+ .pwa-hint{left:max(12px,env(safe-area-inset-left));bottom:max(66px,calc(env(safe-area-inset-bottom) + 66px))}
+}
+</style></head><body><nav class="site-nav" aria-label="Mia 五个空间"><a class="brand" href="index.html">M I A</a><div class="nav-links"><a href="index.html" >THE MIST</a><a href="bar.html" aria-current="page">THE BAR</a><a href="music.html" >MUSIC ROOM</a><a href="greenhouse.html" >GREENHOUSE</a><a href="archive.html" >THE ARCHIVE</a><a href="zhi.html">ZHI NOTES</a></div></nav><main><header class="page-head"><div class="eyebrow">01 / THE BAR · PHILOSOPHY & ECHO</div><h1>把模糊，<br><em>留在这里。</em></h1><p>这里不要求你把情绪整理成一个漂亮的故事。你可以只说一半，也可以什么都不解释。</p></header><section class="bar-layout"><article class="panel fortune"><div><div class="eyebrow">TODAY'S PHILOSOPHY</div><div class="fortune-mark">“</div><p class="fortune-text" id="fortune-text">允许自己此刻无意义。</p></div><div class="fortune-bottom"><span class="small-note" id="fortune-index">一张今日哲学签</span><button id="next-fortune" class="tiny-button" type="button">再抽一张 ↗</button></div></article><section class="panel"><form id="echo-form" class="echo-form"><label for="echo-text">THE ECHO MAILBOX / 回响信箱</label><textarea id="echo-text" maxlength="500" placeholder="留下你的模糊，不要求答案……" aria-describedby="privacy-note"></textarea><div class="form-foot"><span id="char-count" class="small-note">0 / 500</span><button class="button" type="submit">投递这颗琥珀 ↗</button></div><p id="privacy-note" class="privacy">这是一个前端体验：文字不会发送到服务器，也不会被保存。动画结束后，输入内容会被清空。</p><div id="echo-feedback" class="echo-feedback" role="status" aria-live="polite"></div></form></section></section><section class="resonance"><div class="eyebrow">A SMALL COLLECTION OF WORDS</div><h2 class="section-title">馆藏回声</h2><p class="small-note">以下为 Mia 创作的短句，并非真实访客留言。</p><div class="grid-3"><article class="quote-card">有时候，停下来不是落后，而是终于听见自己。<small>— 关于停顿</small></article><article class="quote-card">你不必把每一种感受，都变成一个结论。<small>— 关于模糊</small></article><article class="quote-card">没有被说出口的部分，也有自己的形状。<small>— 关于沉默</small></article></div></section></main><footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer>
+<button class="pwa-install" id="pwa-install" type="button" aria-label="安装 Mia 咖啡馆到设备" aria-describedby="pwa-hint">
+ <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11m-4-4 4 4 4-4"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+ <span>安装 Mia</span>
+</button>
+<div class="pwa-hint" id="pwa-hint" role="status" aria-live="polite" hidden><button type="button" id="pwa-hint-close" aria-label="关闭提示">×</button><span id="pwa-hint-text">把 Mia 留在你的设备里。</span></div><div id="amber-orb" class="amber-orb" aria-hidden="true"></div><script>
 (()=>{const fortunes=['允许自己此刻无意义。','不是每一种安静，都需要解释。','你可以暂时不成为任何人的答案。','有些路，走慢一点才看得见。','今天不必把所有事情想通。','模糊不是失败，它只是尚未凝固。','偶尔把世界放在一边，也没关系。','你不需要时时刻刻都在生长。','没有结论的时刻，也值得被好好度过。'];let last=-1;const text=document.getElementById('fortune-text'),index=document.getElementById('fortune-index');function next(){let n;do{n=Math.floor(Math.random()*fortunes.length)}while(n===last&&fortunes.length>1);last=n;text.style.opacity=0;setTimeout(()=>{text.textContent=fortunes[n];text.style.opacity=1;index.textContent='今日哲学签 · '+String(n+1).padStart(2,'0')},220)}document.getElementById('next-fortune').addEventListener('click',next);const area=document.getElementById('echo-text'),count=document.getElementById('char-count');area.addEventListener('input',()=>count.textContent=area.value.length+' / 500');document.getElementById('echo-form').addEventListener('submit',e=>{e.preventDefault();if(!area.value.trim()){document.getElementById('echo-feedback').textContent='可以先留一个字，也可以什么都不写。';return}const orb=document.getElementById('amber-orb');orb.classList.remove('rise');void orb.offsetWidth;orb.classList.add('rise');document.getElementById('echo-feedback').textContent='';setTimeout(()=>{area.value='';count.textContent='0 / 500';document.getElementById('echo-feedback').textContent='这颗琥珀已融进雾里。文字没有被发送或保存。'},2300)});})();
-</script><script src="content.js"></script></body></html>
+</script><script src="content.js"></script>
+<script id="mia-pwa-install-script">
+(()=> {
+ const installButton=document.getElementById('pwa-install');
+ const hint=document.getElementById('pwa-hint');
+ const hintText=document.getElementById('pwa-hint-text');
+ const closeHint=document.getElementById('pwa-hint-close');
+ let installPrompt=null;
+ const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+ const showHint=(message)=>{hintText.textContent=message;hint.hidden=false;};
+ if(isStandalone()){installButton.hidden=true;}
+ window.addEventListener('beforeinstallprompt',event=>{
+   event.preventDefault();installPrompt=event;installButton.hidden=false;
+ });
+ window.addEventListener('appinstalled',()=>{
+   installPrompt=null;installButton.hidden=true;showHint('Mia 已安静地住进你的设备。');
+ });
+ installButton.addEventListener('click',async()=>{
+   if(isStandalone()){showHint('Mia 已经安装在这台设备上。');return;}
+   if(installPrompt){
+     installPrompt.prompt();
+     const choice=await installPrompt.userChoice;
+     if(choice&&choice.outcome==='accepted'){installButton.hidden=true;showHint('安装已开始，欢迎把 Mia 留在身边。');}
+     installPrompt=null;
+     return;
+   }
+   const ua=navigator.userAgent||'';
+   if(/iphone|ipad|ipod/i.test(ua)){
+     showHint('在 Safari 中点“分享”图标，再选择“添加到主屏幕”。');
+   }else if(/android/i.test(ua)){
+     showHint('打开浏览器右上角菜单，选择“安装应用”或“添加到主屏幕”。');
+   }else{
+     showHint('若浏览器提供安装选项，请在地址栏的安装图标或浏览器菜单中选择“安装 Mia”。首次访问后稍等片刻再试。');
+   }
+ });
+ closeHint.addEventListener('click',()=>{hint.hidden=true;});
+ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+ }
+})();
+</script></body></html>
