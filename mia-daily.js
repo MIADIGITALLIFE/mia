@@ -1,6 +1,6 @@
 (() => {
   const ROOT = 'mia-daily-thought';
-  const DAILY_URL = 'https://zeefsee.github.io/ZEE/mia/daily.json';
+  const DAILY_URL = 'https://raw.githubusercontent.com/ZEEFSEE/ZEE/main/mia/daily.json';
   const styles = `
     #mia-daily-thought{width:min(520px,calc(100% - 36px));margin:24px auto 0;padding:18px 20px 16px;border:1px solid #d8cbb033;border-radius:4px;background:linear-gradient(135deg,#ffffff05,var(--mia-diary-tint,#e0f7fa12));text-align:center;box-sizing:border-box;animation:mia-diary-in .8s ease both}
     #mia-daily-thought .mia-daily-label{font:10px/1.8 Georgia,serif;letter-spacing:.24em;color:#c8c0b0a0}
