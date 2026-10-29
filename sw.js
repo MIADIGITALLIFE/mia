@@ -33,7 +33,7 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  const isLiveData = /\\.(?:js|json)$/i.test(url.pathname) ||
+  const isLiveData = url.pathname.endsWith('.js') || url.pathname.endsWith('.json') ||
     req.destination==='script' ||
     req.destination==='style';
 
