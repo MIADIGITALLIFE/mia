@@ -1,4 +1,4 @@
-const CACHE_NAME='mia-cafe-pwa-v2';
+const CACHE_NAME='mia-cafe-pwa-v3';
 const CORE=['/mia/bar.html','/mia/content.js','/mia/manifest.json','/mia/mia-pwa.svg'];
 
 self.addEventListener('install',event=>{
