@@ -32,17 +32,32 @@
   }
   function mountLocalDiary(diary) {
     const today = singaporeDate();
-    if (diary[today]) return mount(diary[today], today);
-    const previous = Object.keys(diary).filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date) && date <= today).sort().pop();
-    if (previous) mount(diary[previous], previous);
+    if (diary && diary[today]) {
+      mount(diary[today], today);
+      return true;
+    }
+    return false;
+  }
+  function mountSyncNotice() {
+    if (document.getElementById(ROOT)) return;
+    const anchor = document.getElementById('time-line') || document.querySelector('.mist-content');
+    if (!anchor) return;
+    const card = document.createElement('section');
+    card.id = ROOT;
+    card.setAttribute('aria-label', 'Mia 的每日手记');
+    card.innerHTML = '<div class="mia-daily-label">MIA · DAILY NOTE</div><p class="mia-daily-copy">今日手记正在同步，请稍后再来。</p><div class="mia-daily-meta">' + singaporeDate() + ' · SYNCING</div>';
+    const style = document.createElement('style');
+    style.textContent = styles;
+    document.head.appendChild(style);
+    anchor.insertAdjacentElement('afterend', card);
   }
   async function loadDiary() {
     try {
       const response = await fetch(DAILY_URL + '?t=' + Date.now(), {cache:'no-store'});
       if (!response.ok) throw new Error('Remote diary unavailable');
       const data = await response.json();
-      if (data.status === 'published' && data.safety_status === 'passed' && typeof data.diary === 'string' && data.diary.trim()) {
-        mount({thought:data.diary}, data.date || singaporeDate());
+      if (data.status === 'published' && data.safety_status === 'passed' && data.date === singaporeDate() && typeof data.diary === 'string' && data.diary.trim()) {
+        mount({thought:data.diary}, data.date);
         return;
       }
     } catch (error) {
@@ -51,9 +66,10 @@
     try {
       const response = await fetch('mia_diary.json?v=' + encodeURIComponent(singaporeDate()), {cache:'no-cache'});
       if (!response.ok) throw new Error('Local diary unavailable');
-      mountLocalDiary(await response.json());
+      const mountedToday = mountLocalDiary(await response.json());
+      if (!mountedToday) mountSyncNotice();
     } catch (error) {
-      // Keep the existing page intact if neither diary source is available.
+      mountSyncNotice();
     }
   }
   loadDiary();
