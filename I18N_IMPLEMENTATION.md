@@ -194,3 +194,23 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Static review confirms that all six original filenames are retained, the English page uses the shared audio ownership key/channel and album messages, and the page does not import Chinese content scripts.
 - Browser-level verification of audio file loading, playback, pause coordination with the shell, cross-tab ownership, keyboard controls, and mobile layout remains pending.
 - This page is committed only to the bilingual feature branch. It has not been merged or deployed to GitHub Pages.
+
+
+## English Time Capsule milestone
+
+### Added on the feature branch
+
+- Added `en/time-capsule.html` with an English-only interface, the existing amber visual language, responsive timeline layout, archive filters, date search, and upper-right Chinese language switch.
+- The English page reads the existing root `time-capsule-data.json` directly. It does not copy, regenerate, translate in place, or modify the historical archive.
+- Displays the number of four-dimension snapshots and daily-philosophy entries, grouped by preserved snapshot/date fields.
+- Because the current archive records contain Chinese source text and no approved English translation fields, the English view deliberately does not render those Chinese titles, paragraphs, tags, or moods. Each record is identified as original Chinese source text and links to the Chinese Time Capsule.
+- Preserves the distinction between historical snapshots and the live page; no current content is substituted when the archive cannot load.
+- Updated `en/world.html` so `?space=time-capsule` opens the English archive index.
+
+### Data integrity and limitations
+
+- The current source data contains 10 four-dimension snapshots and 12 daily-philosophy entries (22 records in total at the time of implementation). Counts are read dynamically from the JSON and are not hard-coded.
+- Historical text remains in its original language and remains unchanged. English translation of the archived content is a separate future content task; the English page does not imply that those translations exist.
+- Static review confirms the English page reads the shared archive JSON, displays only English interface copy (apart from the intentional `中文` switch), and routes to the English Time Capsule.
+- Browser-level verification of data loading, filters, date search, Chinese cross-link behavior, and mobile layout remains pending.
+- This page is committed only to the bilingual feature branch. It has not been merged or deployed to GitHub Pages.
