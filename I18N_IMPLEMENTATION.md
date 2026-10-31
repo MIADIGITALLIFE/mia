@@ -319,3 +319,17 @@ Findings:
 - Proposed parallel outputs are `mia/daily.en.json`, `mia/todays-philosophy.en.json`, and `mia/sections.en.json`. They must preserve source date/section IDs and have their own translation review/publication status.
 
 A write attempt to create `feature/mia-bilingual-feeds` in `ZEEFSEE/ZEE` was rejected by GitHub with HTTP 403 (resource not accessible by integration). No upstream files were modified. This is an external permission boundary, not a successful implementation. The Mia PR records the exact next integration contract; upstream write access or a user-created branch is required before implementing the ZEE-side feeds.
+
+
+## Source-linked English draft batch — 2026-10-31
+
+Added `data/i18n/upstream-drafts/2026-10-31.json` on the feature branch.
+
+- Contains six stable records: one daily note, one philosophy entry, and four ZHI sections.
+- Daily/philosophy records use the source date as identity; ZHI records use the existing stable section IDs.
+- Original Chinese source text and source references are retained in the batch for comparison.
+- Every English payload is explicitly `draft` and marked as an AI-assisted draft requiring human review.
+- No translation has been marked `approved` or `published`; the production English reader must not render this batch.
+- The file is a review artifact in the Mia repository, not a replacement for the canonical ZEE upstream feeds. It does not change any source JSON or the live site.
+
+Static contract review: all six records use the expected record shape, stable IDs, valid source timestamps, allowed types/locales/statuses, and non-empty draft English copy. The repository validator should be run in CI against this file before merge; a full JSON Schema Draft 2020-12 validator remains a separate acceptance requirement.
