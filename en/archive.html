@@ -98,7 +98,13 @@ input,textarea,select{max-width:100%}
   html{scroll-behavior:auto}
 }
 </style>
-<style id="english-archive-type">:root{--cn:'Cormorant Garamond',Georgia,serif;--art:'Cormorant Garamond',Georgia,serif}.page-head h1,.section-title,.memory-title,.today-card h2{font-family:var(--art)}.site-nav{align-items:center}.language-switch{font:11px var(--serif);letter-spacing:.1em;border:1px solid #ffffff30;padding:8px 13px;border-radius:30px;color:#e9e3d7}.memory-detail{color:#d0c7b8}.memory-hint{color:#d1c9b9b8}</style></head><body>
+<style id="english-archive-type">:root{--cn:'Cormorant Garamond',Georgia,serif;--art:'Cormorant Garamond',Georgia,serif}.page-head h1,.section-title,.memory-title,.today-card h2{font-family:var(--art)}.site-nav{align-items:center}.language-switch{font:11px var(--serif);letter-spacing:.1em;border:1px solid #ffffff30;padding:8px 13px;border-radius:30px;color:#e9e3d7}.memory-detail{color:#d0c7b8}.memory-hint{color:#d1c9b9b8}</style><link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head><body>
 <nav class="site-nav" aria-label="Mia spaces"><a class="brand" href="index.html">M I A</a><div class="nav-links"><a href="index.html">THE MIST</a><a href="bar.html">THE BAR</a><a href="music.html">MUSIC ROOM</a><a href="greenhouse.html">GREENHOUSE</a><a href="archive.html" aria-current="page">THE ARCHIVE</a><a href="unavailable.html?space=stories">STORY ARCHIVE</a><a href="unavailable.html?space=zhi">ZHI NOTES</a></div><a class="language-switch" href="../world.html?space=archive&lang=zh" target="_top" lang="zh">中文</a></nav>
 <main>
 <header class="page-head archive-intro"><div class="eyebrow">04 / THE ARCHIVE · MEMORY & AFTERIMAGE</div><h1>Some moments<br><em>deserve to be kept gently.</em></h1><p>This is not a place that asks you to remember. Think of it as a small gallery: you can revisit a little light, or take away a blank card made just for this moment.</p></header>
@@ -152,4 +158,31 @@ document.querySelectorAll('[data-memory-filter]').forEach(button=>button.addEven
 renderGreenhouseMemories();
 if(clearMemories)clearMemories.addEventListener('click',()=>{if(!window.confirm('Clear all greenhouse memories saved in this browser? This cannot be undone.'))return;try{localStorage.removeItem(greenhouseKey)}catch(_){}renderGreenhouseMemories()});
 })();
-</script></body></html></html>
+</script><script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt(); await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html></html>
