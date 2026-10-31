@@ -234,3 +234,24 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Static review confirms the English catalogue and reader use English interface copy, use the shared story data and cover asset, retain the original reading-progress key, and do not alter the source JSON.
 - Browser-level verification of chapter navigation, resume progress across locales, URL hash restoration, cover loading, and mobile reading layout remains pending.
 - These pages are committed only to the bilingual feature branch. They have not been merged or deployed to GitHub Pages.
+
+
+## English ZHI Notes milestone
+
+### Added on the feature branch
+
+- Added `en/zhi.html` with an English-only four-dimension interface: Creation & Exploration, Reality & Decisions, Philosophical Experiments, and Growth & Everyday Life.
+- Preserved the existing dark editorial visual direction, responsive four-dimension navigation, single-dimension deep links, and upper-right Chinese language switch.
+- The page reads the established public `mia/sections.json` feed from the ZEE repository. It uses stable section IDs to match the four dimensions.
+- The current public feed declares `language: zh-CN` and contains Chinese-only titles, tags, triggers, focus notes, and body content. The English page therefore does not render those fields or use Chinese content as a fallback.
+- Added a forward-compatible localized-field contract: the English page will render `title_en`, `subtitle_en`, `tags_en`, `focus_en`, `content_en`, `mood_en`, and `trigger_en` only when supplied by the feed. Until approved English fields exist, each dimension displays an English translation-unavailable notice and a link to the matching Chinese section.
+- Added an EN switch to the existing Chinese `zhi.html`; both directions preserve the `section` query parameter and URL hash.
+- Updated `en/world.html` so `?space=zhi` opens the English ZHI Notes page.
+
+### Data integrity and verification limits
+
+- The existing public feed currently contains four published Chinese sections and no `sections-en.json` translation feed. No source feed, content, IDs, or timestamps were modified.
+- The English page may display the feed's update date and count of approved English editions; it does not expose untranslated Chinese copy.
+- Static review confirms the English page declares `lang=en`, contains English-only interface copy apart from the intentional `中文` switch, uses the public sections feed, and gates all dynamic text behind explicit English-suffixed fields.
+- Browser-level verification of the live remote feed, section deep links, language switching, mobile layout, and future localized-field rendering remains pending.
+- These changes are committed only to the bilingual feature branch. They have not been merged or deployed to GitHub Pages.
