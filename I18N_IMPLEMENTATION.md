@@ -157,3 +157,21 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Browser-level verification of rain audio, parent-shell message coordination, light animation, local memory persistence, and narrow-screen layout is still pending.
 - Saved memory display in an English Archive is not yet implemented; the English Archive remains an untranslated-room boundary.
 - The page has not been merged or deployed to GitHub Pages.
+
+
+## English Archive room milestone
+
+### Added on the feature branch
+
+- Added `en/archive.html` with an English-only interface and the original nine gallery image assets, retaining their existing image files and order.
+- Preserved the greenhouse-memory storage key and record schema (`mia-greenhouse-memories-v1`). The English Archive reads the same browser-local records created by the Chinese or English Greenhouse; it does not migrate, rewrite, or upload them.
+- Preserved memory counts, latest-save date, filters (all / rain / light / breathing), individual memory cards, and the explicit clear-on-this-device action with confirmation.
+- Added English-only gallery descriptions, reflection notes, empty states, date formatting, and copy feedback. The daily note card is local to the page and is not automatically saved.
+- The page does not load Chinese `content.js` or Chinese dynamic content. Its only Chinese UI text is the intentional `中文` language switch.
+- Updated `en/world.html` so `?space=archive` opens the translated English Archive.
+
+### Remaining for the Archive
+
+- Browser-level verification of the nine image asset paths, localStorage compatibility across the two language routes, filtering, clipboard permission handling, and mobile layout is still pending.
+- Story Archive content remains a separate untranslated room; story bodies will retain their original language unless an approved translation exists.
+- The page has not been merged or deployed to GitHub Pages.
