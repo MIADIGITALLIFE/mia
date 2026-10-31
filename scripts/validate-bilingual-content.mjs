@@ -7,7 +7,7 @@ const allowedStatuses = new Set(['draft','in_review','approved','published','una
 const topLevelKeys = new Set(['schema_version','id','type','parent_id','source_locale','created_at','published_at','source_updated_at','source_ref','immutable','translations']);
 const payloadKeys = new Set(['status','title','subtitle','summary','body','tags','mood','focus','question','chapter_title','translator','reviewed_by','reviewed_at','published_at']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const isDateTime = value => typeof value === 'string' && /^\\d{4}-\\d{2}-\\d{2}T/.test(value) && !Number.isNaN(Date.parse(value));
+const isDateTime = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) && !Number.isNaN(Date.parse(value));
 const files = process.argv.slice(2);
 if (!files.length) {
   console.error('Usage: node scripts/validate-bilingual-content.mjs <content.json> [...]');
@@ -37,7 +37,7 @@ for (const file of files) {
     if (!isDateTime(record.created_at)) fail('created_at must be a valid date-time');
     if (record.parent_id !== undefined && (typeof record.parent_id !== 'string' || !record.parent_id.trim())) fail('parent_id must be a non-empty string');
     for (const key of ['published_at','source_updated_at']) if (record[key] !== undefined && record[key] !== null && !isDateTime(record[key])) fail(`${key} must be a date-time or null`);
-    if (record.source_ref !== undefined && record.source_ref !== null && (typeof record.source_ref !== 'string' || !/^https?:\\/\\//.test(record.source_ref))) fail('source_ref must be an HTTP(S) URI or null');
+    if (record.source_ref !== undefined && record.source_ref !== null) { try { const url = new URL(record.source_ref); if (!['http:','https:'].includes(url.protocol)) fail('source_ref must be an HTTP(S) URI or null'); } catch { fail('source_ref must be an HTTP(S) URI or null'); } }
     if (record.immutable !== undefined && typeof record.immutable !== 'boolean') fail('immutable must be boolean');
     if (!isObject(record.translations) || Object.keys(record.translations).length < 1) { fail('translations must be a non-empty object'); return; }
     for (const locale of Object.keys(record.translations)) if (!allowedLocales.has(locale)) fail(`unsupported locale: ${locale}`);
