@@ -72,3 +72,13 @@ Before publishing a localized record:
 ## Current status
 
 This contract and example are added on the bilingual feature branch. Existing feeds have not been migrated, translated, or overwritten. No public page is switched to the new schema yet.
+
+## Validation
+
+Run the lightweight contract validator against one or more normalized content-record JSON files:
+
+```sh
+node scripts/validate-bilingual-content.mjs data/i18n/content.example.json
+```
+
+The validator checks stable IDs, supported record types/locales, timestamps, translation statuses, and publication metadata. It is a focused release gate for this contract; use a JSON Schema Draft 2020-12 validator as well when integrating it into a larger content pipeline.
