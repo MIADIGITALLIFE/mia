@@ -61,4 +61,20 @@ for (const file of pages) {
   assert.doesNotMatch(read(file), /<script[^>]+src=["'][^"']*(?:content\.js|mia-album\.js)["']/i,
     `${file} must not import legacy Chinese-only content scripts`);
 }
+const enManifest = JSON.parse(read('en/manifest.json'));
+assert.equal(enManifest.lang, 'en');
+assert.equal(enManifest.scope, '/mia/en/');
+assert.equal(enManifest.start_url, '/mia/en/index.html');
+assert.equal(enManifest.icons[0].src, '../mia-pwa.svg');
+const enWorker = read('en/sw.js');
+assert.ok(enWorker.includes("'mia-cafe-en-pwa-v1'"));
+assert.ok(enWorker.includes('key.startsWith(CACHE_PREFIX)'));
+const zhWorker = read('sw.js');
+assert.ok(zhWorker.includes("key.startsWith('mia-cafe-pwa-')"));
+assert.ok(!zhWorker.includes("keys.filter(key=>key!==CACHE_NAME)"));
+for (const file of pages) {
+  const html = read(file);
+  assert.ok(html.includes('rel="manifest"'), file + ' must link the English manifest');
+  assert.ok(html.includes("register('sw.js'"), file + ' must register the English worker');
+}
 console.log('Bilingual site smoke tests passed (locale routing, 11 English pages, 7 spaces, 9 original photos, storage compatibility, language isolation).');
