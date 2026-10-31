@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101913"><title>Mia — The Greenhouse</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=ZCOOL+XiaoWei&display=swap');
+:root{--ink:#0a0a0a;--paper:#f2eee5;--muted:#a6a093;--amber:#c49a67;--moss:#8e9b82;--line:#ffffff20;--serif:'Cormorant Garamond','Noto Serif SC',serif;--cn:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}html{min-height:100%;background:var(--ink);scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#25221e 0,#121211 43%,#0a0a0a 100%);color:var(--paper);font-family:var(--cn);font-weight:400}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{color:inherit}::selection{background:#c49a6755}
+.site-nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px clamp(20px,5vw,76px);border-bottom:1px solid #ffffff12}.brand{font:500 19px var(--serif);letter-spacing:.28em;white-space:nowrap}.nav-links{display:flex;gap:clamp(12px,2.7vw,34px);flex-wrap:wrap;justify-content:flex-end}.nav-links a{font:500 11px var(--serif);letter-spacing:.13em;color:#c7c1b6a8;transition:color .25s}.nav-links a:hover,.nav-links a[aria-current=page]{color:var(--amber)}
+main{width:min(1100px,100% - 40px);margin:auto}.eyebrow{font:500 11px var(--serif);letter-spacing:.25em;text-transform:uppercase;color:var(--amber)}.page-head{padding:clamp(62px,10vh,120px) 0 54px;max-width:720px}.page-head h1{font:400 clamp(48px,8vw,92px)/.98 var(--serif);letter-spacing:-.035em;margin:20px 0}.page-head p{max-width:530px;color:#c6c0b5b8;font-size:14px;line-height:2.1}.soft{color:#aaa395}.divider{height:1px;background:var(--line);margin:38px 0}.panel{border:1px solid #ffffff1c;background:linear-gradient(135deg,#ffffff08,#ffffff02);border-radius:4px;padding:clamp(22px,4vw,42px);backdrop-filter:blur(12px)}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:14px 21px;border:1px solid #c49a6780;border-radius:2px;background:#c49a6714;color:var(--paper);cursor:pointer;letter-spacing:.06em;font-size:13px;transition:background .3s,border-color .3s,transform .3s}.button:hover{background:#c49a6728;border-color:var(--amber);transform:translateY(-2px)}.button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--amber);outline-offset:4px}.small-note{font-size:11px;line-height:1.9;color:#a8a195a8}.site-footer{padding:45px 20px 100px;text-align:center;color:#9993868a;font:11px var(--serif);letter-spacing:.17em}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:680px){.site-nav{align-items:flex-start;flex-direction:column;padding:20px}.nav-links{justify-content:flex-start;gap:13px 20px}.nav-links a{font-size:10px}main{width:calc(100% - 32px)}.grid-2,.grid-3{grid-template-columns:1fr}.page-head{padding:58px 0 34px}.site-footer{padding-bottom:100px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style><style>
+body{background:radial-gradient(ellipse at 10% 0%,#40523a45 0,transparent 42%),linear-gradient(150deg,#101913,#0b0f0c 70%)}.greenhouse-hero{position:relative;overflow:hidden;min-height:350px;display:flex;align-items:flex-end;background:linear-gradient(0deg,#101913 0%,#101913bb 24%,transparent 75%),radial-gradient(ellipse at 70% 15%,#91a77b42,transparent 36%),radial-gradient(ellipse at 22% 50%,#5b78502e,transparent 44%),#17241b}.leaf-orbit{position:absolute;inset:0;pointer-events:none;overflow:hidden}.leaf-orbit:before,.leaf-orbit:after{content:"";position:absolute;width:250px;height:440px;border:1px solid #9fb28a25;border-radius:100% 0 100% 0;transform:rotate(35deg);right:14%;top:-70px;box-shadow:0 0 70px #a8bc8a0a}.leaf-orbit:after{width:180px;height:330px;right:29%;top:12%;transform:rotate(68deg)}.greenhouse-hero .inner{position:relative;padding:clamp(25px,5vw,50px)}.greenhouse-hero h2{font:400 clamp(35px,5vw,57px)/1.2 var(--serif);margin:14px 0}.practice{min-height:240px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .3s,border-color .3s}.practice:hover{transform:translateY(-3px);border-color:#a3b39366}.practice[aria-pressed=true]{border-color:#a3b393b3;background:linear-gradient(145deg,#8b9b771c,#ffffff03)}.practice .glyph{font-size:25px;color:#b5c6a4}.practice h3{font:400 29px var(--serif);margin:16px 0 8px}.practice p{font-size:12px;color:#b9b9aa;line-height:2}.prompt{padding:28px;border-left:1px solid #8fa17a88;margin:34px 0;color:#d4d8c9;line-height:2.2}.breath-circle{width:86px;height:86px;border:1px solid #a6b99366;border-radius:50%;display:grid;place-items:center;margin:18px 0;position:relative}.breath-circle:before{content:"";position:absolute;inset:9px;border:1px solid #a6b99330;border-radius:50%}.breath-circle.active{animation:breathe 8s ease-in-out infinite}.breath-circle span{font:12px var(--serif);letter-spacing:.12em;color:#cad6be}@keyframes breathe{0%,100%{transform:scale(.85);box-shadow:0 0 0 #8fa17a00}50%{transform:scale(1.18);box-shadow:0 0 36px #8fa17a18}}@media(max-width:680px){.greenhouse-hero{min-height:300px}.practice{min-height:200px}}
+</style><style id="mia-editorial-refinement">
+/* Shared editorial system: softer type, calmer hierarchy, consistent spacing */
+:root{--paper:#e9e3d7;--muted:#aaa395;--line:#ffffff18}
+.page-head{padding:clamp(46px,7.5vh,86px) 0 38px;max-width:760px}
+.page-head h1{font:400 clamp(35px,5.3vw,62px)/1.28 var(--cn);letter-spacing:.012em;color:#e4ddcf;margin:17px 0 20px;max-width:15em;text-wrap:balance}
+.page-head h1 em{font-style:normal;color:#c9bda7}
+.page-head p{max-width:490px;color:#b8b1a5;font-size:13px;line-height:2.15}
+.section-title{font:400 clamp(26px,3.2vw,35px)/1.4 var(--cn);letter-spacing:.015em;color:#dcd4c6;margin:12px 0 24px}
+.panel{border-color:#ffffff18;border-radius:6px}
+.mood-card .mood-title{font-size:clamp(27px,2.7vw,31px);color:#e0d9cc;letter-spacing:.01em}
+.mood-sub{color:#b7b1a7}
+.fortune-text{font-size:clamp(22px,2.6vw,30px);line-height:1.9;color:#ded5c6;letter-spacing:.025em}
+.greenhouse-hero h2{font-size:clamp(30px,4vw,44px);line-height:1.45;color:#dce0d0;letter-spacing:.015em}
+.today-card h2{font-size:clamp(27px,3.3vw,36px);line-height:1.65;color:#e0d7c8;letter-spacing:.01em}
+.memory-title{font-size:clamp(20px,2vw,23px);line-height:1.45;color:#e7dfd1}
+.archive-note{color:#b9b1a4}
+.quote-card{color:#c8c0b4}
+.small-note,.privacy{color:#aaa397}
+.mist-line{font:400 clamp(17px,2.5vw,22px)/1.95 var(--cn);letter-spacing:.045em;color:#d9d1c3;margin:22px 0 12px}
+.mist-sub{color:#bdb4a5}
+@media(max-width:680px){
+ .page-head{padding:48px 0 30px}
+ .page-head h1{font-size:clamp(32px,8vw,40px);line-height:1.38;letter-spacing:.015em;margin:15px 0 17px}
+ .page-head p{font-size:12px;line-height:2.05}
+ .section-title{font-size:27px}
+ .mood-card .mood-title{font-size:28px}
+}
+
+/* Art direction: literary Chinese display type, restrained English serif */
+:root{--art:'Cormorant Garamond',Georgia,serif}
+.page-head h1,.section-title,.mood-card .mood-title,.fortune-text,.greenhouse-hero h2,.today-card h2,.memory-title,.mist-line{font-family:var(--art)}
+.page-head h1{font-weight:400;letter-spacing:.035em;line-height:1.38}
+.section-title{letter-spacing:.035em}
+.mood-card .mood-title{letter-spacing:.035em}
+.fortune-text{letter-spacing:.045em}
+.greenhouse-hero h2,.today-card h2,.memory-title{letter-spacing:.025em}
+.mist-line{letter-spacing:.06em}
+@media(max-width:680px){.page-head h1{line-height:1.42;letter-spacing:.025em}}
+</style><style id="greenhouse-loop">
+.experience-panel{margin:34px 0 10px;background:linear-gradient(145deg,#a0b18a0b,#ffffff02)}
+.experience-panel h2{font:400 clamp(25px,3vw,33px)/1.5 var(--art,var(--cn));margin:13px 0 8px;color:#dce0d0}
+.experience-description{max-width:560px;font-size:12px;line-height:2;color:#bdb9ad}
+.experience-progress{height:2px;background:#ffffff16;margin:22px 0 10px;overflow:hidden}
+.experience-progress span{display:block;height:100%;width:0;background:#a6b993;transition:width .35s linear}
+.experience-timer{font:400 25px var(--serif);letter-spacing:.12em;color:#cbd6bf;margin:10px 0}
+.reflection-wrap{margin-top:22px}
+.reflection-wrap label{display:block;font-size:12px;color:#d7d5c9;margin-bottom:10px}
+.reflection-wrap textarea{width:100%;resize:vertical;min-height:78px;padding:13px 14px;border:1px solid #ffffff24;border-radius:3px;background:#080d09a8;color:#e9e3d7;line-height:1.9;font-size:12px}
+.experience-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.experience-actions [hidden],.experience-progress[hidden],.experience-timer[hidden],.reflection-wrap[hidden]{display:none!important}
+.archive-return{display:inline-block;margin-top:18px;font:11px var(--serif);letter-spacing:.08em;color:#b9c7aa}
+.archive-return:hover{color:#e0e8d7}
+@media(max-width:680px){.experience-actions .button{width:100%}.experience-panel{padding:22px}}
+
+</style><style id="greenhouse-light-experience">
+.experience-panel{position:relative;isolation:isolate;overflow:hidden;min-height:390px;transition:background 1.5s ease,border-color 1.5s ease}
+.experience-panel>.light-screen-wash{position:fixed;inset:0;z-index:999;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,#fff8df 0%,#fff0c9 42%,#f6e7c6 100%);opacity:0;visibility:hidden;mix-blend-mode:screen}
+.experience-panel.light-active>.light-screen-wash{visibility:visible;animation:greenhouseFullScreenGlow 13s ease-in-out both}
+@keyframes greenhouseFullScreenGlow{0%{opacity:0}22%{opacity:.12}40%{opacity:.48}52%{opacity:.92}61%{opacity:.96}72%{opacity:.68}88%{opacity:.22}100%{opacity:0}}
+.experience-panel>.light-scene{position:absolute;z-index:0;inset:-10%;pointer-events:none;opacity:0;overflow:hidden;transition:opacity 1.4s ease;background:radial-gradient(ellipse at 22% 4%,#f8dfaa88 0,transparent 35%),radial-gradient(ellipse at 76% 16%,#e4c57b55 0,transparent 35%),radial-gradient(ellipse at 48% 86%,#a8b78b26 0,transparent 46%),linear-gradient(125deg,#293326,#161d16 65%)}
+.experience-panel>.light-scene .sun-glow{position:absolute;width:min(58vw,520px);height:min(58vw,520px);min-width:280px;min-height:280px;border-radius:50%;left:-8%;top:-48%;background:radial-gradient(circle,#fff2c9e8 0%,#f4d99a9e 16%,#e9c77a42 39%,#e9c77a0a 67%,transparent 72%);filter:blur(5px);transform:translate3d(0,0,0);opacity:.0;transition:opacity 2s ease;animation:greenhouseSunDrift 18s ease-in-out infinite alternate}
+.experience-panel>.light-scene .window-shadows{position:absolute;inset:-30%;background:repeating-linear-gradient(108deg,transparent 0 11%,#fff0c90a 11.5% 12%,transparent 13% 24%),linear-gradient(105deg,transparent 18%,#f6dca51c 31%,#f6dca554 39%,#fff0c90f 48%,transparent 64%);filter:blur(12px);transform:rotate(-7deg);transform-origin:top left;opacity:.0;transition:opacity 2s ease;animation:greenhouseWindowDrift 14s ease-in-out infinite alternate}
+.experience-panel>.light-scene .leaf-shadows{position:absolute;inset:-12%;background:radial-gradient(ellipse at 78% 38%,transparent 0 10%,#0b120c18 10.5% 11%,transparent 12%),radial-gradient(ellipse at 83% 55%,#0b120c24 0 7%,transparent 7.5%),radial-gradient(ellipse at 65% 64%,#0b120c20 0 9%,transparent 9.5%),radial-gradient(ellipse at 92% 68%,#0b120c25 0 8%,transparent 8.5%);filter:blur(6px);opacity:0;transition:opacity 2s ease;animation:greenhouseLeafDrift 12s ease-in-out infinite alternate}
+.experience-panel>.light-scene .light-dust{position:absolute;inset:0;background:radial-gradient(2px 2px at 17% 31%,#fff0c9 0,transparent 100%),radial-gradient(1px 1px at 34% 62%,#fff0c9 0,transparent 100%),radial-gradient(2px 2px at 57% 24%,#fff0c9 0,transparent 100%),radial-gradient(1px 1px at 71% 72%,#fff0c9 0,transparent 100%),radial-gradient(1.5px 1.5px at 89% 42%,#fff0c9 0,transparent 100%);opacity:0;transition:opacity 2s ease;animation:greenhouseDustDrift 8s ease-in-out infinite alternate}
+.experience-panel.light-active>.light-scene{opacity:1}
+.experience-panel.light-active>.light-scene .sun-glow,.experience-panel.light-active>.light-scene .window-shadows,.experience-panel.light-active>.light-scene .leaf-shadows,.experience-panel.light-active>.light-scene .light-dust{opacity:1}
+.experience-panel.light-active{border-color:#ddc58a99;background:linear-gradient(120deg,#c8a76720,#f4e2b70b 50%,#7e926a16);box-shadow:inset 0 0 100px #e4c7800d}
+.experience-panel.light-active .eyebrow{color:#e5c98d}
+.experience-panel.light-active #experience-title{color:#f0e4c9;text-shadow:0 1px 24px #eacb8530}
+.experience-panel.light-active .experience-description{color:#ded4c0}
+@keyframes greenhouseSunDrift{0%{transform:translate3d(-2%,0,0) scale(.92)}100%{transform:translate3d(28%,16%,0) scale(1.12)}}
+@keyframes greenhouseWindowDrift{0%{transform:translate3d(-8%,0,0) rotate(-11deg)}100%{transform:translate3d(12%,5%,0) rotate(-3deg)}}
+@keyframes greenhouseLeafDrift{0%{transform:translate3d(2%,-1%,0) rotate(-3deg)}100%{transform:translate3d(-3%,2%,0) rotate(4deg)}}
+@keyframes greenhouseDustDrift{0%{transform:translate3d(-1%,1%,0);opacity:.2}100%{transform:translate3d(2%,-2%,0);opacity:.8}}
+.experience-panel>:not(.light-scene){position:relative;z-index:1}
+@media(max-width:680px){.experience-panel{min-height:360px}.experience-panel>.light-scene .sun-glow{left:-25%;top:-22%}.experience-panel>.light-scene .window-shadows{inset:-10%}}
+@media(prefers-reduced-motion:reduce){.experience-panel>.light-scene *,.experience-panel>.light-screen-wash{animation:none!important;opacity:0!important}}
+</style>
+<style id="mia-responsive-finish">
+/* Responsive finish: preserve Mia's atmosphere while preventing clipped content */
+html{max-width:100%;overflow-x:clip}
+body{max-width:100%;overflow-x:clip}
+img,video,canvas,svg{max-width:100%;height:auto}
+main{min-width:0}
+.site-nav{flex-wrap:wrap;min-width:0}
+.nav-links{min-width:0;max-width:100%;flex-wrap:wrap}
+.panel,.record,.memory,.mood-card,.dimension,.greenhouse-memory,.today-card,.saved-card{min-width:0;overflow-wrap:anywhere}
+button,a,input,textarea,select{touch-action:manipulation}
+input,textarea,select{max-width:100%}
+@media(max-width:760px){
+  .site-nav{gap:15px}
+  .nav-links{row-gap:12px}
+  .panel{padding:clamp(18px,4vw,28px)}
+  .grid-2,.grid-3{grid-template-columns:minmax(0,1fr)}
+  .bar-layout{grid-template-columns:minmax(0,1fr)!important}
+  .memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-index{min-width:0}
+  .experience-panel{padding:24px 18px}
+  .experience-actions{flex-wrap:wrap}
+  .experience-actions>*{max-width:100%}
+}
+@media(max-width:480px){
+  .site-nav{padding:17px 16px;gap:14px}
+  .brand{font-size:17px;letter-spacing:.24em}
+  .nav-links{gap:11px 14px}
+  .nav-links a{font-size:9px;letter-spacing:.08em}
+  main{width:calc(100% - 30px)}
+  .page-head{padding-top:42px}
+  .page-head h1{font-size:clamp(30px,9vw,39px);overflow-wrap:anywhere}
+  .page-head p{font-size:12px;line-height:2}
+  .button{min-height:44px;padding:12px 16px}
+  .memory-grid{grid-template-columns:minmax(0,1fr)}
+  .memory-detail{max-width:100%;overflow-wrap:anywhere}
+  .fortune-text{overflow-wrap:anywhere}
+  .site-footer{padding-left:16px;padding-right:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head><body>
+<nav class="site-nav" aria-label="Mia spaces">
+<a class="brand" href="index.html">M I A</a>
+<div class="nav-links"><a href="index.html">THE MIST</a><a href="bar.html">THE BAR</a><a href="music.html">MUSIC ROOM</a><a href="greenhouse.html" aria-current="page">GREENHOUSE</a><a href="unavailable.html?space=archive">THE ARCHIVE</a><a href="unavailable.html?space=zhi">ZHI NOTES</a></div>
+<a href="../world.html?space=greenhouse&lang=zh" target="_top" style="font:11px Georgia,serif;letter-spacing:.08em;color:#e9e3d7;border:1px solid #e8dfc955;border-radius:30px;padding:8px 13px">中文</a>
+</nav>
+<main>
+<header class="page-head"><div class="eyebrow">03 / THE GREENHOUSE · SENSORY PAUSE</div><h1>Let your heart<br><em>return to the wind.</em></h1><p>There is nothing to finish here. Notice a little light, listen to an imagined rain, or simply stay for a while.</p></header>
+<section class="panel greenhouse-hero"><div class="leaf-orbit" aria-hidden="true"></div><div class="inner"><div class="eyebrow">A SMALL GREEN WORLD</div><h2>You do not have to bloom.<br>Just breathe.</h2><p class="small-note">Soft light · Moss · Mist · Space</p></div></section>
+<div class="divider"></div><div class="eyebrow">CHOOSE A QUIET MOMENT</div><h2 class="section-title">What would you like to be near?</h2>
+<section class="grid-3">
+<button class="panel practice" data-practice="rain" aria-pressed="false"><div><div class="glyph">⌁</div><h3>Listen to rain</h3><p>Imagine rain falling against glass.<br>Each drop can take its time.</p></div><span class="small-note">STAY WITH THE SOUND ↗</span></button>
+<button class="panel practice" data-practice="light" aria-pressed="false"><div><div class="glyph">☼</div><h3>Notice the light</h3><p>Find the gentlest patch of light.<br>Let it stay for a few seconds.</p></div><span class="small-note">NOTICE THE LIGHT ↗</span></button>
+<button class="panel practice" data-practice="breath" aria-pressed="false"><div><div class="glyph">◌</div><h3>Take a breath</h3><p>If you wish, breathe in slowly,<br>then let the breath leave naturally.</p></div><span class="small-note">NO NEED TO GET IT RIGHT ↗</span></button>
+</section>
+<section class="prompt" aria-live="polite"><div class="eyebrow">A NOTE FROM THE GREENHOUSE</div><p id="practice-text">A plant does not think it has failed just because it did not grow taller today.</p><div id="breath-circle" class="breath-circle" aria-hidden="true"><span id="breath-label">PAUSE</span></div><p id="practice-status" class="small-note">Choose a quiet corner and see what it brings.</p></section>
+<section id="experience-panel" class="panel experience-panel" aria-live="polite">
+<div class="light-screen-wash" aria-hidden="true"></div><div class="light-scene" aria-hidden="true"><div class="sun-glow"></div><div class="window-shadows"></div><div class="leaf-shadows"></div><div class="light-dust"></div></div>
+<div class="eyebrow">A MOMENT, JUST FOR YOU</div><h2 id="experience-title">There is no need to begin yet.</h2>
+<p id="experience-description" class="experience-description">Choose a quiet corner, then begin whenever you like. You can stop at any time, and you do not have to save anything.</p>
+<div id="experience-progress" class="experience-progress" hidden><span id="experience-progress-fill"></span></div><p id="experience-timer" class="experience-timer" hidden>00:20</p>
+<div id="reflection-wrap" class="reflection-wrap" hidden><label for="experience-note">Leave a sentence, if you wish</label><textarea id="experience-note" rows="3" maxlength="240" placeholder="In this moment, I notice… (optional)"></textarea><p class="small-note">Only what you choose to write will be saved. Up to 240 characters.</p></div>
+<div class="experience-actions"><button id="experience-start" class="button" type="button" disabled hidden>Begin this moment ↗</button><button id="experience-end" class="button" type="button" hidden>End this moment</button><button id="experience-save" class="button" type="button" hidden>Save to memory</button><button id="experience-skip" class="button" type="button" hidden>Leave without saving</button></div>
+<p id="experience-feedback" class="small-note" role="status"></p><a class="archive-return" href="unavailable.html?space=archive">Visit The Archive ↗</a>
+</section></main><footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer>
+<script>
+(()=> {
+const $=id=>document.getElementById(id), duration=20, key='mia-greenhouse-memories-v1';
+const names={rain:'Listening to rain',light:'Noticing the light',breath:'A quiet breath'};
+const notes={
+rain:{text:'Rain does not have to wash everything away. It simply falls, then passes.',status:'A rain pause has begun. Listen to the sounds already around you.',label:'RAIN'},
+light:{text:'Where light falls, that place can become somewhere to rest for a moment.',status:'A light pause has begun. Notice a gentle change between light and shade.',label:'LIGHT'},
+breath:{text:'You do not need to change how you feel. Give this breath a little room.',status:'A breathing pause has begun. Your own pace is enough; stop whenever you wish.',label:'BREATHE'}
+};
+const endings={
+rain:'The rain did not need to fall. May the sound you imagined leave a little room inside.',
+light:'Light does not need to reach every corner. The small patch you noticed is enough.',
+breath:'Nothing needs to be better. May this natural breath accompany you into the rest of your day.'
+};
+const circle=$('breath-circle'),label=$('breath-label'),title=$('experience-title'),desc=$('experience-description');
+const start=$('experience-start'),end=$('experience-end'),save=$('experience-save'),skip=$('experience-skip');
+const timer=$('experience-timer'),progress=$('experience-progress'),fill=$('experience-progress-fill'),reflection=$('reflection-wrap'),input=$('experience-note'),feedback=$('experience-feedback'),panel=$('experience-panel');
+const rain=document.createElement('audio');rain.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/Rain_(1).ogg';rain.preload='none';rain.loop=true;rain.volume=0;document.body.appendChild(rain);
+let rainFade=null,selected=null,remaining=duration,interval=null,finished=false;
+const tell=type=>{try{if(parent!==window)parent.postMessage({type},'*')}catch(_){}};
+const fadeRain=(target,ms,done)=>{if(rainFade)clearInterval(rainFade);const from=rain.volume,at=Date.now();rainFade=setInterval(()=>{const p=Math.min(1,(Date.now()-at)/ms);rain.volume=from+(target-from)*p;if(p>=1){clearInterval(rainFade);rainFade=null;if(done)done()}},35)};
+const stopRain=()=>{tell('mia:rain-stop');fadeRain(0,450,()=>{rain.pause();rain.currentTime=0})};
+const memories=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(v)?v:[]}catch(_){return[]}};
+const clear=()=>{if(interval)clearInterval(interval);interval=null};
+function reset(){stopRain();panel.classList.remove('light-active');clear();remaining=duration;finished=false;timer.hidden=true;timer.textContent='00:20';progress.hidden=true;fill.style.width='0%';reflection.hidden=true;start.hidden=!selected;start.textContent='Experience again ↗';end.hidden=true;save.hidden=true;skip.hidden=true;circle.classList.remove('active')}
+document.querySelectorAll('.practice').forEach(btn=>btn.addEventListener('click',()=>{
+clear();selected=btn.dataset.practice;document.querySelectorAll('.practice').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+const p=notes[selected];$('practice-text').textContent=p.text;$('practice-status').textContent=p.status;label.textContent=p.label;circle.classList.remove('active');
+title.textContent=names[selected]+' · take it slowly';
+desc.textContent=selected==='rain'?'Spend 20 seconds listening to the sounds around you. No rain audio is needed; nothing has to be found.':selected==='light'?'Watch a beam of light move through a space. Notice soft shadows and the changing edge between light and shade.':'If it feels comfortable, let the circle offer a gentle breathing cue. Your natural pace is always fine.';
+feedback.textContent='';input.value='';reset();start.hidden=false;start.disabled=false;start.textContent='Begin this moment ↗';
+}));
+start.addEventListener('click',()=>{
+if(!selected||interval)return;
+if(selected==='rain'){tell('mia:rain-start');rain.volume=0;const p=rain.play();if(p&&p.catch)p.catch(()=>{feedback.textContent='Rain audio is unavailable right now. You can still enjoy the quiet pause.'});fadeRain(.4,900)}
+panel.classList.toggle('light-active',selected==='light');remaining=duration;finished=false;start.hidden=true;end.hidden=false;timer.hidden=false;progress.hidden=false;timer.textContent='00:20';
+if(selected==='breath'){circle.classList.add('active');label.textContent='BREATHE'}
+title.textContent='Keep this little moment for yourself.';desc.textContent='There is nothing to complete. You can end the experience whenever you wish.';
+feedback.textContent=selected==='breath'?'The circle is only a gentle cue. Follow it only if it feels comfortable.':selected==='light'?'Let the light pass slowly. Notice its colour, shadows and warmth.':'You can remain quiet or end the moment at any time.';
+const began=Date.now();interval=setInterval(()=>{remaining=Math.max(0,duration-Math.floor((Date.now()-began)/1000));timer.textContent='00:'+String(remaining).padStart(2,'0');fill.style.width=((duration-remaining)/duration*100)+'%';if(remaining<=0)finish(true)},200);
+});
+function finish(natural){stopRain();panel.classList.remove('light-active');clear();finished=true;circle.classList.remove('active');label.textContent='PAUSE';timer.hidden=true;progress.hidden=true;end.hidden=true;start.hidden=true;reflection.hidden=false;save.hidden=false;skip.hidden=false;title.textContent='This moment is enough.';desc.textContent=endings[selected];feedback.textContent=natural?'Your pause is complete. Leave a sentence, or leave nothing at all.':'Your pause has ended. It is fine not to finish the full duration.'}
+end.addEventListener('click',()=>{if(selected)finish(false)});
+skip.addEventListener('click',()=>{reset();title.textContent='Nothing needs to be kept.';desc.textContent='Thank you for staying a moment. Choose another corner, or simply leave.';feedback.textContent='This moment was not saved.'});
+save.addEventListener('click',()=>{
+if(!selected||!finished)return;const list=memories();list.unshift({id:'gh-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),type:selected,title:names[selected],note:(input.value||'').trim(),date:new Date().toISOString(),quote:endings[selected]});
+try{localStorage.setItem(key,JSON.stringify(list.slice(0,50)));save.hidden=true;skip.hidden=true;reflection.hidden=true;feedback.textContent='Saved in this browser on this device. You can find it again in The Archive.';desc.textContent='This memory stays in this browser. It is not sent to a server.';title.textContent='A memory, gently kept.'}
+catch(_){feedback.textContent='Your browser could not save this moment. You can copy your sentence or leave without saving.'}
+});
+window.addEventListener('pagehide',stopRain);
+})();
+</script></body></html></html>
