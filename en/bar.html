@@ -15,7 +15,13 @@ main{width:min(1100px,100% - 40px);margin:auto}.eyebrow{font:500 11px var(--seri
 @media(max-width:760px){.bar-layout{grid-template-columns:1fr}.fortune{min-height:260px}.resonance{margin-top:46px}.grid-3{grid-template-columns:1fr}.site-nav{align-items:flex-start;flex-direction:column;padding:20px}.nav-links{justify-content:flex-start;gap:13px 20px}.nav-links a{font-size:10px}main{width:calc(100% - 32px)}.page-head{padding:48px 0 30px}.page-head h1{font-size:clamp(32px,8vw,40px);line-height:1.3}.page-head p{font-size:12px;line-height:2.05}.panel{padding:clamp(18px,4vw,28px)}}
 @media(max-width:480px){.site-nav{padding:17px 16px;gap:14px}.brand{font-size:17px}.nav-links{gap:11px 14px}.nav-links a{font-size:9px}main{width:calc(100% - 30px)}.page-head{padding-top:42px}.page-head h1{font-size:clamp(30px,9vw,39px)}.button{width:100%}.site-footer{padding-left:16px;padding-right:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
-</style></head>
+</style><link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[ data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head>
 <body>
 <a class="language-switch" id="language-switch" href="../world.html?space=bar&lang=zh" target="_top" hreflang="zh-CN" lang="zh">中文</a>
 <nav class="site-nav" aria-label="Mia spaces"><a class="brand" href="index.html" target="_top">M I A</a><div class="nav-links">
@@ -59,4 +65,32 @@ main{width:min(1100px,100% - 40px);margin:auto}.eyebrow{font:500 11px var(--seri
  const params=new URLSearchParams(location.search);params.set('space','bar');params.set('lang','zh');
  document.getElementById('language-switch').href='../world.html?'+params.toString()+location.hash;
 })();
-</script></body></html>
+</script><script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html>
