@@ -52,6 +52,21 @@ for (const phrase of ['在思绪之间，留一处安静', '停留片刻 · 进�
 assert.ok(!/A QUIET PLACE BETWEEN THOUGHTS|STAY A LITTLE|TIME CAPSULE|BREATHE IN · LET THE WORLD WAIT/.test(chineseEntry),
   'Chinese entry must not mix English interface copy into the Chinese experience');
 
+const chineseSwitchPages = ['world.html', 'bar.html', 'music.html', 'greenhouse.html', 'archive.html', 'time-capsule.html', 'stories.html'];
+for (const file of chineseSwitchPages) {
+  const html = read(file);
+  assert.ok(html.includes('id="mia-language-switch"'),
+    file + ' must expose an English language switch');
+  assert.ok(html.includes("p.set('lang','en')") && html.includes('location.hash'),
+    file + ' must preserve query parameters and hash when switching to English');
+  assert.ok(html.includes('target="_top"'),
+    file + ' must switch the top-level page rather than only the embedded frame');
+}
+assert.equal((read('stories.html').match(/id="mia-language-switch"/g) || []).length, 1,
+  'Chinese story archive must have exactly one top-level language switch');
+assert.ok(read('en/world.html').includes("zhParams.set('lang','zh')"),
+  'English world shell must preserve the current query and hash when switching to Chinese');
+
 const shell = read('en/world.html');
 for (const space of ['bar', 'music', 'greenhouse', 'archive', 'zhi', 'time-capsule', 'stories']) {
   assert.ok(shell.includes(`'${space}'`), `English shell must route ${space}`);
