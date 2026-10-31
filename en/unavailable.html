@@ -4,11 +4,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px;background:radial-gradient(ellipse at 50% 45%,#252522,#0a0a0a 72%);color:#e9e3d7;font-family:"Cormorant Garamond",Georgia,serif;text-align:center}.wrap{max-width:620px}.eyebrow{font-size:11px;letter-spacing:.28em;color:#c49a67}.title{font-size:clamp(34px,6vw,58px);font-weight:400;margin:24px 0 14px}.copy{font:14px/2 Arial,sans-serif;color:#b8b1a5}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}.link{color:#e9e3d7;text-decoration:none;border:1px solid #d7c8ad55;padding:11px 18px;font:11px Arial,sans-serif;letter-spacing:.1em}.language{position:fixed;top:20px;right:20px;border-radius:30px;padding:9px 13px;background:#14141299}.route{margin-top:22px;color:#9e9688;font:11px Arial,sans-serif;letter-spacing:.08em}
-</style></head><body>
+</style><link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head><body>
 <a class="link language" id="language" href="../world.html" lang="zh">中文</a>
 <main class="wrap"><div class="eyebrow">MIA · THE ENGLISH EDITION</div><h1 class="title">This room is still being translated.</h1>
 <p class="copy">This space is not yet available in English. We are keeping the language boundary clear rather than showing a mixed-language page. Your original room and its content remain available in the Chinese edition.</p>
 <div class="actions"><a class="link" href="world.html">RETURN TO THE MIST</a><a class="link" id="open-chinese" href="../world.html">OPEN THE CHINESE EDITION</a></div><div class="route" id="route-note"></div></main>
 <script>
 (()=>{const params=new URLSearchParams(location.search);const requested=params.get('space');document.getElementById('route-note').textContent=requested?'Requested room: '+requested.replace(/-/g,' '):'';params.set('lang','zh');const target='../world.html?'+params.toString()+location.hash;document.getElementById('language').href=target;document.getElementById('open-chinese').href=target;})();
-</script></body></html>
+</script><script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt(); await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html>
