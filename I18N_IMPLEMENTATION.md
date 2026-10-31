@@ -139,3 +139,21 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - A dedicated English dynamic-content source for daily philosophy and future curated echoes is not yet connected.
 - PWA metadata and service-worker behavior are not yet localized for the English route.
 - Browser-level visual, form, keyboard, and mobile checks on the deployed Pages site remain pending.
+
+
+## English Greenhouse room milestone
+
+### Added on the feature branch
+
+- Added `en/greenhouse.html` as an English-only translation of the Greenhouse experience.
+- Preserved the greenhouse visual system, responsive layout, rain / light / breathing choices, animated light scene, 20-second optional pause, progress indicator, optional reflection, and end-or-skip controls.
+- Rain playback continues to coordinate with the shared English shell through the existing `mia:rain-start` / `mia:rain-stop` messages. The standalone fallback remains available when the page is opened outside the shell.
+- Optional memories retain the existing localStorage key and record shape (`mia-greenhouse-memories-v1`) so the existing Archive can recognize saved entries. Notes are stored only after an explicit save action and remain in the current browser.
+- The English page does not load `content.js` or Chinese greenhouse copy. Its interface and prompts are English-only, apart from the intentional `中文` language switch.
+- Updated `en/world.html` so `?space=greenhouse` opens the translated English room.
+
+### Remaining for the Greenhouse
+
+- Browser-level verification of rain audio, parent-shell message coordination, light animation, local memory persistence, and narrow-screen layout is still pending.
+- Saved memory display in an English Archive is not yet implemented; the English Archive remains an untranslated-room boundary.
+- The page has not been merged or deployed to GitHub Pages.
