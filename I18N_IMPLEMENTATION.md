@@ -51,3 +51,31 @@ Assets (including the original nine photographs and audio files) remain shared a
 ## Delivery discipline
 
 Implement in small pull requests. Do not switch the production root to English until all reachable spaces and dynamic content have passed the acceptance checks. This branch establishes the audit and contract only; it does not claim that the site is already bilingual.
+
+## Progress on the feature branch
+
+### Completed
+
+- Added `i18n/locale.js`, a small shared locale-routing utility.
+- Locale normalization supports `en`, `zh`, and regional tags such as `zh-CN`.
+- Locale resolution is deterministic: explicit `?lang=` first, then a locale path segment, then the planned English default.
+- URL mapping preserves the complete query string and hash, so current space/story/chapter parameters are not discarded.
+- The helper does not translate page content and is intentionally not wired into the production shell yet.
+
+### Not yet implemented or verified
+
+- No English space pages or complete English dynamic-content translations exist yet.
+- The visible language switch is intentionally deferred until it can lead to a complete same-language experience.
+- Root default, `/zh/` production routing, iframe locale propagation, localized PWA metadata, and locale-separated service-worker caches remain pending.
+- No production URL has been changed; this branch has not been merged or deployed.
+
+### Locale utility contract
+
+Load `i18n/locale.js` only after a page is ready to render a complete locale. Its public API is `window.MiaI18n`:
+
+- `resolveLocale(locationLike?)`
+- `localeFromPath(pathname)`
+- `normalizeLocale(value)`
+- `withLocale(urlLike, locale, basePath?)`
+
+For GitHub Pages project hosting, pass `/mia/` as the base path when constructing cross-locale routes. Do not use root-absolute asset paths that escape the `/mia/` project prefix.
