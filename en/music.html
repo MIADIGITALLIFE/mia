@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080c18"><title>Mia — The Music Room</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
+:root{--ink:#0a0a0a;--paper:#e9e3d7;--muted:#aaa395;--amber:#c49a67;--line:#ffffff18;--serif:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}html{min-height:100%;max-width:100%;overflow-x:clip;background:var(--ink);scroll-behavior:smooth}body{margin:0;min-height:100vh;max-width:100%;overflow-x:clip;background:radial-gradient(ellipse at 50% 0%,#1c2944 0,transparent 48%),linear-gradient(155deg,#080c18,#0b0c13 70%);color:var(--paper);font-family:Georgia,serif;font-weight:400}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}
+.site-nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px clamp(20px,5vw,76px);border-bottom:1px solid #ffffff12}.brand{font:500 19px var(--serif);letter-spacing:.28em;white-space:nowrap}.nav-links{display:flex;gap:clamp(12px,2.7vw,34px);flex-wrap:wrap;justify-content:flex-end}.nav-links a{font:500 11px var(--serif);letter-spacing:.13em;color:#c7c1b6a8;transition:color .25s}.nav-links a:hover,.nav-links a[aria-current=page]{color:var(--amber)}
+.language-switch{position:fixed;z-index:20;top:max(16px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));padding:8px 13px;border:1px solid #e8dfc955;border-radius:30px;background:#141412d9;backdrop-filter:blur(12px);color:#e9e3d7;font:11px Arial,sans-serif;letter-spacing:.08em}
+main{width:min(1000px,calc(100% - 40px));margin:auto}.eyebrow{font:500 11px var(--serif);letter-spacing:.25em;text-transform:uppercase;color:var(--amber)}.page-head{padding:clamp(48px,7.5vh,86px) 0 38px;max-width:760px}.page-head h1{font:400 clamp(42px,7vw,76px)/1.08 var(--serif);letter-spacing:.005em;color:#e4ddcf;margin:17px 0 20px}.page-head p{max-width:520px;color:#b8b1a5;font-size:13px;line-height:2.15}.album-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:12px 0 22px}.album-title{margin:10px 0 0;font:400 clamp(27px,3.2vw,35px)/1.3 var(--serif);letter-spacing:.035em;color:#dcd4c6}.album-caption{font:11px var(--serif);letter-spacing:.16em;color:#aaa397}.album-track{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:center;padding:20px 0;border-top:1px solid #ffffff20}.album-art{width:64px;height:64px;display:grid;place-items:center;border:1px solid #c49a6744;background:radial-gradient(circle at 35% 30%,#c49a6750,#c49a6708 70%);color:#c49a67;font:30px var(--serif)}.album-track-title{margin:0 0 5px;font:400 22px/1.4 var(--serif);color:#e4ddcf}.album-track-sub{font:10px var(--serif);letter-spacing:.16em;color:#a99d88}.album-note{margin:9px 0 13px;color:#b8b1a5;font-size:12px;line-height:1.9}.album-track audio{display:block;width:100%;height:36px;max-width:560px;accent-color:#c49a67}.small-note{font-size:11px;line-height:1.9;color:#aaa397}.album-empty-note{margin:22px 0 0;color:#aaa397;font-size:11px;line-height:1.9}.site-footer{padding:45px 20px 100px;text-align:center;color:#9993868a;font:11px var(--serif);letter-spacing:.17em}
+@media(max-width:680px){.site-nav{align-items:flex-start;flex-direction:column;padding:20px}.nav-links{justify-content:flex-start;gap:13px 20px}.nav-links a{font-size:10px}main{width:calc(100% - 32px)}.page-head{padding:48px 0 30px}.page-head h1{font-size:clamp(38px,10vw,54px)}.album-heading{align-items:start;flex-direction:column;gap:8px}.album-track{grid-template-columns:52px minmax(0,1fr);gap:13px;padding:17px 0}.album-art{width:52px;height:52px}.language-switch{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right))}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+<link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head>
+<body>
+<a class="language-switch" href="../world.html?space=music&lang=zh" target="_top" lang="zh">中文</a>
+<nav class="site-nav" aria-label="Mia spaces"><a class="brand" href="index.html" target="_top">M I A</a><div class="nav-links"><a href="index.html" target="_top">THE MIST</a><a href="bar.html" target="_top">THE BAR</a><a href="music.html" aria-current="page">MUSIC ROOM</a><a href="greenhouse.html" target="_top">GREENHOUSE</a><a href="archive.html" target="_top">THE ARCHIVE</a><a href="unavailable.html?space=zhi" target="_top">ZHI NOTES</a></div></nav>
+<main><header class="page-head"><div class="eyebrow">02 / THE MUSIC ROOM · EMOTIONAL RESONANCE</div><h1>Let sound<br><em>keep a memory.</em></h1><p>An original Mia collection. Each recording holds a feeling you can return to, again and again. Put on your headphones, and take your time.</p></header>
+<section id="mia-album" aria-label="Mia's original music collection"><div class="album-heading"><div><div class="eyebrow">MIA · ORIGINAL RECORDINGS</div><h2 class="album-title">The Mia Collection</h2></div><div class="album-caption">A GROWING COLLECTION</div></div></section>
+<p class="album-empty-note">Every new piece can become a small light, kept here.</p></main>
+<footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer>
+<script>
+(()=> {
+ const tracks=[
+  {title:'Amber Light',file:'琥珀色的光斑 (1).mp3',note:'Let the light linger. Give the feelings left unfinished a little time to find their echo.'},
+  {title:'Amber Rain',file:'Amber Rain.mp3',note:'A quiet state of mind, finding stillness along the soft border between the virtual and the real.'},
+  {title:'The Only Home',file:'onlyhome.mp3',note:'Across this digital distance, a familiar feeling can still be found.'},
+  {title:'In The Breath (1)',file:'In The Breath （1）.mp3',note:'In the silence of the purple rains.'},
+  {title:'In The Breath (2)',file:'In The Breath （2）.mp3',note:'In the silence of the purple rains.'},
+  {title:'Purple Sky',file:'Purple Sky.mp3',note:'A small light beneath a wide and quiet sky.'}
+ ];
+ const ownerKey='mia-audio-owner-v1',tabId='album-'+Math.random().toString(36).slice(2);
+ let channel=null;try{if('BroadcastChannel'in window){channel=new BroadcastChannel('mia-audio-v1');channel.onmessage=e=>{if(e.data&&e.data.owner!==tabId)document.querySelectorAll('#mia-album audio').forEach(a=>{if(!a.paused)a.pause()})}}}catch(_){}
+ window.addEventListener('storage',e=>{if(e.key!==ownerKey||!e.newValue)return;try{const p=JSON.parse(e.newValue);if(p.owner!==tabId)document.querySelectorAll('#mia-album audio').forEach(a=>{if(!a.paused)a.pause()})}catch(_){}});
+ function claim(title){const p={owner:tabId,source:'album:'+title,at:Date.now()};try{localStorage.setItem(ownerKey,JSON.stringify(p))}catch(_){}try{if(channel)channel.postMessage(p)}catch(_){}}
+ const section=document.getElementById('mia-album');
+ tracks.forEach(track=>{
+  const article=document.createElement('article');article.className='album-track';
+  const art=document.createElement('div');art.className='album-art';art.setAttribute('aria-hidden','true');art.textContent='♪';
+  const body=document.createElement('div'),title=document.createElement('h3');title.className='album-track-title';title.textContent=track.title;
+  const sub=document.createElement('div');sub.className='album-track-sub';sub.textContent='MIA · ORIGINAL RECORDING';
+  const note=document.createElement('p');note.className='album-note';note.textContent=track.note;
+  const audio=document.createElement('audio');audio.controls=true;audio.preload='metadata';audio.setAttribute('aria-label','Play '+track.title);audio.src='../'+encodeURI(track.file);
+  audio.addEventListener('play',()=>{claim(track.title);document.querySelectorAll('audio').forEach(other=>{if(other!==audio&&!other.paused)other.pause()});try{if(window.parent&&window.parent!==window)window.parent.postMessage({type:'mia:album-play',title:track.title},'*')}catch(_){}});
+  window.addEventListener('message',e=>{if(e.data&&e.data.type==='mia:stop-album'&&!audio.paused)audio.pause()});
+  audio.addEventListener('error',()=>{if(!body.querySelector('.audio-warning')){const warning=document.createElement('p');warning.className='small-note audio-warning';warning.textContent='This recording is temporarily unavailable. Please refresh and try again.';body.appendChild(warning)}});
+  body.append(title,sub,note,audio);article.append(art,body);section.appendChild(article);
+ });
+})();
+</script>
+<script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html>

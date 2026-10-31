@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "id": "philosophy:2026-10-31:001",
+  "type": "philosophy",
+  "source_locale": "zh-CN",
+  "created_at": "2026-10-31T10:00:00+08:00",
+  "published_at": null,
+  "source_updated_at": null,
+  "source_ref": null,
+  "immutable": false,
+  "translations": {
+    "zh-CN": {
+      "status": "published",
+      "title": "示例哲思标题",
+      "body": "中文原文由内容生产流程写入。",
+      "tags": [
+        "记忆",
+        "成长"
+      ]
+    },
+    "en": {
+      "status": "draft"
+    }
+  }
+}

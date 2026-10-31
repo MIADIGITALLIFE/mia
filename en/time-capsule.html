@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090b0b">
+<title>Mia · Time Capsule — An Amber of Memory</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
+:root{--bg:#090b0b;--paper:#e9e3d7;--muted:#a9a092;--amber:#c49a67;--line:#ffffff1b;--serif:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth;max-width:100%;overflow-x:clip}body{margin:0;min-height:100vh;max-width:100%;overflow-x:clip;color:var(--paper);font-family:Georgia,serif;background:radial-gradient(ellipse at 70% 0%,#7a4c241c,transparent 35%),linear-gradient(160deg,#111513,#090a0a 65%)}a{color:inherit;text-decoration:none}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px clamp(20px,5vw,76px);border-bottom:1px solid #ffffff12}.brand{font:500 18px var(--serif);letter-spacing:.32em}.links{display:flex;gap:clamp(10px,2vw,26px);flex-wrap:wrap}.links a{font:10px var(--serif);letter-spacing:.12em;color:#bcb5a8a8}.links a:hover,.links a[aria-current=page]{color:#e2bd86}
+.language-switch{position:fixed;z-index:20;top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));padding:8px 13px;border:1px solid #e8dfc955;border-radius:30px;background:#141412e8;backdrop-filter:blur(12px);font:11px Arial,sans-serif;letter-spacing:.08em}
+main{width:min(980px,calc(100% - 38px));margin:auto}.hero{display:grid;grid-template-columns:1fr 200px;gap:30px;align-items:center;padding:72px 0 38px}.eyebrow{font:10px var(--serif);letter-spacing:.25em;color:var(--amber)}h1{font:400 clamp(42px,6.5vw,70px)/1.1 var(--serif);letter-spacing:.035em;margin:20px 0 8px}.subtitle{font:400 clamp(22px,3vw,29px)/1.7 var(--serif);letter-spacing:.18em;color:#d4b88f;margin:0 0 22px}.intro{max-width:590px;color:#b8b1a5;font-size:13px;line-height:2.2}.hero-note{font:italic 15px/1.8 var(--serif);color:#a99b85;margin-top:18px}
+.amber{position:relative;justify-self:center;width:180px;aspect-ratio:1;border-radius:50%;background:radial-gradient(ellipse at 30% 25%,#ffe0a66e,#d88b3c45 19%,#7b431b9c 45%,#211810 72%,#090b0b 100%);border:1px solid #edc27b91;box-shadow:inset -16px -20px 32px #000b,inset 8px 8px 18px #ffe0a638,0 0 50px #c58b401b;overflow:hidden}.amber:before{content:"";position:absolute;inset:9%;border:1px solid #f4d9aa44;border-radius:50%;background:radial-gradient(ellipse at 55% 40%,#ffd88735,transparent 54%)}.amber:after{content:"";position:absolute;left:44%;top:17%;width:2px;height:65%;background:linear-gradient(transparent,#f0c779,#8c4e22,transparent);transform:rotate(27deg)}.spark{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffdf9b;box-shadow:0 0 12px 3px #ffca6c66;left:34%;top:44%}.spark.s2{left:67%;top:58%;width:3px;height:3px}
+.rule{display:flex;gap:15px;align-items:center;margin:20px 0}.rule:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#c49a6744,transparent)}.rule span{font:10px var(--serif);letter-spacing:.2em;color:#c4a474}.archive-head{padding:24px 0 18px}.archive-head h2{font:400 clamp(27px,3.6vw,38px)/1.5 var(--serif);color:#e2d9ca;margin:0 0 8px}.archive-head p{font-size:12px;line-height:2;color:#a9a194;max-width:650px}
+.status{margin:22px 0;padding:22px;border:1px solid #c49a6730;background:linear-gradient(140deg,#c49a670b,#ffffff02)}.status strong{display:block;font:400 20px var(--serif);color:#e4dccd;margin-bottom:8px}.status p{margin:0;color:#b8b1a5;font-size:12px;line-height:2}.counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}.count{padding:18px 16px;border-top:1px solid #c49a6740;background:#ffffff04}.count b{display:block;font:400 32px var(--serif);color:#d9b47c}.count span{display:block;margin-top:4px;font:10px var(--serif);letter-spacing:.12em;color:#a9a092}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.filter{border:1px solid #ffffff22;background:#ffffff04;color:#c4bbae;padding:9px 14px;font-size:11px;cursor:pointer}.filter[aria-pressed=true]{border-color:#c49a6780;color:#f0d6ad;background:#c49a6712}.search{width:100%;max-width:380px;border:1px solid #ffffff22;background:#ffffff05;color:var(--paper);padding:12px 14px;font-size:12px}.timeline{border-left:1px solid #c49a6740;margin:28px 0 0 7px;padding-left:27px}.day{position:relative;margin:0 0 28px}.day:before{content:"";position:absolute;left:-33px;top:7px;width:10px;height:10px;border:1px solid #d2a76c;background:#11120f;border-radius:50%}.date{font:11px var(--serif);letter-spacing:.18em;color:#cba875;margin:0 0 12px}.entry{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 17px;margin-bottom:8px;border:1px solid #ffffff17;background:#ffffff04}.entry strong{font:400 17px var(--serif);color:#e4dccd}.entry small{display:block;margin-top:4px;color:#999184;font:10px var(--serif);letter-spacing:.08em}.entry a{flex:none;color:#c5a16e;font:10px var(--serif);border-bottom:1px solid #c49a6740;padding-bottom:4px}.footnote{border-top:1px solid #ffffff12;margin-top:55px;padding:22px 0 55px;color:#8e877b;font-size:10px;line-height:2}.footnote a{color:#bfa171;text-decoration:underline;text-underline-offset:3px}.footer{text-align:center;padding:0 20px 38px;font:10px var(--serif);letter-spacing:.18em;color:#827b70}
+@media(max-width:680px){.nav{align-items:flex-start;flex-direction:column;padding:18px 17px}.links{gap:11px 15px}.links a{font-size:9px}main{width:calc(100% - 32px)}.hero{grid-template-columns:1fr;padding:46px 0 28px;gap:22px}.amber{grid-row:1;width:142px}.hero-copy{grid-row:2}.hero h1{font-size:clamp(42px,12vw,58px)}.counts{gap:7px}.count{padding:14px 10px}.count b{font-size:27px}.count span{font-size:9px}.timeline{padding-left:19px;margin-left:5px}.day:before{left:-25px}.entry{align-items:flex-start;flex-direction:column}.entry a{align-self:flex-start}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style><link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head>
+<body>
+<a class="language-switch" href="../world.html?space=time-capsule&lang=zh" target="_top" lang="zh">中文</a>
+<nav class="nav" aria-label="Mia navigation"><a class="brand" href="index.html" target="_top">MIA</a><div class="links"><a href="index.html" target="_top">THE MIST</a><a href="bar.html" target="_top">THE BAR</a><a href="music.html" target="_top">MUSIC ROOM</a><a href="greenhouse.html" target="_top">GREENHOUSE</a><a href="archive.html" target="_top">THE ARCHIVE</a><a href="unavailable.html?space=zhi" target="_top">ZHI NOTES</a><a href="time-capsule.html" aria-current="page">TIME CAPSULE</a></div></nav>
+<main>
+<header class="hero"><div class="hero-copy"><div class="eyebrow">MIA · A MOMENT, PRESERVED</div><h1>TIME CAPSULE</h1><p class="subtitle">An Amber of Memory</p><p class="intro">This is not a mirror of the present page. It is an archive of earlier versions, preserved with their original dates and source history. Today may change; yesterday is not overwritten.</p><p class="hero-note">What time keeps, memory remembers.</p></div><div class="amber" aria-hidden="true"><span class="spark"></span><span class="spark s2"></span></div></header>
+<div class="rule"><span>THE PRESERVED PAST</span></div>
+<section class="archive-head"><h2>Return to a moment in time</h2><p>Historical snapshots are immutable records. The archive keeps the original Chinese source text intact; approved English translations have not yet been prepared. This English edition therefore shows archive dates and record counts without silently displaying untranslated text.</p></section>
+<section class="status" aria-live="polite"><strong>Original-language records preserved</strong><p id="status-copy">Loading the archive index…</p></section>
+<div class="counts"><div class="count"><b id="snapshot-count">—</b><span>FOUR-DIMENSION SNAPSHOTS</span></div><div class="count"><b id="daily-count">—</b><span>DAILY PHILOSOPHY ENTRIES</span></div><div class="count"><b id="total-count">—</b><span>HISTORICAL RECORDS</span></div></div>
+<div class="controls" role="group" aria-label="Filter archive records"><button class="filter" data-filter="all" aria-pressed="true">All records</button><button class="filter" data-filter="dimensions" aria-pressed="false">Four dimensions</button><button class="filter" data-filter="daily" aria-pressed="false">Daily philosophy</button></div>
+<input class="search" id="search" type="search" placeholder="Find a date (YYYY-MM-DD)" aria-label="Search archive dates">
+<section class="timeline" id="timeline" aria-label="Archive timeline"><p class="status">Opening the amber archive…</p></section>
+<section class="footnote">The index is read from the existing archive data. Original snapshots, dates, source references, and content are not modified by this English view.<br>Original sources: <a href="https://github.com/ZEEFSEE/ZEE/commits/main/mia/sections.json" target="_blank" rel="noopener">Four-dimension history</a> · <a href="https://github.com/ZEEFSEE/ZEE/commits/main/mia/daily.json" target="_blank" rel="noopener">Daily philosophy history</a></section>
+</main><footer class="footer">MIA · TIME CAPSULE</footer>
+<script>
+(()=>{let archive=null,filter='all',query='';const timeline=document.getElementById('timeline');const dateKey=v=>String(v||'unknown').slice(0,10);const dateLabel=v=>{const d=new Date(v+'T12:00:00');return Number.isNaN(d.getTime())?v:new Intl.DateTimeFormat('en-SG',{timeZone:'Asia/Singapore',year:'numeric',month:'long',day:'numeric'}).format(d)};
+function render(){if(!archive)return;const rows=[];if(filter!=='daily')(archive.section_snapshots||[]).forEach(x=>rows.push({kind:'dimensions',date:dateKey(x.snapshot_date||x.captured_at),source:x.source_url}));if(filter!=='dimensions')(archive.daily_entries||[]).forEach(x=>rows.push({kind:'daily',date:dateKey(x.date||x.captured_at),source:x.source_url}));const filtered=rows.filter(x=>!query||x.date.includes(query)).sort((a,b)=>b.date.localeCompare(a.date));timeline.replaceChildren();if(!filtered.length){const p=document.createElement('p');p.className='status';p.textContent='No archive dates match this search.';timeline.append(p);return}const groups=new Map();filtered.forEach(x=>{if(!groups.has(x.date))groups.set(x.date,[]);groups.get(x.date).push(x)});groups.forEach((items,date)=>{const group=document.createElement('section');group.className='day';const h=document.createElement('h3');h.className='date';h.textContent=dateLabel(date);group.append(h);items.forEach(item=>{const row=document.createElement('article');row.className='entry';const info=document.createElement('div');const title=document.createElement('strong');title.textContent=item.kind==='dimensions'?'Four-dimension reflection':'Daily philosophy';const note=document.createElement('small');note.textContent='Original source text · Chinese';info.append(title,note);const link=document.createElement('a');link.href='../world.html?space=time-capsule&lang=zh';link.target='_top';link.textContent='READ IN CHINESE ↗';row.append(info,link);group.append(row)});timeline.append(group)})}
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render()}));document.getElementById('search').addEventListener('input',e=>{query=e.target.value.trim();render()});
+fetch('../time-capsule-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('archive unavailable');return r.json()}).then(data=>{archive=data;const sections=data.section_snapshots||[],daily=data.daily_entries||[];document.getElementById('snapshot-count').textContent=sections.length;document.getElementById('daily-count').textContent=daily.length;document.getElementById('total-count').textContent=sections.length+daily.length;document.getElementById('status-copy').textContent=(sections.length+daily.length)+' historical records are available. Their original Chinese text remains unchanged; choose “Read in Chinese” to open the complete entry.';render()}).catch(()=>{document.getElementById('status-copy').textContent='The archive index is temporarily unavailable. No current-page content will be substituted for historical records.';timeline.textContent='The archive could not be loaded. Please try again later.'});
+})();
+</script><script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt(); await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html>

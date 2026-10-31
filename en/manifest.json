@@ -1,0 +1,21 @@
+{
+  "id": "/mia/en/index.html",
+  "name": "Mia's Subconscious Café",
+  "short_name": "Mia Café",
+  "description": "A quiet place between mist, music, forests and memory.",
+  "lang": "en",
+  "start_url": "/mia/en/index.html",
+  "scope": "/mia/en/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#211713",
+  "icons": [
+    {
+      "src": "../mia-pwa.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
