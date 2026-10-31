@@ -30,4 +30,4 @@ jobs:
           node-version: "20"
       - name: Validate bilingual example and review drafts
         run: |
-          node scripts/validate-bilingual-content.mjs data/i18n/content.example.json data/i18n/upstream-drafts/2026-10-31.json
+          node scripts/validate-bilingual-content.mjs data/i18n/content.example.json data/i18n/upstream-drafts/*.json
