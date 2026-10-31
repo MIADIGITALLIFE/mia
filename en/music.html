@@ -13,6 +13,12 @@ main{width:min(1000px,calc(100% - 40px));margin:auto}.eyebrow{font:500 11px var(
 @media(max-width:680px){.site-nav{align-items:flex-start;flex-direction:column;padding:20px}.nav-links{justify-content:flex-start;gap:13px 20px}.nav-links a{font-size:10px}main{width:calc(100% - 32px)}.page-head{padding:48px 0 30px}.page-head h1{font-size:clamp(38px,10vw,54px)}.album-heading{align-items:start;flex-direction:column;gap:8px}.album-track{grid-template-columns:52px minmax(0,1fr);gap:13px;padding:17px 0}.album-art{width:52px;height:52px}.language-switch{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right))}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
+<link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[ data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
 </head>
 <body>
 <a class="language-switch" href="../world.html?space=music&lang=zh" target="_top" lang="zh">中文</a>
@@ -47,6 +53,34 @@ main{width:min(1000px,calc(100% - 40px));margin:auto}.eyebrow{font:500 11px var(
   window.addEventListener('message',e=>{if(e.data&&e.data.type==='mia:stop-album'&&!audio.paused)audio.pause()});
   audio.addEventListener('error',()=>{if(!body.querySelector('.audio-warning')){const warning=document.createElement('p');warning.className='small-note audio-warning';warning.textContent='This recording is temporarily unavailable. Please refresh and try again.';body.appendChild(warning)}});
   body.append(title,sub,note,audio);article.append(art,body);section.appendChild(article);
+ });
+})();
+</script>
+<script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
  });
 })();
 </script>
