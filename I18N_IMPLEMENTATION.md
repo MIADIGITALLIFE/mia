@@ -274,3 +274,31 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - The example record intentionally keeps its English payload in `draft` status.
 - The validator is a focused contract checker, not a complete JSON Schema implementation. A full Draft 2020-12 validator should also run in the content CI pipeline before production use.
 - The schema, example, validator, and ZHI adapter are committed only to the bilingual feature branch. No merge or production deployment is claimed.
+
+
+## Dynamic feed integration milestone
+
+### Added on the feature branch
+
+- Added `data/i18n/feed-map.json` to register the current ZEE daily note, daily philosophy, and four-dimension feeds, their stable identity keys, source locale, and expected English payload location.
+- Added `i18n/dynamic-content.js`, a shared locale-safe reader. It normalizes locale tags, loads JSON without stale cache, extracts only published locale payloads, and never falls back to another language.
+- Legacy English fields are accepted only when `translation_status_en: "published"` is explicitly present. Unmarked legacy fields are not treated as approved translations.
+- Refactored `en/zhi.html` to use the shared reader for `translations.en` payloads.
+
+### Upstream feed audit
+
+At the time of this implementation, the live ZEE feeds expose Chinese-only content:
+- `mia/daily.json`: Chinese diary, mood, theme, and tags.
+- `mia/todays-philosophy.json`: Chinese philosophy and reflection.
+- `mia/sections.json`: four Chinese sections with stable section IDs.
+
+No English payload was present in those three upstream files. The feed map therefore leaves English endpoints unconfigured, and no page is allowed to infer or fabricate an English edition from Chinese text.
+
+### Not yet implemented
+
+- ZEE-side publication of reviewed English payloads for the three feeds.
+- Connecting English home and Bar pages to those English feed payloads.
+- A bilingual daily-content workflow and CI publication gate in the ZEE repository.
+- Browser-level verification against live English payloads.
+
+Existing upstream files and Chinese content remain unchanged. The changes are limited to the Mia bilingual feature branch.
