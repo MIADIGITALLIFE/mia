@@ -10,7 +10,7 @@
 4. 填写标题、简介、分类、预计阅读时间。
 5. 将正文拆成章节；每个章节的 `body` 是段落字符串数组。
 6. 将对象追加到 `data/stories.json` 的 `stories` 数组。
-7. 如有封面，将图片放在 `assets/stories/covers/<id>.jpg`，并在 `cover` 字段填写相对路径。
+7. 如有封面，将图片放在 `assets/stories/covers/<id>.svg`，并在 `cover` 字段填写相对路径。
 
 ## 字段约定
 
