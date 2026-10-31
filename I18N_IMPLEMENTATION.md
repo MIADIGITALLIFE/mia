@@ -79,3 +79,19 @@ Load `i18n/locale.js` only after a page is ready to render a complete locale. It
 - `withLocale(urlLike, locale, basePath?)`
 
 For GitHub Pages project hosting, pass `/mia/` as the base path when constructing cross-locale routes. Do not use root-absolute asset paths that escape the `/mia/` project prefix.
+
+## Locale landing milestone
+
+### Added on the feature branch
+
+- `en/index.html`: a fully English Mist landing page, retaining the quiet dark visual direction, responsive layout, time-sensitive welcome line, and upper-right Chinese switch.
+- `zh/index.html`: a Simplified Chinese Mist landing page with the matching visual composition and upper-right English switch.
+- `en/world.html`: an explicit English-language boundary page for spaces that have not yet been translated. It preserves the requested query string and hash when offering the Chinese edition; it does not silently embed Chinese content into the English edition.
+
+### Scope and limitations
+
+- These are locale preview routes under `/en/` and `/zh/`; the production root route is intentionally unchanged.
+- The English landing-page actions lead to the English boundary page until each destination space has a complete English translation.
+- The Chinese landing-page actions continue to use the existing Chinese world shell.
+- The full shared music shell, space-by-space translations, translated live feeds, root English default, and localized PWA setup are still pending.
+- This milestone has been committed to the feature branch only. It has not been merged, deployed, or verified on GitHub Pages.
