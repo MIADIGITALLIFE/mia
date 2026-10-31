@@ -93,3 +93,27 @@ The validator checks stable IDs, supported record types/locales, timestamps, tra
 - The reader is now used by `en/zhi.html`. The other feeds are registered but their upstream English payloads do not exist yet.
 
 The current upstream feeds are Chinese-only. Do not point English UI at their source-language text. Add reviewed translations to the upstream data contract first, then expose them to the page.
+
+## ZEE upstream publication contract
+
+The upstream repository is `ZEEFSEE/ZEE` (default branch `main`). Its current public feeds are:
+- `mia/daily.json` — one published diary record, keyed by `date`.
+- `mia/todays-philosophy.json` — one published philosophy/reflection record, keyed by `date`.
+- `mia/sections.json` — four section records, keyed by stable `sections[].id`.
+
+The daily workflow `.github/workflows/mia-daily.yml` generates and publishes only `mia/daily.json`. It obtains a short-lived OIDC token, calls the server-side `mia-daily-publish` Supabase function, runs `mia/safety-check.mjs`, then commits only the reviewed Chinese daily JSON. It does not currently generate or publish English translations, and it does not publish the philosophy or sections feeds.
+
+### Required future English artifacts
+
+The planned parallel files are:
+- `mia/daily.en.json`
+- `mia/todays-philosophy.en.json`
+- `mia/sections.en.json`
+
+Each English record must preserve the source `date` or stable section `id`, identify `source_locale: "zh-CN"`, carry a `translation_status` of `draft`, `in_review`, or `published`, and include reviewer identity/time before public publication. These are parallel outputs: never overwrite the Chinese files.
+
+English publication must be a separate, explicit gate. It must not inherit the Chinese record's `status: "published"` as proof that its translation is approved. The Mia reader should render English only after the English record itself is marked `published`.
+
+### Access and implementation status
+
+The upstream files and workflow were inspected. A feature branch could not be created in `ZEEFSEE/ZEE` because the connected GitHub integration returned HTTP 403 (resource not accessible by integration). No write was attempted against upstream `main`. The three English feeds and their workflow are therefore **not yet implemented**. The Mia-side registry remains intentionally configured with null English endpoints until the upstream files exist.
