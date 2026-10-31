@@ -82,3 +82,14 @@ node scripts/validate-bilingual-content.mjs data/i18n/content.example.json
 ```
 
 The validator checks stable IDs, supported record types/locales, timestamps, translation statuses, and publication metadata. It is a focused release gate for this contract; use a JSON Schema Draft 2020-12 validator as well when integrating it into a larger content pipeline.
+
+
+## Dynamic feed registry and reader
+
+- `data/i18n/feed-map.json` records the three current ZEE sources, their stable identity keys, source locale, and the expected English translation location.
+- `i18n/dynamic-content.js` exposes `window.MiaContent` with `normalizeLocale`, `getLocalePayload`, `getCollectionPayload`, and `fetchJson`.
+- The reader returns a locale payload only when its status is exactly `published`. It never falls back to another locale.
+- Legacy English fields are accepted only when the record explicitly carries `translation_status_en: "published"`. Existing unmarked `*_en` fields are not enough.
+- The reader is now used by `en/zhi.html`. The other feeds are registered but their upstream English payloads do not exist yet.
+
+The current upstream feeds are Chinese-only. Do not point English UI at their source-language text. Add reviewed translations to the upstream data contract first, then expose them to the page.
