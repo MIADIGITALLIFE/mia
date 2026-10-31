@@ -61,6 +61,10 @@ for (const file of pages) {
   assert.doesNotMatch(read(file), /<script[^>]+src=["'][^"']*(?:content\.js|mia-album\.js)["']/i,
     `${file} must not import legacy Chinese-only content scripts`);
 }
+for (const file of pages) {
+  assert.ok(read(file).includes('#mia-pwa-install[data-ready="true"]'),
+    file + ' must reveal the install control when installation is available');
+}
 const enManifest = JSON.parse(read('en/manifest.json'));
 assert.equal(enManifest.lang, 'en');
 assert.equal(enManifest.scope, '/mia/en/');
