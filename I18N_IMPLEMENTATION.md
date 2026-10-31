@@ -333,3 +333,10 @@ Added `data/i18n/upstream-drafts/2026-10-31.json` on the feature branch.
 - The file is a review artifact in the Mia repository, not a replacement for the canonical ZEE upstream feeds. It does not change any source JSON or the live site.
 
 Static contract review: all six records use the expected record shape, stable IDs, valid source timestamps, allowed types/locales/statuses, and non-empty draft English copy. The repository validator should be run in CI against this file before merge; a full JSON Schema Draft 2020-12 validator remains a separate acceptance requirement.
+
+
+## Bilingual-content CI gate
+
+Added `.github/workflows/validate-bilingual-content.yml`. On pull requests and pushes affecting bilingual content, it runs the repository's dependency-free validator against both the schema example and the 2026-10-31 source-linked draft batch. The workflow uses read-only repository permissions and Node.js 20.
+
+The workflow file is committed, but no run result was returned for its commit at the time of this update. Treat CI execution as pending until a GitHub Actions run reports a completed status; do not describe the validator as CI-verified yet.
