@@ -21,7 +21,7 @@ iframe{width:100%;height:100%;height:100dvh}
 </head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia 的潜意识咖啡馆" allow="autoplay"></iframe><audio id="mia-default-music" src="mia-background.mp3" preload="auto" loop playsinline muted></audio><div class="player" aria-label="Mia 全站共享音乐播放器"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">声音还在这里</small></div><button id="music-toggle" type="button" aria-label="播放背景音乐" title="播放背景音乐">♫</button></div><script>
 (()=> {
  const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
- try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive','zhi','time-capsule'].includes(s))frame.src=s+'.html'}catch(_){}
+ try{const s=new URLSearchParams(location.search).get('space');if(['bar','music','greenhouse','archive','zhi','time-capsule','stories'].includes(s))frame.src=s+'.html'}catch(_){}
  const modes={
   'synth:tearful':{name:'深蓝 · 慢弦',notes:[110,130.81,164.81,146.83],step:4.8,wave:'triangle',base:55,filter:760,volume:.24,extra:.48},
   'synth:dazing':{name:'琥珀色的光斑',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
