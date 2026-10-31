@@ -36,6 +36,22 @@ for (const file of pages) {
   assert.match(read(file), /<html[^>]*lang="en"/i, `${file} must declare English`);
 }
 
+const chineseEntry = read('zh/index.html');
+assert.match(chineseEntry, /<html[^>]*lang="zh-CN"/i,
+  'Chinese entry must declare Simplified Chinese');
+assert.ok(chineseEntry.includes('href="../en/"'),
+  'Chinese entry must provide an English language switch');
+assert.ok(chineseEntry.includes('../world.html?space=bar&lang=zh') &&
+  chineseEntry.includes('../world.html?space=time-capsule&lang=zh'),
+  'Chinese entry must route its primary actions to the existing Chinese world shell');
+assert.ok(exists('world.html'),
+  'Chinese entry must point to an existing root Chinese world shell');
+for (const phrase of ['在思绪之间，留一处安静', '停留片刻 · 进入空间', '时间胶囊 · 记忆的琥珀', '深呼吸 · 让世界暂时慢下来']) {
+  assert.ok(chineseEntry.includes(phrase), 'Chinese entry is missing localized copy: ' + phrase);
+}
+assert.ok(!/A QUIET PLACE BETWEEN THOUGHTS|STAY A LITTLE|TIME CAPSULE|BREATHE IN · LET THE WORLD WAIT/.test(chineseEntry),
+  'Chinese entry must not mix English interface copy into the Chinese experience');
+
 const shell = read('en/world.html');
 for (const space of ['bar', 'music', 'greenhouse', 'archive', 'zhi', 'time-capsule', 'stories']) {
   assert.ok(shell.includes(`'${space}'`), `English shell must route ${space}`);
