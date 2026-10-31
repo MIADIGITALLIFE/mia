@@ -24,7 +24,7 @@ iframe{width:100%;height:100%;height:100dvh}
  const params=new URLSearchParams(location.search);
  const requested=params.get('space');
  const supported=['bar','music','greenhouse','archive','zhi','time-capsule','stories'];
- if(requested&&supported.includes(requested))frame.src=(requested==='bar'?'bar.html':requested==='greenhouse'?'greenhouse.html':'unavailable.html?space='+encodeURIComponent(requested));
+ if(requested&&supported.includes(requested))frame.src=(requested==='bar'?'bar.html':requested==='greenhouse'?'greenhouse.html':requested==='archive'?'archive.html':'unavailable.html?space='+encodeURIComponent(requested));
  const zhParams=new URLSearchParams(location.search);zhParams.set('lang','zh');
  document.getElementById('language-switch').href='../world.html'+(zhParams.toString()?'?'+zhParams.toString():'')+location.hash;
  const modes={
