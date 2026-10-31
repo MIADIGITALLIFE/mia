@@ -57,6 +57,23 @@ assert.ok(archive.includes('mia-greenhouse-memories-v1'));
 assert.ok(read('en/story.html').includes("'mia-story-progress:'"),
   'English story reader must retain the established progress key prefix');
 
+const englishReader = read('en/story.html');
+assert.ok(
+  englishReader.includes("(lang==='zh'?'../story.html':'story.html')+'?'+p.toString()+location.hash"),
+  'English story language switch must target the root Chinese reader and preserve query/hash state'
+);
+const chineseReader = read('story.html');
+assert.ok(
+  chineseReader.includes("languageParams.set('lang','en')") &&
+  chineseReader.includes("'en/story.html?'+languageParams.toString()+location.hash"),
+  'Chinese story language switch must target the English reader and preserve query/hash state'
+);
+assert.ok(
+  englishReader.includes("const key='mia-story-progress:'+story.id"),
+  'English reader must continue using the established per-story progress key'
+);
+
+
 for (const file of pages) {
   assert.doesNotMatch(read(file), /<script[^>]+src=["'][^"']*(?:^|\/)(?:content\.js|mia-album\.js)["']/i,
     `${file} must not import legacy Chinese-only content scripts`);
