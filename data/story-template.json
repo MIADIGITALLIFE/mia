@@ -1,0 +1,24 @@
+{
+  "id": "your-story-id",
+  "number": "NO.002",
+  "title": "故事标题",
+  "englishTitle": "ENGLISH TITLE",
+  "subtitle": "一句能够留下余韵的副标题。",
+  "description": "一段简短介绍，说明故事的主题与核心冲突。",
+  "category": [
+    "科幻",
+    "哲思"
+  ],
+  "readingTime": "约 10 分钟",
+  "status": "草稿",
+  "cover": "assets/stories/covers/your-story-id.svg",
+  "chapters": [
+    {
+      "title": "第一章标题",
+      "body": [
+        "第一段。",
+        "第二段。"
+      ]
+    }
+  ]
+}
