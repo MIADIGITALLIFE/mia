@@ -302,3 +302,20 @@ No English payload was present in those three upstream files. The feed map there
 - Browser-level verification against live English payloads.
 
 Existing upstream files and Chinese content remain unchanged. The changes are limited to the Mia bilingual feature branch.
+
+
+## ZEE upstream publication audit and access boundary
+
+Inspected the live `ZEEFSEE/ZEE` main-branch files:
+- `mia/daily.json`
+- `mia/todays-philosophy.json`
+- `mia/sections.json`
+- `.github/workflows/mia-daily.yml`
+
+Findings:
+- The three feeds are Chinese-only at inspection time.
+- The daily workflow publishes only `mia/daily.json`, using a short-lived OIDC token, a server-side Supabase publisher, and `mia/safety-check.mjs` before committing the reviewed JSON.
+- The workflow does not currently publish English translations, philosophy feed, or section feed.
+- Proposed parallel outputs are `mia/daily.en.json`, `mia/todays-philosophy.en.json`, and `mia/sections.en.json`. They must preserve source date/section IDs and have their own translation review/publication status.
+
+A write attempt to create `feature/mia-bilingual-feeds` in `ZEEFSEE/ZEE` was rejected by GitHub with HTTP 403 (resource not accessible by integration). No upstream files were modified. This is an external permission boundary, not a successful implementation. The Mia PR records the exact next integration contract; upstream write access or a user-created branch is required before implementing the ZEE-side feeds.
