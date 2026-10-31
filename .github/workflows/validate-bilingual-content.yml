@@ -4,8 +4,11 @@ on:
   pull_request:
     paths:
       - "data/i18n/**"
+      - "i18n/**"
+      - "en/**"
       - "scripts/validate-bilingual-content.mjs"
       - "scripts/test-bilingual-content.mjs"
+      - "scripts/test-bilingual-site.mjs"
       - ".github/workflows/validate-bilingual-content.yml"
   push:
     branches:
@@ -13,8 +16,11 @@ on:
       - "feature/mia-bilingual-foundation"
     paths:
       - "data/i18n/**"
+      - "i18n/**"
+      - "en/**"
       - "scripts/validate-bilingual-content.mjs"
       - "scripts/test-bilingual-content.mjs"
+      - "scripts/test-bilingual-site.mjs"
       - ".github/workflows/validate-bilingual-content.yml"
 
 permissions:
@@ -35,3 +41,5 @@ jobs:
           node scripts/validate-bilingual-content.mjs data/i18n/content.example.json data/i18n/upstream-drafts/*.json
       - name: Test publication boundary rules
         run: node scripts/test-bilingual-content.mjs
+      - name: Test bilingual site invariants
+        run: node scripts/test-bilingual-site.mjs
