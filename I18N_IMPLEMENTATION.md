@@ -95,3 +95,29 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - The Chinese landing-page actions continue to use the existing Chinese world shell.
 - The full shared music shell, space-by-space translations, translated live feeds, root English default, and localized PWA setup are still pending.
 - This milestone has been committed to the feature branch only. It has not been merged, deployed, or verified on GitHub Pages.
+
+
+## English shell milestone
+
+### Added on the feature branch
+
+- Replaced the English placeholder shell at `en/world.html` with a locale-specific outer shell based on the existing shared audio shell.
+- Preserved the existing audio ownership coordination, BroadcastChannel behavior, synthesized soundscapes, rain audio controls, album messages, and shared player interactions.
+- Adjusted the original background-music asset path for the `/en/` directory.
+- Added an upper-right Chinese switch in the English shell. It carries the current query parameters and URL hash into the Chinese shell.
+- Added `en/unavailable.html` as an English-only boundary state for rooms that do not yet have English translations. It identifies the requested room and carries route state when opening the Chinese edition.
+- Updated the English landing-page room links to open the top-level English shell rather than navigating the iframe into a nested shell.
+
+### Current route behavior
+
+- `/en/` opens the English Mist landing page.
+- `/en/world.html` opens the English shell and its shared music controls.
+- English requests for rooms such as `bar`, `music`, `greenhouse`, `archive`, `zhi`, `time-capsule`, and `stories` currently open the English unavailable state. They do not fall through to Chinese room pages.
+- The English shell's language switch opens the existing Chinese root shell while preserving query parameters and the hash.
+
+### Not yet verified / remaining
+
+- The English shell has been committed, but browser-level playback, mobile layout, iframe messaging, and cross-tab audio ownership have not yet been tested in a deployed Pages environment.
+- Individual English room pages and localized dynamic feeds are still pending.
+- The Chinese edition has not yet been moved to a fully independent `/zh/world.html` shell.
+- Root default remains unchanged. No production deployment or merge is claimed.
