@@ -30,6 +30,12 @@ body{min-height:100svh;overflow:hidden;font-family:"Cormorant Garamond",Georgia,
 @media(max-width:680px){.symbol{width:66px;height:66px;margin-bottom:27px}.kicker{font-size:9px;letter-spacing:.2em;line-height:1.8}.line{font-size:clamp(18px,5vw,22px);line-height:1.9;margin:19px 0 10px}.sub{font-size:12px;line-height:1.9;letter-spacing:.08em}.actions{margin-top:30px}.button{width:min(320px,100%);font-size:11px}.bottom{position:relative;bottom:auto;padding-top:25px;font-size:9px;line-height:1.8}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 </style>
+<link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[ data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
 </head>
 <body>
 <a class="language" href="../zh/" hreflang="zh-CN" lang="zh-CN" aria-label="Switch to Simplified Chinese">中文</a>
@@ -46,5 +52,33 @@ body{min-height:100svh;overflow:hidden;font-family:"Cormorant Garamond",Georgia,
 </section><div class="bottom">BREATHE IN · LET THE WORLD WAIT</div></main>
 <script>
 (()=>{const line=document.getElementById('time-line'),h=new Date().getHours();const lines=h<5?["The night is still deep. Nothing needs to be solved yet.","Let unfinished thoughts rest for a while."]:h<11?["Morning does not need to become an answer.","Leave a little room for yourself today."]:h<17?["You are allowed to be without purpose for a moment.","Not every silence needs an explanation."]:h<21?["As daylight fades, let the mind slow down.","Set down, gently, the words left unsaid today."]:["The night is a place to keep things without conclusions.","Some answers do not need to arrive today."];line.textContent=lines[Math.floor(Math.random()*lines.length)];})();
+</script>
+<script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
 </script>
 </body></html>
