@@ -5,6 +5,7 @@ on:
     paths:
       - "data/i18n/**"
       - "scripts/validate-bilingual-content.mjs"
+      - "scripts/test-bilingual-content.mjs"
       - ".github/workflows/validate-bilingual-content.yml"
   push:
     branches:
@@ -31,3 +32,5 @@ jobs:
       - name: Validate bilingual example and review drafts
         run: |
           node scripts/validate-bilingual-content.mjs data/i18n/content.example.json data/i18n/upstream-drafts/*.json
+      - name: Test publication boundary rules
+        run: node scripts/test-bilingual-content.mjs
