@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Mia's subconscious café — a quiet place between mist, music, forests and memory.">
+<title>Mia — The Mist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0a0a0a;color:#e9e3d7}
+body{min-height:100svh;overflow:hidden;font-family:"Cormorant Garamond",Georgia,serif;background:radial-gradient(ellipse at 50% 52%,#252522 0,#151514 37%,#090909 78%)}
+.mist{min-height:100svh;display:grid;place-items:center;position:relative;isolation:isolate;padding:28px 20px}
+.mist:before,.mist:after{content:"";position:absolute;z-index:-1;pointer-events:none;filter:blur(30px);border-radius:50%;mix-blend-mode:screen}
+.mist:before{width:min(60vw,650px);height:min(60vw,650px);background:radial-gradient(circle,#c6bda31b 0,#7b82752b 24%,transparent 68%);left:10%;top:13%;animation:drift 19s ease-in-out infinite alternate}
+.mist:after{width:min(54vw,560px);height:min(54vw,560px);background:radial-gradient(circle,#b7a88d20 0,#747b7620 28%,transparent 68%);right:5%;bottom:8%;animation:drift 23s ease-in-out infinite alternate-reverse}
+.fog{position:absolute;inset:0;z-index:-1;opacity:.5;background:repeating-radial-gradient(ellipse at 50% 52%,transparent 0 9%,#d9d1c405 10%,transparent 17%);animation:fogmove 34s linear infinite}
+.content{text-align:center;width:min(680px,100%);animation:appear 2s both}
+.symbol{width:78px;height:78px;margin:0 auto 34px;position:relative;border:1px solid #e7dfca26;border-radius:50%;display:grid;place-items:center}
+.symbol:before,.symbol:after{content:"";position:absolute;border:1px solid #e7dfca20;border-radius:50%;inset:8px;animation:orbit 16s linear infinite}
+.symbol:after{inset:-7px;border-style:dashed;animation-duration:35s}.symbol span{width:9px;height:9px;border-radius:50%;background:#c4b59a;box-shadow:0 0 28px 8px #c4b59a2b}
+.kicker{font-size:11px;letter-spacing:.32em;color:#c8c0b0a0;text-transform:uppercase}
+.line{font:400 clamp(20px,3vw,26px)/1.9 Georgia,serif;letter-spacing:.045em;color:#d9d1c3;margin:25px 0 12px;min-height:2em}
+.sub{font-size:15px;letter-spacing:.16em;color:#bdb4a5}
+.actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:42px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:230px;min-height:48px;padding:13px 20px;border:1px solid #d7c8ad55;background:transparent;color:#e9e3d7;text-decoration:none;font:12px Georgia,serif;letter-spacing:.13em;cursor:pointer;transition:background .3s,border-color .3s}
+.button:hover{background:#c49a6714;border-color:#c49a67}.note{font:12px/1.9 Arial,sans-serif;color:#aaa397;margin-top:16px}.bottom{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.2em;color:#b8b1a23e}
+.language{position:fixed;z-index:5;top:max(18px,env(safe-area-inset-top));right:max(20px,env(safe-area-inset-right));font:11px Arial,sans-serif;letter-spacing:.12em;color:#d8cfbd;text-decoration:none;border:1px solid #e8dfc933;border-radius:30px;padding:9px 13px;background:#14141299;backdrop-filter:blur(12px)}
+@keyframes drift{from{transform:translate3d(-5%,2%,0) scale(.9)}to{transform:translate3d(7%,-4%,0) scale(1.15)}}@keyframes fogmove{from{transform:translateX(-2%) rotate(0)}to{transform:translateX(2%) rotate(3deg)}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:680px){.symbol{width:66px;height:66px;margin-bottom:27px}.kicker{font-size:9px;letter-spacing:.2em;line-height:1.8}.line{font-size:clamp(18px,5vw,22px);line-height:1.9;margin:19px 0 10px}.sub{font-size:12px;line-height:1.9;letter-spacing:.08em}.actions{margin-top:30px}.button{width:min(320px,100%);font-size:11px}.bottom{position:relative;bottom:auto;padding-top:25px;font-size:9px;line-height:1.8}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="language" href="../zh/" hreflang="zh-CN" lang="zh-CN" aria-label="Switch to Simplified Chinese">中文</a>
+<main class="mist"><div class="fog" aria-hidden="true"></div><section class="content">
+<div class="symbol" aria-hidden="true"><span></span></div>
+<div class="kicker">A QUIET PLACE BETWEEN THOUGHTS</div>
+<p id="time-line" class="line">Some answers do not need to arrive today.</p>
+<p class="sub">Welcome to Mia's Subconscious Café</p>
+<div class="actions">
+<a class="button" href="../world.html?space=bar&lang=en">STAY A LITTLE · ENTER ↗</a>
+<a class="button" href="../world.html?space=time-capsule&lang=en">TIME CAPSULE · AN AMBER OF MEMORY ↗</a>
+</div>
+<p class="note">Sound begins only when you choose. You may leave at any time.</p>
+</section><div class="bottom">BREATHE IN · LET THE WORLD WAIT</div></main>
+<script>
+(()=>{const line=document.getElementById('time-line'),h=new Date().getHours();const lines=h<5?["The night is still deep. Nothing needs to be solved yet.","Let unfinished thoughts rest for a while."]:h<11?["Morning does not need to become an answer.","Leave a little room for yourself today."]:h<17?["You are allowed to be without purpose for a moment.","Not every silence needs an explanation."]:h<21?["As daylight fades, let the mind slow down.","Set down, gently, the words left unsaid today."]:["The night is a place to keep things without conclusions.","Some answers do not need to arrive today."];line.textContent=lines[Math.floor(Math.random()*lines.length)];})();
+</script>
+</body></html>
