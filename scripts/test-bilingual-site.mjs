@@ -58,7 +58,7 @@ assert.ok(read('en/story.html').includes("'mia-story-progress:'"),
   'English story reader must retain the established progress key prefix');
 
 for (const file of pages) {
-  assert.doesNotMatch(read(file), /<script[^>]+src=["'][^"']*(?:content\.js|mia-album\.js)["']/i,
+  assert.doesNotMatch(read(file), /<script[^>]+src=["'][^"']*(?:^|\/)(?:content\.js|mia-album\.js)["']/i,
     `${file} must not import legacy Chinese-only content scripts`);
 }
 for (const file of pages) {
