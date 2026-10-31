@@ -340,3 +340,21 @@ Static contract review: all six records use the expected record shape, stable ID
 Added `.github/workflows/validate-bilingual-content.yml`. On pull requests and pushes affecting bilingual content, it runs the repository's dependency-free validator against both the schema example and the 2026-10-31 source-linked draft batch. The workflow uses read-only repository permissions and Node.js 20.
 
 The workflow file is committed, but no run result was returned for its commit at the time of this update. Treat CI execution as pending until a GitHub Actions run reports a completed status; do not describe the validator as CI-verified yet.
+
+## English PWA and locale cache-isolation milestone
+
+### Added on the feature branch
+
+- Added `en/manifest.json` with English app metadata, `/mia/en/index.html` as its start URL, and `/mia/en/` as its scope.
+- Added `en/sw.js` with the separate cache namespace `mia-cafe-en-pwa-*`. It only controls requests under the English route, does not cache JSON feeds, and only removes older caches in its own namespace.
+- Linked the English manifest and registered the English service worker from all 11 English pages.
+- Added a browser-supported `beforeinstallprompt` install affordance at the lower-left corner, styled to match the café's dark and warm-neutral palette. The control appears only when the browser exposes an install prompt; browsers without that event may use their native install flow instead.
+- Changed the Chinese root service worker cleanup to remove only older `mia-cafe-pwa-*` caches. It no longer deletes the English cache namespace during activation.
+- Extended the bilingual site smoke test to check the English manifest, worker cache namespace, locale cache isolation, page registration, and install-control visibility selector. Root `sw.js` changes now trigger the workflow too.
+
+### Verification status and limits
+
+- Static source inspection confirms the English manifest and service worker are present and the Chinese worker cleanup is namespace-scoped.
+- A selector defect found during follow-up review was corrected in the first four English pages and an assertion was added to guard against recurrence.
+- The new site smoke test and latest Actions run have not yet been confirmed as passing. Browser installation, offline navigation, update lifecycle, iOS behavior, and mobile safe-area rendering remain unverified.
+- These changes remain on the bilingual feature branch. No merge or production deployment has occurred.
