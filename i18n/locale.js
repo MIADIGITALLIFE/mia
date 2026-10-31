@@ -39,7 +39,10 @@
     const segments = relative.split('/').filter(Boolean);
     if (segments[0] === 'en' || segments[0] === 'zh') segments.shift();
     const targetPath = base + targetLocale + '/' + (segments.length ? segments.join('/') : 'index.html');
-    return targetPath + current.search + current.hash;
+    const params = new URLSearchParams(current.search);
+    params.set('lang', targetLocale);
+    const query = params.toString();
+    return targetPath + (query ? '?' + query : '') + current.hash;
   }
 
   global.MiaI18n = Object.freeze({
