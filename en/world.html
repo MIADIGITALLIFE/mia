@@ -163,7 +163,7 @@ iframe{width:100%;height:100%;height:100dvh}
   playing=false;rainAudio.volume=0;rainAudio.currentTime=0;
   let attempt;try{attempt=rainAudio.play()}catch(_){rainActive=false;rainRestore=null;status.textContent='Rain audio is temporarily unavailable';paint();return}
   if(attempt&&attempt.catch)attempt.catch(()=>{rainActive=false;rainRestore=null;status.textContent='Rain audio is temporarily unavailable';paint()});
-  fadeRainTo(.4,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','停止听雨');status.textContent='Playing · Rain in the greenhouse';
+  fadeRainTo(.4,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','Stop rain');status.textContent='Playing · Rain in the greenhouse';
  }
  async function endRain(){
   if(!rainActive)return;
@@ -250,7 +250,7 @@ iframe{width:100%;height:100%;height:100dvh}
   const name=track==='default'?'Mia · Original soundtrack':modes[track].name;
   button.setAttribute('aria-label',playing?'Pause background music':'Play background music');
   button.title=playing?'Pause background music':'Play background music';
-  status.textContent=playing?'正在播放 · '+name:'Tap to bring the sound back';
+  status.textContent=playing?'Playing · '+name:'Tap to bring the sound back';
  }
  function bindMoodClicks(){
   try{
