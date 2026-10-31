@@ -175,3 +175,22 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Browser-level verification of the nine image asset paths, localStorage compatibility across the two language routes, filtering, clipboard permission handling, and mobile layout is still pending.
 - Story Archive content remains a separate untranslated room; story bodies will retain their original language unless an approved translation exists.
 - The page has not been merged or deployed to GitHub Pages.
+
+
+## English Music Room milestone
+
+### Added on the feature branch
+
+- Added `en/music.html` as an English-only Music Room page with the existing restrained night-sky palette, serif typography, responsive navigation, and upper-right Chinese language switch.
+- Recreated the six original album entries in English while retaining their exact source audio filenames; audio assets are referenced from the shared repository root and are not copied, renamed, or replaced.
+- Preserved native audio controls, metadata preloading, one-audible-player behavior within the album, and the existing `mia-audio-owner-v1` / `mia-audio-v1` cross-tab ownership protocol.
+- Preserved the `mia:album-play` and `mia:stop-album` parent-shell messages so album playback continues to coordinate with the English shared player.
+- The English Music Room does not load Chinese `content.js`, `content.json`, or the Chinese music playlist. Its only Chinese interface text is the intentional `中文` language switch.
+- Updated `en/world.html` so `?space=music` opens `en/music.html` rather than the untranslated-room boundary.
+
+### Scope and verification limits
+
+- The legacy Chinese Music Room currently exposes the original album through `mia-album.js`. The older three mood-synthesis choices are part of the shared shell/content integration and are not presented as separate selectable cards on this album page; no new mood controls or replacement audio have been invented in the English translation.
+- Static review confirms that all six original filenames are retained, the English page uses the shared audio ownership key/channel and album messages, and the page does not import Chinese content scripts.
+- Browser-level verification of audio file loading, playback, pause coordination with the shell, cross-tab ownership, keyboard controls, and mobile layout remains pending.
+- This page is committed only to the bilingual feature branch. It has not been merged or deployed to GitHub Pages.
