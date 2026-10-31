@@ -20,5 +20,9 @@
         "第二段。"
       ]
     }
-  ]
+  ],
+  "series": "未归类",
+  "seriesOrder": 1,
+  "publishedAt": "YYYY-MM-DD",
+  "afterwordQuestion": "读完这个故事，你最想继续追问什么？"
 }
