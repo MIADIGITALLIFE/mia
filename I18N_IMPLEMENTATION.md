@@ -255,3 +255,22 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Static review confirms the English page declares `lang=en`, contains English-only interface copy apart from the intentional `中文` switch, uses the public sections feed, and gates all dynamic text behind explicit English-suffixed fields.
 - Browser-level verification of the live remote feed, section deep links, language switching, mobile layout, and future localized-field rendering remains pending.
 - These changes are committed only to the bilingual feature branch. They have not been merged or deployed to GitHub Pages.
+
+
+## Unified bilingual dynamic-content contract milestone
+
+### Added on the feature branch
+
+- Added `data/i18n/content.schema.json` (JSON Schema Draft 2020-12) to define stable content identity, source locale, provenance timestamps, immutable-history flag, and locale-specific payloads.
+- Added `data/i18n/content.example.json` as an illustrative record. It is sample data, not a published Mia item or a translation.
+- Added `data/i18n/README.md` to define locale payload lifecycle (`draft`, `in_review`, `approved`, `published`, `unavailable`), publication gates, story/chapter identity rules, and Time Capsule immutability.
+- Added `scripts/validate-bilingual-content.mjs`, a dependency-free validation gate for normalized records. It rejects unsupported IDs/types/locales/statuses, invalid creation dates, published empty payloads, and published non-source translations without reviewer metadata.
+- Updated `en/zhi.html` to accept the new `translations.en` payload when its status is `published`, while retaining compatibility with existing explicit `*_en` fields. It still refuses to display source-language text as an English translation.
+
+### Data protection and current scope
+
+- Existing `sections.json`, daily feeds, story JSON, and Time Capsule snapshots remain unchanged.
+- No machine-generated English translation has been marked approved or published.
+- The example record intentionally keeps its English payload in `draft` status.
+- The validator is a focused contract checker, not a complete JSON Schema implementation. A full Draft 2020-12 validator should also run in the content CI pipeline before production use.
+- The schema, example, validator, and ZHI adapter are committed only to the bilingual feature branch. No merge or production deployment is claimed.
