@@ -121,3 +121,21 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Individual English room pages and localized dynamic feeds are still pending.
 - The Chinese edition has not yet been moved to a fully independent `/zh/world.html` shell.
 - Root default remains unchanged. No production deployment or merge is claimed.
+
+
+## English Bar room milestone
+
+### Added on the feature branch
+
+- Added `en/bar.html` as the first translated English room.
+- Recreated the Bar's visual hierarchy and responsive layout in English while retaining its quiet amber palette, typography, echo animation, and 500-character input limit.
+- Translated the philosophy cards and the curated Echo Collection.
+- Kept the Echo Mailbox front-end only: text is neither transmitted nor persisted, and is cleared after the interaction.
+- The English Bar uses its own English copy and does not load the Chinese shared `content.js` feed. This prevents Chinese daily-philosophy or visitor-wall content from leaking into the English edition when no approved English feed exists.
+- Updated the English shell so `?space=bar` loads `en/bar.html`; other untranslated rooms continue to show the English boundary page.
+
+### Remaining for the Bar
+
+- A dedicated English dynamic-content source for daily philosophy and future curated echoes is not yet connected.
+- PWA metadata and service-worker behavior are not yet localized for the English route.
+- Browser-level visual, form, keyboard, and mobile checks on the deployed Pages site remain pending.
