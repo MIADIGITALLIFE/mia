@@ -214,3 +214,23 @@ For GitHub Pages project hosting, pass `/mia/` as the base path when constructin
 - Static review confirms the English page reads the shared archive JSON, displays only English interface copy (apart from the intentional `中文` switch), and routes to the English Time Capsule.
 - Browser-level verification of data loading, filters, date search, Chinese cross-link behavior, and mobile layout remains pending.
 - This page is committed only to the bilingual feature branch. It has not been merged or deployed to GitHub Pages.
+
+
+## English Story Archive milestone
+
+### Added on the feature branch
+
+- Added `en/stories.html`, an English-only story catalogue with translated interface copy, English category labels, responsive story cards, and the existing shared story catalogue data.
+- Added `en/story.html`, an English reading-room interface with chapter navigation, reading progress, resume-reading support, and the same localStorage progress key (`mia-story-progress:<story-id>`) used by the Chinese reader.
+- Both English pages read the existing `data/stories.json`; no story IDs, chapter arrays, source text, publication metadata, cover assets, or timestamps are rewritten.
+- The current published story has an English title (`REVERSE ENLIGHTENMENT`) but no approved English chapter translation or chapter-title translations. The English reader therefore presents the original Chinese body as an explicitly labeled original-language edition; chapter navigation uses neutral numbered labels rather than leaking Chinese chapter headings into the English interface.
+- Language switching from the reader preserves the story ID, query parameters, and chapter hash when opening the Chinese reader. The catalogue links to the existing Chinese catalogue.
+- Updated `en/world.html` so `?space=stories` opens the English Story Archive catalogue.
+
+### Data integrity and verification limits
+
+- The current catalogue contains one published story with eight chapters. This count is read from the shared JSON, not hard-coded into the catalogue.
+- The existing story timestamp is preserved as source data but is not presented as an exact publication time in the English catalogue; the displayed timestamp in the legacy record is a placeholder and should not be treated as a verified creation time.
+- Static review confirms the English catalogue and reader use English interface copy, use the shared story data and cover asset, retain the original reading-progress key, and do not alter the source JSON.
+- Browser-level verification of chapter navigation, resume progress across locales, URL hash restoration, cover loading, and mobile reading layout remains pending.
+- These pages are committed only to the bilingual feature branch. They have not been merged or deployed to GitHub Pages.
