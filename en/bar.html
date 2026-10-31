@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#211713"><meta name="description" content="A quiet bar for philosophy, unfinished thoughts, and gentle echoes.">
+<title>Mia — The Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#100f0e;--paper:#e9e3d7;--muted:#aaa395;--amber:#c49a67;--line:#ffffff20;--serif:"Cormorant Garamond",Georgia,serif;--sans:Inter,Arial,sans-serif}
+*{box-sizing:border-box}html{min-height:100%;background:var(--ink);scroll-behavior:smooth}body{margin:0;min-height:100vh;overflow-x:hidden;background:radial-gradient(ellipse at 16% 25%,#50332255 0,transparent 40%),radial-gradient(ellipse at 85% 5%,#6d4a2b30 0,transparent 34%),linear-gradient(150deg,#211713,#100f0e 65%);color:var(--paper);font-family:var(--sans);font-weight:400}a{color:inherit;text-decoration:none}button,textarea{font:inherit}button{color:inherit}
+.site-nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px clamp(20px,5vw,76px);border-bottom:1px solid #ffffff12}.brand{font:500 19px var(--serif);letter-spacing:.28em;white-space:nowrap}.nav-links{display:flex;gap:clamp(12px,2.7vw,34px);flex-wrap:wrap;justify-content:flex-end}.nav-links a{font:500 11px var(--serif);letter-spacing:.13em;color:#c7c1b6a8;transition:color .25s}.nav-links a:hover,.nav-links a[aria-current=page]{color:var(--amber)}
+main{width:min(1100px,100% - 40px);margin:auto}.eyebrow{font:500 11px var(--serif);letter-spacing:.25em;text-transform:uppercase;color:var(--amber)}.page-head{padding:clamp(46px,7.5vh,86px) 0 38px;max-width:760px}.page-head h1{font:400 clamp(35px,5.3vw,62px)/1.18 var(--serif);letter-spacing:.012em;color:#e4ddcf;margin:17px 0 20px;max-width:15em}.page-head h1 em{font-style:italic;color:#c9bda7}.page-head p{max-width:490px;color:#b8b1a5;font-size:13px;line-height:2.15}
+.panel{border:1px solid #ffffff18;background:linear-gradient(135deg,#ffffff08,#ffffff02);border-radius:6px;padding:clamp(22px,4vw,42px);backdrop-filter:blur(12px)}.bar-layout{display:grid;grid-template-columns:.88fr 1.12fr;gap:22px;align-items:stretch}.fortune{min-height:330px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(ellipse at 70% 10%,#b8864b22,transparent 50%),#ffffff05}.fortune-mark{font:400 56px var(--serif);color:#c49a6755}.fortune-text{font:400 clamp(22px,2.6vw,30px)/1.9 var(--serif);color:#ded5c6;letter-spacing:.025em;transition:opacity .22s}.fortune-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}.tiny-button{background:transparent;border:0;color:var(--amber);cursor:pointer;font-size:12px;padding:10px 0}.echo-form{display:flex;flex-direction:column;gap:16px}.echo-form label{font:500 12px var(--serif);letter-spacing:.16em;color:var(--amber)}textarea{resize:vertical;min-height:185px;width:100%;padding:17px;background:#05050555;border:1px solid #ffffff22;color:var(--paper);border-radius:2px;line-height:2;outline:none}textarea::placeholder{color:#bcb3a16e}.form-foot{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:12px 21px;border:1px solid #c49a6780;border-radius:2px;background:#c49a6714;color:var(--paper);cursor:pointer;letter-spacing:.06em;font-size:12px;transition:background .3s,border-color .3s,transform .3s}.button:hover{background:#c49a6728;border-color:var(--amber);transform:translateY(-2px)}.button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid var(--amber);outline-offset:4px}.small-note,.privacy{font-size:11px;line-height:1.9;color:#aaa397}.echo-feedback{min-height:24px;color:#d5b98e;font-size:12px;letter-spacing:.06em}.resonance{margin-top:64px}.section-title{font:400 clamp(36px,4.8vw,50px)/1.3 var(--serif);letter-spacing:.12em;color:#d9c7a7;text-shadow:0 0 24px #c49a6718;margin:14px 0 24px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.quote-card{padding:22px;border-top:1px solid #ffffff20;color:#c8c0b4;font:13px/2 var(--serif)}.quote-card small{display:block;color:#a58a69;font:11px var(--serif);letter-spacing:.14em;margin-top:14px}.site-footer{padding:45px 20px 100px;text-align:center;color:#9993868a;font:11px var(--serif);letter-spacing:.17em}.amber-orb{position:fixed;z-index:20;left:50%;top:58%;width:12px;height:12px;border-radius:50%;pointer-events:none;opacity:0;background:radial-gradient(circle at 32% 25%,#fff4cf,#e6b36b 35%,#a56b36 65%,#6c4728);box-shadow:0 0 24px 12px #d7a15b45}.amber-orb.rise{animation:orb-rise 2.7s cubic-bezier(.2,.7,.3,1) forwards}@keyframes orb-rise{0%{opacity:0;transform:translate(-50%,40px) scale(.3);filter:blur(1px)}15%{opacity:.95}75%{opacity:.7;transform:translate(calc(-50% + 100px),-260px) scale(2.2);filter:blur(2px)}100%{opacity:0;transform:translate(calc(-50% + 150px),-390px) scale(4);filter:blur(8px)}}
+.language-switch{position:fixed;z-index:40;top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));padding:8px 13px;border:1px solid #e8dfc955;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(12px);font:11px var(--sans);letter-spacing:.08em}
+@media(max-width:760px){.bar-layout{grid-template-columns:1fr}.fortune{min-height:260px}.resonance{margin-top:46px}.grid-3{grid-template-columns:1fr}.site-nav{align-items:flex-start;flex-direction:column;padding:20px}.nav-links{justify-content:flex-start;gap:13px 20px}.nav-links a{font-size:10px}main{width:calc(100% - 32px)}.page-head{padding:48px 0 30px}.page-head h1{font-size:clamp(32px,8vw,40px);line-height:1.3}.page-head p{font-size:12px;line-height:2.05}.panel{padding:clamp(18px,4vw,28px)}}
+@media(max-width:480px){.site-nav{padding:17px 16px;gap:14px}.brand{font-size:17px}.nav-links{gap:11px 14px}.nav-links a{font-size:9px}main{width:calc(100% - 30px)}.page-head{padding-top:42px}.page-head h1{font-size:clamp(30px,9vw,39px)}.button{width:100%}.site-footer{padding-left:16px;padding-right:16px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style></head>
+<body>
+<a class="language-switch" id="language-switch" href="../world.html?space=bar&lang=zh" target="_top" hreflang="zh-CN" lang="zh">中文</a>
+<nav class="site-nav" aria-label="Mia spaces"><a class="brand" href="index.html" target="_top">M I A</a><div class="nav-links">
+<a href="index.html" target="_top">THE MIST</a><a href="bar.html" aria-current="page">THE BAR</a>
+<a href="unavailable.html?space=music" target="_top">MUSIC ROOM</a><a href="unavailable.html?space=greenhouse" target="_top">GREENHOUSE</a><a href="unavailable.html?space=archive" target="_top">THE ARCHIVE</a><a href="unavailable.html?space=zhi" target="_top">ZHI NOTES</a>
+</div></nav>
+<main><header class="page-head"><div class="eyebrow">01 / THE BAR · PHILOSOPHY & ECHO</div><h1>Let the unfinished<br><em>remain here.</em></h1><p>You do not have to turn your feelings into a beautiful story. You may say only half of it. You do not have to explain anything at all.</p></header>
+<section class="bar-layout"><article class="panel fortune"><div><div class="eyebrow">TODAY'S PHILOSOPHY</div><div class="fortune-mark">“</div><p class="fortune-text" id="fortune-text">You are allowed to be without purpose for a moment.</p></div><div class="fortune-bottom"><span class="small-note" id="fortune-index">A small philosophy card</span><button id="next-fortune" class="tiny-button" type="button">Draw another ↗</button></div></article>
+<section class="panel"><form id="echo-form" class="echo-form"><label for="echo-text">THE ECHO MAILBOX</label><textarea id="echo-text" maxlength="500" placeholder="Leave an unfinished thought. No answer is required…" aria-describedby="privacy-note"></textarea><div class="form-foot"><span id="char-count" class="small-note">0 / 500</span><button class="button" type="submit">Release this amber ↗</button></div><p id="privacy-note" class="privacy">This is a front-end experience. Your words are not sent to a server or saved. After the animation, the text you entered will be cleared.</p><div id="echo-feedback" class="echo-feedback" role="status" aria-live="polite"></div></form></section></section>
+<section class="resonance"><div class="eyebrow">A SMALL COLLECTION OF WORDS</div><h2 class="section-title">Echoes in the Collection</h2><p class="small-note">These short pieces were written by Mia; they are not messages from actual visitors.</p><div class="grid-3">
+<article class="quote-card">Sometimes stopping is not falling behind; it is finally hearing yourself.<small>— On pausing</small><p class="small-note">Rest is not leaving life. It is bringing yourself back into it.</p></article>
+<article class="quote-card">You do not have to turn every feeling into a conclusion.<small>— On uncertainty</small><p class="small-note">A feeling can be seen before it needs to be explained.</p></article>
+<article class="quote-card">The things left unspoken have a shape of their own.<small>— On silence</small><p class="small-note">Silence, too, has its own echo.</p></article>
+</div></section></main>
+<footer class="site-footer">M I A &nbsp;·&nbsp; SMALL MOMENTS, A BIGGER WORLD</footer>
+<div id="amber-orb" class="amber-orb" aria-hidden="true"></div>
+<script>
+(()=> {
+ const fortunes=[
+  "You are allowed to be without purpose for a moment.",
+  "Not every silence needs an explanation.",
+  "You do not have to be anyone's answer right now.",
+  "Some paths become visible when you walk a little more slowly.",
+  "You do not have to figure everything out today.",
+  "Uncertainty is not failure; it simply has not settled yet.",
+  "It is all right to set the world aside for a while.",
+  "You do not have to be growing every moment.",
+  "Even a moment without a conclusion deserves care."
+ ];
+ let last=-1;const text=document.getElementById('fortune-text'),index=document.getElementById('fortune-index');
+ function next(){let n;do{n=Math.floor(Math.random()*fortunes.length)}while(n===last&&fortunes.length>1);last=n;text.style.opacity=0;setTimeout(()=>{text.textContent=fortunes[n];text.style.opacity=1;index.textContent="TODAY'S PHILOSOPHY · "+String(n+1).padStart(2,'0')},220)}
+ document.getElementById('next-fortune').addEventListener('click',next);
+ const area=document.getElementById('echo-text'),count=document.getElementById('char-count');
+ area.addEventListener('input',()=>count.textContent=area.value.length+' / 500');
+ document.getElementById('echo-form').addEventListener('submit',e=>{
+  e.preventDefault();const feedback=document.getElementById('echo-feedback');
+  if(!area.value.trim()){feedback.textContent='You may leave a single word, or leave nothing at all.';return}
+  const orb=document.getElementById('amber-orb');orb.classList.remove('rise');void orb.offsetWidth;orb.classList.add('rise');feedback.textContent='';
+  setTimeout(()=>{area.value='';count.textContent='0 / 500';feedback.textContent='This amber has dissolved into the mist. Your words were not sent or saved.'},2300);
+ });
+ const params=new URLSearchParams(location.search);params.set('space','bar');params.set('lang','zh');
+ document.getElementById('language-switch').href='../world.html?'+params.toString()+location.hash;
+})();
+</script></body></html>
