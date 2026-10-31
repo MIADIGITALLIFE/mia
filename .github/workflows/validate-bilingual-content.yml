@@ -14,6 +14,7 @@ on:
     paths:
       - "data/i18n/**"
       - "scripts/validate-bilingual-content.mjs"
+      - "scripts/test-bilingual-content.mjs"
       - ".github/workflows/validate-bilingual-content.yml"
 
 permissions:
