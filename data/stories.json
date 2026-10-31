@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updated": "2026-10-31",
   "stories": [
     {
@@ -15,7 +15,7 @@
         "人工智能"
       ],
       "readingTime": "约 12 分钟",
-      "status": "首发收藏",
+      "status": "已发布",
       "chapters": [
         {
           "title": "普通人",
@@ -257,7 +257,12 @@
           ]
         }
       ],
-      "cover": "assets/stories/covers/reverse-enlightenment.svg"
+      "cover": "assets/stories/covers/reverse-enlightenment.svg",
+      "series": "独立篇章",
+      "seriesOrder": 1,
+      "publishedAt": "2026-10-31",
+      "afterwordQuestion": "如果智能不只是寻找答案，那么人类与另一种智能共同成长时，最值得守护的是什么？",
+      "timestamp": "2026-10-31T00:00:00+08:00"
     }
   ]
 }
