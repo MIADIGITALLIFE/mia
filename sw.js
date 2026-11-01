@@ -1,5 +1,5 @@
-const CACHE_NAME='mia-cafe-pwa-v3';
-const CORE=['/mia/bar.html','/mia/content.js','/mia/manifest.json','/mia/mia-pwa.svg'];
+const CACHE_NAME='mia-cafe-pwa-v4';
+const CORE=['/mia/bar.html','/mia/content.js','/mia/manifest.json','/mia/mia-pwa.svg','/mia/zh/','/mia/zh/index.html'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(
@@ -28,7 +28,7 @@ self.addEventListener('fetch',event=>{
       fetch(req).then(response=>{
         if(response.ok) caches.open(CACHE_NAME).then(cache=>cache.put(req,response.clone()));
         return response;
-      }).catch(()=>caches.match(req).then(cached=>cached||caches.match('/mia/bar.html')))
+      }).catch(()=>caches.match(req).then(cached=>cached||(url.pathname.startsWith('/mia/zh/')?caches.match('/mia/zh/index.html'):caches.match('/mia/bar.html'))))
     );
     return;
   }
