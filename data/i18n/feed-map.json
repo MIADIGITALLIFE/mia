@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "description": "Source registry and locale policy for Mia dynamic feeds. English endpoints are planned until the source publishes reviewed English payloads.",
+  "description": "Source registry for automatic Chinese-to-English feeds. English feeds are published by the ZEE/Supabase translation pipeline.",
   "feeds": {
     "daily_note": {
       "source": "https://raw.githubusercontent.com/ZEEFSEE/ZEE/main/mia/daily.json",
@@ -9,7 +9,7 @@
       "source_locale": "zh-CN",
       "english_payload": "translations.en",
       "english_status_required": "published",
-      "english_endpoint": null
+      "english_endpoint": "https://raw.githubusercontent.com/MIADIGITALLIFE/zee/main/mia/en/daily.json"
     },
     "philosophy": {
       "source": "https://raw.githubusercontent.com/ZEEFSEE/ZEE/main/mia/todays-philosophy.json",
@@ -18,7 +18,7 @@
       "source_locale": "zh-CN",
       "english_payload": "translations.en",
       "english_status_required": "published",
-      "english_endpoint": null
+      "english_endpoint": "https://raw.githubusercontent.com/MIADIGITALLIFE/zee/main/mia/en/todays-philosophy.json"
     },
     "zhi_sections": {
       "source": "https://raw.githubusercontent.com/ZEEFSEE/ZEE/main/mia/sections.json",
@@ -27,12 +27,13 @@
       "source_locale": "zh-CN",
       "english_payload": "sections[].translations.en",
       "english_status_required": "published",
-      "english_endpoint": null
+      "english_endpoint": "https://raw.githubusercontent.com/MIADIGITALLIFE/zee/main/mia/en/sections.json"
     }
   },
   "policy": {
     "cross_locale_fallback": false,
-    "unreviewed_translation_publication": false,
-    "source_mutation_during_localization": false
+    "unreviewed_translation_publication": true,
+    "source_mutation_during_localization": false,
+    "automated_quality_gate_required": true
   }
 }
