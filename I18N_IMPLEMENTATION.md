@@ -358,3 +358,18 @@ The workflow file is committed, but no run result was returned for its commit at
 - A selector defect found during follow-up review was corrected in the first four English pages and an assertion was added to guard against recurrence.
 - The new site smoke test and latest Actions run have not yet been confirmed as passing. Browser installation, offline navigation, update lifecycle, iOS behavior, and mobile safe-area rendering remain unverified.
 - These changes remain on the bilingual feature branch. No merge or production deployment has occurred.
+
+
+---
+
+## Current candidate status — supersedes earlier milestone snapshots
+
+As of 2026-11-01, the implementation has advanced beyond the earlier milestone notes above. The current state is:
+
+- English and Simplified Chinese entry pages, room pages, language controls, route preservation, and locale-specific PWA files are present on the feature branch.
+- Automated bilingual-content, publication-boundary, and site-invariant tests passed in [GitHub Actions run 41263834854](https://github.com/MIADIGITALLIFE/mia/actions/runs/41263834854), commit `9504056b8063d050bfdbb1035f981eff0df946d3`.
+- This establishes a **static-validation candidate**, not full browser acceptance. Audio, cross-frame behavior, mobile layouts, PWA installation/offline behavior, and actual Pages rendering still require manual browser checks.
+- The English novel reader intentionally retains the original Chinese story body and labels it as original-language content; no unapproved translation is presented as English.
+- ZEE's three upstream feeds remain Chinese-only. Their English feed generation and reviewed publication are explicitly deferred to the next phase.
+
+See [BILINGUAL_CANDIDATE_ACCEPTANCE.md](BILINGUAL_CANDIDATE_ACCEPTANCE.md) for the release checklist. Earlier sections in this document are milestone records and should not be interpreted as the current overall status.
