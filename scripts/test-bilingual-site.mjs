@@ -36,6 +36,13 @@ for (const file of pages) {
   assert.match(read(file), /<html[^>]*lang="en"/i, `${file} must declare English`);
 }
 
+const rootEntry = read('index.html');
+assert.match(rootEntry, /<html[^>]*lang="en"/i, 'Root entry must declare English as the default locale');
+assert.ok(rootEntry.includes("const locale=requested==='zh'||requested==='zh-cn'?'zh':'en'"),
+  'Root entry must default to English and honor an explicit Simplified Chinese preference');
+assert.ok(rootEntry.includes("new URL(locale+'/',location.href)") && rootEntry.includes('target.search=location.search') && rootEntry.includes('target.hash=location.hash'),
+  'Root locale routing must preserve query parameters and hash fragments');
+
 const chineseEntry = read('zh/index.html');
 assert.match(chineseEntry, /<html[^>]*lang="zh-CN"/i,
   'Chinese entry must declare Simplified Chinese');
