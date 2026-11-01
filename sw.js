@@ -1,5 +1,5 @@
-const CACHE_NAME='mia-cafe-pwa-v4';
-const CORE=['/mia/bar.html','/mia/content.js','/mia/manifest.json','/mia/mia-pwa.svg','/mia/zh/','/mia/zh/index.html'];
+const CACHE_NAME='mia-cafe-pwa-v3';
+const CORE=['/mia/bar.html','/mia/content.js','/mia/manifest.json','/mia/mia-pwa.svg'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(
@@ -12,7 +12,7 @@ self.addEventListener('install',event=>{
 self.addEventListener('activate',event=>{
   event.waitUntil(
     caches.keys()
-      .then(keys=>Promise.all(keys.filter(key=>key.startsWith('mia-cafe-pwa-') && key!==CACHE_NAME).map(key=>caches.delete(key))))
+      .then(keys=>Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key))))
       .then(()=>self.clients.claim())
   );
 });
@@ -22,15 +22,13 @@ self.addEventListener('fetch',event=>{
   if(req.method!=='GET') return;
   const url=new URL(req.url);
   if(url.origin!==self.location.origin) return;
-  // The English edition has its own narrower worker and cache namespace.
-  if(url.pathname.startsWith('/mia/en/')) return;
 
   if(req.mode==='navigate'){
     event.respondWith(
       fetch(req).then(response=>{
         if(response.ok) caches.open(CACHE_NAME).then(cache=>cache.put(req,response.clone()));
         return response;
-      }).catch(()=>caches.match(req).then(cached=>cached||(url.pathname.startsWith('/mia/zh/')?caches.match('/mia/zh/index.html'):caches.match('/mia/bar.html'))))
+      }).catch(()=>caches.match(req).then(cached=>cached||caches.match('/mia/bar.html')))
     );
     return;
   }
