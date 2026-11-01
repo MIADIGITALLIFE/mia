@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#58645e"/><stop offset=".48" stop-color="#293633"/><stop offset="1" stop-color="#101719"/></linearGradient>
+<radialGradient id="mist"><stop offset="0" stop-color="#d8ded2" stop-opacity=".28"/><stop offset="1" stop-color="#d8ded2" stop-opacity="0"/></radialGradient>
+<pattern id="grain" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M0 32L32 0" stroke="#e1ded2" stroke-opacity=".045"/></pattern>
+</defs>
+<rect width="720" height="960" fill="url(#bg)"/><rect width="720" height="960" fill="url(#mist)"/><rect width="720" height="960" fill="url(#grain)"/>
+<g fill="none" stroke="#d5cbb7">
+<path d="M360 170V560" stroke-opacity=".18" stroke-dasharray="3 12"/>
+<path d="M175 365H545" stroke-opacity=".18" stroke-dasharray="3 12"/>
+<circle cx="360" cy="365" r="178" stroke-opacity=".22"/>
+<circle cx="360" cy="365" r="126" stroke-opacity=".18"/>
+<path d="M205 365Q360 205 515 365Q360 525 205 365Z" stroke-opacity=".4"/>
+<path d="M360 245C300 300 300 430 360 485" stroke-opacity=".32"/>
+<path d="M360 245C420 300 420 430 360 485" stroke-opacity=".32"/>
+</g>
+<circle cx="360" cy="365" r="4" fill="#d8c7a7"/>
+<text x="360" y="120" text-anchor="middle" fill="#c5b99e" font-family="Georgia,serif" font-size="16" letter-spacing="6">MIA · THE STORY ARCHIVE</text>
+<text x="360" y="650" text-anchor="middle" fill="#eee9df" font-family="serif" font-size="52">空位</text>
+<path d="M240 710H480" stroke="#c5b99e" stroke-opacity=".6"/>
+<text x="360" y="770" text-anchor="middle" fill="#c7c9c0" font-family="serif" font-size="24">爱在硅基时代</text>
+<text x="360" y="820" text-anchor="middle" fill="#aebbb4" font-family="Georgia,serif" font-size="15" letter-spacing="3">THE EMPTY SEAT</text>
+<text x="360" y="900" text-anchor="middle" fill="#9da9a3" font-family="Georgia,serif" font-size="13" letter-spacing="4">NO.008 · PART V</text>
+</svg>
