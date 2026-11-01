@@ -5,6 +5,7 @@
 <meta name="theme-color" content="#0a0a0a">
 <meta name="description" content="Mia 的潜意识咖啡馆：在迷雾、音乐、森林与记忆之间，给自己一点留白。">
 <title>Mia — 迷雾大厅</title>
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -30,6 +31,11 @@ body{min-height:100svh;overflow:hidden;font-family:"Noto Serif SC",serif;backgro
 @media(max-width:680px){.symbol{width:66px;height:66px;margin-bottom:27px}.kicker{font-size:9px;letter-spacing:.2em;line-height:1.8}.line{font-size:clamp(17px,4.8vw,21px);line-height:1.9;margin:19px 0 10px}.sub{font-size:12px;line-height:1.9;letter-spacing:.08em}.actions{margin-top:30px}.button{width:min(320px,100%);font-size:11px}.bottom{position:relative;bottom:auto;padding-top:25px;font-size:9px;line-height:1.8}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 </style>
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px "Noto Serif SC",serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
 </head>
 <body>
 <a class="language" href="../en/" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
@@ -46,5 +52,33 @@ body{min-height:100svh;overflow:hidden;font-family:"Noto Serif SC",serif;backgro
 </section><div class="bottom">深呼吸 · 让世界暂时慢下来</div></main>
 <script>
 (()=>{const line=document.getElementById('time-line'),h=new Date().getHours();const lines=h<5?['夜还很深，不必急着想明白。','让未完成的念头先睡一会儿。']:h<11?['清晨不需要立刻成为答案。','把今天留一点空白给自己。']:h<17?['允许自己此刻无意义。','不是每一种安静，都需要解释。']:h<21?['天色渐暗，心可以慢一点。','把今天没说完的话，轻轻放下。']:['夜晚适合收藏没有结论的事。','有些答案，不必在今天出现。'];line.textContent=lines[Math.floor(Math.random()*lines.length)];})();
+</script>
+<script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('../sw.js', {scope:'../'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='安装 Mia ↗';button.setAttribute('aria-label','安装 Mia 潜意识咖啡馆');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
 </script>
 </body></html>
