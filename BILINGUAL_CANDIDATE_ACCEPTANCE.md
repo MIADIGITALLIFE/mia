@@ -1,6 +1,6 @@
 # Mia bilingual candidate — acceptance report
 
-**Status:** static-validation candidate; browser acceptance is still pending.  
+**Status:** automated static + headless-browser candidate checks passed; production deployment acceptance is still pending.  
 **Branch:** `feature/mia-bilingual-foundation`  
 **Pull request:** [#4](https://github.com/MIADIGITALLIFE/mia/pull/4)  
 **Production:** unchanged; this report does not authorize merge or deployment.
@@ -28,20 +28,32 @@ The following checks are enforced by `.github/workflows/validate-bilingual-conte
 
 Latest recorded successful run before this report: [Run 41263834854](https://github.com/MIADIGITALLIFE/mia/actions/runs/41263834854), commit `9504056b8063d050bfdbb1035f981eff0df946d3`.
 
+## Automated browser acceptance completed
+
+A Playwright Chromium smoke test now runs against the candidate branch served locally at the GitHub Pages project path. It checks:
+
+- Root default-English and explicit Simplified Chinese entry routing.
+- HTTP response and declared `html lang` for 20 English/Chinese room routes.
+- Query/hash preservation on both English and Chinese shell language switches.
+- Horizontal overflow at a 360px mobile viewport across 10 key landing/shell/room pages.
+- Uncaught page errors during navigation.
+
+The first browser run found a 10px horizontal overflow on both locale landing pages. This was fixed with root-level horizontal overflow clipping and re-tested successfully in [browser run 41264484497](https://github.com/MIADIGITALLIFE/mia/actions/runs/41264484497). Static validation also passed for the same final landing-page commit in [run 41264490087](https://github.com/MIADIGITALLIFE/mia/actions/runs/41264490087).
+
 ## Manual acceptance still required
 
 Static tests cannot prove browser behavior. Before calling the candidate fully accepted, test the Pages preview or a non-production preview build on desktop and mobile:
 
-- [ ] Root entry opens English; explicit Chinese selection opens the Chinese edition.
-- [ ] Language switches preserve `space`, story ID, chapter query, and hash.
-- [ ] Every English room opens in English; untranslated records show the documented English notice.
+- [x] Root entry opens English; explicit Chinese selection opens the Chinese edition (headless Chromium).
+- [x] Language switches preserve `space`, story ID, chapter query, and hash (headless Chromium).
+- [x] English and Chinese route responses and `html lang` declarations checked for 20 room routes (headless Chromium); untranslated-content behavior remains covered by static regression tests.
 - [ ] Every Chinese room remains Chinese and the EN switch returns to the matching English room.
 - [ ] Background music, room audio, rain audio, and cross-room/cross-tab ownership behave as before.
 - [ ] Story chapter navigation, hash restoration, and reading progress work in both locales.
 - [ ] Time Capsule counts, date search, filters, and Chinese-original links work.
 - [ ] All nine original photos load in the Archive.
 - [ ] PWA install flow, offline fallback, cache update, and locale isolation work on supported browsers.
-- [ ] Narrow mobile layouts, safe-area spacing, language control, and install control remain usable.
+- [x] No horizontal overflow at 360px on 10 key mobile pages (headless Chromium). Visual safe-area, language-control and install-control usability still needs a human device pass.
 
 ## Explicitly outside this candidate
 
@@ -51,4 +63,4 @@ ZEE feed generation, human translation review, publication workflows, and live E
 
 ## Release gate
 
-This candidate is ready for a browser-based acceptance pass, not yet for a production release. Do not merge or deploy until the manual checklist is completed and the owner explicitly approves release.
+This candidate has passed automated static checks and a headless Chromium browser smoke test. It has **not** yet been tested on the live GitHub Pages deployment or on physical desktop/mobile devices. Audio playback, real PWA installation/offline behavior, and cross-tab/cross-frame sound ownership remain manual checks. Do not merge or deploy to production until those checks are completed and the owner explicitly approves release.
