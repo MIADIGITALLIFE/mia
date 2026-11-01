@@ -46,6 +46,12 @@ assert.ok(chineseEntry.includes('../world.html?space=bar&lang=zh') &&
   'Chinese entry must route its primary actions to the existing Chinese world shell');
 assert.ok(exists('world.html'),
   'Chinese entry must point to an existing root Chinese world shell');
+assert.ok(chineseEntry.includes('rel="manifest" href="manifest.json"'),
+  'Chinese entry must link its dedicated PWA manifest');
+assert.ok(chineseEntry.includes("register('../sw.js', {scope:'../'})"),
+  'Chinese entry must register the shared Chinese service worker with the parent scope');
+assert.ok(chineseEntry.includes('安装 Mia ↗') && chineseEntry.includes('#mia-pwa-install[data-ready="true"]'),
+  'Chinese entry must provide a localized, styled PWA install action');
 for (const phrase of ['在思绪之间，留一处安静', '停留片刻 · 进入空间', '时间胶囊 · 记忆的琥珀', '深呼吸 · 让世界暂时慢下来']) {
   assert.ok(chineseEntry.includes(phrase), 'Chinese entry is missing localized copy: ' + phrase);
 }
@@ -113,6 +119,11 @@ for (const file of pages) {
   assert.ok(read(file).includes('#mia-pwa-install[data-ready="true"]'),
     file + ' must reveal the install control when installation is available');
 }
+const zhManifest = JSON.parse(read('zh/manifest.json'));
+assert.equal(zhManifest.lang, 'zh-CN');
+assert.equal(zhManifest.scope, '/mia/');
+assert.equal(zhManifest.start_url, '/mia/zh/');
+assert.equal(zhManifest.id, '/mia/zh/');
 const enManifest = JSON.parse(read('en/manifest.json'));
 assert.equal(enManifest.lang, 'en');
 assert.equal(enManifest.scope, '/mia/en/');
@@ -123,6 +134,8 @@ assert.ok(enWorker.includes("'mia-cafe-en-pwa-v1'"));
 assert.ok(enWorker.includes('key.startsWith(CACHE_PREFIX)'));
 const zhWorker = read('sw.js');
 assert.ok(zhWorker.includes("key.startsWith('mia-cafe-pwa-')"));
+assert.ok(zhWorker.includes("'/mia/zh/index.html'"), 'Chinese worker must precache the Chinese PWA entry');
+assert.ok(zhWorker.includes('mia-cafe-pwa-v4'), 'Chinese cache version must advance for the new offline entry');
 assert.ok(!zhWorker.includes("keys.filter(key=>key!==CACHE_NAME)"));
 for (const file of pages) {
   const html = read(file);
