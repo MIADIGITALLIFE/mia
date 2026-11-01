@@ -143,6 +143,8 @@ const zhWorker = read('sw.js');
 assert.ok(zhWorker.includes("key.startsWith('mia-cafe-pwa-')"));
 assert.ok(zhWorker.includes("'/mia/zh/index.html'"), 'Chinese worker must precache the Chinese PWA entry');
 assert.ok(zhWorker.includes('mia-cafe-pwa-v4'), 'Chinese cache version must advance for the new offline entry');
+assert.ok(zhWorker.includes("if(url.pathname.startsWith('/mia/en/')) return;"),
+  'Chinese worker must never intercept the English edition, which has its own worker and cache namespace');
 assert.ok(!zhWorker.includes("keys.filter(key=>key!==CACHE_NAME)"));
 for (const file of pages) {
   const html = read(file);
