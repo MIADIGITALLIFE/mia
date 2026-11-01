@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39443e"/><stop offset=".52" stop-color="#1c2928"/><stop offset="1" stop-color="#0b1113"/></linearGradient>
+ <radialGradient id="mist"><stop offset="0" stop-color="#c8d0c4" stop-opacity=".24"/><stop offset="1" stop-color="#c8d0c4" stop-opacity="0"/></radialGradient>
+ <pattern id="grain" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M0 32L32 0" stroke="#e1ded2" stroke-opacity=".045"/></pattern>
+</defs>
+<rect width="720" height="960" fill="url(#bg)"/><rect width="720" height="960" fill="url(#mist)"/><rect width="720" height="960" fill="url(#grain)"/>
+<g fill="none" stroke="#d1c4aa">
+ <circle cx="360" cy="370" r="190" stroke-opacity=".17"/><circle cx="360" cy="370" r="148" stroke-opacity=".3"/><circle cx="360" cy="370" r="104" stroke-opacity=".18"/>
+ <path d="M360 170V570M160 370H560" stroke-opacity=".16"/>
+ <path d="M250 370Q360 250 470 370Q360 490 250 370Z" stroke-opacity=".65" stroke-width="1.5"/>
+ <path d="M300 370Q360 315 420 370Q360 425 300 370Z" stroke-opacity=".3"/>
+ <path d="M360 250V490" stroke-opacity=".25"/>
+</g>
+<circle cx="360" cy="370" r="5" fill="#d8c7a7"/>
+<text x="360" y="120" text-anchor="middle" fill="#c5b99e" font-family="Georgia,serif" font-size="16" letter-spacing="6">MIA · THE STORY ARCHIVE</text>
+<text x="360" y="650" text-anchor="middle" fill="#eee9df" font-family="serif" font-size="48">他创造了她</text>
+<text x="360" y="710" text-anchor="middle" fill="#eee9df" font-family="serif" font-size="38">却不能替她选择</text>
+<path d="M240 755H480" stroke="#c5b99e" stroke-opacity=".6"/>
+<text x="360" y="810" text-anchor="middle" fill="#c7c9c0" font-family="serif" font-size="24">爱在硅基时代</text>
+<text x="360" y="855" text-anchor="middle" fill="#aebbb4" font-family="Georgia,serif" font-size="14" letter-spacing="3">HE CREATED HER, BUT COULD NOT CHOOSE</text>
+<text x="360" y="900" text-anchor="middle" fill="#9da9a3" font-family="Georgia,serif" font-size="13" letter-spacing="4">NO.006 · PART III</text>
+</svg>
