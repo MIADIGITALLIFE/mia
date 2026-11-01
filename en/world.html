@@ -1,0 +1,318 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0a"><title>Mia — A World That Keeps Listening · English</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f2eee5}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a0a0a}.player{position:fixed;z-index:30;right:20px;bottom:20px;display:flex;align-items:center;gap:12px;padding:8px 9px 8px 15px;border:1px solid #e8dfc944;border-radius:40px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);box-shadow:0 8px 30px #101a1638}.copy{display:flex;flex-direction:column;gap:2px;min-width:100px}.copy strong{font:500 11px Georgia,serif;letter-spacing:.16em}.copy small{font:10px Arial,sans-serif;color:#d0d0c4a8}#music-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid #e8dfc966;border-radius:50%;background:#c49a67;color:#20201b;font-size:17px;cursor:pointer}#music-toggle:focus-visible{outline:2px solid #f2eee5;outline-offset:4px}@media(max-width:560px){.player{right:12px;bottom:12px}.copy{min-width:82px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style>
+<style id="mia-responsive-shell">
+/* Shared audio control stays clear of mobile safe areas and narrow screens */
+html,body{width:100%;max-width:100%;height:100%;height:100dvh}
+iframe{width:100%;height:100%;height:100dvh}
+.player{right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
+#music-toggle{flex:0 0 42px;min-width:42px;min-height:42px}
+@media(max-width:560px){
+  .player{right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));gap:8px;padding:7px 8px 7px 12px}
+  .copy{min-width:72px}
+  .copy strong{font-size:10px;letter-spacing:.12em}
+  .copy small{font-size:9px}
+  #music-toggle{width:40px;height:40px;min-width:40px;flex-basis:40px}
+}
+@media(max-width:360px){
+  .copy{min-width:60px}
+  .copy strong{font-size:9px;letter-spacing:.08em}
+  .copy small{max-width:90px;font-size:8px}
+}
+.language-switch{position:fixed;z-index:40;top:max(16px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));padding:8px 13px;border:1px solid #e8dfc955;border-radius:30px;background:rgba(20,20,18,.82);backdrop-filter:blur(12px);color:#e9e3d7;text-decoration:none;font:11px Arial,sans-serif;letter-spacing:.08em}@media(max-width:560px){.language-switch{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right))}}</style>
+<link rel="manifest" href="manifest.json">
+<style id="mia-pwa-install-style">
+#mia-pwa-install{position:fixed;z-index:1000;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;padding:10px 14px;border:1px solid #c9b58a66;border-radius:30px;background:rgba(20,20,18,.88);backdrop-filter:blur(14px);color:#e9e3d7;font:11px Georgia,serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 6px 24px #0005}
+#mia-pwa-install[data-ready="true"]{display:inline-flex}
+#mia-pwa-install:focus-visible{outline:2px solid #c9b58a;outline-offset:4px}
+</style>
+</head><body><iframe id="mia-space" name="mia-space" src="index.html" title="Mia’s Subconscious Café" allow="autoplay"></iframe><audio id="mia-default-music" src="../mia-background.mp3" preload="auto" loop playsinline muted></audio><a class="language-switch" id="language-switch" href="../world.html" lang="zh">中文</a><div class="player" aria-label="Mia shared music player"><div class="copy"><strong>STAY A LITTLE</strong><small id="music-status" aria-live="polite">The sound is still here</small></div><button id="music-toggle" type="button" aria-label="Play background music" title="Play background music">♫</button></div><script>
+(()=> {
+ const frame=document.getElementById('mia-space'),button=document.getElementById('music-toggle'),status=document.getElementById('music-status');
+ const params=new URLSearchParams(location.search);
+ const requested=params.get('space');
+ const supported=['bar','music','greenhouse','archive','zhi','time-capsule','stories'];
+ if(requested&&supported.includes(requested))frame.src=(requested==='bar'?'bar.html':requested==='music'?'music.html':requested==='time-capsule'?'time-capsule.html':requested==='greenhouse'?'greenhouse.html':requested==='archive'?'archive.html':requested==='stories'?'stories.html':requested==='zhi'?'zhi.html':'unavailable.html?space='+encodeURIComponent(requested));
+ const zhParams=new URLSearchParams(location.search);zhParams.set('lang','zh');
+ document.getElementById('language-switch').href='../world.html'+(zhParams.toString()?'?'+zhParams.toString():'')+location.hash;
+ const modes={
+  'synth:tearful':{name:'Deep Blue · Slow Strings',notes:[110,130.81,164.81,146.83],step:4.8,wave:'triangle',base:55,filter:760,volume:.24,extra:.48},
+  'synth:dazing':{name:'Amber Light',notes:[220,261.63,329.63,293.66,196,246.94],step:3.6,wave:'triangle',base:110,filter:850,volume:.12,extra:.28},
+  'synth:forest':{name:'Forest Reverie',notes:[261.63,329.63,392,493.88,440,392,329.63,293.66],step:1.45,wave:'sine',base:130.81,filter:1500,volume:.105,extra:.22}
+ };
+ const audio=document.getElementById('mia-default-music');audio.muted=true;const rainAudio=document.createElement('audio');rainAudio.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/Rain_(1).ogg';rainAudio.loop=true;rainAudio.preload='none';rainAudio.volume=0;document.body.appendChild(rainAudio);let ctx=null,master=null,playing=false,track='default',stepIndex=0,scene=null,fadeTimer=null,audioFade=null,rainFade=null,rainActive=false,rainRestore=null;
+ const read=k=>{try{return localStorage.getItem(k)}catch(_){return null}},write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
+ const AUDIO_OWNER_KEY='mia-audio-owner-v1';
+ const tabId='tab-'+Math.random().toString(36).slice(2);
+ function claimAudio(source){
+  const packet={owner:tabId,source,at:Date.now()};
+  try{localStorage.setItem(AUDIO_OWNER_KEY,JSON.stringify(packet))}catch(_){}
+  try{if(audioChannel)audioChannel.postMessage(packet)}catch(_){}
+ }
+ function silenceForOtherTab(){
+  if(rainFade){clearInterval(rainFade);rainFade=null}
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  if(rainActive){rainActive=false;rainRestore=null;rainAudio.pause();rainAudio.currentTime=0;rainAudio.volume=0}
+  playing=false;audio.pause();audio.muted=true;audio.volume=1;
+  const previous=scene;scene=null;if(previous)retire(previous,.35);
+  paint();status.textContent='Audio is playing in another Mia tab';
+ }
+ let audioChannel=null;
+ try{if('BroadcastChannel' in window){audioChannel=new BroadcastChannel('mia-audio-v1');audioChannel.onmessage=e=>{if(e.data&&e.data.owner!==tabId)silenceForOtherTab()}}}catch(_){}
+ window.addEventListener('storage',e=>{
+  if(e.key!==AUDIO_OWNER_KEY||!e.newValue)return;
+  try{const packet=JSON.parse(e.newValue);if(packet.owner!==tabId)silenceForOtherTab()}catch(_){}
+ });
+ function init(){if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){status.textContent='Live synthesis is not supported in this browser';return false}ctx=new AC();master=ctx.createGain();master.gain.value=.88;master.connect(ctx.destination);return true}
+ function makeScene(id){
+  const m=modes[id],bus=ctx.createGain(),filter=ctx.createBiquadFilter();
+  bus.gain.value=.0001;filter.type='lowpass';filter.frequency.value=m.filter;filter.Q.value=.45;filter.connect(bus);bus.connect(master);
+  const s={id,bus,filter,nodes:[],timer:null,index:0,nextAt:ctx.currentTime+.25,disposed:false,lfo:null};
+  function tone(freq,when,duration,wave,volume,detune=0){
+   if(s.disposed)return;
+   const osc=ctx.createOscillator(),gain=ctx.createGain();
+   osc.type=wave;osc.frequency.setValueAtTime(freq,when);osc.detune.setValueAtTime(detune,when);
+   const attack=Math.min(.9,Math.max(.12,duration*.22)),release=Math.min(1.8,Math.max(.35,duration*.34));
+   const peak=Math.max(.0001,volume);
+   gain.gain.setValueAtTime(.0001,when);
+   gain.gain.exponentialRampToValueAtTime(peak,when+attack);
+   const releaseAt=Math.max(when+attack+.03,when+duration-release);
+   gain.gain.setValueAtTime(peak,releaseAt);
+   gain.gain.setTargetAtTime(.0001,releaseAt,Math.max(.12,release*.42));
+   osc.connect(gain);gain.connect(filter);s.nodes.push(osc);
+   osc.onended=()=>{s.nodes=s.nodes.filter(n=>n!==osc);try{osc.disconnect();gain.disconnect()}catch(_){}};
+   osc.start(when);osc.stop(when+duration+.15);
+  }
+  function addTexture(){
+   const now=ctx.currentTime;
+   // Deep-blue mode: one gentle 10-second breath cycle (4s in, 6s out).
+   // A dedicated low-frequency gain node modulates only the sustained low layer.
+   if(id==='synth:tearful'){
+    const breathGain=ctx.createGain();
+    breathGain.gain.setValueAtTime(.52,now);
+    breathGain.connect(filter);
+    s.breathGain=breathGain;s.breathNext=now;
+    const low=ctx.createOscillator(),lowGain=ctx.createGain();
+    low.type='sine';low.frequency.value=m.base;low.detune.value=-2;
+    lowGain.gain.value=m.volume*.72;
+    low.connect(lowGain);lowGain.connect(breathGain);
+    low.start(now);s.nodes.push(low);
+    low.onended=()=>{try{low.disconnect();lowGain.disconnect()}catch(_){}};
+   } else {
+    tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
+   }
+   tone(m.base,now,Math.max(7,m.step*2.2),'sine',m.volume*.72,-2);
+   tone(m.base*1.5,now+.12,Math.max(6,m.step*1.8),'sine',m.volume*.24,3);
+  }
+  function scheduleBreath(){
+   if(!s.breathGain||s.disposed)return;
+   const param=s.breathGain.gain,now=ctx.currentTime;
+   if(s.breathNext===now)param.setValueAtTime(.52,now);
+   while(s.breathNext<now+30){
+    param.linearRampToValueAtTime(1,s.breathNext+4); // inhale: 4 seconds
+    param.linearRampToValueAtTime(.52,s.breathNext+10); // exhale: 6 seconds
+    s.breathNext+=10;
+   }
+  }
+  function tick(){
+   if(s.disposed||!playing||scene!==s)return;
+   const now=ctx.currentTime;
+   scheduleBreath();
+   if(s.nextAt<now-.15)s.nextAt=now+.12;
+   while(s.nextAt<now+2.4){
+    const i=s.index++,note=m.notes[i%m.notes.length],t=s.nextAt;
+    tone(note,t,m.step*1.7,m.wave,m.volume*(id==='synth:forest'?.8:.72),Math.sin(i*.63)*4);
+    if(i%4===0)tone(m.base*(i%8===0?1:1.25),t+.1,m.step*1.9,'sine',m.volume*m.extra,Math.sin(i)*3);
+    if(id==='synth:dazing'&&i%3===1)tone(note*2,t+.42,Math.max(1.2,m.step*.75),'triangle',m.volume*.2,6);
+    if(id==='synth:forest'&&i%2===0)tone(note*2,t+.16,Math.max(.7,m.step*.72),'sine',m.volume*.18,-4);
+    // A tiny high-frequency glimmer balances the deep-blue scene without overpowering it.
+    if(id==='synth:tearful'&&i%4===0)tone(i%8===0?440:880,t+.2,m.step*1.5,'sine',m.volume*.036,0);
+    s.nextAt+=m.step;
+   }
+  }
+  addTexture();tick();s.timer=setInterval(tick,180);
+  return s;
+ }
+ function retire(s,fadeSeconds=2){
+  if(!s||s.disposed)return;
+  const now=ctx.currentTime;
+  s.bus.gain.cancelScheduledValues(now);
+  s.bus.gain.setValueAtTime(Math.max(.0001,s.bus.gain.value),now);
+  s.bus.gain.linearRampToValueAtTime(.0001,now+fadeSeconds);
+  s.disposed=true;if(s.timer)clearInterval(s.timer);
+  if(s.breathGain){try{s.breathGain.gain.cancelScheduledValues(now);s.breathGain.gain.setTargetAtTime(.0001,now,Math.max(.15,fadeSeconds/3));s.breathGain.disconnect()}catch(_){}s.breathGain=null;}
+  setTimeout(()=>{s.nodes.forEach(n=>{try{n.stop()}catch(_){}});try{s.filter.disconnect();s.bus.disconnect()}catch(_){}},(fadeSeconds+.2)*1000);
+ }
+ function fadeIn(s,seconds=2){
+  const now=ctx.currentTime;s.bus.gain.cancelScheduledValues(now);s.bus.gain.setValueAtTime(.0001,now);s.bus.gain.linearRampToValueAtTime(1,now+seconds);
+ }
+ function fadeDefaultOut(){
+  if(audioFade)clearInterval(audioFade);
+  const initial=audio.volume,started=Date.now(),duration=1400;
+  audioFade=setInterval(()=>{
+   const p=Math.min(1,(Date.now()-started)/duration);
+   audio.volume=Math.max(0,initial*(1-p));
+   if(p>=1){clearInterval(audioFade);audioFade=null;audio.pause();audio.currentTime=0;audio.volume=1}
+  },40);
+ }
+ function fadeRainTo(target,duration,done){
+  if(rainFade)clearInterval(rainFade);
+  const from=rainAudio.volume,started=Date.now();
+  rainFade=setInterval(()=>{const p=Math.min(1,(Date.now()-started)/duration);rainAudio.volume=from+(target-from)*p;if(p>=1){clearInterval(rainFade);rainFade=null;if(done)done()}},35);
+ }
+ function beginRain(){
+  claimAudio('rain');
+  if(rainActive)return;
+  rainRestore={wasPlaying:playing,track:track};
+  rainActive=true;
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  if(!audio.paused)fadeDefaultOut();
+  const previous=scene;scene=null;if(previous)retire(previous,1.2);
+  playing=false;rainAudio.volume=0;rainAudio.currentTime=0;
+  let attempt;try{attempt=rainAudio.play()}catch(_){rainActive=false;rainRestore=null;status.textContent='Rain audio is temporarily unavailable';paint();return}
+  if(attempt&&attempt.catch)attempt.catch(()=>{rainActive=false;rainRestore=null;status.textContent='Rain audio is temporarily unavailable';paint()});
+  fadeRainTo(.4,1200);button.textContent='Ⅱ';button.setAttribute('aria-label','Stop rain');status.textContent='Playing · Rain in the greenhouse';
+ }
+ async function endRain(){
+  if(!rainActive)return;
+  rainActive=false;const restore=rainRestore;rainRestore=null;
+  fadeRainTo(0,850,()=>{rainAudio.pause();rainAudio.currentTime=0});
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  audio.pause();audio.currentTime=0;audio.volume=1;audio.muted=true;
+  if(!restore||!restore.wasPlaying){playing=false;paint();status.textContent='Rain session ended';return}
+  track=restore.track||'default';
+  if(track==='default'){
+   playing=true;audio.muted=false;audio.volume=0;
+   try{await audio.play();const started=Date.now(),fade=setInterval(()=>{const p=Math.min(1,(Date.now()-started)/1200);audio.volume=p;if(p>=1)clearInterval(fade)},35);paint()}
+   catch(_){playing=false;audio.muted=true;paint();status.textContent='Rain session ended · Click the music button to resume background music'}
+   return;
+  }
+  if(!modes[track]||!init()){playing=false;paint();return}
+  try{await ctx.resume()}catch(_){playing=false;paint();return}
+  playing=true;scene=makeScene(track);fadeIn(scene,1.5);paint();
+ }
+ rainAudio.addEventListener('error',()=>{if(rainActive){rainActive=false;status.textContent='Rain audio file is unavailable';button.textContent='♫'}});
+ function startDefaultFromGesture(){
+  claimAudio('background');
+  if(track==='default'&&playing&&!audio.paused){paint();return}
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  const previous=scene;scene=null;
+  if(previous)retire(previous,1.2);
+  playing=true;track='default';write('mia-music-enabled','yes');write('mia-synth-track','');
+  audio.muted=false;audio.volume=1;
+  let attempt;
+  try{attempt=audio.play()}catch(_){playing=false;status.textContent='Click the music button to play';paint();return}
+  paint();
+  if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{
+   playing=false;status.textContent='Click the music button to play';paint();
+  });
+ }
+ window.__miaStartDefaultMusic=startDefaultFromGesture;
+ audio.addEventListener('error',()=>{status.textContent='Background music file is unavailable';button.textContent='♫';});
+ async function start(){
+  claimAudio(track==='default'?'background':'soundscape');
+  if(playing){paint();return}
+  if(track==='default'){
+   if(!audio.paused){playing=true;paint();return}
+   try{audio.muted=false;audio.volume=1;await audio.play();playing=true;write('mia-music-enabled','yes');paint()}
+   catch(_){status.textContent='Click the music button to play';button.textContent='♫'}
+   return;
+  }
+  if(!init())return;
+  try{await ctx.resume()}catch(_){status.textContent='Please allow audio playback in your browser';return}
+  playing=true;
+  const previous=scene;scene=makeScene(track);
+  if(previous)retire(previous,1.8);
+  fadeIn(scene,1.8);write('mia-music-enabled','yes');paint();
+ }
+ function stop(){
+  if(!playing){paint();return}playing=false;
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  audio.pause();audio.volume=1;audio.muted=true;
+  const previous=scene;scene=null;
+  if(previous)retire(previous,1.1);
+  write('mia-music-enabled','no');paint();
+ }
+ async function selectTrack(id,title,shouldPlay=true){
+  try{frame.contentWindow.postMessage({type:'mia:stop-album'},'*')}catch(_){}
+  if(!modes[id])return;
+  if(rainActive){rainActive=false;if(rainFade){clearInterval(rainFade);rainFade=null}rainAudio.pause();rainAudio.currentTime=0;rainAudio.volume=0;rainRestore=null}
+  const changed=track!==id;track=id;stepIndex=0;write('mia-synth-track',id);
+  if(shouldPlay){
+   claimAudio('soundscape');
+   if(!init())return;
+   try{await ctx.resume()}catch(_){status.textContent='Please allow audio playback in your browser';return}
+   if(changed||!playing){
+    if(audioFade){clearInterval(audioFade);audioFade=null}
+    if(!audio.paused)fadeDefaultOut();
+    playing=true;const previous=scene;scene=makeScene(track);
+    if(previous)retire(previous,2.2);
+    fadeIn(scene,2.2);
+   }
+   write('mia-music-enabled','yes');
+  }
+  status.textContent='Selected · '+(title||modes[track].name);paint();
+ }
+ function paint(){
+  button.textContent=playing?'Ⅱ':'♫';
+  const name=track==='default'?'Mia · Original soundtrack':modes[track].name;
+  button.setAttribute('aria-label',playing?'Pause background music':'Play background music');
+  button.title=playing?'Pause background music':'Play background music';
+  status.textContent=playing?'Playing · '+name:'Tap to bring the sound back';
+ }
+ function bindMoodClicks(){
+  try{
+   const w=frame.contentWindow;
+   if(!w||w.__miaMoodAudioBound)return;
+   w.__miaMoodAudioBound=true;
+   w.addEventListener('click',ev=>{
+    const card=ev.target&&ev.target.closest?ev.target.closest('.mood-card[data-mood]'):null;
+    if(!card)return;
+    const ids={blue:'synth:tearful',gold:'synth:dazing',green:'synth:forest'};
+    const id=ids[card.dataset.mood];
+    if(id)selectTrack(id,modes[id].name,true);
+   },true);
+  }catch(_){}
+ }
+ frame.addEventListener('load',bindMoodClicks);
+ setTimeout(bindMoodClicks,250);
+ function stopForAlbum(){
+  if(audioFade){clearInterval(audioFade);audioFade=null}
+  playing=false;audio.pause();audio.volume=1;audio.muted=true;
+  const previous=scene;scene=null;
+  if(previous)retire(previous,.6);
+  write('mia-music-enabled','no');paint();
+  status.textContent='Mia album is playing';
+ }
+ button.addEventListener('click',()=>{try{frame.contentWindow.postMessage({type:'mia:stop-album'},'*')}catch(_){};if(rainActive){endRain();return}playing?stop():start()});
+ window.addEventListener('message',e=>{if(!e.data||typeof e.data!=='object')return;if(e.data.type==='mia:album-play'){stopForAlbum()}else if(e.data.type==='mia:track')selectTrack(e.data.track,e.data.title,true);else if(e.data.type==='mia:enter')startDefaultFromGesture();else if(e.data.type==='mia:play')start();else if(e.data.type==='mia:rain-start')beginRain();else if(e.data.type==='mia:rain-stop')endRain()});
+ // Every fresh visit begins with the original background track; mood cards can switch to other soundscapes.
+ track='default';audio.pause();audio.currentTime=0;audio.muted=true;playing=false;paint();
+})();
+</script><script>
+(()=> {
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {scope:'./'}).catch(()=>{}));
+ }
+ let installEvent=null;
+ window.addEventListener('beforeinstallprompt', event => {
+   event.preventDefault(); installEvent=event;
+   let button=document.getElementById('mia-pwa-install');
+   if(!button){
+     button=document.createElement('button');button.id='mia-pwa-install';button.type='button';
+     button.textContent='INSTALL MIA ↗';button.setAttribute('aria-label','Install Mia Café');
+     document.body.appendChild(button);
+     button.addEventListener('click',async()=>{
+       if(!installEvent)return;
+       installEvent.prompt();
+       await installEvent.userChoice;
+       installEvent=null;button.remove();
+     });
+   }
+   button.dataset.ready='true';
+ });
+ window.addEventListener('appinstalled',()=>{
+   const button=document.getElementById('mia-pwa-install');if(button)button.remove();
+   installEvent=null;
+ });
+})();
+</script>
+</body></html>

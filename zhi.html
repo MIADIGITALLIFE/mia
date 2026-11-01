@@ -142,8 +142,8 @@ input,textarea,select{max-width:100%}
   html{scroll-behavior:auto}
 }
 </style>
-</head>
-<body>
+<style>.language-switch{position:fixed;z-index:50;top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));padding:8px 13px;border:1px solid #c49a6788;border-radius:24px;background:#11100eeF;color:#e9e3d7;font:11px Arial,sans-serif;letter-spacing:.08em;backdrop-filter:blur(12px);text-decoration:none}</style></head>
+<body><a class="language-switch" id="language-switch" href="en/zhi.html" lang="en">EN</a>
 <nav class="site-nav" aria-label="Mia spaces">
 <a class="brand" href="index.html">M I A</a>
 <div class="nav-links"><a href="index.html">THE MIST</a><a href="bar.html">THE BAR</a><a href="music.html">MUSIC ROOM</a><a href="greenhouse.html">GREENHOUSE</a><a href="archive.html">THE ARCHIVE</a><a href="zhi.html" aria-current="page">ZHI NOTES</a></div>
@@ -191,6 +191,7 @@ input,textarea,select{max-width:100%}
 <script>
 (()=> {
 const DATA_URL='https://raw.githubusercontent.com/ZEEFSEE/ZEE/main/mia/sections.json';
+const langParams=new URLSearchParams(location.search);langParams.set('lang','en');document.getElementById('language-switch').href='en/zhi.html?'+langParams.toString()+location.hash;
 const statusEl=document.getElementById('status');
 const sectionEls=[...document.querySelectorAll('[data-section]')];
 const config={

@@ -1,0 +1,47 @@
+name: Validate bilingual content
+
+on:
+  pull_request:
+    paths:
+      - "data/i18n/**"
+      - "i18n/**"
+      - "en/**"
+      - "sw.js"
+      - "scripts/validate-bilingual-content.mjs"
+      - "scripts/test-bilingual-content.mjs"
+      - "scripts/test-bilingual-site.mjs"
+      - ".github/workflows/validate-bilingual-content.yml"
+  push:
+    branches:
+      - main
+      - "feature/mia-bilingual-foundation"
+    paths:
+      - "data/i18n/**"
+      - "i18n/**"
+      - "en/**"
+      - "sw.js"
+      - "scripts/validate-bilingual-content.mjs"
+      - "scripts/test-bilingual-content.mjs"
+      - "scripts/test-bilingual-site.mjs"
+      - ".github/workflows/validate-bilingual-content.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate bilingual example and review drafts
+        run: |
+          node scripts/validate-bilingual-content.mjs data/i18n/content.example.json data/i18n/upstream-drafts/*.json
+      - name: Test publication boundary rules
+        run: node scripts/test-bilingual-content.mjs
+      - name: Test bilingual site invariants
+        run: node scripts/test-bilingual-site.mjs

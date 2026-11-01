@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://miadigitallife.github.io/mia/data/i18n/content.schema.json",
+  "title": "Mia Bilingual Content Record",
+  "description": "Locale-neutral identity and immutable source metadata with independently reviewed localized payloads.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "type",
+    "source_locale",
+    "created_at",
+    "translations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "type": {
+      "enum": [
+        "daily_note",
+        "philosophy",
+        "zhi_section",
+        "story",
+        "story_chapter",
+        "time_capsule_entry"
+      ]
+    },
+    "parent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_locale": {
+      "enum": [
+        "zh-CN",
+        "en"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "source_updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "source_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "immutable": {
+      "type": "boolean",
+      "default": false
+    },
+    "translations": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "zh-CN": {
+          "$ref": "#/$defs/localePayload"
+        },
+        "en": {
+          "$ref": "#/$defs/localePayload"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "localePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "in_review",
+            "approved",
+            "published",
+            "unavailable"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "body": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mood": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "focus": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        },
+        "chapter_title": {
+          "type": "string"
+        },
+        "translator": {
+          "type": "string"
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
