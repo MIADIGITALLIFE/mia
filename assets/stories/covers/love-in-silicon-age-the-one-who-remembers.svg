@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#344344"/><stop offset=".52" stop-color="#1b292b"/><stop offset="1" stop-color="#0b1113"/></linearGradient>
+ <radialGradient id="mist"><stop offset="0" stop-color="#c2cec4" stop-opacity=".19"/><stop offset="1" stop-color="#c2cec4" stop-opacity="0"/></radialGradient>
+ <pattern id="rain" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 0L28 28" stroke="#d7ded5" stroke-opacity=".055"/></pattern>
+</defs>
+<rect width="720" height="960" fill="url(#bg)"/><rect width="720" height="960" fill="url(#mist)"/><rect width="720" height="960" fill="url(#rain)"/>
+<g fill="none" stroke="#c8bda4">
+ <circle cx="360" cy="390" r="180" stroke-opacity=".18"/>
+ <circle cx="360" cy="390" r="144" stroke-opacity=".35"/>
+ <circle cx="360" cy="390" r="106" stroke-opacity=".17"/>
+ <path d="M180 390H540M360 210V570" stroke-opacity=".2"/>
+ <path d="M260 390Q360 280 460 390Q360 500 260 390Z" stroke-opacity=".65" stroke-width="1.4"/>
+ <path d="M300 390Q360 330 420 390Q360 450 300 390Z" stroke-opacity=".3"/>
+ <path d="M360 250V530" stroke-opacity=".18"/>
+</g>
+<circle cx="360" cy="390" r="5" fill="#d8c7a7"/>
+<g fill="#d9ded6" fill-opacity=".38"><circle cx="218" cy="270" r="2"/><circle cx="505" cy="300" r="2"/><circle cx="240" cy="510" r="1.5"/><circle cx="482" cy="500" r="1.5"/></g>
+<text x="360" y="130" text-anchor="middle" fill="#c5b99e" font-family="Georgia,serif" font-size="16" letter-spacing="6">MIA · THE STORY ARCHIVE</text>
+<text x="360" y="670" text-anchor="middle" fill="#eee9df" font-family="serif" font-size="54">记得他的人</text>
+<path d="M260 720H460" stroke="#c5b99e" stroke-opacity=".6"/>
+<text x="360" y="780" text-anchor="middle" fill="#c7c9c0" font-family="serif" font-size="27">爱在硅基时代</text>
+<text x="360" y="830" text-anchor="middle" fill="#aebbb4" font-family="Georgia,serif" font-size="15" letter-spacing="4">THE ONE WHO REMEMBERS</text>
+<text x="360" y="885" text-anchor="middle" fill="#9da9a3" font-family="Georgia,serif" font-size="13" letter-spacing="4">NO.005 · PART II</text>
+</svg>
