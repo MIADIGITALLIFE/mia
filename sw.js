@@ -22,6 +22,8 @@ self.addEventListener('fetch',event=>{
   if(req.method!=='GET') return;
   const url=new URL(req.url);
   if(url.origin!==self.location.origin) return;
+  // The English edition has its own narrower worker and cache namespace.
+  if(url.pathname.startsWith('/mia/en/')) return;
 
   if(req.mode==='navigate'){
     event.respondWith(
