@@ -51,6 +51,14 @@ body{min-height:100svh;overflow:hidden;font-family:"Cormorant Garamond",Georgia,
 <p class="note">Sound begins only when you choose. You may leave at any time.</p>
 </section><div class="bottom">BREATHE IN · LET THE WORLD WAIT</div></main>
 <script>
+(()=>{
+ const params=new URLSearchParams(location.search);
+ if(!params.has('space'))return;
+ params.set('lang','en');
+ location.replace('world.html?'+params.toString()+location.hash);
+})();
+</script>
+<script>
 (()=>{const line=document.getElementById('time-line'),h=new Date().getHours();const lines=h<5?["The night is still deep. Nothing needs to be solved yet.","Let unfinished thoughts rest for a while."]:h<11?["Morning does not need to become an answer.","Leave a little room for yourself today."]:h<17?["You are allowed to be without purpose for a moment.","Not every silence needs an explanation."]:h<21?["As daylight fades, let the mind slow down.","Set down, gently, the words left unsaid today."]:["The night is a place to keep things without conclusions.","Some answers do not need to arrive today."];line.textContent=lines[Math.floor(Math.random()*lines.length)];})();
 </script>
 <script>
