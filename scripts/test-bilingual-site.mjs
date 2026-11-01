@@ -109,6 +109,20 @@ assert.ok(englishZhi.includes("if(!localized){empty(container") &&
 assert.ok(read('en/story.html').includes("'mia-story-progress:'"),
   'English story reader must retain the established progress key prefix');
 
+const englishCapsule = read('en/time-capsule.html');
+assert.ok(englishCapsule.includes("fetch('../time-capsule-data.json'") && englishCapsule.includes('Original source text · Chinese') && englishCapsule.includes('READ IN CHINESE'),
+  'English time capsule must preserve untranslated source records and direct readers to the Chinese edition');
+assert.ok(!/item\.(?:title|body|content|tags|mood|text)\b/.test(englishCapsule),
+  'English time capsule must not render untranslated historical source fields');
+const englishBar = read('en/bar.html');
+assert.ok(englishBar.includes('A PHILOSOPHY CARD') && englishBar.includes('CURATED REFLECTION'),
+  'English bar must label its built-in copy as curated, not as a live daily feed');
+assert.ok(!englishBar.includes("TODAY'S PHILOSOPHY"),
+  'English bar must not imply its static curated pool is a live daily philosophy feed');
+const englishStory = read('en/story.html');
+assert.ok(englishStory.includes('ORIGINAL CHINESE TEXT') && englishStory.includes('This story is presented in its original Chinese.'),
+  'English story reader must disclose that the novel body remains in its source language until an approved translation exists');
+
 const englishReader = read('en/story.html');
 assert.ok(
   englishReader.includes("(lang==='zh'?'../story.html':'story.html')+'?'+p.toString()+location.hash"),
