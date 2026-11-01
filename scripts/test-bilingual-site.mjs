@@ -102,6 +102,10 @@ for (const photo of photos) {
 }
 assert.ok(read('en/greenhouse.html').includes('mia-greenhouse-memories-v1'));
 assert.ok(archive.includes('mia-greenhouse-memories-v1'));
+const englishZhi = read('en/zhi.html');
+assert.ok(englishZhi.includes("if(!localized){empty(container") &&
+  !englishZhi.includes(":sourceItem;"),
+  'English ZHI must render only a published locale payload and never fall back to raw source fields');
 assert.ok(read('en/story.html').includes("'mia-story-progress:'"),
   'English story reader must retain the established progress key prefix');
 
