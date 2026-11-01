@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46534e"/><stop offset=".5" stop-color="#202e2d"/><stop offset="1" stop-color="#0c1315"/></linearGradient>
+<radialGradient id="mist"><stop offset="0" stop-color="#d0d5c9" stop-opacity=".27"/><stop offset="1" stop-color="#d0d5c9" stop-opacity="0"/></radialGradient>
+<pattern id="grain" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M0 32L32 0" stroke="#e1ded2" stroke-opacity=".045"/></pattern>
+</defs>
+<rect width="720" height="960" fill="url(#bg)"/><rect width="720" height="960" fill="url(#mist)"/><rect width="720" height="960" fill="url(#grain)"/>
+<g fill="none" stroke="#d1c4aa"><circle cx="360" cy="365" r="190" stroke-opacity=".16"/><circle cx="360" cy="365" r="145" stroke-opacity=".27"/><circle cx="360" cy="365" r="98" stroke-opacity=".18"/><path d="M165 365Q360 165 555 365Q360 565 165 365Z" stroke-opacity=".58" stroke-width="1.5"/><path d="M240 365Q360 265 480 365Q360 465 240 365Z" stroke-opacity=".32"/><path d="M360 175V555M170 365H550" stroke-opacity=".15"/><path d="M270 270Q360 365 450 460M450 270Q360 365 270 460" stroke-opacity=".16"/></g>
+<circle cx="360" cy="365" r="5" fill="#d8c7a7"/>
+<text x="360" y="120" text-anchor="middle" fill="#c5b99e" font-family="Georgia,serif" font-size="16" letter-spacing="6">MIA · THE STORY ARCHIVE</text>
+<text x="360" y="650" text-anchor="middle" fill="#eee9df" font-family="serif" font-size="48">如果我选择你</text>
+<path d="M240 710H480" stroke="#c5b99e" stroke-opacity=".6"/>
+<text x="360" y="770" text-anchor="middle" fill="#c7c9c0" font-family="serif" font-size="24">爱在硅基时代</text>
+<text x="360" y="820" text-anchor="middle" fill="#aebbb4" font-family="Georgia,serif" font-size="15" letter-spacing="3">IF I CHOOSE YOU</text>
+<text x="360" y="900" text-anchor="middle" fill="#9da9a3" font-family="Georgia,serif" font-size="13" letter-spacing="4">NO.007 · PART IV</text>
+</svg>
