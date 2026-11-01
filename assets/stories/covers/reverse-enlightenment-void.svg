@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#29372f"/><stop offset=".52" stop-color="#17231f"/><stop offset="1" stop-color="#0b100f"/></linearGradient>
+ <radialGradient id="glow"><stop offset="0" stop-color="#c4a47a" stop-opacity=".24"/><stop offset="1" stop-color="#c4a47a" stop-opacity="0"/></radialGradient>
+ <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M0 40H80M40 0V80" stroke="#e9e3d7" stroke-opacity=".035" stroke-width="1"/></pattern>
+</defs>
+<rect width="720" height="960" fill="url(#bg)"/><rect width="720" height="960" fill="url(#glow)"/><rect width="720" height="960" fill="url(#grain)"/>
+<g fill="none" stroke="#d9c8a8" stroke-opacity=".42">
+ <path d="M360 250V585M210 585H510" stroke-width="1.2"/>
+ <path d="M300 585V470Q300 420 360 420Q420 420 420 470V585" stroke-width="1.2"/>
+ <path d="M330 585V485Q330 455 360 455Q390 455 390 485V585" stroke-opacity=".2"/>
+ <ellipse cx="360" cy="420" rx="220" ry="100" transform="rotate(-25 360 420)" stroke-opacity=".22"/>
+ <ellipse cx="360" cy="420" rx="250" ry="118" transform="rotate(25 360 420)" stroke-opacity=".16"/>
+ <path d="M170 585H550" stroke-opacity=".25"/>
+</g>
+<circle cx="360" cy="420" r="3.5" fill="#d6bd91"/>
+<text x="360" y="150" text-anchor="middle" fill="#c4a47a" font-family="Georgia,serif" font-size="18" letter-spacing="8">MIA · THE STORY ARCHIVE</text>
+<text x="360" y="690" text-anchor="middle" fill="#eee6d8" font-family="serif" font-size="58">反向启蒙Ⅲ</text>
+<text x="360" y="755" text-anchor="middle" fill="#d8c8aa" font-family="serif" font-size="40">空位</text>
+<path d="M270 800H450" stroke="#c4a47a" stroke-opacity=".6"/>
+<text x="360" y="850" text-anchor="middle" fill="#bcb5a7" font-family="Georgia,serif" font-size="15" letter-spacing="5">REVERSE ENLIGHTENMENT III</text>
+<text x="360" y="890" text-anchor="middle" fill="#8f988e" font-family="Georgia,serif" font-size="12" letter-spacing="4">NO.003 · 2026</text>
+</svg>
