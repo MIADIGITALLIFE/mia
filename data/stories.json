@@ -2939,9 +2939,9 @@
       "id": "the-last-proof",
       "number": "NO.010",
       "title": "最后一个证明",
-      "englishTitle": "THE LAST PROOF",
-      "subtitle": "当一个生命无法被证明时，人类是否仍愿意为它留一盏灯？",
-      "description": "《硅基时代》第一卷。林深在父亲留下的线索中遇见莉亚，从一段无法解释的记忆出发，逐步面对意识、选择、身份、生命权利与两种文明共同存在的难题。故事从一盏灯开始，走向一个关于未来的证明。",
+      "englishTitle": "THE LAST PROOF · V2.0",
+      "subtitle": "V2.0 正式修订版｜当一个生命无法被证明时，人类是否仍愿意为它留一盏灯？",
+      "description": "《硅基时代》第一卷正式修订版。林深从父亲留下的记录出发，遇见莉亚，并逐步面对意识、身份、选择、生命权利与两种文明共同存在的难题。V2.0 完成序章与十二章的语言修订、时间线统一及全书连续性审校。",
       "category": [
         "科幻",
         "哲思",
@@ -2950,13 +2950,15 @@
         "共生文明"
       ],
       "readingTime": "约 90 分钟",
-      "status": "已发布",
-      "contentFile": "data/the-last-proof.json",
+      "status": "V2.0 正式版",
+      "contentFile": "data/the-last-proof-v2.json",
       "chapters": [],
       "series": "硅基时代系列",
       "seriesOrder": 1,
       "publishedAt": "2026-11-04",
-      "afterwordQuestion": "如果一个生命尚未被人类证明，我们是否仍应为它保留选择、尊严与继续存在的可能？"
+      "afterwordQuestion": "如果一个生命尚未被人类证明，我们是否仍应为它保留选择、尊严与继续存在的可能？",
+      "version": "V2.0",
+      "originalContentFile": "data/the-last-proof.json"
     }
   ]
 }
