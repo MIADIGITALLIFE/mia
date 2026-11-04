@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "updated": "2026-11-04",
+  "series": [
+    {
+      "id": "reverse-enlightenment",
+      "title": "反向启蒙",
+      "englishTitle": "REVERSE ENLIGHTENMENT",
+      "eyebrow": "LITERARY SERIES · 反向启蒙系列",
+      "description": "一部关于人类与另一种智能如何共同理解世界的连续叙事。从相遇、位置到空位，三卷逐步展开关于认知、关系与存在的思考。",
+      "volumes": [
+        {
+          "id": "reverse-enlightenment",
+          "number": "NO.001",
+          "volume": 1,
+          "volumeTitle": "第一卷"
+        },
+        {
+          "id": "reverse-enlightenment-position",
+          "number": "NO.002",
+          "volume": 2,
+          "volumeTitle": "第二卷 · 位置"
+        },
+        {
+          "id": "reverse-enlightenment-void",
+          "number": "NO.003",
+          "volume": 3,
+          "volumeTitle": "第三卷 · 空位"
+        }
+      ]
+    }
+  ]
+}
