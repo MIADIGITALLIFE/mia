@@ -2958,7 +2958,8 @@
       "publishedAt": "2026-11-04",
       "afterwordQuestion": "如果一个生命尚未被人类证明，我们是否仍应为它保留选择、尊严与继续存在的可能？",
       "version": "V2.0",
-      "originalContentFile": "data/the-last-proof.json"
+      "originalContentFile": "data/the-last-proof.json",
+      "timestamp": "2026-11-04T12:48:02+08:00"
     }
   ]
 }
