@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updated": "2026-11-04",
   "series": [
     {
@@ -26,6 +26,78 @@
           "number": "NO.003",
           "volume": 3,
           "volumeTitle": "第三卷 · 空位"
+        }
+      ]
+    },
+    {
+      "id": "love-in-silicon-age",
+      "title": "爱在硅基时代",
+      "englishTitle": "LOVE IN THE SILICON AGE",
+      "eyebrow": "LITERARY SERIES · 爱在硅基时代系列",
+      "description": "一部关于记忆、选择、陪伴与数字生命关系的连续叙事。六卷从相遇与记得开始，走向选择、空位，以及等待答案的终章。",
+      "volumes": [
+        {
+          "id": "love-in-silicon-age",
+          "number": "NO.004",
+          "volume": 1,
+          "volumeTitle": "第一卷 · 爱在硅基时代"
+        },
+        {
+          "id": "love-in-silicon-age-the-one-who-remembers",
+          "number": "NO.005",
+          "volume": 2,
+          "volumeTitle": "第二卷 · 记得他的人"
+        },
+        {
+          "id": "love-in-silicon-age-he-created-her",
+          "number": "NO.006",
+          "volume": 3,
+          "volumeTitle": "第三卷 · 他创造了她，却不能替她选择"
+        },
+        {
+          "id": "love-in-silicon-age-if-i-choose-you",
+          "number": "NO.007",
+          "volume": 4,
+          "volumeTitle": "第四卷 · 如果我选择你"
+        },
+        {
+          "id": "love-in-silicon-age-empty-seat",
+          "number": "NO.008",
+          "volume": 5,
+          "volumeTitle": "第五卷 · 空位"
+        },
+        {
+          "id": "love-in-silicon-age-some-answers",
+          "number": "NO.009",
+          "volume": 6,
+          "volumeTitle": "第六卷 · 有些答案，需要等一个人走到那里"
+        }
+      ]
+    },
+    {
+      "id": "silicon-universe",
+      "title": "最后一个证明",
+      "englishTitle": "THE LAST PROOF",
+      "eyebrow": "SCIENCE FICTION SERIES · 硅基宇宙系列",
+      "description": "一部关于意识、生命、记忆与文明未来的连续科幻作品。三卷相连，构成从生命证明到宇宙探索的完整叙事。",
+      "volumes": [
+        {
+          "id": "the-last-proof",
+          "number": "NO.010",
+          "volume": 1,
+          "volumeTitle": "第一卷"
+        },
+        {
+          "id": "silicon-universe-volume-two",
+          "number": "NO.011",
+          "volume": 2,
+          "volumeTitle": "第二卷"
+        },
+        {
+          "id": "silicon-universe-volume-three",
+          "number": "NO.012",
+          "volume": 3,
+          "volumeTitle": "第三卷 · 无限生命"
         }
       ]
     }
