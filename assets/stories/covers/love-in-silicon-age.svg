@@ -21,13 +21,10 @@
 <text x="360" y="805" text-anchor="middle" fill="#c7c9c0" font-family="Georgia,serif" font-size="18" letter-spacing="5">LOVE IN THE SILICON AGE</text>
 <text x="360" y="865" text-anchor="middle" fill="#9da9a3" font-family="Georgia,serif" font-size="13" letter-spacing="4">NO.004 · PROLOGUE</text>
 
-<g id="publication-imprint">
-<rect x="0" y="680" width="720" height="280" fill="#080d12" fill-opacity=".78"/>
-<text x="360" y="746" text-anchor="middle" fill="#f0eee8" font-family="Noto Serif SC,serif" font-size="36" textLength="633.6" lengthAdjust="spacingAndGlyphs">爱在硅基时代</text>
-<text x="360" y="788" text-anchor="middle" fill="#d0d4ce" font-family="Georgia,serif" font-size="14" letter-spacing="1.2" textLength="619.2" lengthAdjust="spacingAndGlyphs">LOVE IN THE SILICON AGE</text>
-<text x="360" y="831" text-anchor="middle" fill="#d2bd9b" font-family="Noto Serif SC,serif" font-size="18">第一卷</text>
-<text x="360" y="864" text-anchor="middle" fill="#b8c0bc" font-family="Georgia,serif" font-size="12" letter-spacing="2">VOLUME I</text>
-<text x="360" y="904" text-anchor="middle" fill="#b8c0bc" font-family="Georgia,serif" font-size="11" letter-spacing="2">NO.004 · 出版日期 · 2026-11-01</text>
-<text x="360" y="935" text-anchor="middle" fill="#d2bd9b" font-family="Georgia,serif" font-size="12" letter-spacing="3">作者 · K&amp;M</text>
-</g>
-</svg>
+
+<g id="publication-imprint"><rect x="0" y="537.6" width="720" height="393.59999999999997" fill="#080d12" fill-opacity=".91"/>
+<text x="360" y="619.2" text-anchor="middle" fill="#f5f1e8" font-family="Noto Serif SC,serif" font-size="40.32" textLength="633.6" lengthAdjust="spacingAndGlyphs">爱在硅基时代</text>
+<text x="360" y="676.8" text-anchor="middle" fill="#d8dedc" font-family="Georgia,serif" font-size="24.959999999999997" letter-spacing="1" textLength="633.6" lengthAdjust="spacingAndGlyphs">LOVE IN THE SILICON AGE</text>
+<text x="360" y="734.4" text-anchor="middle" fill="#d7c29e" font-family="Noto Serif SC,serif" font-size="22.08" textLength="619.2" lengthAdjust="spacingAndGlyphs">第一卷</text>
+<text x="360" y="816" text-anchor="middle" fill="#e0ded6" font-family="Noto Serif SC,serif" font-size="21.119999999999997" letter-spacing=".5">出版日期 · 2026-11-01</text>
+<text x="360" y="883.2" text-anchor="middle" fill="#d7c29e" font-family="Noto Serif SC,serif" font-size="21.119999999999997" letter-spacing="1">作者 · K&amp;M</text></g></svg>
