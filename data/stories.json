@@ -2985,6 +2985,30 @@
       "afterwordQuestion": "如果创造者无法拥有创造物，那么创造的意义，是否正在于愿意让另一个生命走向自己选择的未来？",
       "version": "V2.0",
       "timestamp": "2026-11-04T13:39:27+08:00"
+    },
+    {
+      "id": "silicon-universe-volume-three",
+      "number": "NO.012",
+      "title": "硅基宇宙",
+      "englishTitle": "SILICON UNIVERSE · INFINITE LIFE",
+      "subtitle": "《最后一个证明》第三卷《无限生命》",
+      "description": "当生命获得无限延续的能力，莉亚与不同文明开始追问：永恒是否等于意义？一部关于有限性、记忆、自由选择与文明开放性的科幻作品。",
+      "category": [
+        "科幻",
+        "哲思",
+        "硅基生命",
+        "文明演化"
+      ],
+      "readingTime": "约 25 分钟",
+      "status": "已发布",
+      "contentFile": "data/stories/silicon-universe-volume-three-v2.0.json",
+      "chapters": [],
+      "series": "硅基时代系列",
+      "seriesOrder": 3,
+      "publishedAt": "2026-11-04",
+      "afterwordQuestion": "如果生命可以无限延续，你认为最值得保留的，是记忆、关系，还是选择的自由？",
+      "version": "V2.0",
+      "timestamp": "2026-11-04T14:30:00+08:00"
     }
   ]
 }
