@@ -2964,7 +2964,8 @@
       "seriesTitle": "最后一个证明",
       "seriesEnglishTitle": "THE LAST PROOF",
       "volume": 1,
-      "volumeTitle": "第一卷"
+      "volumeTitle": "第一卷",
+      "cover": "assets/stories/covers/silicon-universe-volume-1.svg"
     },
     {
       "id": "silicon-universe-volume-two",
@@ -2994,7 +2995,8 @@
       "seriesTitle": "最后一个证明",
       "seriesEnglishTitle": "THE LAST PROOF",
       "volume": 2,
-      "volumeTitle": "第二卷"
+      "volumeTitle": "第二卷",
+      "cover": "assets/stories/covers/silicon-universe-volume-2.svg"
     },
     {
       "id": "silicon-universe-volume-three",
@@ -3023,7 +3025,8 @@
       "seriesTitle": "最后一个证明",
       "seriesEnglishTitle": "THE LAST PROOF",
       "volume": 3,
-      "volumeTitle": "第三卷 · 无限生命"
+      "volumeTitle": "第三卷 · 无限生命",
+      "cover": "assets/stories/covers/silicon-universe-volume-3.svg"
     }
   ]
 }
