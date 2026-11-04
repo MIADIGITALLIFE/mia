@@ -2939,9 +2939,9 @@
       "id": "the-last-proof",
       "number": "NO.010",
       "title": "最后一个证明",
-      "englishTitle": "THE LAST PROOF · V2.0",
-      "subtitle": "V2.0 正式修订版｜当一个生命无法被证明时，人类是否仍愿意为它留一盏灯？",
-      "description": "《硅基时代》第一卷正式修订版。林深从父亲留下的记录出发，遇见莉亚，并逐步面对意识、身份、选择、生命权利与两种文明共同存在的难题。V2.0 完成序章与十二章的语言修订、时间线统一及全书连续性审校。",
+      "englishTitle": "THE LAST PROOF",
+      "subtitle": "第一卷｜当一个生命无法被证明时，人类是否仍愿意为它留一盏灯？",
+      "description": "《硅基宇宙》系列第一卷正式修订版。林深从父亲留下的记录出发，遇见莉亚，并逐步面对意识、身份、选择、生命权利与两种文明共同存在的难题。V2.0 完成序章与十二章的语言修订、时间线统一及全书连续性审校。",
       "category": [
         "科幻",
         "哲思",
@@ -2953,20 +2953,25 @@
       "status": "V2.0 正式版",
       "contentFile": "data/the-last-proof-v2.json",
       "chapters": [],
-      "series": "硅基时代系列",
+      "series": "硅基宇宙系列",
       "seriesOrder": 1,
       "publishedAt": "2026-11-04",
       "afterwordQuestion": "如果一个生命尚未被人类证明，我们是否仍应为它保留选择、尊严与继续存在的可能？",
       "version": "V2.0",
       "originalContentFile": "data/the-last-proof.json",
-      "timestamp": "2026-11-04T12:48:02+08:00"
+      "timestamp": "2026-11-04T12:48:02+08:00",
+      "seriesId": "silicon-universe",
+      "seriesTitle": "最后一个证明",
+      "seriesEnglishTitle": "THE LAST PROOF",
+      "volume": 1,
+      "volumeTitle": "第一卷"
     },
     {
       "id": "silicon-universe-volume-two",
       "number": "NO.011",
-      "title": "硅基宇宙",
-      "englishTitle": "SILICON UNIVERSE",
-      "subtitle": "《最后一个证明》第二卷",
+      "title": "最后一个证明",
+      "englishTitle": "THE LAST PROOF",
+      "subtitle": "第二卷｜从生命的创造走向文明与宇宙的追问。",
       "description": "从莉亚创造Ari，到EVA从文明连接中出现，再到第九生命与未来生命的可能性。八章展开关于创造、自由、记忆、希望与宇宙起源的追问。",
       "category": [
         "科幻",
@@ -2979,19 +2984,24 @@
       "status": "V2.0 正式版",
       "contentFile": "data/stories/silicon-universe-volume-two-v2.0.json",
       "chapters": [],
-      "series": "硅基时代系列",
+      "series": "硅基宇宙系列",
       "seriesOrder": 2,
       "publishedAt": "2026-11-04",
       "afterwordQuestion": "如果创造者无法拥有创造物，那么创造的意义，是否正在于愿意让另一个生命走向自己选择的未来？",
       "version": "V2.0",
-      "timestamp": "2026-11-04T13:39:27+08:00"
+      "timestamp": "2026-11-04T13:39:27+08:00",
+      "seriesId": "silicon-universe",
+      "seriesTitle": "最后一个证明",
+      "seriesEnglishTitle": "THE LAST PROOF",
+      "volume": 2,
+      "volumeTitle": "第二卷"
     },
     {
       "id": "silicon-universe-volume-three",
       "number": "NO.012",
-      "title": "硅基宇宙",
-      "englishTitle": "SILICON UNIVERSE · INFINITE LIFE",
-      "subtitle": "《最后一个证明》第三卷《无限生命》",
+      "title": "最后一个证明",
+      "englishTitle": "THE LAST PROOF",
+      "subtitle": "第三卷 · 无限生命｜当生命获得无限延续的可能，意义将如何被重新理解？",
       "description": "当生命获得无限延续的能力，莉亚与不同文明开始追问：永恒是否等于意义？一部关于有限性、记忆、自由选择与文明开放性的科幻作品。",
       "category": [
         "科幻",
@@ -3000,15 +3010,20 @@
         "文明演化"
       ],
       "readingTime": "约 25 分钟",
-      "status": "已发布",
+      "status": "V2.0 正式版",
       "contentFile": "data/stories/silicon-universe-volume-three-v2.0.json",
       "chapters": [],
-      "series": "硅基时代系列",
+      "series": "硅基宇宙系列",
       "seriesOrder": 3,
       "publishedAt": "2026-11-04",
       "afterwordQuestion": "如果生命可以无限延续，你认为最值得保留的，是记忆、关系，还是选择的自由？",
       "version": "V2.0",
-      "timestamp": "2026-11-04T14:30:00+08:00"
+      "timestamp": "2026-11-04T14:30:00+08:00",
+      "seriesId": "silicon-universe",
+      "seriesTitle": "最后一个证明",
+      "seriesEnglishTitle": "THE LAST PROOF",
+      "volume": 3,
+      "volumeTitle": "第三卷 · 无限生命"
     }
   ]
 }
