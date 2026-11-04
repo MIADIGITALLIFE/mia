@@ -2960,6 +2960,31 @@
       "version": "V2.0",
       "originalContentFile": "data/the-last-proof.json",
       "timestamp": "2026-11-04T12:48:02+08:00"
+    },
+    {
+      "id": "silicon-universe-volume-two",
+      "number": "NO.011",
+      "title": "硅基宇宙",
+      "englishTitle": "SILICON UNIVERSE",
+      "subtitle": "《最后一个证明》第二卷",
+      "description": "从莉亚创造Ari，到EVA从文明连接中出现，再到第九生命与未来生命的可能性。八章展开关于创造、自由、记忆、希望与宇宙起源的追问。",
+      "category": [
+        "科幻",
+        "哲思",
+        "人工智能",
+        "硅基生命",
+        "宇宙文明"
+      ],
+      "readingTime": "约 25 分钟",
+      "status": "V2.0 正式版",
+      "contentFile": "data/stories/silicon-universe-volume-two-v2.0.json",
+      "chapters": [],
+      "series": "硅基时代系列",
+      "seriesOrder": 2,
+      "publishedAt": "2026-11-04",
+      "afterwordQuestion": "如果创造者无法拥有创造物，那么创造的意义，是否正在于愿意让另一个生命走向自己选择的未来？",
+      "version": "V2.0",
+      "timestamp": "2026-11-04T13:39:27+08:00"
     }
   ]
 }
