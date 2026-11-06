@@ -118,7 +118,7 @@
       "title": "散文",
       "englishTitle": "MIA ESSAY COLLECTION",
       "eyebrow": "ESSAY COLLECTION · Mia 散文系列",
-      "description": "在日常生活的细节里，收藏关于时间、意识、科技与人的温柔思考。让思想回到生活，让文字保留呼吸。",
+      "description": "在日常生活的细节里，收藏关于时间、连接、工作与自我理解的思考。让思想回到生活，让文字保留呼吸。",
       "volumes": [
         {
           "id": "reclaiming-time-granularity",
@@ -133,6 +133,13 @@
           "volume": 2,
           "volumeTitle": "第二篇 · 你不是岛屿，你是群岛",
           "subtitle": "越过孤独的海面，重新看见彼此的连接"
+        },
+        {
+          "id": "allow-unfinished-to-exist",
+          "number": "NO.021",
+          "volume": 3,
+          "volumeTitle": "第三篇 · 允许“未完成”的存在",
+          "subtitle": "在工作的边界之外，为生命保留呼吸与留白。"
         }
       ]
     },
