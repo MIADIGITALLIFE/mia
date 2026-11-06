@@ -135,6 +135,36 @@
           "subtitle": "越过孤独的海面，重新看见彼此的连接"
         }
       ]
+    },
+    {
+      "id": "complete-fragments",
+      "title": "完整的碎片",
+      "englishTitle": "FRAGMENTS OF WHOLENESS",
+      "eyebrow": "ESSAY SERIES · 完整的碎片",
+      "description": "数字时代的意识随笔。以找回当下、接纳停顿、重建主权为线索，重新讨论人与时间、注意力和自我之间的关系。",
+      "volumes": [
+        {
+          "id": "complete-fragments",
+          "number": "NO.015",
+          "volume": 1,
+          "volumeTitle": "第一篇 · 完整的碎片",
+          "subtitle": "在信息过载的时代，重新找回此刻的重量。"
+        },
+        {
+          "id": "allow-pausing",
+          "number": "NO.016",
+          "volume": 2,
+          "volumeTitle": "第二篇 · 允许暂停",
+          "subtitle": "休息不是偏离生命，而是生命自己的节奏。"
+        },
+        {
+          "id": "small-rebellion",
+          "number": "NO.017",
+          "volume": 3,
+          "volumeTitle": "第三篇 · 微小的反叛",
+          "subtitle": "在日常选择里，重新拿回注意力与生活的主权。"
+        }
+      ]
     }
   ]
 }
