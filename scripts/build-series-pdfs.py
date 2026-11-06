@@ -255,13 +255,23 @@ with open(os.path.join(OUT, "manifest.json"), "w", encoding="utf-8") as f:
     json.dump(manifest, f, ensure_ascii=False, indent=2)
 
 # A simple landing page with direct PDF download links.
+cover_files = {
+    "reverse-enlightenment": "reverse-enlightenment.svg",
+    "love-in-silicon-age": "love-in-silicon-age.svg",
+    "silicon-universe": "silicon-universe.svg",
+    "mia-essays": "mia-essays.svg",
+    "complete-fragments": "complete-fragments.svg",
+    "three-ways-human": "soul-direction.svg",
+}
 cards = []
 for item in manifest["editions"]:
+    cover = cover_files.get(item["id"], "")
     cards.append(
-        '<article><p class="eyebrow">' + escape(item["englishTitle"]) + '</p>'
+        '<article><img class="series-cover" src="assets/series-covers/' + escape(cover) + '" alt="' + escape(item["title"]) + ' 系列封面">'
+        '<div class="card-copy"><p class="eyebrow">' + escape(item["englishTitle"]) + '</p>'
         '<h2>' + escape(item["title"]) + '</h2>'
         '<p>收录 ' + str(item["works"]) + ' 部作品 · A4 PDF</p>'
-        '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载 PDF</a></article>'
+        '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载 PDF</a></div></article>'
     )
 html = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -272,12 +282,15 @@ main{max-width:920px;margin:auto;padding:64px 24px 80px}header{text-align:center
 .kicker{font:10px Arial,sans-serif;letter-spacing:.24em;color:var(--muted)}
 h1{font-size:clamp(30px,6vw,48px);font-weight:400;margin:18px 0 12px}
 .sub{color:var(--muted);font-size:14px;line-height:1.9}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-article{background:#fbfaf7;border:1px solid var(--line);padding:25px 23px;min-height:190px;display:flex;flex-direction:column}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+article{background:#fbfaf7;border:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+.series-cover{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#e7e8e1}
+.card-copy{padding:21px 22px 23px;min-height:175px;display:flex;flex-direction:column}
 article h2{font-size:21px;font-weight:400;margin:8px 0 6px}
 article p{font-size:12px;color:var(--muted);line-height:1.8}
 article .eyebrow{font:9px Arial,sans-serif;letter-spacing:.12em}
 a{margin-top:auto;color:#526858;text-decoration:none;border-bottom:1px solid #aab6a8;padding-bottom:5px;width:max-content;font-size:13px}
+@media(max-width:560px){main{padding:38px 17px 56px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card-copy{padding:15px 13px 17px;min-height:160px}article h2{font-size:17px}.series-cover{aspect-ratio:3/4}}
 footer{text-align:center;color:var(--muted);font:10px Arial,sans-serif;letter-spacing:.12em;margin-top:48px}
 </style></head><body><main><header><div class="kicker">MIA · LITERARY ARCHIVE</div><h1>A4 出版版</h1><p class="sub">六个系列，分别成册。<br>依据故事档案馆已发布文本整理 · 作者 K&M</p></header><section class="grid">""" + "".join(cards) + """</section><footer>K&M · MIA LITERARY ARCHIVE</footer></main></body></html>"""
 with open(os.path.join(ROOT, "editions.html"), "w", encoding="utf-8") as f:

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+<defs><linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dce2df"/><stop offset="1" stop-color="#f4f1e9"/></linearGradient></defs>
+<rect width="600" height="800" fill="url(#wash)"/><rect x="26" y="26" width="548" height="748" fill="none" stroke="#35433e" stroke-opacity=".22"/>
+<text x="58" y="78" font-family="Georgia,serif" font-size="13" letter-spacing="4" fill="#35433e" opacity=".75">MIA · LITERARY ARCHIVE</text>
+<text x="58" y="122" font-family="Georgia,serif" font-size="11" letter-spacing="3" fill="#35433e" opacity=".6">A SERIES COLLECTION</text>
+<g transform="translate(0 85)"><path d="M300 390 C220 300 205 210 300 85 C395 210 380 300 300 390Z" fill="none" stroke="#91a79c" stroke-width="2"/><path d="M300 390V115 M210 275L390 275" stroke="#35433e" stroke-width="1" opacity=".5"/><circle cx="300" cy="245" r="44" fill="none" stroke="#91a79c" stroke-width="1.5"/><circle cx="300" cy="245" r="5" fill="#35433e"/></g>
+<path d="M58 505H542" stroke="#35433e" stroke-opacity=".28"/>
+<text x="58" y="570" font-family="'Noto Serif CJK SC',serif" font-size="38" fill="#35433e">灵魂自有其方向</text>
+<text x="58" y="610" font-family="Georgia,serif" font-size="12" letter-spacing="1.2" fill="#35433e" opacity=".75">THE SOUL HAS ITS OWN DIRECTION</text>
+<text x="58" y="655" font-family="'Noto Serif CJK SC',serif" font-size="15" fill="#35433e" opacity=".8">在喧嚣之外，听见内在的坐标</text>
+<text x="58" y="735" font-family="Georgia,serif" font-size="12" letter-spacing="2" fill="#35433e" opacity=".7">K&amp;M</text>
+<text x="542" y="735" text-anchor="end" font-family="Georgia,serif" font-size="10" letter-spacing="2" fill="#35433e" opacity=".6">A4 EDITION</text>
+</svg>
