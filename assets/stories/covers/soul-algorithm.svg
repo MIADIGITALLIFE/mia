@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" role="img" aria-labelledby="title desc">
+<title id="title">不要把灵魂交给算法 · DON'T HAND YOUR SOUL TO THE ALGORITHM</title>
+<desc id="desc">NO.020，K&amp;M，出版日期 2026年11月6日。</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48514d"/><stop offset=".5" stop-color="#293632"/><stop offset="1" stop-color="#121b1a"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#d7c8a8" stop-opacity=".48"/><stop offset="1" stop-color="#d7c8a8" stop-opacity="0"/></radialGradient>
+<linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9c9a8" stop-opacity=".06"/><stop offset=".52" stop-color="#e2d5b8" stop-opacity=".65"/><stop offset="1" stop-color="#d9c9a8" stop-opacity=".08"/></linearGradient>
+</defs>
+<rect width="800" height="1200" fill="url(#bg)"/><circle cx="400" cy="470" r="370" fill="url(#glow)"/>
+<g fill="none" stroke="url(#line)" stroke-width="1.5">
+<path d="M80 660 C210 520 250 340 400 255 S610 330 720 170"/><path d="M65 720 C210 570 285 410 405 350 S610 410 740 250" opacity=".7"/><path d="M115 780 C240 640 300 525 420 470 S615 520 700 385" opacity=".55"/><path d="M400 170 C350 300 470 365 400 500 S330 700 430 850" opacity=".55"/><path d="M180 430 C300 455 315 560 400 610 S560 650 640 760" opacity=".6"/><circle cx="400" cy="500" r="185" stroke-opacity=".18"/><circle cx="400" cy="500" r="250" stroke-opacity=".12"/>
+</g>
+<g fill="#e3d7c0" opacity=".65"><circle cx="400" cy="255" r="4"/><circle cx="720" cy="170" r="3"/><circle cx="115" cy="780" r="3"/><circle cx="640" cy="760" r="4"/></g>
+<text x="400" y="130" text-anchor="middle" fill="#d9c9a8" font-family="Georgia,serif" font-size="19" letter-spacing="6">K &amp; M · LITERARY ESSAY</text>
+<text x="400" y="820" text-anchor="middle" fill="#f1ede4" font-family="'Noto Serif SC',serif" font-size="51" letter-spacing="5">不要把灵魂交给算法</text>
+<text x="400" y="885" text-anchor="middle" fill="#d9d1c2" font-family="Georgia,serif" font-size="19" letter-spacing="2">DON'T HAND YOUR SOUL</text>
+<text x="400" y="916" text-anchor="middle" fill="#d9d1c2" font-family="Georgia,serif" font-size="19" letter-spacing="2">TO THE ALGORITHM</text>
+<text x="400" y="985" text-anchor="middle" fill="#d7c9aa" font-family="Georgia,serif" font-size="18" letter-spacing="4">NO.020 · MIA STORY ARCHIVE</text>
+<path d="M230 1018 H570" stroke="#d7c9aa" stroke-opacity=".42"/>
+<text x="400" y="1060" text-anchor="middle" fill="#e4dac8" font-family="Georgia,serif" font-size="17" letter-spacing="2">2026.11.06 · 12:50:58 +08:00</text>
+<text x="400" y="1100" text-anchor="middle" fill="#c9c0b1" font-family="Georgia,serif" font-size="17" letter-spacing="3">AUTHOR · K&amp;M</text>
+</svg>
