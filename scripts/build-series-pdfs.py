@@ -11,7 +11,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether,
     HRFlowable, Table, TableStyle
@@ -22,23 +22,9 @@ DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "downloads", "series")
 os.makedirs(OUT, exist_ok=True)
 
-FONT_CANDIDATES = [
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
-    "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
-]
-FONT_BOLD_CANDIDATES = [
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
-    "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
-]
-FONT_PATH = next((p for p in FONT_CANDIDATES if os.path.exists(p)), None)
-FONT_BOLD_PATH = next((p for p in FONT_BOLD_CANDIDATES if os.path.exists(p)), FONT_PATH)
-if not FONT_PATH:
-    raise SystemExit("Noto Sans CJK font not found. Install fonts-noto-cjk first.")
-
-pdfmetrics.registerFont(TTFont("NotoCJK", FONT_PATH, subfontIndex=0))
-pdfmetrics.registerFont(TTFont("NotoCJK-Bold", FONT_BOLD_PATH, subfontIndex=0))
-pdfmetrics.registerFontFamily("NotoCJK", normal="NotoCJK", bold="NotoCJK-Bold",
-                              italic="NotoCJK", boldItalic="NotoCJK-Bold")
+pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
+pdfmetrics.registerFontFamily("STSong-Light", normal="STSong-Light", bold="STSong-Light",
+                              italic="STSong-Light", boldItalic="STSong-Light")
 
 stories_data = json.load(open(os.path.join(DATA, "stories.json"), encoding="utf-8"))
 series_data = json.load(open(os.path.join(DATA, "series.json"), encoding="utf-8"))
@@ -52,62 +38,62 @@ PAPER = colors.HexColor("#FBFAF7")
 
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(
-    name="CoverEyebrow", fontName="NotoCJK", fontSize=9, leading=15,
+    name="CoverEyebrow", fontName="STSong-Light", fontSize=9, leading=15,
     textColor=MUTED, alignment=TA_CENTER, spaceAfter=18, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="CoverTitle", fontName="NotoCJK-Bold", fontSize=29, leading=43,
+    name="CoverTitle", fontName="STSong-Light", fontSize=29, leading=43,
     textColor=INK, alignment=TA_CENTER, spaceAfter=12, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="CoverEnglish", fontName="NotoCJK", fontSize=10, leading=16,
+    name="CoverEnglish", fontName="STSong-Light", fontSize=10, leading=16,
     textColor=MUTED, alignment=TA_CENTER, spaceAfter=18
 ))
 styles.add(ParagraphStyle(
-    name="CoverDescription", fontName="NotoCJK", fontSize=10.5, leading=19,
+    name="CoverDescription", fontName="STSong-Light", fontSize=10.5, leading=19,
     textColor=INK, alignment=TA_CENTER, leftIndent=18*mm, rightIndent=18*mm,
     spaceAfter=8, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="SmallCenter", fontName="NotoCJK", fontSize=8.5, leading=14,
+    name="SmallCenter", fontName="STSong-Light", fontSize=8.5, leading=14,
     textColor=MUTED, alignment=TA_CENTER, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="SectionTitle", fontName="NotoCJK-Bold", fontSize=20, leading=30,
+    name="SectionTitle", fontName="STSong-Light", fontSize=20, leading=30,
     textColor=INK, spaceBefore=4, spaceAfter=12, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="WorkTitle", fontName="NotoCJK-Bold", fontSize=19, leading=29,
+    name="WorkTitle", fontName="STSong-Light", fontSize=19, leading=29,
     textColor=INK, spaceAfter=7, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="WorkEnglish", fontName="NotoCJK", fontSize=8.5, leading=14,
+    name="WorkEnglish", fontName="STSong-Light", fontSize=8.5, leading=14,
     textColor=MUTED, spaceAfter=9
 ))
 styles.add(ParagraphStyle(
-    name="Meta", fontName="NotoCJK", fontSize=8.5, leading=15,
+    name="Meta", fontName="STSong-Light", fontSize=8.5, leading=15,
     textColor=MUTED, spaceAfter=4, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="ChapterTitle", fontName="NotoCJK-Bold", fontSize=13, leading=21,
+    name="ChapterTitle", fontName="STSong-Light", fontSize=13, leading=21,
     textColor=INK, spaceBefore=14, spaceAfter=10, keepWithNext=True,
     wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="BodyCJK", fontName="NotoCJK", fontSize=10.2, leading=18.5,
+    name="BodyCJK", fontName="STSong-Light", fontSize=10.2, leading=18.5,
     textColor=INK, alignment=TA_JUSTIFY, spaceAfter=4.2, wordWrap="CJK",
     allowWidows=0, allowOrphans=0
 ))
 styles.add(ParagraphStyle(
-    name="TOCItem", fontName="NotoCJK", fontSize=10, leading=18,
+    name="TOCItem", fontName="STSong-Light", fontSize=10, leading=18,
     textColor=INK, leftIndent=2*mm, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="IntroBody", fontName="NotoCJK", fontSize=10, leading=19,
+    name="IntroBody", fontName="STSong-Light", fontSize=10, leading=19,
     textColor=INK, spaceAfter=9, alignment=TA_JUSTIFY, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="Question", fontName="NotoCJK", fontSize=10, leading=18,
+    name="Question", fontName="STSong-Light", fontSize=10, leading=18,
     textColor=INK, leftIndent=5*mm, rightIndent=5*mm, spaceBefore=7,
     spaceAfter=10, wordWrap="CJK"
 ))
@@ -125,7 +111,7 @@ def footer(canvas, doc):
     canvas.setStrokeColor(PALE)
     canvas.setLineWidth(0.55)
     canvas.line(20*mm, 15*mm, w-20*mm, 15*mm)
-    canvas.setFont("NotoCJK", 7.5)
+    canvas.setFont("STSong-Light", 7.5)
     canvas.setFillColor(MUTED)
     canvas.drawString(20*mm, 10.5*mm, "K&M  ·  MIA LITERARY ARCHIVE")
     canvas.drawRightString(w-20*mm, 10.5*mm, str(doc.page))
