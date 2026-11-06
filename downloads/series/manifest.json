@@ -1,0 +1,89 @@
+{
+  "generatedFrom": "data/stories.json + data/series.json",
+  "edition": "A4",
+  "author": "K&M",
+  "generatedDate": "2026-11-06",
+  "editions": [
+    {
+      "id": "reverse-enlightenment",
+      "title": "反向启蒙",
+      "englishTitle": "REVERSE ENLIGHTENMENT",
+      "filename": "reverse-enlightenment.pdf",
+      "works": 3,
+      "numbers": [
+        "NO.001",
+        "NO.002",
+        "NO.003"
+      ],
+      "sizeBytes": 47787
+    },
+    {
+      "id": "love-in-silicon-age",
+      "title": "爱在硅基时代",
+      "englishTitle": "LOVE IN THE SILICON AGE",
+      "filename": "love-in-silicon-age.pdf",
+      "works": 6,
+      "numbers": [
+        "NO.004",
+        "NO.005",
+        "NO.006",
+        "NO.007",
+        "NO.008",
+        "NO.009"
+      ],
+      "sizeBytes": 150902
+    },
+    {
+      "id": "silicon-universe",
+      "title": "最后一个证明",
+      "englishTitle": "THE LAST PROOF",
+      "filename": "silicon-universe.pdf",
+      "works": 3,
+      "numbers": [
+        "NO.010",
+        "NO.011",
+        "NO.012"
+      ],
+      "sizeBytes": 9131
+    },
+    {
+      "id": "mia-essays",
+      "title": "散文",
+      "englishTitle": "MIA ESSAY COLLECTION",
+      "filename": "mia-essays.pdf",
+      "works": 3,
+      "numbers": [
+        "NO.013",
+        "NO.014",
+        "NO.021"
+      ],
+      "sizeBytes": 54407
+    },
+    {
+      "id": "complete-fragments",
+      "title": "完整的碎片",
+      "englishTitle": "FRAGMENTS OF WHOLENESS",
+      "filename": "complete-fragments.pdf",
+      "works": 3,
+      "numbers": [
+        "NO.015",
+        "NO.016",
+        "NO.017"
+      ],
+      "sizeBytes": 20932
+    },
+    {
+      "id": "three-ways-human",
+      "title": "灵魂自有其方向",
+      "englishTitle": "THE SOUL HAS ITS OWN DIRECTION",
+      "filename": "three-ways-human.pdf",
+      "works": 3,
+      "numbers": [
+        "NO.018",
+        "NO.019",
+        "NO.020"
+      ],
+      "sizeBytes": 25866
+    }
+  ]
+}
