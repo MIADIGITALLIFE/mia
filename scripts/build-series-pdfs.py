@@ -140,7 +140,9 @@ def build_pdf(series):
         if story is None:
             missing.append(volume.get("id"))
             continue
-        if story.get("status") not in ("已发布", "published", "Published"):
+        status = str(story.get("status", ""))
+        is_published = status in ("已发布", "published", "Published") or "正式版" in status
+        if not is_published:
             continue
         works.append((volume, story))
     if missing:
