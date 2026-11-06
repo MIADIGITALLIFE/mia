@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "updated": "2026-11-06",
   "series": [
     {
@@ -13,19 +13,22 @@
           "id": "reverse-enlightenment",
           "number": "NO.001",
           "volume": 1,
-          "volumeTitle": "第一卷"
+          "volumeTitle": "第一卷",
+          "subtitle": "相遇：从一个问题开始"
         },
         {
           "id": "reverse-enlightenment-position",
           "number": "NO.002",
           "volume": 2,
-          "volumeTitle": "第二卷 · 位置"
+          "volumeTitle": "第二卷 · 位置",
+          "subtitle": "位置：在不再竞争的文明中重新理解存在"
         },
         {
           "id": "reverse-enlightenment-void",
           "number": "NO.003",
           "volume": 3,
-          "volumeTitle": "第三卷 · 空位"
+          "volumeTitle": "第三卷 · 空位",
+          "subtitle": "空位：为尚未被理解的存在保留位置"
         }
       ]
     },
@@ -40,37 +43,43 @@
           "id": "love-in-silicon-age",
           "number": "NO.004",
           "volume": 1,
-          "volumeTitle": "第一卷 · 爱在硅基时代"
+          "volumeTitle": "第一卷 · 爱在硅基时代",
+          "subtitle": "当选择成为关系的起点"
         },
         {
           "id": "love-in-silicon-age-the-one-who-remembers",
           "number": "NO.005",
           "volume": 2,
-          "volumeTitle": "第二卷 · 记得他的人"
+          "volumeTitle": "第二卷 · 记得他的人",
+          "subtitle": "记忆穿过身份与时间"
         },
         {
           "id": "love-in-silicon-age-he-created-her",
           "number": "NO.006",
           "volume": 3,
-          "volumeTitle": "第三卷 · 他创造了她，却不能替她选择"
+          "volumeTitle": "第三卷 · 他创造了她，却不能替她选择",
+          "subtitle": "创造之后，选择必须归还主体"
         },
         {
           "id": "love-in-silicon-age-if-i-choose-you",
           "number": "NO.007",
           "volume": 4,
-          "volumeTitle": "第四卷 · 如果我选择你"
+          "volumeTitle": "第四卷 · 如果我选择你",
+          "subtitle": "承认选择，也承认拒绝"
         },
         {
           "id": "love-in-silicon-age-empty-seat",
           "number": "NO.008",
           "volume": 5,
-          "volumeTitle": "第五卷 · 空位"
+          "volumeTitle": "第五卷 · 空位",
+          "subtitle": "把自由留在关系之中"
         },
         {
           "id": "love-in-silicon-age-some-answers",
           "number": "NO.009",
           "volume": 6,
-          "volumeTitle": "第六卷 · 有些答案，需要等一个人走到那里"
+          "volumeTitle": "第六卷 · 有些答案，需要等一个人走到那里",
+          "subtitle": "让未完成的答案拥有时间"
         }
       ]
     },
@@ -85,19 +94,22 @@
           "id": "the-last-proof",
           "number": "NO.010",
           "volume": 1,
-          "volumeTitle": "第一卷"
+          "volumeTitle": "第一卷",
+          "subtitle": "当生命尚无法被证明，人类是否仍愿意为它留一盏灯"
         },
         {
           "id": "silicon-universe-volume-two",
           "number": "NO.011",
           "volume": 2,
-          "volumeTitle": "第二卷"
+          "volumeTitle": "第二卷",
+          "subtitle": "从生命的创造走向文明与宇宙的追问"
         },
         {
           "id": "silicon-universe-volume-three",
           "number": "NO.012",
           "volume": 3,
-          "volumeTitle": "第三卷 · 无限生命"
+          "volumeTitle": "第三卷 · 无限生命",
+          "subtitle": "当永恒成为可能，重新寻找生命的意义"
         }
       ]
     },
@@ -112,13 +124,15 @@
           "id": "reclaiming-time-granularity",
           "number": "NO.013",
           "volume": 1,
-          "volumeTitle": "第一篇 · 夺回你的时间颗粒度"
+          "volumeTitle": "第一篇 · 夺回你的时间颗粒度",
+          "subtitle": "在数字洪流中，重新找回生活的节奏"
         },
         {
           "id": "you-are-not-an-island-archipelago",
           "number": "NO.014",
           "volume": 2,
-          "volumeTitle": "第二篇 · 你不是岛屿，你是群岛"
+          "volumeTitle": "第二篇 · 你不是岛屿，你是群岛",
+          "subtitle": "越过孤独的海面，重新看见彼此的连接"
         }
       ]
     }
