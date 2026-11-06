@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1080" role="img" aria-labelledby="title desc">
+<title id="title">你不是岛屿，你是群岛 — You Are Not an Island, but an Archipelago</title>
+<desc id="desc">A quiet literary cover of islands connected by a shared sea beneath a muted evening sky.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#273a3a"/><stop offset=".48" stop-color="#526664"/><stop offset="1" stop-color="#182725"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#d8c7a4" stop-opacity=".48"/><stop offset="1" stop-color="#d8c7a4" stop-opacity="0"/></radialGradient>
+ <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a5b1a4" stop-opacity=".34"/><stop offset="1" stop-color="#0c1b1b" stop-opacity=".05"/></linearGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="32"/></filter>
+ <pattern id="grain" width="82" height="82" patternUnits="userSpaceOnUse"><circle cx="13" cy="19" r="1" fill="#fff" opacity=".08"/><circle cx="62" cy="51" r=".8" fill="#fff" opacity=".07"/><circle cx="37" cy="72" r=".7" fill="#fff" opacity=".06"/></pattern>
+</defs>
+<rect width="720" height="1080" fill="url(#bg)"/>
+<circle cx="355" cy="340" r="270" fill="url(#glow)" filter="url(#soft)"/>
+<path d="M0 520Q110 480 220 520T440 520T720 505V1080H0Z" fill="url(#sea)"/>
+<g fill="none" stroke="#d8d3c2" opacity=".22">
+ <path d="M0 610Q110 580 220 610T440 610T720 590"/>
+ <path d="M0 680Q110 650 220 680T440 680T720 660"/>
+ <path d="M0 760Q110 730 220 760T440 760T720 740"/>
+ <path d="M0 845Q110 815 220 845T440 845T720 825"/>
+</g>
+<g fill="#1d2a26" stroke="#b9b9a5" stroke-opacity=".28" stroke-width="2">
+ <path d="M94 592Q120 540 168 550Q200 520 235 555Q258 580 240 610Q190 632 130 620Z"/>
+ <path d="M315 545Q350 492 396 512Q445 500 468 544Q482 574 445 594Q380 605 335 580Z"/>
+ <path d="M520 638Q548 594 588 606Q624 590 650 625Q660 652 624 668Q570 680 535 660Z"/>
+</g>
+<g fill="#c9c4aa" opacity=".55">
+ <circle cx="166" cy="560" r="5"/><circle cx="389" cy="520" r="5"/><circle cx="587" cy="613" r="4"/>
+</g>
+<g fill="none" stroke="#d9d1bb" stroke-width="1.4" opacity=".42" stroke-dasharray="4 9">
+ <path d="M185 583Q270 500 366 548T574 640"/>
+ <path d="M168 586Q275 680 389 560"/>
+</g>
+<rect width="720" height="1080" fill="url(#grain)"/>
+<g text-anchor="middle">
+ <text x="360" y="145" fill="#d7cfbd" font-family="Georgia,serif" font-size="15" letter-spacing="6">MIA · STORY CORRIDOR</text>
+ <text x="360" y="292" fill="#f0eadc" font-family="'Noto Serif SC','Songti SC',serif" font-size="48" letter-spacing="5">你不是岛屿，</text>
+ <text x="360" y="365" fill="#f0eadc" font-family="'Noto Serif SC','Songti SC',serif" font-size="54" letter-spacing="7">你是群岛</text>
+ <path d="M240 415H480" stroke="#d4c19b" stroke-width="1" opacity=".75"/>
+ <text x="360" y="466" fill="#e0d7c6" font-family="Georgia,serif" font-size="18" letter-spacing="2">YOU ARE NOT AN ISLAND,</text>
+ <text x="360" y="495" fill="#e0d7c6" font-family="Georgia,serif" font-size="18" letter-spacing="2">BUT AN ARCHIPELAGO</text>
+ <text x="360" y="742" fill="#d2cbbb" font-family="'Noto Serif SC','Songti SC',serif" font-size="17" letter-spacing="3">关于孤独、连接，以及重新发现世界的温柔练习</text>
+ <text x="360" y="900" fill="#e0d4bd" font-family="Georgia,serif" font-size="15" letter-spacing="5">K &amp; M</text>
+ <text x="360" y="957" fill="#c9c2b2" font-family="Georgia,serif" font-size="12" letter-spacing="3">PUBLISHED · 2026.11.06</text>
+ <text x="360" y="993" fill="#c0b9a9" font-family="Georgia,serif" font-size="10" letter-spacing="2">ARCHIVED · 2026.11.06 10:28:33 +08:00</text>
+ <text x="360" y="1030" fill="#a9b0a5" font-family="Georgia,serif" font-size="11" letter-spacing="4">NO.014 · ESSAY COLLECTION</text>
+</g></svg>
