@@ -275,7 +275,7 @@ for item in manifest["editions"]:
     )
 html = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mia · A4 出版版</title><style>
+<title>Mia · 系列下载</title><style>
 :root{color-scheme:light;--ink:#30372f;--muted:#7c857a;--paper:#f4f2ec;--line:#dfe3da}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Noto Serif CJK SC',serif}
 main{max-width:920px;margin:auto;padding:64px 24px 80px}header{text-align:center;padding:24px 0 44px}
@@ -292,7 +292,7 @@ article .eyebrow{font:9px Arial,sans-serif;letter-spacing:.12em}
 a{margin-top:auto;color:#526858;text-decoration:none;border-bottom:1px solid #aab6a8;padding-bottom:5px;width:max-content;font-size:13px}
 @media(max-width:560px){main{padding:38px 17px 56px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card-copy{padding:15px 13px 17px;min-height:160px}article h2{font-size:17px}.series-cover{aspect-ratio:3/4}}
 footer{text-align:center;color:var(--muted);font:10px Arial,sans-serif;letter-spacing:.12em;margin-top:48px}
-</style></head><body><main><header><div class="kicker">MIA · LITERARY ARCHIVE</div><h1>A4 出版版</h1><p class="sub">六个系列，分别成册。<br>依据故事档案馆已发布文本整理 · 作者 K&M</p></header><section class="grid">""" + "".join(cards) + """</section><footer>K&M · MIA LITERARY ARCHIVE</footer></main></body></html>"""
+</style></head><body><main><header><div class="kicker">MIA · LITERARY ARCHIVE</div><p class="sub">六个系列，分别成册。<br>依据故事档案馆已发布文本整理 · 作者 K&M</p></header><section class="grid">""" + "".join(cards) + """</section><footer>K&M · MIA LITERARY ARCHIVE</footer></main></body></html>"""
 with open(os.path.join(ROOT, "editions.html"), "w", encoding="utf-8") as f:
     f.write(html)
 
