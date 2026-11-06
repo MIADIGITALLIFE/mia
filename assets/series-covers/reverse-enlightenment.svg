@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+<defs><linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9ded6"/><stop offset="1" stop-color="#f4f1e9"/></linearGradient></defs>
+<rect width="600" height="800" fill="url(#wash)"/><rect x="26" y="26" width="548" height="748" fill="none" stroke="#35443c" stroke-opacity=".22"/>
+<text x="58" y="78" font-family="Georgia,serif" font-size="13" letter-spacing="4" fill="#35443c" opacity=".75">MIA · LITERARY ARCHIVE</text>
+<text x="58" y="122" font-family="Georgia,serif" font-size="11" letter-spacing="3" fill="#35443c" opacity=".6">A SERIES COLLECTION</text>
+<g transform="translate(0 85)"><path d="M90 420 C160 300 250 300 310 200 S430 100 500 35" fill="none" stroke="#899b8e" stroke-width="2"/><path d="M90 420 C190 350 220 220 310 200 S430 260 500 35" fill="none" stroke="#35443c" stroke-width="1" opacity=".55"/><circle cx="310" cy="200" r="62" fill="none" stroke="#899b8e" stroke-width="1.5"/><circle cx="310" cy="200" r="7" fill="#35443c"/></g>
+<path d="M58 505H542" stroke="#35443c" stroke-opacity=".28"/>
+<text x="58" y="570" font-family="'Noto Serif CJK SC',serif" font-size="38" fill="#35443c">反向启蒙</text>
+<text x="58" y="610" font-family="Georgia,serif" font-size="12" letter-spacing="1.2" fill="#35443c" opacity=".75">REVERSE ENLIGHTENMENT</text>
+<text x="58" y="655" font-family="'Noto Serif CJK SC',serif" font-size="15" fill="#35443c" opacity=".8">在答案之外，重新学习提问</text>
+<text x="58" y="735" font-family="Georgia,serif" font-size="12" letter-spacing="2" fill="#35443c" opacity=".7">K&amp;M</text>
+<text x="542" y="735" text-anchor="end" font-family="Georgia,serif" font-size="10" letter-spacing="2" fill="#35443c" opacity=".6">A4 EDITION</text>
+</svg>
