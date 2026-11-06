@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" role="img" aria-labelledby="title desc">
+<title id="title">时间的馈赠 · THE GIFT OF TIME</title>
+<desc id="desc">NO.019，K&amp;M，出版日期 2026年11月6日。</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48534a"/><stop offset=".48" stop-color="#27352f"/><stop offset="1" stop-color="#111a17"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#d9c9a8" stop-opacity=".5"/><stop offset="1" stop-color="#d9c9a8" stop-opacity="0"/></radialGradient>
+ <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b8aa8c" stop-opacity=".05"/><stop offset=".5" stop-color="#d6c7a6" stop-opacity=".42"/><stop offset="1" stop-color="#b8aa8c" stop-opacity=".04"/></linearGradient>
+</defs>
+<rect width="800" height="1200" fill="url(#bg)"/>
+<circle cx="405" cy="425" r="360" fill="url(#light)"/>
+<path d="M400 760 C386 650 408 555 394 450 C382 360 405 285 400 210 M398 470 C340 405 280 360 205 325 M400 430 C460 370 515 320 600 280 M397 560 C330 530 270 500 190 475 M404 585 C475 535 535 490 620 455" fill="none" stroke="url(#trunk)" stroke-width="12" stroke-linecap="round"/>
+<g fill="none" stroke="#d7c9aa" stroke-opacity=".3" stroke-width="1.5">
+ <path d="M95 730 Q400 560 705 730"/><path d="M120 760 Q400 600 680 760"/>
+ <path d="M400 160 V910" stroke-opacity=".13"/>
+ <ellipse cx="400" cy="520" rx="270" ry="115" transform="rotate(-24 400 520)"/>
+ <ellipse cx="400" cy="520" rx="225" ry="90" transform="rotate(26 400 520)" stroke-opacity=".2"/>
+</g>
+<text x="400" y="145" text-anchor="middle" fill="#d9c9a8" font-family="Georgia,serif" font-size="20" letter-spacing="7">K &amp; M · LITERARY ESSAY</text>
+<text x="400" y="820" text-anchor="middle" fill="#f1ede4" font-family="'Noto Serif SC',serif" font-size="66" letter-spacing="8">时间的馈赠</text>
+<text x="400" y="885" text-anchor="middle" fill="#d9d1c2" font-family="Georgia,serif" font-size="25" letter-spacing="4">THE GIFT OF TIME</text>
+<text x="400" y="980" text-anchor="middle" fill="#d7c9aa" font-family="Georgia,serif" font-size="19" letter-spacing="5">NO.019 · MIA STORY ARCHIVE</text>
+<path d="M230 1015 H570" stroke="#d7c9aa" stroke-opacity=".42"/>
+<text x="400" y="1060" text-anchor="middle" fill="#e4dac8" font-family="Georgia,serif" font-size="17" letter-spacing="2">2026.11.06 · 12:39:00 +08:00</text>
+<text x="400" y="1100" text-anchor="middle" fill="#c9c0b1" font-family="Georgia,serif" font-size="17" letter-spacing="3">AUTHOR · K&amp;M</text>
+</svg>
