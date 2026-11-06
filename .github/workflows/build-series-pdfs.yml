@@ -31,12 +31,12 @@ jobs:
         run: python scripts/build-series-pdfs.py
       - name: Commit generated editions
         run: |
-          if git diff --quiet -- downloads/series editions.html; then
+          git add downloads/series editions.html
+          if git diff --cached --quiet; then
             echo "No PDF edition changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add downloads/series editions.html
           git commit -m "publish: generate A4 PDF series editions [skip ci]"
           git push
