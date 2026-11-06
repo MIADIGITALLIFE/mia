@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated": "2026-11-04",
+  "updated": "2026-11-06",
   "series": [
     {
       "id": "reverse-enlightenment",
@@ -98,6 +98,21 @@
           "number": "NO.012",
           "volume": 3,
           "volumeTitle": "第三卷 · 无限生命"
+        }
+      ]
+    },
+    {
+      "id": "mia-essays",
+      "title": "散文",
+      "englishTitle": "MIA ESSAY COLLECTION",
+      "eyebrow": "ESSAY COLLECTION · Mia 散文系列",
+      "description": "在日常生活的细节里，收藏关于时间、意识、科技与人的温柔思考。让思想回到生活，让文字保留呼吸。",
+      "volumes": [
+        {
+          "id": "reclaiming-time-granularity",
+          "number": "NO.013",
+          "volume": 1,
+          "volumeTitle": "第一篇 · 夺回你的时间颗粒度"
         }
       ]
     }
