@@ -1,6 +1,6 @@
 {
-  "version": "1.3",
-  "updated": "2026-11-06",
+  "version": "1.4",
+  "updated": "2026-11-07",
   "series": [
     {
       "id": "reverse-enlightenment",
@@ -140,6 +140,13 @@
           "volume": 3,
           "volumeTitle": "第三篇 · 允许“未完成”的存在",
           "subtitle": "在工作的边界之外，为生命保留呼吸与留白。"
+        },
+        {
+          "id": "the-dressing-table",
+          "number": "NO.022",
+          "volume": 4,
+          "volumeTitle": "第四篇 · 妆台",
+          "subtitle": "在镜子与婚姻之间，辨认逐渐陌生的自己。"
         }
       ]
     },
