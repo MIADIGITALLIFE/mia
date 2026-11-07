@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1080" role="img" aria-labelledby="title desc">
+<title id="title">妆台 — The Dressing Table</title>
+<desc id="desc">NO.022，Mia 散文系列第四篇，作者 K&amp;M，出版日期 2026年11月7日。</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#51483f"/><stop offset=".48" stop-color="#35332f"/><stop offset="1" stop-color="#171a18"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#e2d2b5" stop-opacity=".42"/><stop offset=".55" stop-color="#c5a77f" stop-opacity=".12"/><stop offset="1" stop-color="#c5a77f" stop-opacity="0"/></radialGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8dfcc" stop-opacity=".24"/><stop offset=".5" stop-color="#c7b99f" stop-opacity=".05"/><stop offset="1" stop-color="#f0e5d0" stop-opacity=".16"/></linearGradient>
+ <pattern id="grain" width="74" height="74" patternUnits="userSpaceOnUse"><circle cx="12" cy="17" r="1" fill="#fff" opacity=".07"/><circle cx="57" cy="42" r=".8" fill="#fff" opacity=".06"/><circle cx="31" cy="66" r=".7" fill="#fff" opacity=".05"/></pattern>
+ <filter id="blur"><feGaussianBlur stdDeviation="28"/></filter>
+</defs>
+<rect width="720" height="1080" fill="url(#bg)"/>
+<circle cx="365" cy="380" r="330" fill="url(#glow)" filter="url(#blur)"/>
+<g opacity=".58">
+ <rect x="194" y="190" width="332" height="430" rx="166" fill="url(#glass)" stroke="#d8c9ae" stroke-opacity=".5" stroke-width="2"/>
+ <rect x="207" y="203" width="306" height="404" rx="153" fill="none" stroke="#e6d8bf" stroke-opacity=".22"/>
+ <path d="M228 258Q270 213 327 218" fill="none" stroke="#fff1d8" stroke-opacity=".2" stroke-width="5"/>
+ <path d="M360 620V680M270 680H450" stroke="#d5c5a8" stroke-opacity=".35" stroke-width="3"/>
+</g>
+<g fill="none" stroke="#d7c8ae" stroke-opacity=".22">
+ <path d="M92 746H628M122 764H598"/>
+ <path d="M150 746V885M570 746V885" stroke-width="3"/>
+ <path d="M150 885H570" stroke-width="2"/>
+</g>
+<g opacity=".64">
+ <path d="M305 690h38l-4 94h-30z" fill="#a78b70" fill-opacity=".45" stroke="#d9c8ac" stroke-opacity=".45"/>
+ <path d="M310 680h28v14h-28z" fill="#c7b18e" fill-opacity=".7"/>
+ <path d="M319 680l5-30 5 30z" fill="#b95f58"/>
+ <rect x="392" y="700" width="39" height="82" rx="8" fill="#c8b99f" fill-opacity=".28" stroke="#dfd2bb" stroke-opacity=".4"/>
+ <rect x="399" y="686" width="25" height="18" rx="3" fill="#d7c9ae" fill-opacity=".48"/>
+</g>
+<g fill="none" stroke="#d8c9ad" stroke-opacity=".2">
+ <path d="M70 140H650M70 920H650"/>
+ <path d="M95 160V900M625 160V900" stroke-dasharray="2 12"/>
+</g>
+<rect width="720" height="1080" fill="url(#grain)"/>
+<g text-anchor="middle">
+ <text x="360" y="116" fill="#d9c9ad" font-family="Georgia,serif" font-size="15" letter-spacing="5">MIA · ESSAY COLLECTION</text>
+ <text x="360" y="390" fill="#f1e9da" font-family="'Noto Serif SC','Songti SC',serif" font-size="76" letter-spacing="13">妆台</text>
+ <path d="M264 435H456" stroke="#c9b28e" stroke-width="1" opacity=".8"/>
+ <text x="360" y="493" fill="#e0d4c0" font-family="Georgia,serif" font-size="20" letter-spacing="3">THE DRESSING TABLE</text>
+ <text x="360" y="560" fill="#d4c7b2" font-family="'Noto Serif SC','Songti SC',serif" font-size="17" letter-spacing="2">一个女人如何把一生，过成一场漫长的化妆</text>
+ <text x="360" y="928" fill="#e0d1b8" font-family="Georgia,serif" font-size="15" letter-spacing="5">K &amp; M</text>
+ <text x="360" y="978" fill="#d1c5b2" font-family="Georgia,serif" font-size="12" letter-spacing="3">PUBLISHED · 2026.11.07</text>
+ <text x="360" y="1018" fill="#c7bba8" font-family="Georgia,serif" font-size="11" letter-spacing="3">NO.022 · FOURTH ESSAY · MIA STORY ARCHIVE</text>
+</g>
+</svg>
