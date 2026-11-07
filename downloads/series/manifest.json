@@ -2,7 +2,7 @@
   "generatedFrom": "data/stories.json + data/series.json",
   "edition": "A4",
   "author": "K&M",
-  "generatedDate": "2026-11-06",
+  "generatedDate": "2026-11-07",
   "editions": [
     {
       "id": "reverse-enlightenment",
@@ -51,13 +51,14 @@
       "title": "散文",
       "englishTitle": "MIA ESSAY COLLECTION",
       "filename": "mia-essays.pdf",
-      "works": 3,
+      "works": 4,
       "numbers": [
         "NO.013",
         "NO.014",
-        "NO.021"
+        "NO.021",
+        "NO.022"
       ],
-      "sizeBytes": 54407
+      "sizeBytes": 65320
     },
     {
       "id": "complete-fragments",
