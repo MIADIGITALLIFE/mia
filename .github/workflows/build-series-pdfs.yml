@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - 'data/stories.json'
+      - 'data/the-last-proof-v2.json'
+      - 'data/stories/**'
       - 'data/series.json'
       - 'scripts/build-series-pdfs.py'
       - '.github/workflows/build-series-pdfs.yml'
