@@ -30,6 +30,33 @@ stories_data = json.load(open(os.path.join(DATA, "stories.json"), encoding="utf-
 series_data = json.load(open(os.path.join(DATA, "series.json"), encoding="utf-8"))
 story_by_id = {item.get("id"): item for item in stories_data.get("stories", [])}
 
+# The three Silicon Universe volumes have dedicated V2.0 manuscript sources.
+# stories.json intentionally keeps lightweight archive records; it is not the
+# canonical manuscript source for these three volumes.
+special_sources = {
+    "the-last-proof": ("data/the-last-proof-v2.json", "NO.010", 13),
+    "silicon-universe-volume-two": (
+        "data/stories/silicon-universe-volume-two-v2.0.json", "NO.011", 8
+    ),
+    "silicon-universe-volume-three": (
+        "data/stories/silicon-universe-volume-three-v2.0.json", "NO.012", 5
+    ),
+}
+for story_id, (relative_path, work_number, expected_chapters) in special_sources.items():
+    source_path = os.path.join(ROOT, relative_path)
+    with open(source_path, encoding="utf-8") as source_file:
+        manuscript = json.load(source_file)
+    chapters = manuscript.get("chapters") or []
+    if len(chapters) != expected_chapters:
+        raise ValueError(
+            f"{work_number} manuscript chapter count mismatch: "
+            f"expected {expected_chapters}, found {len(chapters)}"
+        )
+    manuscript["id"] = story_id
+    manuscript["number"] = work_number
+    manuscript["status"] = manuscript.get("status") or "V2.0 正式版"
+    story_by_id[story_id] = manuscript
+
 INK = colors.HexColor("#252923")
 MUTED = colors.HexColor("#73796F")
 ACCENT = colors.HexColor("#8C9A8A")
@@ -203,8 +230,9 @@ def build_pdf(series):
         flow.append(para(title, styles["WorkTitle"]))
         if story.get("englishTitle"):
             flow.append(para(story["englishTitle"], styles["WorkEnglish"]))
-        if story.get("subtitle"):
-            flow.append(para(story["subtitle"], styles["IntroBody"]))
+        subtitle = story.get("subtitle") or volume.get("subtitle")
+        if subtitle:
+            flow.append(para(subtitle, styles["IntroBody"]))
         metadata = []
         if story.get("publishedAt"):
             metadata.append(f"出版日期：{story['publishedAt']}")
@@ -241,11 +269,13 @@ def build_pdf(series):
         "filename": filename,
         "works": len(works),
         "numbers": [story.get("number") or volume.get("number") for volume, story in works],
+        "chapterCounts": [len(story.get("chapters", [])) for volume, story in works],
+        "totalChapters": sum(len(story.get("chapters", [])) for volume, story in works),
         "sizeBytes": os.path.getsize(path),
     }
 
 manifest = {
-    "generatedFrom": "data/stories.json + data/series.json",
+    "generatedFrom": "data/series.json + data/the-last-proof-v2.json + data/stories/silicon-universe-volume-two-v2.0.json + data/stories/silicon-universe-volume-three-v2.0.json + data/stories.json",
     "edition": "A4",
     "author": "K&M",
     "generatedDate": date.today().isoformat(),
