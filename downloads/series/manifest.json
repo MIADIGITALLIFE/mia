@@ -1,8 +1,8 @@
 {
-  "generatedFrom": "data/stories.json + data/series.json",
+  "generatedFrom": "data/series.json + data/the-last-proof-v2.json + data/stories/silicon-universe-volume-two-v2.0.json + data/stories/silicon-universe-volume-three-v2.0.json + data/stories.json",
   "edition": "A4",
   "author": "K&M",
-  "generatedDate": "2026-11-07",
+  "generatedDate": "2026-11-08",
   "editions": [
     {
       "id": "reverse-enlightenment",
@@ -15,6 +15,12 @@
         "NO.002",
         "NO.003"
       ],
+      "chapterCounts": [
+        8,
+        8,
+        6
+      ],
+      "totalChapters": 22,
       "sizeBytes": 47787
     },
     {
@@ -31,6 +37,15 @@
         "NO.008",
         "NO.009"
       ],
+      "chapterCounts": [
+        1,
+        5,
+        6,
+        8,
+        9,
+        9
+      ],
+      "totalChapters": 38,
       "sizeBytes": 150902
     },
     {
@@ -44,7 +59,13 @@
         "NO.011",
         "NO.012"
       ],
-      "sizeBytes": 9131
+      "chapterCounts": [
+        13,
+        8,
+        5
+      ],
+      "totalChapters": 26,
+      "sizeBytes": 306693
     },
     {
       "id": "mia-essays",
@@ -58,6 +79,13 @@
         "NO.021",
         "NO.022"
       ],
+      "chapterCounts": [
+        7,
+        7,
+        1,
+        1
+      ],
+      "totalChapters": 16,
       "sizeBytes": 65320
     },
     {
@@ -71,6 +99,12 @@
         "NO.016",
         "NO.017"
       ],
+      "chapterCounts": [
+        4,
+        4,
+        4
+      ],
+      "totalChapters": 12,
       "sizeBytes": 20932
     },
     {
@@ -84,6 +118,12 @@
         "NO.019",
         "NO.020"
       ],
+      "chapterCounts": [
+        1,
+        1,
+        5
+      ],
+      "totalChapters": 7,
       "sizeBytes": 25866
     }
   ]
