@@ -37,6 +37,18 @@
   file: 'Purple Sky.mp3',
   note: 'Just our love across the world to bend'
     },
+    {
+      title: 'Half-Collapsed, Half-Awake',
+      subtitle: 'MIA · NEW RECORDING',
+      file: 'Half-Collapsed, Half-Awake.mp3',
+      note: '在清醒与梦境的边缘，听见尚未说完的自己。'
+    },
+    {
+      title: 'Purple Fire',
+      subtitle: 'MIA · NEW RECORDING',
+      file: 'Purple Fire.mp3',
+      note: '一簇紫色的火，安静燃烧，却不曾熄灭。'
+    },
   ];
 
   const AUDIO_OWNER_KEY='mia-audio-owner-v1';
