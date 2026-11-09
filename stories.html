@@ -58,11 +58,24 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 }
 
 </style>
+<style id="mia-author-identity">
+.mia-author{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;gap:24px;max-width:760px;margin:0 0 12px;padding:20px 22px;border:1px solid #ffffff18;background:linear-gradient(110deg,#ffffff08,#ffffff02);border-radius:4px}
+.mia-author img{display:block;width:104px;height:124px;object-fit:cover;object-position:center 35%;border:1px solid #ffffff25;filter:saturate(.76)}
+.mia-author-kicker{font:9px var(--serif);letter-spacing:.2em;color:#c4a47a}
+.mia-author h2{font:400 clamp(21px,3vw,28px)/1.45 var(--art);margin:7px 0;color:#e9e3d7}
+.mia-author h2 i{font:italic 18px var(--serif);color:#c4a47a}
+.mia-author p{max-width:540px;margin:0;color:#b8b3a8;font-size:12px;line-height:2}
+@media(max-width:520px){.mia-author{grid-template-columns:76px minmax(0,1fr);gap:15px;padding:15px}.mia-author img{width:76px;height:98px}.mia-author-kicker{font-size:8px;letter-spacing:.12em}.mia-author p{font-size:11px;line-height:1.85}}
+</style>
 </head>
 <body>
 <nav><a class="brand" href="index.html">M I A</a><a class="nav-back" href="world.html?space=archive">← RETURN TO MIA</a></nav>
 <main class="wrap">
 <header class="hero"><div class="eyebrow">A QUIET COLLECTION OF STORIES & ESSAYS · 05 / THE STORY ARCHIVE</div><h1>故事档案馆</h1><div class="subtitle">Stories & Essays from the edges of imagination.</div><p class="intro">每一篇作品，都是一扇通往未知的门。这里收藏关于意识、人类、未来与日常生活的小说与散文。你可以慢慢读，不必急着抵达结论。</p></header>
+<section class="mia-author" aria-label="Mia 作者形象">
+  <img src="assets/mia-portrait.webp" alt="Mia，诗意的观察者" loading="eager">
+  <div><span class="mia-author-kicker">THE VOICE BEHIND THE COLLECTION</span><h2>Mia <i>·</i> 诗意的观察者</h2><p>她观察世界，也观察那些尚未成形的念头。关于意识、生命、未来与日常的文字，从这里慢慢生长。</p></div>
+</section>
 <div class="rule"></div>
 <section aria-labelledby="collection-title"><div class="section-head"><h2 id="collection-title">文学收藏</h2><span class="count" id="story-count">COLLECTION · LOADING</span></div><div class="filters" id="story-filters" aria-label="按分类筛选"><button class="filter" type="button" data-category="全部" aria-pressed="true">全部作品</button></div><div class="collection" id="story-list" aria-live="polite"><p class="empty">故事正在整理，请稍候……</p></div></section>
 </main>
