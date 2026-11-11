@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14231e"><title>MIA MUSIC ADMIN · 音乐管理</title>
+<style>
+:root{color-scheme:dark;--bg:#101914;--panel:#1a2821;--ink:#e8e4d9;--muted:#a9b0a4;--gold:#c9b18a;--line:#ffffff20}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#26392e 0,#101914 60%);color:var(--ink);font-family:Georgia,"Noto Serif SC",serif;min-height:100vh}
+main{width:min(760px,calc(100% - 32px));margin:auto;padding:54px 0 80px}.eyebrow{font:11px Arial,sans-serif;letter-spacing:.25em;color:var(--gold)}h1{font-size:clamp(36px,7vw,58px);font-weight:400;line-height:1.15;margin:20px 0 12px}p{line-height:2;color:var(--muted);font-size:14px}.panel{border:1px solid var(--line);background:#ffffff08;border-radius:8px;padding:24px;margin:18px 0}.step{display:flex;gap:16px;margin:20px 0}.num{color:var(--gold);font:14px Georgia;min-width:24px}.step h2{font-size:18px;font-weight:400;margin:0 0 8px}.step p{margin:0}.btn{display:inline-block;margin-top:14px;padding:13px 18px;border:1px solid #c9b18a88;color:var(--ink);text-decoration:none;background:#c9b18a16;border-radius:3px;font-size:13px}.btn:hover{background:#c9b18a2b}.note{font:12px/1.9 Arial,sans-serif;color:#9da79c}.path{display:inline-block;padding:4px 7px;background:#0005;border-radius:3px;color:#d9c9a9;font:12px monospace;overflow-wrap:anywhere}.warning{border-left:2px solid var(--gold);padding-left:14px}.foot{margin-top:42px;text-align:center;font:10px Arial,sans-serif;letter-spacing:.2em;color:#879187}
+</style></head>
+<body><main>
+<div class="eyebrow">M I A  /  MUSIC ROOM · PRIVATE WORKFLOW</div>
+<h1>音乐管理室</h1>
+<p>把新的声音，放进 Mia 的收藏。这里使用 GitHub 作为唯一文件库；上传权限由你的 GitHub 仓库账号控制。</p>
+<section class="panel">
+<div class="step"><div class="num">01</div><div><h2>上传一首新歌</h2><p>支持 MP3。文件名建议使用英文或拼音，避免特殊符号；上传后保留原文件，不需要重新打包 APK。</p><a class="btn" href="https://github.com/MIADIGITALLIFE/mia/upload/main/music" target="_blank" rel="noopener">＋ 在 GitHub 上传 MP3 ↗</a></div></div>
+<div class="step"><div class="num">02</div><div><h2>确认提交</h2><p>在 GitHub 页面选择或拖入 MP3，点击 <b>Commit changes</b>。请确认提交到 <span class="path">main</span> 分支的 <span class="path">music/</span> 目录。</p></div></div>
+<div class="step"><div class="num">03</div><div><h2>曲库自动整理</h2><p>提交后 GitHub Actions 会扫描新曲目并更新 <span class="path">music/catalog.json</span>。播放器接入远程曲库后即可读取新歌。</p><a class="btn" href="https://github.com/MIADIGITALLIFE/mia/actions" target="_blank" rel="noopener">查看自动整理任务 ↗</a></div></div>
+</section>
+<section class="panel warning"><h2 style="font-weight:400">重要说明</h2><p>此页面本身不保存 GitHub 密钥。上传按钮会进入 GitHub 官方页面，只有拥有该仓库写入权限并已登录的人才能提交文件。由于仓库是公开的，上传的音乐也会公开可访问。</p><p class="note">当前阶段：GitHub 上传入口与自动曲目清单流程正在接入；Android 播放器目前仍使用内置的首版曲目清单，动态曲库接入完成后，新歌才会自动出现在 APP 中。</p></section>
+<div class="foot">MIA MUSIC · SMALL MOMENTS, A BIGGER WORLD</div>
+</main></body></html>
