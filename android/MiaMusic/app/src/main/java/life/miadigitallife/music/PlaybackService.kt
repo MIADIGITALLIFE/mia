@@ -19,7 +19,7 @@ class PlaybackService : MediaSessionService() {
         }
         mediaSession = MediaSession.Builder(this, player).build()
         TrackCatalog.refresh { tracks, updated ->
-            if (updated && !isDestroyed) {
+            if (updated) {
                 val activePlayer = mediaSession?.player ?: return@refresh
                 val index = activePlayer.currentMediaItemIndex.coerceAtLeast(0)
                 activePlayer.setMediaItems(TrackCatalog.mediaItems(tracks), index.coerceAtMost(tracks.lastIndex), 0L)
