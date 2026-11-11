@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T05:06:40.145Z",
+  "updatedAt": "2026-11-11T05:19:07.191Z",
   "tracks": [
     {
       "id": "amber-rain-mp3",
@@ -46,6 +46,15 @@
       "file": "mia-background.mp3",
       "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/mia-background.mp3",
       "description": "MIA · AMBIENT"
+    },
+    {
+      "id": "mp3",
+      "title": "落梅无声",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "music/落梅无声.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/music/%E8%90%BD%E6%A2%85%E6%97%A0%E5%A3%B0.mp3",
+      "description": "MIA ORIGINAL RECORDING"
     },
     {
       "id": "onlyhome-mp3",
