@@ -1,0 +1,82 @@
+name: Update MIA MUSIC catalogue
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.mp3"
+      - "music/*.mp3"
+      - "music/**/*.mp3"
+      - "scripts/build-music-catalog.mjs"
+      - ".github/workflows/mia-music-catalog.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "*.mp3"
+      - "music/*.mp3"
+      - "music/**/*.mp3"
+      - "scripts/build-music-catalog.mjs"
+      - ".github/workflows/mia-music-catalog.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Test nested uploads and catalogue integrity
+        run: |
+          test_dir="music/.catalog-ci-test"
+          mkdir -p "$test_dir"
+          trap 'rm -rf "$test_dir"; node scripts/build-music-catalog.mjs' EXIT
+          : > "$test_dir/Purple Sky.mp3"
+          node scripts/build-music-catalog.mjs
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const catalog = JSON.parse(fs.readFileSync("music/catalog.json", "utf8"));
+          const ids = catalog.tracks.map((track) => track.id);
+          if (new Set(ids).size !== ids.length) throw new Error("Duplicate track IDs found");
+          if (!catalog.tracks.some((track) => track.file === "music/.catalog-ci-test/Purple Sky.mp3")) {
+            throw new Error("Nested MP3 upload was not included");
+          }
+          for (const track of catalog.tracks) {
+            if (!track.url || new URL(track.url).protocol !== "https:") {
+              throw new Error(`Invalid HTTPS audio URL: ${track.file}`);
+            }
+            if (!track.file.toLowerCase().endsWith(".mp3")) {
+              throw new Error(`Non-MP3 entry found: ${track.file}`);
+            }
+          }
+          console.log(`Validated ${catalog.tracks.length} tracks, nested scan, unique IDs and HTTPS URLs.`);
+          NODE
+
+  catalogue:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate catalogue
+        run: node scripts/build-music-catalog.mjs
+      - name: Commit catalogue
+        run: |
+          if git diff --quiet -- music/catalog.json; then
+            echo "Catalogue is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add music/catalog.json
+          git commit -m "chore(music): refresh catalogue"
+          git push
