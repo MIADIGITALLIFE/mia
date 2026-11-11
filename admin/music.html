@@ -15,8 +15,8 @@ main{width:min(760px,calc(100% - 32px));margin:auto;padding:54px 0 80px}.eyebrow
 <section class="panel">
 <div class="step"><div class="num">01</div><div><h2>上传一首新歌</h2><p>支持 MP3。文件名建议使用英文或拼音，避免特殊符号；上传后保留原文件，不需要重新打包 APK。</p><a class="btn" href="https://github.com/MIADIGITALLIFE/mia/upload/main/music" target="_blank" rel="noopener">＋ 在 GitHub 上传 MP3 ↗</a></div></div>
 <div class="step"><div class="num">02</div><div><h2>确认提交</h2><p>在 GitHub 页面选择或拖入 MP3，点击 <b>Commit changes</b>。请确认提交到 <span class="path">main</span> 分支的 <span class="path">music/</span> 目录。</p></div></div>
-<div class="step"><div class="num">03</div><div><h2>曲库自动整理</h2><p>提交后 GitHub Actions 会扫描新曲目并更新 <span class="path">music/catalog.json</span>。播放器接入远程曲库后即可读取新歌。</p><a class="btn" href="https://github.com/MIADIGITALLIFE/mia/actions" target="_blank" rel="noopener">查看自动整理任务 ↗</a></div></div>
+<div class="step"><div class="num">03</div><div><h2>曲库自动整理</h2><p>提交后 GitHub Actions 会扫描新曲目并更新 <span class="path">music/catalog.json</span>。Android APP 已支持读取远程曲库；新歌提交并完成曲库更新后，听众下次打开 APP 即可读取，无需重新安装。</p><a class="btn" href="https://github.com/MIADIGITALLIFE/mia/actions" target="_blank" rel="noopener">查看自动整理任务 ↗</a></div></div>
 </section>
-<section class="panel warning"><h2 style="font-weight:400">重要说明</h2><p>此页面本身不保存 GitHub 密钥。上传按钮会进入 GitHub 官方页面，只有拥有该仓库写入权限并已登录的人才能提交文件。由于仓库是公开的，上传的音乐也会公开可访问。</p><p class="note">当前阶段：GitHub 上传入口与自动曲目清单流程正在接入；Android 播放器目前仍使用内置的首版曲目清单，动态曲库接入完成后，新歌才会自动出现在 APP 中。</p></section>
+<section class="panel warning"><h2 style="font-weight:400">重要说明</h2><p>此页面本身不保存 GitHub 密钥。上传按钮会进入 GitHub 官方页面，只有拥有该仓库写入权限并已登录的人才能提交文件。由于仓库是公开的，上传的音乐也会公开可访问。</p><p class="note">当前阶段：Android APP 已具备远程曲库读取能力。PR 发布到 main 并完成首次曲库生成后，后续上传 MP3 会自动更新曲目清单；听众重新打开 APP 即可同步。</p></section>
 <div class="foot">MIA MUSIC · SMALL MOMENTS, A BIGGER WORLD</div>
 </main></body></html>
