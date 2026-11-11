@@ -14,22 +14,46 @@ const metadata = {
   "mia-background.mp3": { title: "Mia Background", description: "MIA · AMBIENT" }
 };
 
-const files = [];
-for (const root of ["music", "."]) {
-  if (!fs.existsSync(root)) continue;
-  for (const name of fs.readdirSync(root)) {
-    if (!name.toLowerCase().endsWith(".mp3")) continue;
-    if (root === "." && (name.startsWith(".") || name === "node_modules")) continue;
-    files.push(root === "." ? name : path.posix.join(root, name));
+function collectMp3Files(directory, prefix = "") {
+  if (!fs.existsSync(directory)) return [];
+  const found = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const absolute = path.join(directory, entry.name);
+    const relative = path.posix.join(prefix, entry.name);
+    if (entry.isDirectory()) {
+      found.push(...collectMp3Files(absolute, relative));
+    } else if (entry.isFile() && entry.name.toLowerCase().endsWith(".mp3")) {
+      found.push(relative);
+    }
   }
+  return found;
 }
-const uniqueFiles = [...new Set(files)].sort((a, b) => a.localeCompare(b));
+
+const rootFiles = fs.existsSync(".")
+  ? fs.readdirSync(".", { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".mp3"))
+      .map((entry) => entry.name)
+  : [];
+const musicFiles = collectMp3Files("music", "music");
+const uniqueFiles = [...new Set([...rootFiles, ...musicFiles])].sort((a, b) => a.localeCompare(b));
+const usedIds = new Set();
+
 const tracks = uniqueFiles.map((relative, index) => {
   const file = path.basename(relative);
   const info = metadata[file] || {};
   const encodedPath = relative.split("/").map(encodeURIComponent).join("/");
+  const baseId = file.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || `track-${index + 1}`;
+  let id = baseId;
+  if (usedIds.has(id)) {
+    const pathId = relative.toLowerCase().replace(/\.mp3$/i, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    id = pathId || `track-${index + 1}`;
+  }
+  let suffix = 2;
+  while (usedIds.has(id)) id = `${baseId}-${suffix++}`;
+  usedIds.add(id);
+
   return {
-    id: file.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || `track-${index + 1}`,
+    id,
     title: info.title || path.basename(file, path.extname(file)).replace(/[_-]+/g, " ").trim(),
     artist: "MIA",
     album: "MIA · ORIGINAL RECORDINGS",
@@ -38,6 +62,7 @@ const tracks = uniqueFiles.map((relative, index) => {
     description: info.description || "MIA ORIGINAL RECORDING"
   };
 });
+
 fs.mkdirSync("music", { recursive: true });
 const output = { schemaVersion: 1, updatedAt: new Date().toISOString(), tracks };
 fs.writeFileSync("music/catalog.json", JSON.stringify(output, null, 2) + "\n");
