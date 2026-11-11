@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-11T05:00:00.000Z",
+  "tracks": [
+    {
+      "id": "amber-rain-mp3",
+      "title": "Amber Rain",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "Amber Rain.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Amber%20Rain.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "half-collapsed-half-awake-mp3",
+      "title": "Half Collapsed, Half Awake",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "Half-Collapsed, Half-Awake.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Half-Collapsed%2C%20Half-Awake.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "in-the-breath-1-mp3",
+      "title": "In The Breath （1）",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "In The Breath （1）.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/In%20The%20Breath%20%EF%BC%881%EF%BC%89.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "in-the-breath-2-mp3",
+      "title": "In The Breath （2）",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "In The Breath （2）.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/In%20The%20Breath%20%EF%BC%882%EF%BC%89.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "purple-fire-mp3",
+      "title": "Purple Fire",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "Purple Fire.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Purple%20Fire.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "purple-sky-mp3",
+      "title": "Purple Sky",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "Purple Sky.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Purple%20Sky.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "the-forest-of-dreams-mp3",
+      "title": "The Forest of Dreams",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "The Forest of Dreams.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/The%20Forest%20of%20Dreams.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "mia-background-mp3",
+      "title": "mia background",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "mia-background.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/mia-background.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "onlyhome-mp3",
+      "title": "onlyhome",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "onlyhome.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/onlyhome.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "1-mp3",
+      "title": "琥珀色的光斑 (1)",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "琥珀色的光斑 (1).mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/%E7%90%A5%E7%8F%80%E8%89%B2%E7%9A%84%E5%85%89%E6%96%91%20(1).mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    }
+  ]
+}
