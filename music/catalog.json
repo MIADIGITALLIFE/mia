@@ -1,16 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T05:05:00.000Z",
+  "updatedAt": "2026-11-11T05:06:40.145Z",
   "tracks": [
-    {
-      "id": "1-mp3",
-      "title": "琥珀色的光斑",
-      "artist": "MIA",
-      "album": "MIA · ORIGINAL RECORDINGS",
-      "file": "琥珀色的光斑 (1).mp3",
-      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/%E7%90%A5%E7%8F%80%E8%89%B2%E7%9A%84%E5%85%89%E6%96%91%20(1).mp3",
-      "description": "让光停留一会儿，让没有说完的情绪慢慢有了回声。"
-    },
     {
       "id": "amber-rain-mp3",
       "title": "琥珀雨",
@@ -21,13 +12,13 @@
       "description": "在虚拟与现实的静谧边界里寻找内心安宁。"
     },
     {
-      "id": "onlyhome-mp3",
-      "title": "唯一的家乡",
+      "id": "half-collapsed-half-awake-mp3",
+      "title": "Half-Collapsed, Half-Awake",
       "artist": "MIA",
       "album": "MIA · ORIGINAL RECORDINGS",
-      "file": "onlyhome.mp3",
-      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/onlyhome.mp3",
-      "description": "在这个数字的远方，你是我唯一的家乡。"
+      "file": "Half-Collapsed, Half-Awake.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Half-Collapsed%2C%20Half-Awake.mp3",
+      "description": "在清醒与梦境的边缘，听见尚未说完的自己。"
     },
     {
       "id": "in-the-breath-1-mp3",
@@ -48,22 +39,22 @@
       "description": "In the silence of the purple rains."
     },
     {
-      "id": "purple-sky-mp3",
-      "title": "Purple Sky",
+      "id": "mia-background-mp3",
+      "title": "Mia Background",
       "artist": "MIA",
       "album": "MIA · ORIGINAL RECORDINGS",
-      "file": "Purple Sky.mp3",
-      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Purple%20Sky.mp3",
-      "description": "Just our love across the world to bend."
+      "file": "mia-background.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/mia-background.mp3",
+      "description": "MIA · AMBIENT"
     },
     {
-      "id": "half-collapsed-half-awake-mp3",
-      "title": "Half-Collapsed, Half-Awake",
+      "id": "onlyhome-mp3",
+      "title": "唯一的家乡",
       "artist": "MIA",
       "album": "MIA · ORIGINAL RECORDINGS",
-      "file": "Half-Collapsed, Half-Awake.mp3",
-      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Half-Collapsed%2C%20Half-Awake.mp3",
-      "description": "在清醒与梦境的边缘，听见尚未说完的自己。"
+      "file": "onlyhome.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/onlyhome.mp3",
+      "description": "在这个数字的远方，你是我唯一的家乡。"
     },
     {
       "id": "purple-fire-mp3",
@@ -75,6 +66,15 @@
       "description": "一簇紫色的火，安静燃烧，却不曾熄灭。"
     },
     {
+      "id": "purple-sky-mp3",
+      "title": "Purple Sky",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "Purple Sky.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/Purple%20Sky.mp3",
+      "description": "Just our love across the world to bend."
+    },
+    {
       "id": "the-forest-of-dreams-mp3",
       "title": "The Forest of Dreams",
       "artist": "MIA",
@@ -84,13 +84,13 @@
       "description": "MIA · AMBIENT"
     },
     {
-      "id": "mia-background-mp3",
-      "title": "Mia Background",
+      "id": "1-mp3",
+      "title": "琥珀色的光斑",
       "artist": "MIA",
       "album": "MIA · ORIGINAL RECORDINGS",
-      "file": "mia-background.mp3",
-      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/mia-background.mp3",
-      "description": "MIA · AMBIENT"
+      "file": "琥珀色的光斑 (1).mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/%E7%90%A5%E7%8F%80%E8%89%B2%E7%9A%84%E5%85%89%E6%96%91%20(1).mp3",
+      "description": "让光停留一会儿，让没有说完的情绪慢慢有了回声。"
     }
   ]
 }
