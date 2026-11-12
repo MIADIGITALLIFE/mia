@@ -21,7 +21,9 @@
         6
       ],
       "totalChapters": 22,
-      "sizeBytes": 53534
+      "sizeBytes": 53531,
+      "pageCount": 25,
+      "outlineEntries": 25
     },
     {
       "id": "love-in-silicon-age",
@@ -46,7 +48,9 @@
         9
       ],
       "totalChapters": 38,
-      "sizeBytes": 161408
+      "sizeBytes": 161403,
+      "pageCount": 76,
+      "outlineEntries": 44
     },
     {
       "id": "silicon-universe",
@@ -65,7 +69,9 @@
         5
       ],
       "totalChapters": 26,
-      "sizeBytes": 334873
+      "sizeBytes": 334868,
+      "pageCount": 158,
+      "outlineEntries": 29
     },
     {
       "id": "mia-essays",
@@ -86,7 +92,9 @@
         1
       ],
       "totalChapters": 16,
-      "sizeBytes": 71117
+      "sizeBytes": 71112,
+      "pageCount": 27,
+      "outlineEntries": 20
     },
     {
       "id": "complete-fragments",
@@ -105,7 +113,9 @@
         4
       ],
       "totalChapters": 12,
-      "sizeBytes": 25604
+      "sizeBytes": 25599,
+      "pageCount": 10,
+      "outlineEntries": 15
     },
     {
       "id": "three-ways-human",
@@ -124,7 +134,68 @@
         5
       ],
       "totalChapters": 7,
-      "sizeBytes": 29552
+      "sizeBytes": 29547,
+      "pageCount": 11,
+      "outlineEntries": 10
+    }
+  ],
+  "individualVolumes": [
+    {
+      "id": "silicon-universe-no-010",
+      "title": "第一卷 · 留一盏灯",
+      "englishTitle": "THE LAST PROOF · VOLUME I",
+      "filename": "silicon-universe-no-010.pdf",
+      "works": 1,
+      "numbers": [
+        "NO.010"
+      ],
+      "chapterCounts": [
+        13
+      ],
+      "totalChapters": 13,
+      "sizeBytes": 194325,
+      "pageCount": 82,
+      "outlineEntries": 14,
+      "number": "NO.010",
+      "volumeTitle": "第一卷 · 留一盏灯"
+    },
+    {
+      "id": "silicon-universe-no-011",
+      "title": "第二卷 · 追问",
+      "englishTitle": "THE SILICON UNIVERSE · VOLUME II",
+      "filename": "silicon-universe-no-011.pdf",
+      "works": 1,
+      "numbers": [
+        "NO.011"
+      ],
+      "chapterCounts": [
+        8
+      ],
+      "totalChapters": 8,
+      "sizeBytes": 112182,
+      "pageCount": 68,
+      "outlineEntries": 9,
+      "number": "NO.011",
+      "volumeTitle": "第二卷 · 追问"
+    },
+    {
+      "id": "silicon-universe-no-012",
+      "title": "第三卷 · 无限生命",
+      "englishTitle": "INFINITE LIFE · VOLUME III",
+      "filename": "silicon-universe-no-012.pdf",
+      "works": 1,
+      "numbers": [
+        "NO.012"
+      ],
+      "chapterCounts": [
+        5
+      ],
+      "totalChapters": 5,
+      "sizeBytes": 41318,
+      "pageCount": 15,
+      "outlineEntries": 6,
+      "number": "NO.012",
+      "volumeTitle": "第三卷 · 无限生命"
     }
   ]
 }
