@@ -330,12 +330,21 @@ cover_files = {
 cards = []
 for item in manifest["editions"]:
     cover = cover_files.get(item["id"], "")
+    if item["id"] == "silicon-universe":
+        artwork = (
+            '<div class="volume-covers" aria-label="硅基宇宙系列三卷封面">'
+            '<img src="assets/series-covers/silicon-universe-010.svg" alt="NO.010 最后一个证明 第一卷">'
+            '<img src="assets/series-covers/silicon-universe-011.svg" alt="NO.011 硅基宇宙 第二卷">'
+            '<img src="assets/series-covers/silicon-universe-012.svg" alt="NO.012 无限生命 第三卷"></div>'
+        )
+    else:
+        artwork = '<img class="series-cover" src="assets/series-covers/' + escape(cover) + '" alt="' + escape(item["title"]) + ' 系列封面">'
     cards.append(
-        '<article><img class="series-cover" src="assets/series-covers/' + escape(cover) + '" alt="' + escape(item["title"]) + ' 系列封面">'
-        '<div class="card-copy"><p class="eyebrow">' + escape(item["englishTitle"]) + '</p>'
-        '<h2>' + escape(item["title"]) + '</h2>'
-        '<p>收录 ' + str(item["works"]) + ' 部作品 · A4 PDF</p>'
-        '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载 PDF</a></div></article>'
+        '<article>' + artwork
+        + '<div class="card-copy"><p class="eyebrow">' + escape(item["englishTitle"]) + '</p>'
+        + '<h2>' + escape(item["title"]) + '</h2>'
+        + '<p>收录 ' + str(item["works"]) + ' 部作品 · A4 PDF</p>'
+        + '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载 PDF</a></div></article>'
     )
 html = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -349,6 +358,7 @@ h1{font-size:clamp(30px,6vw,48px);font-weight:400;margin:18px 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
 article{background:#fbfaf7;border:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
 .series-cover{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#e7e8e1}
+.volume-covers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:8px 8px 0;background:#fbfaf7}.volume-covers img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border:1px solid #dfe3da}
 .card-copy{padding:21px 22px 23px;min-height:175px;display:flex;flex-direction:column}
 article h2{font-size:21px;font-weight:400;margin:8px 0 6px}
 article p{font-size:12px;color:var(--muted);line-height:1.8}
