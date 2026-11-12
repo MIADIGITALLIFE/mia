@@ -15,9 +15,10 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
+from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Flowable,
-    HRFlowable, Table, TableStyle, TableOfContents
+    HRFlowable, Table, TableStyle
 )
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
