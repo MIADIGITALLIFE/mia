@@ -16,6 +16,7 @@ from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
 from reportlab.platypus.tableofcontents import TableOfContents
+from pypdf import PdfReader
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Flowable,
     HRFlowable, Table, TableStyle
@@ -358,6 +359,27 @@ def build_pdf(series):
             flow.append(PageBreak())
 
     doc.multiBuild(flow, onFirstPage=footer, onLaterPages=footer)
+
+    # Publication QA: the generated file must be readable, paginated and
+    # carry a complete PDF navigation outline for every volume and chapter.
+    pdf = PdfReader(path)
+    if len(pdf.pages) < len(works) + 4:
+        raise ValueError(f"PDF unexpectedly short: {path} ({len(pdf.pages)} pages)")
+    def count_outline(items):
+        total = 0
+        for entry in items:
+            if isinstance(entry, list):
+                total += count_outline(entry)
+            else:
+                total += 1
+        return total
+    outline_entries = count_outline(pdf.outline)
+    expected_outline = sum(1 + len(story.get("chapters", [])) for volume, story in works)
+    if outline_entries < expected_outline:
+        raise ValueError(
+            f"PDF navigation outline incomplete for {filename}: "
+            f"expected at least {expected_outline}, found {outline_entries}"
+        )
     return {
         "id": series.get("id"),
         "title": series.get("title"),
@@ -368,6 +390,8 @@ def build_pdf(series):
         "chapterCounts": [len(story.get("chapters", [])) for volume, story in works],
         "totalChapters": sum(len(story.get("chapters", [])) for volume, story in works),
         "sizeBytes": os.path.getsize(path),
+        "pageCount": len(pdf.pages),
+        "outlineEntries": outline_entries,
     }
 
 edition_records = [build_pdf(s) for s in series_data.get("series", [])]
