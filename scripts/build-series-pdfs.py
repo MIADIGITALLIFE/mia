@@ -53,10 +53,12 @@ for story_id, (relative_path, work_number, expected_chapters) in special_sources
             f"{work_number} manuscript chapter count mismatch: "
             f"expected {expected_chapters}, found {len(chapters)}"
         )
-    manuscript["id"] = story_id
-    manuscript["number"] = work_number
-    manuscript["status"] = manuscript.get("status") or "V2.0 正式版"
-    story_by_id[story_id] = manuscript
+    archive_record = dict(story_by_id.get(story_id, {}))
+    archive_record.update(manuscript)
+    archive_record["id"] = story_id
+    archive_record["number"] = work_number
+    archive_record["status"] = manuscript.get("status") or archive_record.get("status") or "V2.0 正式版"
+    story_by_id[story_id] = archive_record
 
 INK = colors.HexColor("#252923")
 MUTED = colors.HexColor("#73796F")
@@ -258,13 +260,13 @@ def build_pdf(series):
                 raise FileNotFoundError(f"Missing volume cover: {cover_path}")
             flow.append(SVGFullPage(cover_path, doc.width, doc.height))
             flow.append(PageBreak())
-        title = story.get("title") or volume.get("volumeTitle") or ""
+        title = volume.get("volumeTitle") or story.get("title") or ""
         flow.append(Spacer(1, 4*mm))
         flow.append(para(f"{number}  ·  {volume.get('volumeTitle', '')}", styles["Meta"]))
         flow.append(para(title, styles["WorkTitle"]))
         if story.get("englishTitle"):
             flow.append(para(story["englishTitle"], styles["WorkEnglish"]))
-        subtitle = story.get("subtitle") or volume.get("subtitle")
+        subtitle = volume.get("subtitle") or story.get("subtitle")
         if subtitle:
             flow.append(para(subtitle, styles["IntroBody"]))
         metadata = []
