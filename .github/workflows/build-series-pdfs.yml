@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-noto-cjk
-          python -m pip install reportlab svglib
+          python -m pip install reportlab svglib pypdf
       - name: Generate A4 series PDFs
         run: python scripts/build-series-pdfs.py
       - name: Commit generated editions
