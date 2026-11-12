@@ -2,7 +2,7 @@
   "generatedFrom": "data/series.json + data/the-last-proof-v2.json + data/stories/silicon-universe-volume-two-v2.0.json + data/stories/silicon-universe-volume-three-v2.0.json + data/stories.json",
   "edition": "A4",
   "author": "K&M",
-  "generatedDate": "2026-11-08",
+  "generatedDate": "2026-11-12",
   "editions": [
     {
       "id": "reverse-enlightenment",
@@ -21,7 +21,7 @@
         6
       ],
       "totalChapters": 22,
-      "sizeBytes": 47787
+      "sizeBytes": 47653
     },
     {
       "id": "love-in-silicon-age",
@@ -46,7 +46,7 @@
         9
       ],
       "totalChapters": 38,
-      "sizeBytes": 150902
+      "sizeBytes": 150584
     },
     {
       "id": "silicon-universe",
@@ -65,7 +65,7 @@
         5
       ],
       "totalChapters": 26,
-      "sizeBytes": 306693
+      "sizeBytes": 327141
     },
     {
       "id": "mia-essays",
@@ -86,7 +86,7 @@
         1
       ],
       "totalChapters": 16,
-      "sizeBytes": 65320
+      "sizeBytes": 65299
     },
     {
       "id": "complete-fragments",
@@ -105,7 +105,7 @@
         4
       ],
       "totalChapters": 12,
-      "sizeBytes": 20932
+      "sizeBytes": 20933
     },
     {
       "id": "three-ways-human",
@@ -124,7 +124,7 @@
         5
       ],
       "totalChapters": 7,
-      "sizeBytes": 25866
+      "sizeBytes": 25860
     }
   ]
 }
