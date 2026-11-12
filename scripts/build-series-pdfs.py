@@ -91,40 +91,40 @@ styles.add(ParagraphStyle(
     textColor=MUTED, alignment=TA_CENTER, spaceAfter=18, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="CoverTitle", fontName="STSong-Light", fontSize=29, leading=43,
+    name="CoverTitle", fontName=FONT, fontSize=29, leading=43,
     textColor=INK, alignment=TA_CENTER, spaceAfter=12, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="CoverEnglish", fontName="STSong-Light", fontSize=10, leading=16,
+    name="CoverEnglish", fontName=FONT, fontSize=10, leading=16,
     textColor=MUTED, alignment=TA_CENTER, spaceAfter=18
 ))
 styles.add(ParagraphStyle(
-    name="CoverDescription", fontName="STSong-Light", fontSize=10.5, leading=19,
+    name="CoverDescription", fontName=FONT, fontSize=10.5, leading=19,
     textColor=INK, alignment=TA_CENTER, leftIndent=18*mm, rightIndent=18*mm,
     spaceAfter=8, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="SmallCenter", fontName="STSong-Light", fontSize=8.5, leading=14,
+    name="SmallCenter", fontName=FONT, fontSize=8.5, leading=14,
     textColor=MUTED, alignment=TA_CENTER, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="SectionTitle", fontName="STSong-Light", fontSize=20, leading=30,
+    name="SectionTitle", fontName=FONT, fontSize=20, leading=30,
     textColor=INK, spaceBefore=4, spaceAfter=12, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="WorkTitle", fontName="STSong-Light", fontSize=19, leading=29,
+    name="WorkTitle", fontName=FONT, fontSize=19, leading=29,
     textColor=INK, spaceAfter=7, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="WorkEnglish", fontName="STSong-Light", fontSize=8.5, leading=14,
+    name="WorkEnglish", fontName=FONT, fontSize=8.5, leading=14,
     textColor=MUTED, spaceAfter=9
 ))
 styles.add(ParagraphStyle(
-    name="Meta", fontName="STSong-Light", fontSize=8.5, leading=15,
+    name="Meta", fontName=FONT, fontSize=8.5, leading=15,
     textColor=MUTED, spaceAfter=4, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="ChapterTitle", fontName="STSong-Light", fontSize=13, leading=21,
+    name="ChapterTitle", fontName=FONT, fontSize=13, leading=21,
     textColor=INK, spaceBefore=14, spaceAfter=10, keepWithNext=True,
     wordWrap="CJK"
 ))
@@ -133,20 +133,20 @@ styles.add(ParagraphStyle(
     fontSize=13.5, leading=23, spaceBefore=17, spaceAfter=12
 ))
 styles.add(ParagraphStyle(
-    name="BodyCJK", fontName="STSong-Light", fontSize=10.2, leading=18.5,
+    name="BodyCJK", fontName=FONT, fontSize=10.2, leading=18.5,
     textColor=INK, alignment=TA_JUSTIFY, spaceAfter=4.2, wordWrap="CJK",
     allowWidows=0, allowOrphans=0, splitLongWords=0
 ))
 styles.add(ParagraphStyle(
-    name="TOCItem", fontName="STSong-Light", fontSize=10, leading=18,
+    name="TOCItem", fontName=FONT, fontSize=10, leading=18,
     textColor=INK, leftIndent=2*mm, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="IntroBody", fontName="STSong-Light", fontSize=10, leading=19,
+    name="IntroBody", fontName=FONT, fontSize=10, leading=19,
     textColor=INK, spaceAfter=9, alignment=TA_JUSTIFY, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
-    name="Question", fontName="STSong-Light", fontSize=10, leading=18,
+    name="Question", fontName=FONT, fontSize=10, leading=18,
     textColor=INK, leftIndent=5*mm, rightIndent=5*mm, spaceBefore=7,
     spaceAfter=10, wordWrap="CJK"
 ))
