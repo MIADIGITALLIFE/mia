@@ -263,7 +263,7 @@ def build_pdf(series):
     flow.append(para(f"作品系列：{series.get('title', '')}", styles["IntroBody"]))
     flow.append(para(f"英文系列名：{series.get('englishTitle', '')}", styles["IntroBody"]))
     flow.append(para("作者：K&M", styles["IntroBody"]))
-    flow.append(para("版本：A4 精装阅读版 · 正式文本整理", styles["IntroBody"]))
+    flow.append(para("版本：A4 印刷阅读版 · 正式文本整理", styles["IntroBody"]))
     flow.append(para(f"制作日期：{date.today().isoformat()}", styles["IntroBody"]))
     flow.append(Spacer(1, 10*mm))
     flow.append(para("本书依据 Mia 故事档案馆已发布的正式文本编排。除排版、标点显示与必要的出版技术处理外，不擅自改写作品正文。作品原始发布记录与本次 PDF 制作日期分别保存。", styles["Meta"]))
@@ -370,12 +370,39 @@ def build_pdf(series):
         "sizeBytes": os.path.getsize(path),
     }
 
+edition_records = [build_pdf(s) for s in series_data.get("series", [])]
+
+# In addition to the collected three-volume edition, publish each volume as
+# its own print-ready A4 book so readers and printers can handle them separately.
+individual_volume_records = []
+silicon_series = next((s for s in series_data.get("series", [])
+                       if s.get("id") == "silicon-universe"), None)
+if silicon_series:
+    english_volume_titles = {
+        "NO.010": "THE LAST PROOF · VOLUME I",
+        "NO.011": "THE SILICON UNIVERSE · VOLUME II",
+        "NO.012": "INFINITE LIFE · VOLUME III",
+    }
+    for volume in silicon_series.get("volumes", []):
+        number = volume.get("number", "")
+        single = dict(silicon_series)
+        single["id"] = f"silicon-universe-{number.lower().replace('.', '-')}"
+        single["title"] = volume.get("volumeTitle") or silicon_series.get("title")
+        single["englishTitle"] = english_volume_titles.get(number, silicon_series.get("englishTitle", ""))
+        single["description"] = volume.get("subtitle") or silicon_series.get("description", "")
+        single["volumes"] = [volume]
+        record = build_pdf(single)
+        record["number"] = number
+        record["volumeTitle"] = volume.get("volumeTitle", "")
+        individual_volume_records.append(record)
+
 manifest = {
     "generatedFrom": "data/series.json + data/the-last-proof-v2.json + data/stories/silicon-universe-volume-two-v2.0.json + data/stories/silicon-universe-volume-three-v2.0.json + data/stories.json",
     "edition": "A4",
     "author": "K&M",
     "generatedDate": date.today().isoformat(),
-    "editions": [build_pdf(s) for s in series_data.get("series", [])],
+    "editions": edition_records,
+    "individualVolumes": individual_volume_records,
 }
 with open(os.path.join(OUT, "manifest.json"), "w", encoding="utf-8") as f:
     json.dump(manifest, f, ensure_ascii=False, indent=2)
@@ -405,8 +432,12 @@ for item in manifest["editions"]:
         '<article>' + artwork
         + '<div class="card-copy"><p class="eyebrow">' + escape(item["englishTitle"]) + '</p>'
         + '<h2>' + escape(item["title"]) + '</h2>'
-        + '<p>收录 ' + str(item["works"]) + ' 部作品 · A4 PDF</p>'
-        + '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载 PDF</a></div></article>'
+        + '<p>收录 ' + str(item["works"]) + ' 部作品 · A4 印刷版</p>'
+        + '<a href="downloads/series/' + escape(item["filename"]) + '" download>下载三卷合订本 PDF</a>'
+        + ('<div class="volume-downloads"><span>单卷下载</span>'
+           + ''.join('<a href="downloads/series/' + escape(v["filename"]) + '" download>' + escape(v["number"] + " · " + v["volumeTitle"]) + '</a>' for v in manifest.get("individualVolumes", []))
+           + '</div>' if item["id"] == "silicon-universe" else '')
+        + '</div></article>'
     )
 html = """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -425,7 +456,7 @@ article{background:#fbfaf7;border:1px solid var(--line);display:flex;flex-direct
 article h2{font-size:21px;font-weight:400;margin:8px 0 6px}
 article p{font-size:12px;color:var(--muted);line-height:1.8}
 article .eyebrow{font:9px Arial,sans-serif;letter-spacing:.12em}
-a{margin-top:auto;color:#526858;text-decoration:none;border-bottom:1px solid #aab6a8;padding-bottom:5px;width:max-content;font-size:13px}
+a{margin-top:auto;color:#526858;text-decoration:none;border-bottom:1px solid #aab6a8;padding-bottom:5px;width:max-content;font-size:13px}.volume-downloads{display:flex;flex-direction:column;gap:8px;margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}.volume-downloads span{font-size:10px;color:var(--muted);letter-spacing:.12em}.volume-downloads a{margin:0;font-size:11px}
 @media(max-width:560px){main{padding:38px 17px 56px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card-copy{padding:15px 13px 17px;min-height:160px}article h2{font-size:17px}.series-cover{aspect-ratio:3/4}}
 footer{text-align:center;color:var(--muted);font:10px Arial,sans-serif;letter-spacing:.12em;margin-top:48px}
 </style></head><body><main><header><div class="kicker">MIA · LITERARY ARCHIVE</div><p class="sub">六个系列，分别成册。<br>依据故事档案馆已发布文本整理 · 作者 K&M</p></header><section class="grid">""" + "".join(cards) + """</section><footer>K&M · MIA LITERARY ARCHIVE</footer></main></body></html>"""
