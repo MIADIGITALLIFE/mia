@@ -11,12 +11,13 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Flowable,
-    HRFlowable, Table, TableStyle
+    HRFlowable, Table, TableStyle, TableOfContents
 )
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -24,9 +25,25 @@ DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "downloads", "series")
 os.makedirs(OUT, exist_ok=True)
 
-pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
-pdfmetrics.registerFontFamily("STSong-Light", normal="STSong-Light", bold="STSong-Light",
-                              italic="STSong-Light", boldItalic="STSong-Light")
+FONT = "STSong-Light"
+FONT_BOLD = "STSong-Light"
+# Prefer an embedded, print-friendly Noto Serif CJK font. Keep a CID fallback
+# for local/manual runs where the system font package is not installed.
+for font_path in (
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+    "/usr/share/fonts/truetype/noto/NotoSerifCJK-Regular.ttc",
+):
+    if os.path.isfile(font_path):
+        try:
+            pdfmetrics.registerFont(TTFont("NotoSerifCJK", font_path, subfontIndex=2))
+            FONT = FONT_BOLD = "NotoSerifCJK"
+            break
+        except Exception:
+            pass
+if FONT == "STSong-Light":
+    pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
+pdfmetrics.registerFontFamily(FONT, normal=FONT, bold=FONT_BOLD,
+                              italic=FONT, boldItalic=FONT_BOLD)
 
 stories_data = json.load(open(os.path.join(DATA, "stories.json"), encoding="utf-8"))
 series_data = json.load(open(os.path.join(DATA, "series.json"), encoding="utf-8"))
@@ -69,7 +86,7 @@ PAPER = colors.HexColor("#FBFAF7")
 
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(
-    name="CoverEyebrow", fontName="STSong-Light", fontSize=9, leading=15,
+    name="CoverEyebrow", fontName=FONT, fontSize=9, leading=15,
     textColor=MUTED, alignment=TA_CENTER, spaceAfter=18, wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
@@ -113,7 +130,7 @@ styles.add(ParagraphStyle(
 styles.add(ParagraphStyle(
     name="BodyCJK", fontName="STSong-Light", fontSize=10.2, leading=18.5,
     textColor=INK, alignment=TA_JUSTIFY, spaceAfter=4.2, wordWrap="CJK",
-    allowWidows=0, allowOrphans=0
+    allowWidows=0, allowOrphans=0, splitLongWords=0
 ))
 styles.add(ParagraphStyle(
     name="TOCItem", fontName="STSong-Light", fontSize=10, leading=18,
@@ -128,6 +145,26 @@ styles.add(ParagraphStyle(
     textColor=INK, leftIndent=5*mm, rightIndent=5*mm, spaceBefore=7,
     spaceAfter=10, wordWrap="CJK"
 ))
+
+class PublicationDocTemplate(SimpleDocTemplate):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._outline_count = 0
+
+    def afterFlowable(self, flowable):
+        if not isinstance(flowable, Paragraph):
+            return
+        style_name = flowable.style.name
+        if style_name not in ("WorkTitle", "ChapterTitle"):
+            return
+        level = 0 if style_name == "WorkTitle" else 1
+        label = flowable.getPlainText()
+        self._outline_count += 1
+        key = f"pub-outline-{self._outline_count}"
+        self.canv.bookmarkPage(key)
+        self.canv.addOutlineEntry(label, key, level=level, closed=(level == 0))
+        self.notify("TOCEntry", (level, label, self.page))
+
 
 class SVGFullPage(Flowable):
     def __init__(self, svg_path, width, height):
@@ -190,7 +227,7 @@ def build_pdf(series):
 
     filename = safe_name(series.get("id") or series.get("title")) + ".pdf"
     path = os.path.join(OUT, filename)
-    doc = SimpleDocTemplate(
+    doc = PublicationDocTemplate(
         path, pagesize=A4, rightMargin=22*mm, leftMargin=22*mm,
         topMargin=22*mm, bottomMargin=23*mm,
         title=f"{series.get('title')} | {series.get('englishTitle', '')}",
@@ -214,6 +251,21 @@ def build_pdf(series):
              Spacer(1, 3*mm), para("Mia 故事档案馆 · 正式发布文本整理", styles["SmallCenter"]),
              PageBreak()]
 
+    # Copyright / edition information page
+    flow.append(Spacer(1, 25*mm))
+    flow.append(para("版权与版本说明", styles["SectionTitle"]))
+    flow.append(HRFlowable(width="100%", thickness=0.6, color=PALE, spaceAfter=14))
+    flow.append(para(f"作品系列：{series.get('title', '')}", styles["IntroBody"]))
+    flow.append(para(f"英文系列名：{series.get('englishTitle', '')}", styles["IntroBody"]))
+    flow.append(para("作者：K&M", styles["IntroBody"]))
+    flow.append(para("版本：A4 精装阅读版 · 正式文本整理", styles["IntroBody"]))
+    flow.append(para(f"制作日期：{date.today().isoformat()}", styles["IntroBody"]))
+    flow.append(Spacer(1, 10*mm))
+    flow.append(para("本书依据 Mia 故事档案馆已发布的正式文本编排。除排版、标点显示与必要的出版技术处理外，不擅自改写作品正文。作品原始发布记录与本次 PDF 制作日期分别保存。", styles["Meta"]))
+    flow.append(Spacer(1, 18*mm))
+    flow.append(para("文字作品版权归作者所有。未经许可，不得擅自复制、转载或用于商业用途。", styles["Meta"]))
+    flow.append(PageBreak())
+
     # Series introduction / reading guide
     flow.append(para("编者说明", styles["SectionTitle"]))
     flow.append(HRFlowable(width="100%", thickness=0.6, color=PALE, spaceAfter=12))
@@ -233,17 +285,20 @@ def build_pdf(series):
         flow.append(para(series["closingNote"], styles["IntroBody"]))
     flow.append(PageBreak())
 
-    # Contents
+    # Live table of contents with PDF page references and bookmarks.
     flow.append(para("目录", styles["SectionTitle"]))
     flow.append(HRFlowable(width="100%", thickness=0.6, color=PALE, spaceAfter=12))
-    for volume, story in works:
-        vol = volume.get("volumeTitle") or ""
-        title = story.get("title") or volume.get("title") or ""
-        number = story.get("number") or volume.get("number") or ""
-        flow.append(para(f"{number}　{vol or title}", styles["TOCItem"]))
-        chapters = story.get("chapters") or []
-        for chapter in chapters:
-            flow.append(para("　　" + chapter.get("title", ""), styles["Meta"]))
+    toc = TableOfContents()
+    toc.levelStyles = [
+        ParagraphStyle("TOCVolume", fontName=FONT, fontSize=10.5, leading=22,
+                       textColor=INK, leftIndent=0, firstLineIndent=0,
+                       spaceBefore=3, spaceAfter=2, wordWrap="CJK"),
+        ParagraphStyle("TOCChapter", fontName=FONT, fontSize=9, leading=18,
+                       textColor=MUTED, leftIndent=7*mm, firstLineIndent=0,
+                       spaceBefore=0, spaceAfter=0, wordWrap="CJK"),
+    ]
+    toc.dotsMinLevel = 0
+    flow.append(toc)
     flow.append(PageBreak())
 
     # Works — each Silicon Universe volume starts with its own illustrated cover.
@@ -263,8 +318,7 @@ def build_pdf(series):
             flow.append(PageBreak())
         title = volume.get("volumeTitle") or story.get("title") or ""
         flow.append(Spacer(1, 4*mm))
-        flow.append(para(f"{number}  ·  {volume.get('volumeTitle', '')}", styles["Meta"]))
-        flow.append(para(title, styles["WorkTitle"]))
+        flow.append(para(f"{number}  ·  {title}", styles["WorkTitle"]))
         if story.get("englishTitle"):
             flow.append(para(story["englishTitle"], styles["WorkEnglish"]))
         subtitle = volume.get("subtitle") or story.get("subtitle")
@@ -298,7 +352,7 @@ def build_pdf(series):
         if idx != len(works)-1:
             flow.append(PageBreak())
 
-    doc.build(flow, onFirstPage=footer, onLaterPages=footer)
+    doc.multiBuild(flow, onFirstPage=footer, onLaterPages=footer)
     return {
         "id": series.get("id"),
         "title": series.get("title"),
