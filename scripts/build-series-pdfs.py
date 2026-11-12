@@ -128,6 +128,10 @@ styles.add(ParagraphStyle(
     wordWrap="CJK"
 ))
 styles.add(ParagraphStyle(
+    name="ChapterHeading", parent=styles["ChapterTitle"],
+    fontSize=13.5, leading=23, spaceBefore=17, spaceAfter=12
+))
+styles.add(ParagraphStyle(
     name="BodyCJK", fontName="STSong-Light", fontSize=10.2, leading=18.5,
     textColor=INK, alignment=TA_JUSTIFY, spaceAfter=4.2, wordWrap="CJK",
     allowWidows=0, allowOrphans=0, splitLongWords=0
@@ -155,7 +159,7 @@ class PublicationDocTemplate(SimpleDocTemplate):
         if not isinstance(flowable, Paragraph):
             return
         style_name = flowable.style.name
-        if style_name not in ("WorkTitle", "ChapterTitle"):
+        if style_name not in ("WorkTitle", "ChapterHeading"):
             return
         level = 0 if style_name == "WorkTitle" else 1
         label = flowable.getPlainText()
@@ -200,7 +204,7 @@ def footer(canvas, doc):
     canvas.setStrokeColor(PALE)
     canvas.setLineWidth(0.55)
     canvas.line(20*mm, 15*mm, w-20*mm, 15*mm)
-    canvas.setFont("STSong-Light", 7.5)
+    canvas.setFont(FONT, 7.5)
     canvas.setFillColor(MUTED)
     canvas.drawString(20*mm, 10.5*mm, "K&M  ·  MIA LITERARY ARCHIVE")
     canvas.drawRightString(w-20*mm, 10.5*mm, str(doc.page))
@@ -336,7 +340,7 @@ def build_pdf(series):
         for chapter in story.get("chapters", []):
             chapter_title = chapter.get("title", "")
             if chapter_title:
-                flow.append(para(chapter_title, styles["ChapterTitle"]))
+                flow.append(para(chapter_title, styles["ChapterHeading"]))
             body = chapter.get("body", [])
             if isinstance(body, str):
                 body = body.splitlines()
