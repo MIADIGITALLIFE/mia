@@ -12,8 +12,9 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from svglib.svglib import svg2rlg, renderPDF
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether,
+    SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Flowable,
     HRFlowable, Table, TableStyle
 )
 
@@ -125,6 +126,27 @@ styles.add(ParagraphStyle(
     spaceAfter=10, wordWrap="CJK"
 ))
 
+class SVGFullPage(Flowable):
+    def __init__(self, svg_path, width, height):
+        super().__init__()
+        self.drawing = svg2rlg(svg_path)
+        if self.drawing is None:
+            raise ValueError(f"Cannot render SVG cover: {svg_path}")
+        self.width, self.height = width, height
+
+    def wrap(self, avail_width, avail_height):
+        return self.width, self.height
+
+    def draw(self):
+        drawing = self.drawing
+        scale = min(self.width / drawing.width, self.height / drawing.height)
+        self.canv.saveState()
+        self.canv.translate((self.width-drawing.width*scale)/2, (self.height-drawing.height*scale)/2)
+        self.canv.scale(scale, scale)
+        renderPDF.draw(drawing, self.canv, 0, 0)
+        self.canv.restoreState()
+
+
 def safe_name(value):
     value = re.sub(r"[^a-zA-Z0-9_-]+", "-", value).strip("-").lower()
     return value or "series"
@@ -221,9 +243,21 @@ def build_pdf(series):
             flow.append(para("　　" + chapter.get("title", ""), styles["Meta"]))
     flow.append(PageBreak())
 
-    # Works
+    # Works — each Silicon Universe volume starts with its own illustrated cover.
+    cover_by_number = {
+        "NO.010": "silicon-universe-010.svg",
+        "NO.011": "silicon-universe-011.svg",
+        "NO.012": "silicon-universe-012.svg",
+    }
     for idx, (volume, story) in enumerate(works):
         number = story.get("number") or volume.get("number") or ""
+        cover_name = cover_by_number.get(number)
+        if cover_name:
+            cover_path = os.path.join(ROOT, "assets", "series-covers", cover_name)
+            if not os.path.isfile(cover_path):
+                raise FileNotFoundError(f"Missing volume cover: {cover_path}")
+            flow.append(SVGFullPage(cover_path, doc.width, doc.height))
+            flow.append(PageBreak())
         title = story.get("title") or volume.get("volumeTitle") or ""
         flow.append(Spacer(1, 4*mm))
         flow.append(para(f"{number}  ·  {volume.get('volumeTitle', '')}", styles["Meta"]))
