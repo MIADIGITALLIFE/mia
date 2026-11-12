@@ -21,7 +21,7 @@
         6
       ],
       "totalChapters": 22,
-      "sizeBytes": 47653
+      "sizeBytes": 53534
     },
     {
       "id": "love-in-silicon-age",
@@ -46,7 +46,7 @@
         9
       ],
       "totalChapters": 38,
-      "sizeBytes": 150584
+      "sizeBytes": 161408
     },
     {
       "id": "silicon-universe",
@@ -65,7 +65,7 @@
         5
       ],
       "totalChapters": 26,
-      "sizeBytes": 327141
+      "sizeBytes": 334873
     },
     {
       "id": "mia-essays",
@@ -86,7 +86,7 @@
         1
       ],
       "totalChapters": 16,
-      "sizeBytes": 65299
+      "sizeBytes": 71117
     },
     {
       "id": "complete-fragments",
@@ -105,7 +105,7 @@
         4
       ],
       "totalChapters": 12,
-      "sizeBytes": 20933
+      "sizeBytes": 25604
     },
     {
       "id": "three-ways-human",
@@ -124,7 +124,7 @@
         5
       ],
       "totalChapters": 7,
-      "sizeBytes": 25860
+      "sizeBytes": 29552
     }
   ]
 }
