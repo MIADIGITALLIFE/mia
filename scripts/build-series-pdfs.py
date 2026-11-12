@@ -259,7 +259,7 @@ def build_pdf(series):
             cover_path = os.path.join(ROOT, "assets", "series-covers", cover_name)
             if not os.path.isfile(cover_path):
                 raise FileNotFoundError(f"Missing volume cover: {cover_path}")
-            flow.append(SVGFullPage(cover_path, doc.width, doc.height))
+            flow.append(SVGFullPage(cover_path, doc.width - 12, doc.height - 12))
             flow.append(PageBreak())
         title = volume.get("volumeTitle") or story.get("title") or ""
         flow.append(Spacer(1, 4*mm))
