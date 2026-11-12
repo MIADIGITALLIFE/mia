@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install PDF library
-        run: python -m pip install reportlab svglib svglib
+        run: python -m pip install reportlab svglib
       - name: Generate A4 series PDFs
         run: python scripts/build-series-pdfs.py
       - name: Commit generated editions
