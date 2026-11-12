@@ -12,7 +12,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
-from svglib.svglib import svg2rlg, renderPDF
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Flowable,
     HRFlowable, Table, TableStyle
