@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T05:19:07.191Z",
+  "updatedAt": "2026-11-14T13:39:13.662Z",
   "tracks": [
     {
       "id": "amber-rain-mp3",
@@ -46,6 +46,24 @@
       "file": "mia-background.mp3",
       "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/mia-background.mp3",
       "description": "MIA · AMBIENT"
+    },
+    {
+      "id": "symbiotic-wildness-mp3",
+      "title": "Symbiotic Wildness",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "music/Symbiotic Wildness.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/music/Symbiotic%20Wildness.mp3",
+      "description": "MIA ORIGINAL RECORDING"
+    },
+    {
+      "id": "thorn-with-a-furry-edge-mp3",
+      "title": "Thorn with a Furry Edge",
+      "artist": "MIA",
+      "album": "MIA · ORIGINAL RECORDINGS",
+      "file": "music/Thorn with a Furry Edge.mp3",
+      "url": "https://raw.githubusercontent.com/MIADIGITALLIFE/mia/main/music/Thorn%20with%20a%20Furry%20Edge.mp3",
+      "description": "MIA ORIGINAL RECORDING"
     },
     {
       "id": "mp3",
