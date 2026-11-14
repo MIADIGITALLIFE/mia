@@ -49,6 +49,18 @@
       file: 'Purple Fire.mp3',
       note: '一簇紫色的火，安静燃烧，却不曾熄灭。'
     },
+    {
+      title: 'Symbiotic Wildness',
+      subtitle: 'MIA · NEW RECORDING',
+      file: 'music/Symbiotic Wildness.mp3',
+      note: '在万物共生的旷野里，重新听见生命彼此呼应的声音。'
+    },
+    {
+      title: 'Thorn with a Furry Edge',
+      subtitle: 'MIA · NEW RECORDING',
+      file: 'music/Thorn with a Furry Edge.mp3',
+      note: '柔软与锋芒并存，在细微的刺痛中保留真实。'
+    },
   ];
 
   const AUDIO_OWNER_KEY='mia-audio-owner-v1';
